@@ -1,5 +1,5 @@
 ---
-title: api Reference
+title: API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - shell
@@ -64,7 +64,7 @@ Ejemplo:
 ```shell
 
 Ejemplo:
-POST/api/Sesión.
+POST /api/session
 
 {
   "auth": {
@@ -338,7 +338,7 @@ En caso que la operación quede pendiente, el servicio notificará de forma así
 >Ejemplo de una petición para un pago mixto.
 
 ```shell
-POST/api/Sesión
+POST /api/session
 
 {
   "auth": {
@@ -530,7 +530,7 @@ Las recurrencias sólo pueden ser canceladas en la consola administrativa de Pla
 >Ejemplo para recaudar un pago con suscripción
 
 ```shell
-   POST /api/collect
+POST /api/collect
 {
     "auth": {
 	    "login": "usuarioprueba",
