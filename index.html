@@ -201,7 +201,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;php&quot;,&quot;python&quot;,&quot;csharp&quot;,&quot;java&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -212,10 +212,6 @@
       <img src="images/logo.png" class="logo" alt="Logo" />
         <div class="lang-selector">
               <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="php">php</a>
-              <a href="#" data-language-name="python">python</a>
-              <a href="#" data-language-name="csharp">csharp</a>
-              <a href="#" data-language-name="java">java</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -309,61 +305,6 @@ POST /api/session
     <span class="s2">"seed"</span>: <span class="s2">"2019-04-25T18:17:23-04:00"</span>,
   <span class="o">}</span>
 <span class="o">}</span>
-</code></pre><pre class="highlight php tab-php"><code>Para generar la fecha con formato ISO 8601 en php, utiliza este código:
-
-<span class="cp">&lt;?php</span>
-<span class="nv">$seed</span> <span class="o">=</span> <span class="nb">date</span><span class="p">(</span><span class="s1">'c'</span><span class="p">);</span>
-<span class="cp">?&gt;</span>
-
-"Para generar el nonce en php, utiliza este código:"
-
-<span class="cp">&lt;?php</span>
-<span class="k">if</span> <span class="p">(</span><span class="nb">function_exists</span><span class="p">(</span><span class="s1">'random_bytes'</span><span class="p">))</span> <span class="p">{</span>
-    <span class="nv">$nonce</span> <span class="o">=</span> <span class="nb">bin2hex</span><span class="p">(</span><span class="nx">random_bytes</span><span class="p">(</span><span class="mi">16</span><span class="p">));</span>
-<span class="p">}</span> <span class="k">elseif</span> <span class="p">(</span><span class="nb">function_exists</span><span class="p">(</span><span class="s1">'openssl_random_pseudo_bytes'</span><span class="p">))</span> <span class="p">{</span>
-    <span class="nv">$nonce</span> <span class="o">=</span> <span class="nb">bin2hex</span><span class="p">(</span><span class="nb">openssl_random_pseudo_bytes</span><span class="p">(</span><span class="mi">16</span><span class="p">));</span>
-<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="nv">$nonce</span> <span class="o">=</span> <span class="nb">mt_rand</span><span class="p">();</span>
-<span class="p">}</span>
-<span class="nv">$nonceBase64</span> <span class="o">=</span> <span class="nb">base64_encode</span><span class="p">(</span><span class="nv">$nonce</span><span class="p">);</span>
-<span class="cp">?&gt;</span>
-
-"Para generar el tranKey en php, utiliza este código:"
-
-<span class="cp">&lt;?php</span>
-<span class="nv">$tranKey</span> <span class="o">=</span> <span class="nb">base64_encode</span><span class="p">(</span><span class="nb">sha1</span><span class="p">(</span><span class="nv">$nonce</span> <span class="o">.</span> <span class="nv">$seed</span> <span class="o">.</span> <span class="nv">$secretKey</span><span class="p">,</span> <span class="kc">true</span><span class="p">));</span>
-<span class="cp">?&gt;</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="s">"Para generar la fecha en php, utiliza este código:"</span>
-
-<span class="kn">import</span> <span class="nn">time</span>
-<span class="n">seed</span><span class="o">=</span><span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">"</span><span class="si">%</span><span class="s">c"</span><span class="p">)</span>
-
-<span class="s">"Para generar el nonce en python, utiliza este código:"</span>
-
-<span class="s">"Para generar el tranKey en python, utiliza este código:"</span>
-</code></pre><pre class="highlight csharp tab-csharp"><code><span class="s">"Para generar la fecha con formato ISO 8601 en csharp, utiliza este código:"</span>
-
-<span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">System.Globalization</span><span class="p">;</span>
-
-<span class="n">String</span> <span class="n">seed</span> <span class="p">=</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">UtcNow</span><span class="p">.</span><span class="nf">ToString</span><span class="p">(</span><span class="s">"s"</span><span class="p">,</span>
-<span class="n">System</span><span class="p">.</span><span class="n">Globalization</span><span class="p">.</span><span class="n">CultureInfo</span><span class="p">.</span><span class="n">InvariantCulture</span><span class="p">);</span>
-
-
-<span class="s">"Para generar el nonce en csharp, utiliza este código:"</span>
-
-<span class="s">"Para generar el tranKey en csharp, utiliza este código:"</span>
-</code></pre><pre class="highlight java tab-java"><code><span class="s">"Para generar la fecha con formato ISO 8601 en java, utiliza este código:"</span>
-
-<span class="n">using</span> <span class="n">System</span><span class="o">;</span>
-<span class="n">using</span> <span class="n">System</span><span class="o">.</span><span class="na">Globalization</span><span class="o">;</span>
-
-<span class="n">String</span> <span class="n">seed</span> <span class="o">=</span> <span class="n">DateTime</span><span class="o">.</span><span class="na">UtcNow</span><span class="o">.</span><span class="na">ToString</span><span class="o">(</span><span class="s">"s"</span><span class="o">,</span>
-<span class="n">System</span><span class="o">.</span><span class="na">Globalization</span><span class="o">.</span><span class="na">CultureInfo</span><span class="o">.</span><span class="na">InvariantCulture</span><span class="o">);</span>
-
-<span class="s">"Para generar el nonce en java, utiliza este código:"</span>
-
-<span class="s">"Para generar el tranKey en java, utiliza este código:"</span>
 </code></pre>
 <p>La autenticación al servicio debe ser enviada sobre el objeto <code>auth</code>, el cual debe contener los siguientes atributos:</p>
 
@@ -406,7 +347,7 @@ Esta estructura debe de ser enviada en cada petición realizada al servicio
 <blockquote>
 <p>Ejemplo para la petición de un pago básico:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>POST/api/Sesión
+<pre class="highlight shell tab-shell"><code>POST /api/session
 
 <span class="o">{</span>
   <span class="s2">"auth"</span>: <span class="o">{</span>
@@ -1802,10 +1743,6 @@ Tus servidores requieren TLSv1.2 para recibir la solicitud, debido a la norma PC
       <div class="dark-box">
           <div class="lang-selector">
                 <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="php">php</a>
-                <a href="#" data-language-name="python">python</a>
-                <a href="#" data-language-name="csharp">csharp</a>
-                <a href="#" data-language-name="java">java</a>
           </div>
       </div>
     </div>
