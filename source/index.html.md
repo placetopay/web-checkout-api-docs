@@ -3,10 +3,6 @@ title: API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - shell
-  - php
-  - python
-  - csharp
-  - java
 
 toc_footers:
   - <a href='#'>Sign Up for a Developer Key</a>
@@ -76,75 +72,6 @@ POST /api/session
 }
 ```
 
-
-```php
-Para generar la fecha con formato ISO 8601 en php, utiliza este código:
-
-<?php
-$seed = date('c');
-?>
-
-"Para generar el nonce en php, utiliza este código:"
-
-<?php
-if (function_exists('random_bytes')) {
-    $nonce = bin2hex(random_bytes(16));
-} elseif (function_exists('openssl_random_pseudo_bytes')) {
-    $nonce = bin2hex(openssl_random_pseudo_bytes(16));
-} else {
-    $nonce = mt_rand();
-}
-$nonceBase64 = base64_encode($nonce);
-?>
-
-"Para generar el tranKey en php, utiliza este código:"
-
-<?php
-$tranKey = base64_encode(sha1($nonce . $seed . $secretKey, true));
-?>
-```
-
-```python
-"Para generar la fecha en php, utiliza este código:"
-
-import time
-seed=time.strftime("%c")
-
-"Para generar el nonce en python, utiliza este código:"
-
-"Para generar el tranKey en python, utiliza este código:"
-```
-
-```csharp
-"Para generar la fecha con formato ISO 8601 en csharp, utiliza este código:"
-
-using System;
-using System.Globalization;
-
-String seed = DateTime.UtcNow.ToString("s",
-System.Globalization.CultureInfo.InvariantCulture);
-
-
-"Para generar el nonce en csharp, utiliza este código:"
-
-"Para generar el tranKey en csharp, utiliza este código:"
-```
-
-
-```java
-"Para generar la fecha con formato ISO 8601 en java, utiliza este código:"
-
-using System;
-using System.Globalization;
-
-String seed = DateTime.UtcNow.ToString("s",
-System.Globalization.CultureInfo.InvariantCulture);
-
-"Para generar el nonce en java, utiliza este código:"
-
-"Para generar el tranKey en java, utiliza este código:"
-``` 
-
 La autenticación al servicio debe ser enviada sobre el objeto <code>auth</code>, el cual debe contener los siguientes atributos:
 
 Parametro | Descripción
@@ -171,7 +98,7 @@ Esta estructura debe de ser enviada en cada petición realizada al servicio
 >Ejemplo para la petición de un pago básico:
 
 ```shell
-POST/api/Sesión
+POST /api/session
 
 {
   "auth": {
