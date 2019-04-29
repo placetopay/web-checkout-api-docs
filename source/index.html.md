@@ -17,7 +17,7 @@ includes:
 
 search: true
 ---
-# Web CheckOut
+# Web Checkout
 
 
  Las especificaciones del servicio web y su arquitectura permite a cualquier aplicación conectarse a PlacetoPay. 
