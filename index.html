@@ -220,29 +220,61 @@
       <ul id="toc" class="toc-list-h1">
           <li>
             <a href="#web-checkout" class="toc-h1 toc-link" data-title="Web Checkout">Web Checkout</a>
+          </li>
+          <li>
+            <a href="#autenticacion" class="toc-h1 toc-link" data-title="Autenticación">Autenticación</a>
+          </li>
+          <li>
+            <a href="#pago-basico" class="toc-h1 toc-link" data-title="Pago básico">Pago básico</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#autenticacion" class="toc-h2 toc-link" data-title="Autenticación">Autenticación</a>
+                    <a href="#payment" class="toc-h2 toc-link" data-title="Payment">Payment</a>
                   </li>
                   <li>
-                    <a href="#pago-basico" class="toc-h2 toc-link" data-title="Pago básico">Pago básico</a>
+                    <a href="#amount" class="toc-h2 toc-link" data-title="Amount">Amount<br></a>
                   </li>
                   <li>
-                    <a href="#pago-mixto" class="toc-h2 toc-link" data-title="Pago mixto">Pago mixto</a>
+                    <a href="#redirectresponse" class="toc-h2 toc-link" data-title="RedirectResponse">RedirectResponse</a>
                   </li>
                   <li>
-                    <a href="#pago-recurrente" class="toc-h2 toc-link" data-title="Pago Recurrente">Pago Recurrente</a>
+                    <a href="#status" class="toc-h2 toc-link" data-title="Status">Status</a>
                   </li>
                   <li>
-                    <a href="#suscripcion" class="toc-h2 toc-link" data-title="Suscripción">Suscripción</a>
-                  </li>
-                  <li>
-                    <a href="#notificacion" class="toc-h2 toc-link" data-title="Notificación">Notificación</a>
-                  </li>
-                  <li>
-                    <a href="#consulta" class="toc-h2 toc-link" data-title="Consulta">Consulta</a>
+                    <a href="#estado-de-la-solicitud-o-pago" class="toc-h2 toc-link" data-title="Estado de la solicitud o pago">Estado de la solicitud o pago</a>
                   </li>
               </ul>
+          </li>
+          <li>
+            <a href="#pago-mixto" class="toc-h1 toc-link" data-title="Pago mixto">Pago mixto</a>
+          </li>
+          <li>
+            <a href="#pago-recurrente" class="toc-h1 toc-link" data-title="Pago Recurrente">Pago Recurrente</a>
+          </li>
+          <li>
+            <a href="#suscripcion" class="toc-h1 toc-link" data-title="Suscripción">Suscripción</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#subscriptionresponse" class="toc-h2 toc-link" data-title="SubscriptionResponse">SubscriptionResponse</a>
+                  </li>
+                  <li>
+                    <a href="#namevaluepair" class="toc-h2 toc-link" data-title="NameValuePair">NameValuePair</a>
+                  </li>
+                  <li>
+                    <a href="#recaudar-pago-suscripcion" class="toc-h2 toc-link" data-title="Recaudar pago suscripción">Recaudar pago suscripción</a>
+                  </li>
+                  <li>
+                    <a href="#tipos-de-documento" class="toc-h2 toc-link" data-title="Tipos de documento">Tipos de documento</a>
+                  </li>
+                  <li>
+                    <a href="#instrument" class="toc-h2 toc-link" data-title="Instrument">Instrument</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#notificacion" class="toc-h1 toc-link" data-title="Notificación">Notificación</a>
+          </li>
+          <li>
+            <a href="#consulta" class="toc-h1 toc-link" data-title="Consulta">Consulta</a>
           </li>
           <li>
             <a href="#errores" class="toc-h1 toc-link" data-title="Errores">Errores</a>
@@ -261,7 +293,7 @@
 
 <p>Para hacer uso del servicio web es indispensable un lenguaje de programación que pueda conectarse con servicios REST y se conecte usando la versión 1.2 de TLS.</p>
 
-<p>En esta API se describen, los parámetros de ingreso y estructuras de datos utilizadas para conectarse con el web service <code>Web CheckOut</code>.</p>
+<p>En esta API se describen, los parámetros de ingreso y estructuras de datos utilizadas para conectarse con el web service <code>Web Checkout</code>.</p>
 
 <p><strong>Consideraciones:</strong></p>
 
@@ -280,7 +312,7 @@ límite que tiene el usuario para realizar el pago y debe ser de al menos 5 minu
 </ul>
 
 <p><strong>Importante:</strong> Esta URL de notificación debe ser suministrada a PlacetoPay para su configuración.</p>
-<h2 id='autenticacion'>Autenticación</h2><pre class="highlight shell tab-shell"><code>
+<h1 id='autenticacion'>Autenticación</h1><pre class="highlight shell tab-shell"><code>
 Ejemplo:
     Información proporcionada:
     login <span class="o">=</span> usuarioprueba
@@ -343,7 +375,7 @@ El login y el secretKey son suministrados por PlacetoPay
 <aside class="notice">
 Esta estructura debe de ser enviada en cada petición realizada al servicio 
 </aside>
-<h2 id='pago-basico'>Pago básico</h2>
+<h1 id='pago-basico'>Pago básico</h1>
 <blockquote>
 <p>Ejemplo para la petición de un pago básico:</p>
 </blockquote>
@@ -403,7 +435,7 @@ Esta estructura debe de ser enviada en cada petición realizada al servicio
 <p>En la estructura se deben tener en cuenta algunos parámetros que se manejan dependiendo del tipo de transacción (<a href="#pago-basico">Pago básico</a>, <a href="#pago-mixto">mixto</a>, o <a href="#pago-recurrente">recurrente</a>):</p>
 
 <p>La siguiente información es necesaria para consumir el <code>CreateRequest</code>:</p>
-<h3 id='payment'>Payment</h3>
+<h2 id='payment'>Payment</h2>
 <p>Estructura que contiene la información acerca del pago de la transacción requerida al servicio web.</p>
 
 <table><thead>
@@ -429,7 +461,7 @@ Esta estructura debe de ser enviada en cada petición realizada al servicio
 <td>Objeto que contiene el monto a ser cobrado.</td>
 </tr>
 </tbody></table>
-<h3 id='amount'>Amount<br></h3>
+<h2 id='amount'>Amount<br></h2>
 <p>Contiene diferentes atributos que determinan el contenido del valor total, incluyendo los impuestos y detalles. </p>
 
 <table><thead>
@@ -495,7 +527,7 @@ Esta estructura debe de ser enviada en cada petición realizada al servicio
 <aside class="notice">
 En el returnUrl se recomienda enviar en la URL un dato con el cual el sitio pueda identificar el registro por ejemplo: <code>https://mysite.com/response/{reference}</code>.
 </aside>
-<h3 id='redirectresponse'>RedirectResponse</h3>
+<h2 id='redirectresponse'>RedirectResponse</h2>
 <p>Estructura que contiene la petición de respuesta inicial desde el método <code>createRequest.</code></p>
 
 <table><thead>
@@ -521,7 +553,7 @@ En el returnUrl se recomienda enviar en la URL un dato con el cual el sitio pued
 <td>URL donde se redirecciona al usuario para completar el proceso de pago.</td>
 </tr>
 </tbody></table>
-<h3 id='status'>Status</h3>
+<h2 id='status'>Status</h2>
 <p>Estructura que contiene la información de la respuesta sobre una solicitud o pago, e informa el estado actual de la misma.</p>
 
 <table><thead>
@@ -552,7 +584,7 @@ En el returnUrl se recomienda enviar en la URL un dato con el cual el sitio pued
 <td>Fecha y hora en que se genera el estado de pago.</td>
 </tr>
 </tbody></table>
-<h3 id='estado-de-la-solicitud-o-pago'>Estado de la solicitud o pago</h3>
+<h2 id='estado-de-la-solicitud-o-pago'>Estado de la solicitud o pago</h2>
 <table><thead>
 <tr>
 <th>Estado</th>
@@ -599,7 +631,7 @@ En el returnUrl se recomienda enviar en la URL un dato con el cual el sitio pued
 
 <ul>
 <li>Al recibir la respuesta del <a href="#redirectresponse">redirectResponse</a>, esta debe ser almacenada en su sistema. La operación debe quedar marcada como pendiente. <br></li>
-<li>Luego de almacenar la respuesta de la operación, el sitio debe redireccionar al usuario sobre la misma pestaña a la interfaz de la sesión en Web CheckOut (processUrl) donde debe ingresar la información para procesar el pago:</li>
+<li>Luego de almacenar la respuesta de la operación, el sitio debe redireccionar al usuario sobre la misma pestaña a la interfaz de la sesión en Web Checkout (processUrl) donde debe ingresar la información para procesar el pago:</li>
 </ul>
 
 <table><thead>
@@ -685,7 +717,7 @@ En el returnUrl se recomienda enviar en la URL un dato con el cual el sitio pued
 <aside class="notice">
 En caso que la operación quede pendiente, el servicio notificará de forma asíncrona a la URL de notificación una vez sea resuelta (Apruebe o decline)
 </aside>
-<h2 id='pago-mixto'>Pago mixto</h2>
+<h1 id='pago-mixto'>Pago mixto</h1>
 <blockquote>
 <p>Ejemplo de una petición para un pago mixto.</p>
 </blockquote>
@@ -802,7 +834,7 @@ enviar el atributo <code>allowPartial</code> como: <code>TRUE</code>.</p>
 <aside class="notice">
  Es importante identificar según la regla de negocio del sitio al obtener alguno de estos dos estados.
 </aside>
-<h2 id='pago-recurrente'>Pago Recurrente</h2>
+<h1 id='pago-recurrente'>Pago Recurrente</h1>
 <blockquote>
 <p>Ejemplo petición para un pago recurrente:</p>
 </blockquote>
@@ -879,7 +911,7 @@ En el caso de fallar un cobro recurrente, este será reintentado cada día duran
 <aside class="notice">
 Las recurrencias sólo pueden ser canceladas en la consola administrativa de PlacetoPay.
 </aside>
-<h2 id='suscripcion'>Suscripción</h2>
+<h1 id='suscripcion'>Suscripción</h1>
 <blockquote>
 <p>Ejemplo petición para una suscripción:</p>
 </blockquote>
@@ -955,7 +987,7 @@ Las recurrencias sólo pueden ser canceladas en la consola administrativa de Pla
 <td>Descripción de la suscripción</td>
 </tr>
 </tbody></table>
-<h3 id='subscriptionresponse'>SubscriptionResponse</h3>
+<h2 id='subscriptionresponse'>SubscriptionResponse</h2>
 <p>Estructura que contiene información para el método de pago con suscripción.</p>
 
 <table><thead>
@@ -981,7 +1013,7 @@ Las recurrencias sólo pueden ser canceladas en la consola administrativa de Pla
 <td>Acorde con el tipo de suscripción los valore retornados puede cambiar y serán devueltos en la estructura de NameValuePair.<br><strong>token:</strong><code>[token, subtoken, franchise, <br>franchiseName, lastDigits, validUntil]</code><br><strong>account:</strong> <code>[bankCode, bankName, accountType, <br>accountNumber]</code></td>
 </tr>
 </tbody></table>
-<h3 id='namevaluepair'>NameValuePair</h3>
+<h2 id='namevaluepair'>NameValuePair</h2>
 <p>Se utiliza para definir un tipo de par <code>clave-valor</code></p>
 
 <table><thead>
@@ -1018,7 +1050,7 @@ Luego de tener el token, puede generar cobros al medio de pago tokenizado usando
 </aside>
 
 <p>La estructura de la respuesta contiene toda la información de la petición original y una estructura de suscripción <code>(subscription)</code> con un instrumento <code>(instrument)</code> representado en forma de <strong>token</strong>. <a href="#consulta">Ver Ejemplo de respuesta de una suscripción</a>.</p>
-<h3 id='recaudar-pago-suscripcion'>Recaudar pago suscripción</h3>
+<h2 id='recaudar-pago-suscripcion'>Recaudar pago suscripción</h2>
 <p>Con el <code>token</code> obtenido se procede a realizar la petición de recaudo del pago a la URL de procesamiento <code>(Ej: https://test.placetopay.com/redirection/api/collect/)</code> sin intervención del usuario, mediante el método POST y los parametros con estructuras JSON. Adicionalmente debe enviarse una estructura de pago <code>(payment)</code> y pagador <code>(payer)</code>.</p>
 <h3 id='collect'>Collect</h3>
 <p>Permite realizar cobros sin la intervención del usuario usando medios de pago previamente suscritos.</p>
@@ -1097,7 +1129,7 @@ Luego de tener el token, puede generar cobros al medio de pago tokenizado usando
 <td>Número celular, el <code>PhoneNumberType</code> restringe la longitud del número de teléfono de la cadena a 30 caracteres.</td>
 </tr>
 </tbody></table>
-<h3 id='tipos-de-documento'>Tipos de documento</h3>
+<h2 id='tipos-de-documento'>Tipos de documento</h2>
 <p>Esta es una lista de los tipos de docuemntos aceptados por redirección.</p>
 
 <table><thead>
@@ -1187,7 +1219,7 @@ Luego de tener el token, puede generar cobros al medio de pago tokenizado usando
 <li>En un pago recurrente ya creado no se puede modificar los intervalos de tiempo para el cobro ni el monto, mientras que en suscripción la información puede variar dependiendo de cómo envie la solicitud en el collect.</li>
 <li>Para eliminar la recurrencia de un pago debe hacerse por la consola administrativa de PlacetoPay, mientras que en suscripción debe invalidar o eliminar de sus sistema el token obtenido.</li>
 </ul>
-<h3 id='instrument'>Instrument</h3>
+<h2 id='instrument'>Instrument</h2>
 <p>Estructura que contiene los detalles de un medio de pago suscrito.</p>
 
 <p><strong>Token</strong><br> 
@@ -1252,7 +1284,7 @@ Estructura que contiene los datos del titular del medio de pago almacenado.</p>
 <aside class="notice">
 Si el usuario retorna al comercio, este debe consultar la información de la transacción usando el identificador único (requestId) generado.
 </aside>
-<h2 id='notificacion'>Notificación</h2>
+<h1 id='notificacion'>Notificación</h1>
 <blockquote>
 <p>Ejemplo de notificación para un pago aprobado:</p>
 </blockquote>
@@ -1344,7 +1376,7 @@ Puedes validar que se trate de una respuesta de PlacetoPay haciendo un SHA-1 con
 
 <aside class="success">Luego de obtener el estado de la sesión, puede continuar con la regla de negocio de su sitio. (ejemplo: si la operación es aprobada, envia un correo electrónico al usuario).
 </aside>
-<h2 id='consulta'>Consulta</h2>
+<h1 id='consulta'>Consulta</h1>
 <blockquote>
 <p>Ejemplo de la petición de consulta de la información de una transacción:</p>
 </blockquote>
