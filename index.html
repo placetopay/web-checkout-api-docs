@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>api Reference</title>
+    <title>API Reference</title>
 
     <style>
       .highlight table td { padding: 5px; }
@@ -299,7 +299,7 @@ Ejemplo:
     nonce <span class="o">=</span> <span class="nv">YzkwODVlODJkZWJiODJiMDk1NTU3OTA5OGJlM2Q3Y2E</span><span class="o">=</span> //Nonce en base64
 </code></pre><pre class="highlight shell tab-shell"><code>
 Ejemplo:
-POST/api/Sesión.
+POST /api/session
 
 <span class="o">{</span>
   <span class="s2">"auth"</span>: <span class="o">{</span>
@@ -748,7 +748,7 @@ En caso que la operación quede pendiente, el servicio notificará de forma así
 <blockquote>
 <p>Ejemplo de una petición para un pago mixto.</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>POST/api/Sesión
+<pre class="highlight shell tab-shell"><code>POST /api/session
 
 <span class="o">{</span>
   <span class="s2">"auth"</span>: <span class="o">{</span>
@@ -962,7 +962,7 @@ Las recurrencias sólo pueden ser canceladas en la consola administrativa de Pla
 <blockquote>
 <p>Ejemplo para recaudar un pago con suscripción</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>   POST /api/collect
+<pre class="highlight shell tab-shell"><code>POST /api/collect
 <span class="o">{</span>
     <span class="s2">"auth"</span>: <span class="o">{</span>
         <span class="s2">"login"</span>: <span class="s2">"usuarioprueba"</span>,
