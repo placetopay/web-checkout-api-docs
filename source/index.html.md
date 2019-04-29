@@ -13,6 +13,7 @@ includes:
 
 search: true
 ---
+
 # Web Checkout
 
 
@@ -20,7 +21,7 @@ search: true
 
  Para hacer uso del servicio web es indispensable un lenguaje de programación que pueda conectarse con servicios REST y se conecte usando la versión 1.2 de TLS.
 
- En esta API se describen, los parámetros de ingreso y estructuras de datos utilizadas para conectarse con el web service <code>Web CheckOut</code>.
+ En esta API se describen, los parámetros de ingreso y estructuras de datos utilizadas para conectarse con el web service <code>Web Checkout</code>.
 
 **Consideraciones:**
 
@@ -39,7 +40,7 @@ límite que tiene el usuario para realizar el pago y debe ser de al menos 5 minu
 
 **Importante:** Esta URL de notificación debe ser suministrada a PlacetoPay para su configuración.
 
-## Autenticación
+# Autenticación
 
 ```shell
 
@@ -93,7 +94,7 @@ El login y el secretKey son suministrados por PlacetoPay
 Esta estructura debe de ser enviada en cada petición realizada al servicio 
 </aside>
 
-## Pago básico
+# Pago básico
 
 >Ejemplo para la petición de un pago básico:
 
@@ -158,7 +159,7 @@ En la estructura se deben tener en cuenta algunos parámetros que se manejan dep
 
 La siguiente información es necesaria para consumir el <code>CreateRequest</code>:
 
-### Payment
+## Payment
 Estructura que contiene la información acerca del pago de la transacción requerida al servicio web.
 
 Parametro | Tipo | Descripción
@@ -168,7 +169,7 @@ description | String | Permite identificar la descripción del pago.
 amount | <a href="#amount">Amount</a> | Objeto que contiene el monto a ser cobrado. 
 
 
-###Amount<br>
+## Amount<br>
 Contiene diferentes atributos que determinan el contenido del valor total, incluyendo los impuestos y detalles. 
 
 Parametro | Tipo | Descripción
@@ -191,7 +192,7 @@ userAgent | String | Agente de usuario informado por el usuario.
 En el returnUrl se recomienda enviar en la URL un dato con el cual el sitio pueda identificar el registro por ejemplo: <code>https://mysite.com/response/{reference}</code>.
 </aside>
 
-###RedirectResponse
+## RedirectResponse
 
 Estructura que contiene la petición de respuesta inicial desde el método <code>createRequest.</code>
 
@@ -202,7 +203,7 @@ requestId | Int | Referencia única de la sesión de pago.
 processUrl | String | URL donde se redirecciona al usuario para completar el proceso de pago.
 
 
-### Status
+## Status
 Estructura que contiene la información de la respuesta sobre una solicitud o pago, e informa el estado actual de la misma.
 
 Parametro | Tipo | Descripción
@@ -212,7 +213,7 @@ reason | String | Código del motivo proporcionado.
 message | String | Descripción del código de razón.
 date | DateTime | Fecha y hora en que se genera el estado de pago.
 
-### Estado de la solicitud o pago
+## Estado de la solicitud o pago
 
 Estado | Descripción
 --------- | -----------
@@ -227,7 +228,7 @@ Estado | Descripción
 <code>REFUNDED</code> | Reintegro de una transacción por solicitud de un tarjeta habiente al comercio.
 
 * Al recibir la respuesta del <a href="#redirectresponse">redirectResponse</a>, esta debe ser almacenada en su sistema. La operación debe quedar marcada como pendiente. <br>
-* Luego de almacenar la respuesta de la operación, el sitio debe redireccionar al usuario sobre la misma pestaña a la interfaz de la sesión en Web CheckOut (processUrl) donde debe ingresar la información para procesar el pago:
+* Luego de almacenar la respuesta de la operación, el sitio debe redireccionar al usuario sobre la misma pestaña a la interfaz de la sesión en Web Checkout (processUrl) donde debe ingresar la información para procesar el pago:
 
 
 Parametro | Tipo | Obligatoriedad
@@ -260,7 +261,7 @@ En caso que la operación quede pendiente, el servicio notificará de forma así
 </aside>
 
 
-## Pago mixto
+# Pago mixto
 
 >Ejemplo de una petición para un pago mixto.
 
@@ -373,7 +374,7 @@ Al obtener el resultado de la operación, debe tener muy presente los siguiente 
  Es importante identificar según la regla de negocio del sitio al obtener alguno de estos dos estados.
 </aside>
 
-## Pago Recurrente
+# Pago Recurrente
 
 >Ejemplo petición para un pago recurrente:
 
@@ -431,7 +432,7 @@ En el caso de fallar un cobro recurrente, este será reintentado cada día duran
 Las recurrencias sólo pueden ser canceladas en la consola administrativa de PlacetoPay.
 </aside>
 
-## Suscripción
+# Suscripción
 
 >Ejemplo petición para una suscripción:
 
@@ -497,7 +498,7 @@ Parametro | Tipo | Descripción
 reference | String | Esta debe ser única en la solicitud de suscripción.
 description | String | Descripción de la suscripción
 
-### SubscriptionResponse
+## SubscriptionResponse
 Estructura que contiene información para el método de pago con suscripción.
 
 Parametro | Tipo | Descripción
@@ -506,7 +507,7 @@ status | Status | Estado de la suscripción.
 type | String | Esta cadena dicta el tipo de suscripción que se devuelve, puede ser [token, cuenta]
 instrument | <a href="#namevaluepair">NameValuePair[]</a> | Acorde con el tipo de suscripción los valore retornados puede cambiar y serán devueltos en la estructura de NameValuePair.<br>**token:**<code>[token, subtoken, franchise, <br>franchiseName, lastDigits, validUntil]</code><br>**account:** <code>[bankCode, bankName, accountType, <br>accountNumber]</code> 
 
-### NameValuePair
+## NameValuePair
 Se utiliza para definir un tipo de par <code>clave-valor</code>
 
 Parametro | Tipo | Descripción
@@ -527,7 +528,7 @@ Luego de tener el token, puede generar cobros al medio de pago tokenizado usando
 
 La estructura de la respuesta contiene toda la información de la petición original y una estructura de suscripción <code>(subscription)</code> con un instrumento <code>(instrument)</code> representado en forma de **token**. [Ver Ejemplo de respuesta de una suscripción](#consulta).
 
-### Recaudar pago suscripción 
+## Recaudar pago suscripción 
 
 Con el <code>token</code> obtenido se procede a realizar la petición de recaudo del pago a la URL de procesamiento <code>(Ej: https://test.placetopay.com/redirection/api/collect/)</code> sin intervención del usuario, mediante el método POST y los parametros con estructuras JSON. Adicionalmente debe enviarse una estructura de pago <code>(payment)</code> y pagador <code>(payer)</code>.
 
@@ -554,7 +555,7 @@ email | String | Correo electrónico de la persona.
 address | Address | Información completa de la dirección.
 mobile | PhoneNumberType | Número celular, el <code>PhoneNumberType</code> restringe la longitud del número de teléfono de la cadena a 30 caracteres.
 
-### Tipos de documento
+## Tipos de documento
 Esta es una lista de los tipos de docuemntos aceptados por redirección.
 
 País | Código | Tipo de documento
@@ -583,7 +584,7 @@ USA | SSN | Social security number
   * Para eliminar la recurrencia de un pago debe hacerse por la consola administrativa de PlacetoPay, mientras que en suscripción debe invalidar o eliminar de sus sistema el token obtenido.
 
 
-### Instrument
+## Instrument
 Estructura que contiene los detalles de un medio de pago suscrito.
 
 **Token**<br> 
@@ -611,7 +612,7 @@ mobile | PhoneNumberType | Número telefónico.
 Si el usuario retorna al comercio, este debe consultar la información de la transacción usando el identificador único (requestId) generado.
 </aside>
 
-## Notificación
+# Notificación
 
 >Ejemplo de notificación para un pago aprobado:
 
@@ -691,7 +692,7 @@ Si este valor coincide con el valor proporcionado por el <code>signature</code>,
 <aside class="success">Luego de obtener el estado de la sesión, puede continuar con la regla de negocio de su sitio. (ejemplo: si la operación es aprobada, envia un correo electrónico al usuario).
 </aside>
 
-## Consulta
+# Consulta
 
 >Ejemplo de la petición de consulta de la información de una transacción:
 
