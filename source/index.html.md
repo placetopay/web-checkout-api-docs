@@ -125,34 +125,6 @@ POST /api/session
 }
 ```
 
->Ejemplo de respuesta fallida en una petición de autenticación:
-
-```shell
-{
-    "status": {
-        "status": "FAILED",
-        "reason": 401,
-        "message": "Authentication Failed 103",
-        "date": "2019-03-05T10:22:11-05:00"
-    }
-}
-```
-
->Ejemplo de respuesta aprobada en una solicitud de autenticación:
-
-```shell
-{
-    "status": {
-        "status": "OK",
-        "reason": "PC",
-        "message": "La petición se ha procesado correctamente",
-        "date": "2019-03-04T16:50:02-05:00"
-    },
-    "requestId": 181348,
-    "processUrl": "https://test.placetopay.com/redirection/session/181348/43d83d36aa46de5f993aafb9b3e0be48"
-}
-```
-
 Cuando el usuario selecciona pagar en tu sitio, inicia el flujo del servicio Web Checkout, donde su sitio envía al EndPoint de procesamiento <code>(Ej: https://test.placetopay.com/redirection/api/session/)</code>, mediante el método POST los parametros necesarios para crear la sesión de pago.
 
 En la estructura se deben tener en cuenta algunos parámetros que se manejan dependiendo del tipo de transacción (<a href="#pago-basico">Pago básico</a>, <a href="#pago-mixto">mixto</a>, o <a href="#pago-recurrente">recurrente</a>):
@@ -160,6 +132,25 @@ En la estructura se deben tener en cuenta algunos parámetros que se manejan dep
 La siguiente información es necesaria para consumir el <code>CreateRequest</code>:
 
 ## Payment
+
+>Ejemplo para la estructura payment:
+
+```shell
+
+{
+...
+    "payment": {
+        "reference": "3210",
+        "description": "Pago básico de prueba 04032019",
+        "amount": {
+            "currency": "COP",
+            "total": "10000"
+        }
+      },
+...
+}
+```
+
 Estructura que contiene la información acerca del pago de la transacción requerida al servicio web.
 
 Parametro | Tipo | Descripción
@@ -193,7 +184,6 @@ En el returnUrl se recomienda enviar en la URL un dato con el cual el sitio pued
 </aside>
 
 ## RedirectResponse
-
 Estructura que contiene la petición de respuesta inicial desde el método <code>createRequest.</code>
 
 Parametro | Tipo | Descripción
@@ -214,6 +204,35 @@ message | String | Descripción del código de razón.
 date | DateTime | Fecha y hora en que se genera el estado de pago.
 
 ## Estado de la solicitud o pago
+>Ejemplo de respuesta fallida en una petición de autenticación:
+
+```shell
+
+{
+    "status": {
+        "status": "FAILED",
+        "reason": 401,
+        "message": "Authentication Failed 103",
+        "date": "2019-03-05T10:22:11-05:00"
+    }
+}
+```
+
+>Ejemplo de respuesta aprobada en una solicitud de autenticación:
+
+```shell
+
+{
+    "status": {
+        "status": "OK",
+        "reason": "PC",
+        "message": "La petición se ha procesado correctamente",
+        "date": "2019-03-04T16:50:02-05:00"
+    },
+    "requestId": 181348,
+    "processUrl": "https://test.placetopay.com/redirection/session/181348/43d83d36aa46de5f993aafb9b3e0be48"
+}
+```
 
 Estado | Descripción
 --------- | -----------
