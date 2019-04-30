@@ -133,7 +133,7 @@ La siguiente información es necesaria para consumir el <code>CreateRequest</cod
 
 ## Payment
 
->Ejemplo para la estructura payment:
+>Ejemplo de una estructura payment:
 
 ```shell
 
@@ -194,17 +194,8 @@ processUrl | String | URL donde se redirecciona al usuario para completar el pro
 
 
 ## Status
-Estructura que contiene la información de la respuesta sobre una solicitud o pago, e informa el estado actual de la misma.
 
-Parametro | Tipo | Descripción
---------- | ---- | -----------
-status | String(32) | <a href="#estado-de-la-solicitud-o-pago">Estado de la solicitud o pago</a>
-reason | String | Código del motivo proporcionado.
-message | String | Descripción del código de razón.
-date | DateTime | Fecha y hora en que se genera el estado de pago.
-
-## Estado de la solicitud o pago
->Ejemplo de respuesta fallida en una petición de autenticación:
+>Ejemplo de una estructura status con respuesta fallida en una petición de autenticación:
 
 ```shell
 
@@ -218,7 +209,18 @@ date | DateTime | Fecha y hora en que se genera el estado de pago.
 }
 ```
 
->Ejemplo de respuesta aprobada en una solicitud de autenticación:
+Estructura que contiene la información de la respuesta sobre una solicitud o pago, e informa el estado actual de la misma.
+
+Parametro | Tipo | Descripción
+--------- | ---- | -----------
+status | String(32) | <a href="#estado-de-la-solicitud-o-pago">Estado de la solicitud o pago</a>
+reason | String | Código del motivo proporcionado.
+message | String | Descripción del código de razón.
+date | DateTime | Fecha y hora en que se genera el estado de pago.
+
+## Estado de la solicitud o pago
+
+>Ejemplo de un estado de solicitud de pago con respuesta aprobada en una solicitud de autenticación:
 
 ```shell
 
