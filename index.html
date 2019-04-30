@@ -312,8 +312,7 @@ límite que tiene el usuario para realizar el pago y debe ser de al menos 5 minu
 </ul>
 
 <p><strong>Importante:</strong> Esta URL de notificación debe ser suministrada a PlacetoPay para su configuración.</p>
-<h1 id='autenticacion'>Autenticación</h1><pre class="highlight shell tab-shell"><code>
-Ejemplo:
+<h1 id='autenticacion'>Autenticación</h1><pre class="highlight shell tab-shell"><code>Ejemplo:
     Información proporcionada:
     login <span class="o">=</span> usuarioprueba
     secretKey <span class="o">=</span> ABCD1234
@@ -325,8 +324,7 @@ Ejemplo:
     Datos a enviar:
     tranKey <span class="o">=</span> i/RFwSHAh8d7YgtO3HME5kCnYy8<span class="o">=</span>
     nonce <span class="o">=</span> <span class="nv">YzkwODVlODJkZWJiODJiMDk1NTU3OTA5OGJlM2Q3Y2E</span><span class="o">=</span> //Nonce en base64
-</code></pre><pre class="highlight shell tab-shell"><code>
-Ejemplo:
+</code></pre><pre class="highlight shell tab-shell"><code>Ejemplo:
 POST /api/session
 
 <span class="o">{</span>
@@ -413,8 +411,7 @@ Esta estructura debe de ser enviada en cada petición realizada al servicio
 <blockquote>
 <p>Ejemplo de una estructura payment:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>
-<span class="o">{</span>
+<pre class="highlight shell tab-shell"><code><span class="o">{</span>
 ...
     <span class="s2">"payment"</span>: <span class="o">{</span>
         <span class="s2">"reference"</span>: <span class="s2">"3210"</span>,
@@ -453,6 +450,18 @@ Esta estructura debe de ser enviada en cada petición realizada al servicio
 </tr>
 </tbody></table>
 <h2 id='amount'>Amount<br></h2>
+<blockquote>
+<p>Ejemplo de una esrtructura amount para un pago básico:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">{</span>
+  ...
+        <span class="s2">"amount"</span>: <span class="o">{</span>
+            <span class="s2">"currency"</span>: <span class="s2">"COP"</span>,
+            <span class="s2">"total"</span>: <span class="s2">"10000"</span>
+        <span class="o">}</span>
+  ...     
+<span class="o">}</span>
+</code></pre>
 <p>Contiene diferentes atributos que determinan el contenido del valor total, incluyendo los impuestos y detalles. </p>
 
 <table><thead>
@@ -519,6 +528,20 @@ Esta estructura debe de ser enviada en cada petición realizada al servicio
 En el returnUrl se recomienda enviar en la URL un dato con el cual el sitio pueda identificar el registro por ejemplo: <code>https://mysite.com/response/{reference}</code>.
 </aside>
 <h2 id='redirectresponse'>RedirectResponse</h2>
+<blockquote>
+<p>Ejemplo de una estructura RedirectResponse con respuesta aprobada en una solicitud de autenticación:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">{</span>
+    <span class="s2">"status"</span>: <span class="o">{</span>
+        <span class="s2">"status"</span>: <span class="s2">"OK"</span>,
+        <span class="s2">"reason"</span>: <span class="s2">"PC"</span>,
+        <span class="s2">"message"</span>: <span class="s2">"La petición se ha procesado correctamente"</span>,
+        <span class="s2">"date"</span>: <span class="s2">"2019-03-04T16:50:02-05:00"</span>
+    <span class="o">}</span>,
+    <span class="s2">"requestId"</span>: 181348,
+    <span class="s2">"processUrl"</span>: <span class="s2">"https://test.placetopay.com/redirection/session/181348/43d83d36aa46de5f993aafb9b3e0be48"</span>
+<span class="o">}</span>
+</code></pre>
 <p>Estructura que contiene la petición de respuesta inicial desde el método <code>createRequest.</code></p>
 
 <table><thead>
@@ -548,8 +571,7 @@ En el returnUrl se recomienda enviar en la URL un dato con el cual el sitio pued
 <blockquote>
 <p>Ejemplo de una estructura status con respuesta fallida en una petición de autenticación:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>
-<span class="o">{</span>
+<pre class="highlight shell tab-shell"><code><span class="o">{</span>
     <span class="s2">"status"</span>: <span class="o">{</span>
         <span class="s2">"status"</span>: <span class="s2">"FAILED"</span>,
         <span class="s2">"reason"</span>: 401,
@@ -592,8 +614,7 @@ En el returnUrl se recomienda enviar en la URL un dato con el cual el sitio pued
 <blockquote>
 <p>Ejemplo de un estado de solicitud de pago con respuesta aprobada en una solicitud de autenticación:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>
-<span class="o">{</span>
+<pre class="highlight shell tab-shell"><code><span class="o">{</span>
     <span class="s2">"status"</span>: <span class="o">{</span>
         <span class="s2">"status"</span>: <span class="s2">"OK"</span>,
         <span class="s2">"reason"</span>: <span class="s2">"PC"</span>,
@@ -1033,6 +1054,54 @@ Las recurrencias sólo pueden ser canceladas en la consola administrativa de Pla
 </tr>
 </tbody></table>
 <h2 id='namevaluepair'>NameValuePair</h2>
+<blockquote>
+<p>Ejemplo que contiene la estructura namevaluepair:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>     ...
+            <span class="s2">"processorFields"</span>: <span class="o">[</span>
+                <span class="o">{</span>
+                    <span class="s2">"keyword"</span>: <span class="s2">"merchantCode"</span>,
+                    <span class="s2">"value"</span>: <span class="s2">"011271442"</span>,
+                    <span class="s2">"displayOn"</span>: <span class="s2">"none"</span>
+                <span class="o">}</span>,
+                <span class="o">{</span>
+                    <span class="s2">"keyword"</span>: <span class="s2">"terminalNumber"</span>,
+                    <span class="s2">"value"</span>: <span class="s2">"00057742"</span>,
+                    <span class="s2">"displayOn"</span>: <span class="s2">"none"</span>
+                <span class="o">}</span>,
+                <span class="o">{</span>
+                    <span class="s2">"keyword"</span>: <span class="s2">"lastDigits"</span>,
+                    <span class="s2">"value"</span>: <span class="s2">"1111"</span>,
+                    <span class="s2">"displayOn"</span>: <span class="s2">"none"</span>
+                <span class="o">}</span>,
+                <span class="o">{</span>
+                    <span class="s2">"keyword"</span>: <span class="s2">"id"</span>,
+                    <span class="s2">"value"</span>: <span class="s2">"42337fd0ed2b037667ccabce3427f042"</span>,
+                    <span class="s2">"displayOn"</span>: <span class="s2">"none"</span>
+                <span class="o">}</span>,
+                <span class="o">{</span>
+                    <span class="s2">"keyword"</span>: <span class="s2">"bin"</span>,
+                    <span class="s2">"value"</span>: <span class="s2">"411111"</span>,
+                    <span class="s2">"displayOn"</span>: <span class="s2">"none"</span>
+                <span class="o">}</span>,
+                <span class="o">{</span>
+                    <span class="s2">"keyword"</span>: <span class="s2">"installments"</span>,
+                    <span class="s2">"value"</span>: <span class="s2">"1"</span>,
+                    <span class="s2">"displayOn"</span>: <span class="s2">"none"</span>
+                <span class="o">}</span>,
+                <span class="o">{</span>
+                    <span class="s2">"keyword"</span>: <span class="s2">"expiration"</span>,
+                    <span class="s2">"value"</span>: <span class="s2">"0320"</span>,
+                    <span class="s2">"displayOn"</span>: <span class="s2">"none"</span>
+                <span class="o">}</span>,
+                <span class="o">{</span>
+                    <span class="s2">"keyword"</span>: <span class="s2">"cardType"</span>,
+                    <span class="s2">"value"</span>: <span class="s2">"C"</span>,
+                    <span class="s2">"displayOn"</span>: <span class="s2">"none"</span>
+                <span class="o">}</span>
+            <span class="o">]</span>
+    ...       
+</code></pre>
 <p>Se utiliza para definir un tipo de par <code>clave-valor</code></p>
 
 <table><thead>
@@ -1072,6 +1141,18 @@ Luego de tener el token, puede generar cobros al medio de pago tokenizado usando
 <h2 id='recaudar-pago-suscripcion'>Recaudar pago suscripción</h2>
 <p>Con el <code>token</code> obtenido se procede a realizar la petición de recaudo del pago a la URL de procesamiento <code>(Ej: https://test.placetopay.com/redirection/api/collect/)</code> sin intervención del usuario, mediante el método POST y los parametros con estructuras JSON. Adicionalmente debe enviarse una estructura de pago <code>(payment)</code> y pagador <code>(payer)</code>.</p>
 <h3 id='collect'>Collect</h3>
+<blockquote>
+<p>Ejemplo de una estructura payer con los datos de una estructura person:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="s2">"payer"</span>: <span class="o">{</span>
+            <span class="s2">"document"</span>: <span class="s2">"911111111"</span>,
+            <span class="s2">"documentType"</span>: <span class="s2">"CC"</span>,
+            <span class="s2">"name"</span>: <span class="s2">"Prueba aliado"</span>,
+            <span class="s2">"surname"</span>: <span class="s2">"JA"</span>,
+            <span class="s2">"email"</span>: <span class="s2">"juan.jimenez@placetopay.com"</span>,
+            <span class="s2">"mobile"</span>: <span class="s2">"321000000"</span>
+        <span class="o">}</span>,
+</code></pre>
 <p>Permite realizar cobros sin la intervención del usuario usando medios de pago previamente suscritos.</p>
 
 <table><thead>
