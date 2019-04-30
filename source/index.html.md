@@ -43,7 +43,6 @@ límite que tiene el usuario para realizar el pago y debe ser de al menos 5 minu
 # Autenticación
 
 ```shell
-
 Ejemplo:
     Información proporcionada:
     login = usuarioprueba
@@ -59,7 +58,6 @@ Ejemplo:
 ```
 
 ```shell
-
 Ejemplo:
 POST /api/session
 
@@ -136,7 +134,6 @@ La siguiente información es necesaria para consumir el <code>CreateRequest</cod
 >Ejemplo de una estructura payment:
 
 ```shell
-
 {
 ...
     "payment": {
@@ -161,6 +158,20 @@ amount | <a href="#amount">Amount</a> | Objeto que contiene el monto a ser cobra
 
 
 ## Amount<br>
+
+>Ejemplo de una esrtructura amount para un pago básico:
+
+```shell
+{
+  ...
+        "amount": {
+            "currency": "COP",
+            "total": "10000"
+        }
+  ...     
+}
+```
+
 Contiene diferentes atributos que determinan el contenido del valor total, incluyendo los impuestos y detalles. 
 
 Parametro | Tipo | Descripción
@@ -184,6 +195,22 @@ En el returnUrl se recomienda enviar en la URL un dato con el cual el sitio pued
 </aside>
 
 ## RedirectResponse
+
+>Ejemplo de una estructura RedirectResponse con respuesta aprobada en una solicitud de autenticación:
+
+```shell
+{
+    "status": {
+        "status": "OK",
+        "reason": "PC",
+        "message": "La petición se ha procesado correctamente",
+        "date": "2019-03-04T16:50:02-05:00"
+    },
+    "requestId": 181348,
+    "processUrl": "https://test.placetopay.com/redirection/session/181348/43d83d36aa46de5f993aafb9b3e0be48"
+}
+```
+
 Estructura que contiene la petición de respuesta inicial desde el método <code>createRequest.</code>
 
 Parametro | Tipo | Descripción
@@ -198,7 +225,6 @@ processUrl | String | URL donde se redirecciona al usuario para completar el pro
 >Ejemplo de una estructura status con respuesta fallida en una petición de autenticación:
 
 ```shell
-
 {
     "status": {
         "status": "FAILED",
@@ -223,7 +249,6 @@ date | DateTime | Fecha y hora en que se genera el estado de pago.
 >Ejemplo de un estado de solicitud de pago con respuesta aprobada en una solicitud de autenticación:
 
 ```shell
-
 {
     "status": {
         "status": "OK",
@@ -529,6 +554,56 @@ type | String | Esta cadena dicta el tipo de suscripción que se devuelve, puede
 instrument | <a href="#namevaluepair">NameValuePair[]</a> | Acorde con el tipo de suscripción los valore retornados puede cambiar y serán devueltos en la estructura de NameValuePair.<br>**token:**<code>[token, subtoken, franchise, <br>franchiseName, lastDigits, validUntil]</code><br>**account:** <code>[bankCode, bankName, accountType, <br>accountNumber]</code> 
 
 ## NameValuePair
+
+ >Ejemplo que contiene la estructura namevaluepair:
+
+  ```shell
+     ...
+            "processorFields": [
+                {
+                    "keyword": "merchantCode",
+                    "value": "011271442",
+                    "displayOn": "none"
+                },
+                {
+                    "keyword": "terminalNumber",
+                    "value": "00057742",
+                    "displayOn": "none"
+                },
+                {
+                    "keyword": "lastDigits",
+                    "value": "1111",
+                    "displayOn": "none"
+                },
+                {
+                    "keyword": "id",
+                    "value": "42337fd0ed2b037667ccabce3427f042",
+                    "displayOn": "none"
+                },
+                {
+                    "keyword": "bin",
+                    "value": "411111",
+                    "displayOn": "none"
+                },
+                {
+                    "keyword": "installments",
+                    "value": "1",
+                    "displayOn": "none"
+                },
+                {
+                    "keyword": "expiration",
+                    "value": "0320",
+                    "displayOn": "none"
+                },
+                {
+                    "keyword": "cardType",
+                    "value": "C",
+                    "displayOn": "none"
+                }
+            ]
+    ...       
+```
+
 Se utiliza para definir un tipo de par <code>clave-valor</code>
 
 Parametro | Tipo | Descripción
@@ -554,6 +629,20 @@ La estructura de la respuesta contiene toda la información de la petición orig
 Con el <code>token</code> obtenido se procede a realizar la petición de recaudo del pago a la URL de procesamiento <code>(Ej: https://test.placetopay.com/redirection/api/collect/)</code> sin intervención del usuario, mediante el método POST y los parametros con estructuras JSON. Adicionalmente debe enviarse una estructura de pago <code>(payment)</code> y pagador <code>(payer)</code>.
 
 ### Collect
+
+>Ejemplo de una estructura payer con los datos de una estructura person:
+
+```shell
+"payer": {
+            "document": "911111111",
+            "documentType": "CC",
+            "name": "Prueba aliado",
+            "surname": "JA",
+            "email": "juan.jimenez@placetopay.com",
+            "mobile": "321000000"
+        },
+```
+
 Permite realizar cobros sin la intervención del usuario usando medios de pago previamente suscritos.
 
 Parametro | Tipo | Descripción
