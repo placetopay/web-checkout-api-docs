@@ -404,38 +404,29 @@ Esta estructura debe de ser enviada en cada petición realizada al servicio
     <span class="s2">"userAgent"</span>: <span class="s2">"PlacetoPay Sandbox"</span>
 <span class="o">}</span>
 </code></pre>
-<blockquote>
-<p>Ejemplo de respuesta fallida en una petición de autenticación:</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code><span class="o">{</span>
-    <span class="s2">"status"</span>: <span class="o">{</span>
-        <span class="s2">"status"</span>: <span class="s2">"FAILED"</span>,
-        <span class="s2">"reason"</span>: 401,
-        <span class="s2">"message"</span>: <span class="s2">"Authentication Failed 103"</span>,
-        <span class="s2">"date"</span>: <span class="s2">"2019-03-05T10:22:11-05:00"</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre>
-<blockquote>
-<p>Ejemplo de respuesta aprobada en una solicitud de autenticación:</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code><span class="o">{</span>
-    <span class="s2">"status"</span>: <span class="o">{</span>
-        <span class="s2">"status"</span>: <span class="s2">"OK"</span>,
-        <span class="s2">"reason"</span>: <span class="s2">"PC"</span>,
-        <span class="s2">"message"</span>: <span class="s2">"La petición se ha procesado correctamente"</span>,
-        <span class="s2">"date"</span>: <span class="s2">"2019-03-04T16:50:02-05:00"</span>
-    <span class="o">}</span>,
-    <span class="s2">"requestId"</span>: 181348,
-    <span class="s2">"processUrl"</span>: <span class="s2">"https://test.placetopay.com/redirection/session/181348/43d83d36aa46de5f993aafb9b3e0be48"</span>
-<span class="o">}</span>
-</code></pre>
 <p>Cuando el usuario selecciona pagar en tu sitio, inicia el flujo del servicio Web Checkout, donde su sitio envía al EndPoint de procesamiento <code>(Ej: https://test.placetopay.com/redirection/api/session/)</code>, mediante el método POST los parametros necesarios para crear la sesión de pago.</p>
 
 <p>En la estructura se deben tener en cuenta algunos parámetros que se manejan dependiendo del tipo de transacción (<a href="#pago-basico">Pago básico</a>, <a href="#pago-mixto">mixto</a>, o <a href="#pago-recurrente">recurrente</a>):</p>
 
 <p>La siguiente información es necesaria para consumir el <code>CreateRequest</code>:</p>
 <h2 id='payment'>Payment</h2>
+<blockquote>
+<p>Ejemplo para la estructura payment:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>
+<span class="o">{</span>
+...
+    <span class="s2">"payment"</span>: <span class="o">{</span>
+        <span class="s2">"reference"</span>: <span class="s2">"3210"</span>,
+        <span class="s2">"description"</span>: <span class="s2">"Pago básico de prueba 04032019"</span>,
+        <span class="s2">"amount"</span>: <span class="o">{</span>
+            <span class="s2">"currency"</span>: <span class="s2">"COP"</span>,
+            <span class="s2">"total"</span>: <span class="s2">"10000"</span>
+        <span class="o">}</span>
+      <span class="o">}</span>,
+...
+<span class="o">}</span>
+</code></pre>
 <p>Estructura que contiene la información acerca del pago de la transacción requerida al servicio web.</p>
 
 <table><thead>
@@ -585,6 +576,34 @@ En el returnUrl se recomienda enviar en la URL un dato con el cual el sitio pued
 </tr>
 </tbody></table>
 <h2 id='estado-de-la-solicitud-o-pago'>Estado de la solicitud o pago</h2>
+<blockquote>
+<p>Ejemplo de respuesta fallida en una petición de autenticación:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>
+<span class="o">{</span>
+    <span class="s2">"status"</span>: <span class="o">{</span>
+        <span class="s2">"status"</span>: <span class="s2">"FAILED"</span>,
+        <span class="s2">"reason"</span>: 401,
+        <span class="s2">"message"</span>: <span class="s2">"Authentication Failed 103"</span>,
+        <span class="s2">"date"</span>: <span class="s2">"2019-03-05T10:22:11-05:00"</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+<blockquote>
+<p>Ejemplo de respuesta aprobada en una solicitud de autenticación:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>
+<span class="o">{</span>
+    <span class="s2">"status"</span>: <span class="o">{</span>
+        <span class="s2">"status"</span>: <span class="s2">"OK"</span>,
+        <span class="s2">"reason"</span>: <span class="s2">"PC"</span>,
+        <span class="s2">"message"</span>: <span class="s2">"La petición se ha procesado correctamente"</span>,
+        <span class="s2">"date"</span>: <span class="s2">"2019-03-04T16:50:02-05:00"</span>
+    <span class="o">}</span>,
+    <span class="s2">"requestId"</span>: 181348,
+    <span class="s2">"processUrl"</span>: <span class="s2">"https://test.placetopay.com/redirection/session/181348/43d83d36aa46de5f993aafb9b3e0be48"</span>
+<span class="o">}</span>
+</code></pre>
 <table><thead>
 <tr>
 <th>Estado</th>
