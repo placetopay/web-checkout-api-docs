@@ -411,7 +411,7 @@ Esta estructura debe de ser enviada en cada petición realizada al servicio
 <p>La siguiente información es necesaria para consumir el <code>CreateRequest</code>:</p>
 <h2 id='payment'>Payment</h2>
 <blockquote>
-<p>Ejemplo para la estructura payment:</p>
+<p>Ejemplo de una estructura payment:</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>
 <span class="o">{</span>
@@ -545,6 +545,19 @@ En el returnUrl se recomienda enviar en la URL un dato con el cual el sitio pued
 </tr>
 </tbody></table>
 <h2 id='status'>Status</h2>
+<blockquote>
+<p>Ejemplo de una estructura status con respuesta fallida en una petición de autenticación:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>
+<span class="o">{</span>
+    <span class="s2">"status"</span>: <span class="o">{</span>
+        <span class="s2">"status"</span>: <span class="s2">"FAILED"</span>,
+        <span class="s2">"reason"</span>: 401,
+        <span class="s2">"message"</span>: <span class="s2">"Authentication Failed 103"</span>,
+        <span class="s2">"date"</span>: <span class="s2">"2019-03-05T10:22:11-05:00"</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
 <p>Estructura que contiene la información de la respuesta sobre una solicitud o pago, e informa el estado actual de la misma.</p>
 
 <table><thead>
@@ -577,20 +590,7 @@ En el returnUrl se recomienda enviar en la URL un dato con el cual el sitio pued
 </tbody></table>
 <h2 id='estado-de-la-solicitud-o-pago'>Estado de la solicitud o pago</h2>
 <blockquote>
-<p>Ejemplo de respuesta fallida en una petición de autenticación:</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code>
-<span class="o">{</span>
-    <span class="s2">"status"</span>: <span class="o">{</span>
-        <span class="s2">"status"</span>: <span class="s2">"FAILED"</span>,
-        <span class="s2">"reason"</span>: 401,
-        <span class="s2">"message"</span>: <span class="s2">"Authentication Failed 103"</span>,
-        <span class="s2">"date"</span>: <span class="s2">"2019-03-05T10:22:11-05:00"</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre>
-<blockquote>
-<p>Ejemplo de respuesta aprobada en una solicitud de autenticación:</p>
+<p>Ejemplo de un estado de solicitud de pago con respuesta aprobada en una solicitud de autenticación:</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>
 <span class="o">{</span>
