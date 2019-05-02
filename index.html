@@ -972,39 +972,6 @@ Las recurrencias sólo pueden ser canceladas en la consola administrativa de Pla
     <span class="s2">"userAgent"</span>: <span class="s2">"PlacetoPay Sandbox"</span>
 <span class="o">}</span>
 </code></pre>
-<blockquote>
-<p>Ejemplo para recaudar un pago con suscripción</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code>POST /api/collect
-<span class="o">{</span>
-    <span class="s2">"auth"</span>: <span class="o">{</span>
-        <span class="s2">"login"</span>: <span class="s2">"usuarioprueba"</span>,
-        <span class="s2">"tranKey"</span>: <span class="s2">"YhmdBEZKTMAFsxkI1SrgS4SdBfE="</span>,
-        <span class="s2">"nonce"</span>: <span class="s2">"TlRoaE0yWTROMk0wWVRFellXUTVNVFUwWVRZNVpHRXpZbU16TWpJM01UWT0="</span>,
-        <span class="s2">"seed"</span>: <span class="s2">"2019-04-25T18:17:23-04:00"</span>
-  <span class="o">}</span>,
-    <span class="s2">"instrument"</span>: <span class="o">{</span>
-        <span class="s2">"token"</span>: <span class="o">{</span>
-            <span class="s2">"token"</span>: <span class="s2">"1b394089c97bc5f155b684c068806d858d9e4180c8643b5b29cf216c4b656d3e"</span>
-        <span class="o">}</span>
-    <span class="o">}</span>,
-    <span class="s2">"payer"</span>: <span class="o">{</span>
-            <span class="s2">"document"</span>: <span class="s2">"911111111"</span>,
-            <span class="s2">"documentType"</span>: <span class="s2">"CC"</span>,
-            <span class="s2">"name"</span>: <span class="s2">"Prueba aliado"</span>,
-            <span class="s2">"surname"</span>: <span class="s2">"JA"</span>,
-            <span class="s2">"email"</span>: <span class="s2">"juan.jimenez@placetopay.com"</span>
-    <span class="o">}</span>,
-    <span class="s2">"payment"</span>: <span class="o">{</span>
-        <span class="s2">"reference"</span>: <span class="s2">"3110"</span>,
-        <span class="s2">"description"</span>: <span class="s2">"Pago con suscripción 3110"</span>,
-        <span class="s2">"amount"</span>: <span class="o">{</span>
-            <span class="s2">"currency"</span>: <span class="s2">"COP"</span>,
-            <span class="s2">"total"</span>:10000
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre>
 <p>La suscripción permite almacenar de forma segura (tokenizando) el medio de pago de un usuario, para que luego pueda efectuar cobros relacionados a este mismo.</p>
 
 <p>Para hacer uso de esta funcionalidad es necesario reemplazar en la solicitud al servicio la  estructura <code>Payment</code> por <code>Subscription</code> en la cual deben ser enviada la siguiente información:</p>
@@ -1028,6 +995,28 @@ Las recurrencias sólo pueden ser canceladas en la consola administrativa de Pla
 </tr>
 </tbody></table>
 <h2 id='subscriptionresponse'>SubscriptionResponse</h2>
+<blockquote>
+<p>Ejemplo que contiene la estructura SubscriptionResponse:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>  <span class="o">{</span>
+     ...
+        <span class="s2">"subscription"</span>: <span class="o">{</span>
+                <span class="s2">"type"</span>: <span class="s2">"token"</span>,
+                <span class="s2">"status"</span>: <span class="o">{</span>
+                    <span class="s2">"status"</span>: <span class="s2">"OK"</span>,
+                    <span class="s2">"reason"</span>: <span class="s2">"00"</span>,
+                    <span class="s2">"message"</span>: <span class="s2">"Token generado exitosamente"</span>,
+                    <span class="s2">"date"</span>: <span class="s2">"2019-03-08T10:31:54-05:00"</span>
+                <span class="o">}</span>,
+                <span class="s2">"instrument"</span>: <span class="o">[</span>
+                    <span class="o">{</span>
+                        <span class="s2">"keyword"</span>: <span class="s2">"token"</span>,
+                        <span class="s2">"value"</span>: <span class="s2">"1b394089c97bc5f155b684c068806d858d9e4180c8643b5b29cf216c4b656d3e"</span>,
+                        <span class="s2">"displayOn"</span>: <span class="s2">"none"</span>
+                    <span class="o">}</span>,
+     ...               
+ <span class="o">}</span>
+</code></pre>
 <p>Estructura que contiene información para el método de pago con suscripción.</p>
 
 <table><thead>
@@ -1142,16 +1131,37 @@ Luego de tener el token, puede generar cobros al medio de pago tokenizado usando
 <p>Con el <code>token</code> obtenido se procede a realizar la petición de recaudo del pago a la URL de procesamiento <code>(Ej: https://test.placetopay.com/redirection/api/collect/)</code> sin intervención del usuario, mediante el método POST y los parametros con estructuras JSON. Adicionalmente debe enviarse una estructura de pago <code>(payment)</code> y pagador <code>(payer)</code>.</p>
 <h3 id='collect'>Collect</h3>
 <blockquote>
-<p>Ejemplo de una estructura payer con los datos de una estructura person:</p>
+<p>Ejemplo para recaudar un pago con suscripción</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code><span class="s2">"payer"</span>: <span class="o">{</span>
+<pre class="highlight shell tab-shell"><code>POST /api/collect
+<span class="o">{</span>
+    <span class="s2">"auth"</span>: <span class="o">{</span>
+        <span class="s2">"login"</span>: <span class="s2">"usuarioprueba"</span>,
+        <span class="s2">"tranKey"</span>: <span class="s2">"YhmdBEZKTMAFsxkI1SrgS4SdBfE="</span>,
+        <span class="s2">"nonce"</span>: <span class="s2">"TlRoaE0yWTROMk0wWVRFellXUTVNVFUwWVRZNVpHRXpZbU16TWpJM01UWT0="</span>,
+        <span class="s2">"seed"</span>: <span class="s2">"2019-04-25T18:17:23-04:00"</span>
+  <span class="o">}</span>,
+    <span class="s2">"instrument"</span>: <span class="o">{</span>
+        <span class="s2">"token"</span>: <span class="o">{</span>
+            <span class="s2">"token"</span>: <span class="s2">"1b394089c97bc5f155b684c068806d858d9e4180c8643b5b29cf216c4b656d3e"</span>
+        <span class="o">}</span>
+    <span class="o">}</span>,
+    <span class="s2">"payer"</span>: <span class="o">{</span>
             <span class="s2">"document"</span>: <span class="s2">"911111111"</span>,
             <span class="s2">"documentType"</span>: <span class="s2">"CC"</span>,
             <span class="s2">"name"</span>: <span class="s2">"Prueba aliado"</span>,
             <span class="s2">"surname"</span>: <span class="s2">"JA"</span>,
-            <span class="s2">"email"</span>: <span class="s2">"juan.jimenez@placetopay.com"</span>,
-            <span class="s2">"mobile"</span>: <span class="s2">"321000000"</span>
-        <span class="o">}</span>,
+            <span class="s2">"email"</span>: <span class="s2">"juan.jimenez@placetopay.com"</span>
+    <span class="o">}</span>,
+    <span class="s2">"payment"</span>: <span class="o">{</span>
+        <span class="s2">"reference"</span>: <span class="s2">"3110"</span>,
+        <span class="s2">"description"</span>: <span class="s2">"Pago con suscripción 3110"</span>,
+        <span class="s2">"amount"</span>: <span class="o">{</span>
+            <span class="s2">"currency"</span>: <span class="s2">"COP"</span>,
+            <span class="s2">"total"</span>:10000
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 </code></pre>
 <p>Permite realizar cobros sin la intervención del usuario usando medios de pago previamente suscritos.</p>
 
@@ -1320,6 +1330,19 @@ Luego de tener el token, puede generar cobros al medio de pago tokenizado usando
 <li>Para eliminar la recurrencia de un pago debe hacerse por la consola administrativa de PlacetoPay, mientras que en suscripción debe invalidar o eliminar de sus sistema el token obtenido.</li>
 </ul>
 <h2 id='instrument'>Instrument</h2>
+<blockquote>
+<p>Ejemplo que contiene una estructura instrument:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>   <span class="o">{</span>
+     ...
+        <span class="s2">"instrument"</span>: <span class="o">{</span>
+           <span class="s2">"token"</span>: <span class="o">{</span>
+               <span class="s2">"token"</span>: <span class="s2">"1b394089c97bc5f155b684c068806d858d9e4180c8643b5b29cf216c4b656d3e"</span>
+            <span class="o">}</span>
+       <span class="o">}</span>,
+     ...               
+    <span class="o">}</span>
+</code></pre>
 <p>Estructura que contiene los detalles de un medio de pago suscrito.</p>
 
 <p><strong>Token</strong><br> 
@@ -1339,8 +1362,25 @@ Estructura que contiene información acerca de un token usado para cobros de un 
 </tr>
 </tbody></table>
 
-<p><strong>Payer</strong><br>
-Estructura que contiene los datos del titular del medio de pago almacenado.</p>
+<p><strong>Payer</strong><br></p>
+
+<blockquote>
+<p>Ejemplo que contiene una estructura payer:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>   <span class="o">{</span>
+    ...
+        <span class="s2">"payer"</span>: <span class="o">{</span>
+                    <span class="s2">"document"</span>: <span class="s2">"98762729"</span>,
+                    <span class="s2">"documentType"</span>: <span class="s2">"CE"</span>,
+                    <span class="s2">"name"</span>: <span class="s2">"JD"</span>,
+                    <span class="s2">"surname"</span>: <span class="s2">"JA"</span>,
+                    <span class="s2">"email"</span>: <span class="s2">"juan.jimenez@placetopay.com"</span>,
+                    <span class="s2">"mobile"</span>: <span class="s2">"321000000"</span>
+                <span class="o">}</span>,
+    ...
+   <span class="o">}</span>
+</code></pre>
+<p>Estructura que contiene los datos del titular del medio de pago almacenado.</p>
 
 <table><thead>
 <tr>
