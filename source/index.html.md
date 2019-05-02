@@ -500,41 +500,6 @@ Las recurrencias sólo pueden ser canceladas en la consola administrativa de Pla
     "userAgent": "PlacetoPay Sandbox"
 }
 ```
-
->Ejemplo para recaudar un pago con suscripción
-
-```shell
-POST /api/collect
-{
-    "auth": {
-	    "login": "usuarioprueba",
-	    "tranKey": "YhmdBEZKTMAFsxkI1SrgS4SdBfE=",
-	    "nonce": "TlRoaE0yWTROMk0wWVRFellXUTVNVFUwWVRZNVpHRXpZbU16TWpJM01UWT0=",
-	    "seed": "2019-04-25T18:17:23-04:00"
-  },
-    "instrument": {
-        "token": {
-            "token": "1b394089c97bc5f155b684c068806d858d9e4180c8643b5b29cf216c4b656d3e"
-        }
-    },
-    "payer": {
-            "document": "911111111",
-            "documentType": "CC",
-            "name": "Prueba aliado",
-            "surname": "JA",
-            "email": "juan.jimenez@placetopay.com"
-    },
-    "payment": {
-        "reference": "3110",
-        "description": "Pago con suscripción 3110",
-        "amount": {
-            "currency": "COP",
-            "total":10000
-        }
-    }
-}
-```
-
 La suscripción permite almacenar de forma segura (tokenizando) el medio de pago de un usuario, para que luego pueda efectuar cobros relacionados a este mismo.
 
 Para hacer uso de esta funcionalidad es necesario reemplazar en la solicitud al servicio la  estructura <code>Payment</code> por <code>Subscription</code> en la cual deben ser enviada la siguiente información:
@@ -545,6 +510,31 @@ reference | String | Esta debe ser única en la solicitud de suscripción.
 description | String | Descripción de la suscripción
 
 ## SubscriptionResponse
+
+>Ejemplo que contiene la estructura SubscriptionResponse:
+
+  ```shell
+  {
+     ...
+        "subscription": {
+                "type": "token",
+                "status": {
+                    "status": "OK",
+                    "reason": "00",
+                    "message": "Token generado exitosamente",
+                    "date": "2019-03-08T10:31:54-05:00"
+                },
+                "instrument": [
+                    {
+                        "keyword": "token",
+                        "value": "1b394089c97bc5f155b684c068806d858d9e4180c8643b5b29cf216c4b656d3e",
+                        "displayOn": "none"
+                    },
+     ...               
+ }
+  ```
+
+
 Estructura que contiene información para el método de pago con suscripción.
 
 Parametro | Tipo | Descripción
@@ -630,19 +620,39 @@ Con el <code>token</code> obtenido se procede a realizar la petición de recaudo
 
 ### Collect
 
->Ejemplo de una estructura payer con los datos de una estructura person:
+>Ejemplo para recaudar un pago con suscripción
 
 ```shell
-"payer": {
+POST /api/collect
+{
+    "auth": {
+	    "login": "usuarioprueba",
+	    "tranKey": "YhmdBEZKTMAFsxkI1SrgS4SdBfE=",
+	    "nonce": "TlRoaE0yWTROMk0wWVRFellXUTVNVFUwWVRZNVpHRXpZbU16TWpJM01UWT0=",
+	    "seed": "2019-04-25T18:17:23-04:00"
+  },
+    "instrument": {
+        "token": {
+            "token": "1b394089c97bc5f155b684c068806d858d9e4180c8643b5b29cf216c4b656d3e"
+        }
+    },
+    "payer": {
             "document": "911111111",
             "documentType": "CC",
             "name": "Prueba aliado",
             "surname": "JA",
-            "email": "juan.jimenez@placetopay.com",
-            "mobile": "321000000"
-        },
+            "email": "juan.jimenez@placetopay.com"
+    },
+    "payment": {
+        "reference": "3110",
+        "description": "Pago con suscripción 3110",
+        "amount": {
+            "currency": "COP",
+            "total":10000
+        }
+    }
+}
 ```
-
 Permite realizar cobros sin la intervención del usuario usando medios de pago previamente suscritos.
 
 Parametro | Tipo | Descripción
@@ -695,6 +705,20 @@ USA | SSN | Social security number
 
 
 ## Instrument
+
+>Ejemplo que contiene una estructura instrument:
+
+  ```shell
+   {
+     ...
+        "instrument": {
+           "token": {
+               "token": "1b394089c97bc5f155b684c068806d858d9e4180c8643b5b29cf216c4b656d3e"
+            }
+       },
+     ...               
+    }
+  ```
 Estructura que contiene los detalles de un medio de pago suscrito.
 
 **Token**<br> 
@@ -706,6 +730,24 @@ token | String | Token completo para tarjeta de crédito, debe ser usado para so
 
 
 **Payer**<br>
+
+>Ejemplo que contiene una estructura payer:
+
+```shell
+   {
+    ...
+        "payer": {
+                    "document": "98762729",
+                    "documentType": "CE",
+                    "name": "JD",
+                    "surname": "JA",
+                    "email": "juan.jimenez@placetopay.com",
+                    "mobile": "321000000"
+                },
+    ...
+   }
+```
+
 Estructura que contiene los datos del titular del medio de pago almacenado.
 
 Parametro | Tipo | Descripción
