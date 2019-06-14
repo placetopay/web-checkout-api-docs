@@ -2,6 +2,11 @@
 @import 'normalize';
 @import 'variables';
 @import 'icon-font';
+@import url("https://fonts.googleapis.com/css?family=Roboto");html {
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%
+}
 // @import 'rtl'; // uncomment to switch to RTL format
 
 /*
@@ -24,6 +29,44 @@ under the License.
 // GENERAL STUFF
 ////////////////////////////////////////////////////////////////////////////////
 
+.nav-button span {
+  padding: 25px 25px 25px !important;
+}
+
+.logo-lenguaje {
+width: 12%;
+margin: 10px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px transparent;
+  border-radius: 7px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #666565;
+  border-radius: 7px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #000;
+}
+
+pre.highlight {
+  margin-bottom: 22px !important;
+  border-radius: 5px !important;
+  padding: 2em !important;
+}
+
+
 html, body {
   color: $main-text;
   padding: 0;
@@ -36,13 +79,19 @@ html, body {
   -webkit-text-size-adjust: none; /* Never autoresize text */
 }
 
+a {
+  color: $lang-select-active-text;
+  background-color: B;
+  font-weight: #525880;
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // TABLE OF CONTENTS
 ////////////////////////////////////////////////////////////////////////////////
 
 #toc > ul > li > a > span {
   float: right;
-  background-color: #2484FF;
+  background-color: #c1c9d2;
   border-radius: 40px;
   width: 20px;
 }
@@ -82,10 +131,10 @@ html, body {
     position: relative;
 
     input {
-      background: $nav-bg;
+      background: #666565;
       border-width: 0 0 1px 0;
       border-color: $search-box-border-color;
-      padding: 6px 0 6px 20px;
+      padding: 6px 0 6px 30px;
       box-sizing: border-box;
       margin: $nav-v-padding $nav-padding;
       width: $nav-width - ($nav-padding*2);
@@ -96,8 +145,8 @@ html, body {
 
     &:before {
       position: absolute;
-      top: 17px;
-      left: $nav-padding;
+      top: 14px;
+      left: 30px;
       color: $nav-text;
       @extend %icon-search;
     }
@@ -124,6 +173,7 @@ html, body {
     }
 
     a {
+      padding: 1px;
       color: $nav-text;
       text-decoration: none;
 
@@ -163,6 +213,17 @@ html, body {
     color: $nav-active-parent-text;
   }
 
+  .toc-list-h3 {
+    display: none;
+    background-color: $nav-subitem-bg;
+    font-weight: 500;
+  }
+
+  .toc-h3 {
+    padding-left: $nav-padding + $nav-padding + $nav-indent;
+    font-size: 12px;
+  }
+
   .toc-list-h2 {
     display: none;
     background-color: $nav-subitem-bg;
@@ -179,6 +240,15 @@ html, body {
     margin-top: 1em;
     border-top: 1px dashed $nav-footer-border-color;
 
+    .tocify-subheader {
+      .tocify-subheader {
+        .tocify-item>a {
+          // Styling here for a level 2 nesting. For example ->
+          padding-left: $nav-padding + $nav-indent * 2;
+          font-size: 12px;
+        }
+      }
+    }
     li,a {
       color: $nav-text;
       text-decoration: none;
@@ -215,7 +285,7 @@ html, body {
     display: block;
     $side-pad: $main-padding / 2 - 8px;
     padding: $side-pad $side-pad $side-pad;
-    background-color: rgba($main-bg, 0.7);
+    background-color: rgba($main-bg, 1);
     transform-origin: 0 0;
     transform: rotate(-90deg) translate(-100%, 0);
     border-radius: 0 0 0 5px;
@@ -226,7 +296,7 @@ html, body {
   top: 0;
   left: 0;
   z-index: 100;
-  color: #000;
+  color: #fff;
   text-decoration: none;
   font-weight: bold;
   opacity: 0.7;
@@ -281,7 +351,12 @@ html, body {
   background-color: $lang-select-bg;
   width: 100%;
   font-weight: bold;
+  padding: 20px;
   a {
+      background-color: $lang-select-bg;
+    border-radius: 5px;
+    border: 2px solid white;
+    margin-right: 15px;
     display: block;
     float:left;
     color: $lang-select-text;
@@ -289,15 +364,14 @@ html, body {
     padding: 0 10px;
     line-height: 30px;
     outline: 0;
-
     &:active, &:focus {
       background-color: $lang-select-pressed-bg;
       color: $lang-select-pressed-text;
     }
 
     &.active {
-      background-color: $lang-select-active-bg;
-      color: $lang-select-active-text;
+      border: 2px solid #7CD355;
+      color: #7CD355;
     }
   }
 
@@ -340,7 +414,7 @@ html, body {
   }
 
   // the div is the tocify hidden div for placeholding stuff
-  &>h1, &>h2, &>div {
+  &>h1, &>h2, &>h3, &>div {
     clear:both;
   }
 
@@ -350,10 +424,9 @@ html, body {
     padding-top: 0.5em;
     padding-bottom: 0.5em;
     margin-bottom: $h1-margin-bottom;
-    margin-top: 2em;
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-    background-color: #fdfdfd;
+    margin-top: 6em;
+    border-top: 0px solid #72D54A;
+    border-bottom: 1px solid #72D54A;
   }
 
   h1:first-child, div:first-child + h1 {
@@ -366,10 +439,9 @@ html, body {
     font-size: 19px;
     margin-top: 4em;
     margin-bottom: 0;
-    border-top: 1px solid #ccc;
+    border-top: 0px solid #4F566B;
     padding-top: 1.2em;
     padding-bottom: 1.2em;
-    background-image: linear-gradient(to bottom, rgba(#fff, 0.2), rgba(#fff, 0));
   }
 
   // h2s right after h1s should bump right up
@@ -382,7 +454,7 @@ html, body {
   h3, h4, h5, h6 {
     @extend %header-font;
     font-size: 15px;
-    margin-top: 2.5em;
+    margin-top: 5.5em;
     margin-bottom: 0.8em;
   }
 
@@ -392,17 +464,17 @@ html, body {
 
   hr {
     margin: 2em 0;
-    border-top: 2px solid $examples-bg;
+    border-top: 3px solid $examples-bg;
     border-bottom: 2px solid $main-bg;
   }
 
   table {
-    margin-bottom: 1em;
+    margin-bottom: 3em;
     overflow: auto;
     th,td {
       text-align: left;
       vertical-align: top;
-      line-height: 1.6;
+      line-height: 1.0;
       code {
         white-space: nowrap;
       }
@@ -410,7 +482,7 @@ html, body {
 
     th {
       padding: 5px 10px;
-      border-bottom: 1px solid #ccc;
+      border-bottom: 1px solid #4F566B;
       vertical-align: bottom;
     }
 
@@ -419,15 +491,15 @@ html, body {
     }
 
     tr:last-child {
-      border-bottom: 1px solid #ccc;
+      border-bottom: 0px solid #fff;
     }
 
     tr:nth-child(odd)>td {
-      background-color: lighten($main-bg,4.2%);
+      background-color: lighten($main-bg,1.2%);
     }
 
     tr:nth-child(even)>td {
-      background-color: lighten($main-bg,2.4%);
+      background-color: lighten($main-bg,1.2%);
     }
   }
 
@@ -449,15 +521,17 @@ html, body {
   }
 
   code {
-    background-color: rgba(0,0,0,0.05);
-    padding: 3px;
-    border-radius: 3px;
+
+    padding: 1px;
+    border-radius: 1px;
+    margin: 0px 0px;
     @extend %break-words;
     @extend %code-font;
+    color: #ed5f74;
   }
 
   pre>code {
-    background-color: transparent;
+
     padding: 0;
   }
 
@@ -466,15 +540,18 @@ html, body {
     padding-bottom: 1em;
     margin-top: 1.5em;
     margin-bottom: 1.5em;
-    background: $aside-notice-bg;
-    line-height: 1.6;
+    background: #282828;
+    line-height: 1.0;
+    color: #067ab8;
 
     &.warning {
-      background-color: $aside-warning-bg;
+      background-color: #282828;
+      color: #ed5f74;
     }
 
     &.success {
-      background-color: $aside-success-bg;
+      background-color: #282828;
+      color: #a8d595;
     }
   }
 
@@ -500,8 +577,8 @@ html, body {
     padding: 2px;
     margin: -3px;
     border-radius: 4px;
-    border: 1px solid #F7E633;
-    background: linear-gradient(to top left, #F7E633 0%, #F1D32F 100%);
+    border: 1px solid #535f93;
+    background: linear-gradient(to top left, #535f93 0%, #535f93 100%);
   }
 }
 
@@ -512,9 +589,10 @@ html, body {
 
 .content {
   pre, blockquote {
-    background-color: $code-bg;
+    background-color: #191819;
     color: #fff;
-
+    border-radius: 4px;
+    margin-bottom: 110px;
     margin: 0;
     width: $examples-width;
 
@@ -528,9 +606,9 @@ html, body {
     &>p { margin: 0; }
 
     a {
-      color: #fff;
+      color:  #fff;
       text-decoration: none;
-      border-bottom: dashed 1px #ccc;
+      border-bottom: dashed 1px #535f93;
     }
   }
 
@@ -607,7 +685,7 @@ html, body {
 }
 
 .highlight .c, .highlight .cm, .highlight .c1, .highlight .cs {
-  color: #909090;
+  color: #1a1f36;
 }
 
 .highlight, .highlight .w {

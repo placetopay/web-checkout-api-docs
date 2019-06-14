@@ -1,0 +1,191 @@
+# Flujo de integración
+
+<%= image_tag "images/Warehouse@2x.png" %>
+<%= image_tag "images/PHP.png" %> 
+
+1. Al momento del usuario proceder con la operación en tu sitio, debes consumir el método [createRequest](#createrequest).
+2. Si la solicitud es procesada correctamente, el servicio crea una sesión y retorna en la respuesta: <br>
+   * Identificador <code>requestID</code>
+   * URL de procesamiento <code>processUrl</code>.
+3. Crea un registro en tu sistema, relaciona ese registro al <code>requestID</code> y déjalo en estado pendiente.
+4. Redirecciona al usuario al <code>processURL</code> obtenido en el punto 2.
+5. En la interfaz de Web Checkout el usuario realizará el proceso de pago o suscripción.
+6. Una vez el usuario realiza el proceso y hace clic en “Regresar al comercio”, éste es enviado a la URL de retorno <code>returnUrl</code> (Atributo especificado al crear la operación).
+7. Al llegar a tu sitio, con el <code>requestID</code> del regsitro debes consultar a PlacetoPay el estado de la sesión usando el método [getRequestInformation](#getrequestinformation).
+8. Ejecuta tu regla de negocio según el estado obtenido.
+9. De manera asincrónica, PlacetoPay realiza una notificación, del estado final de una sesión, a tu sitio.
+10. Recomendamos implementar un proceso sonda para resolver aquellas transacciones que no  se resolvieron en los punto 7 y 9.
+
+
+# Librerias
+
+## Instalación para C Sharp
+
+
+###¿Donde obtener la librería?
+    Repositorio: SDK .NET Framework 4.5.0 de Web Checkout.
+
+**DLL y dependencias:** <br>
+
+[https://drive.google.com/open?id=1UMy7SibuN3aVlRd4B8oLifCVQwxURzzv](https://drive.google.com/open?id=1UMy7SibuN3aVlRd4B8oLifCVQwxURzzv)
+
+###¿Que versiones soporta?
+   La versión es estable para la versión 4.5.0
+
+###¿Qué datos debo tener antes de iniciar la instalación?
+   PlacetoPay suministra <code>login</code> y <code>trankey</code>, datos que serán usados para la autenticación y relacionar las transacciones al sitio correspondiente.
+
+
+###Agregar dependencia en Visual Studio
+ Ir al explorador de soluciones, desplegar las opciones del proyecto y luego: <br>
+ Dependencias -> agregar referencia -> examinar -> examinar  -> seleccionar dll -> Aceptar
+
+###¿Cómo usar la clase?
+   Configurar instancia PlacetoPay necesaria para autenticarse ante los servicios web de PlacetoPay.
+
+ ```csharp
+    using P2P = PlacetoPay.Integrations.Library.CSharp.PlacetoPay;
+    Gateway gateway = new P2P(YOUR_LOGIN,
+    	                      YOUR_TRANKEY,
+                              new Uri("URL_INTEGRATION"),
+                              Gateway.TP_SOAP or Gateway.TP_REST);
+```
+El parámetro <code>"URL_INTEGRATION"</code> hace referencia al endpoint a usar, los cuales son: <br>
+**Pruebas:** https://test.placetopay.com/redirection/ <br>
+**Producción:** https://secure.placetopay.com/redirection/ <br>
+
+###Crear una nueva sesión de pago <code>CreateRequest</code>
+
+Solicita la creación de la sesión (petición de cobro o suscripción) y retorna el identificador y la URL de procesamiento. <br>
+
+>Ejemplo de llamada:
+
+```csharp
+    Amount amount = new Amount('PAYMENT_AMOUNT');
+    Payment payment = new Payment("REFERENCE", "DESCRIPTION", amount);
+    RedirectRequest request = new RedirectRequest(payment,
+        RETURN_URL,
+        IP_ADDRESS,
+        USER_AGENT,
+        EXPIRATION);
+
+    RedirectResponse response = gateway.Request(request);
+```
+  **Retorno:** <br>
+    Servicio responde una instancia de la clase <code/>RedirectResponse.</code> Verificando el status de la respuesta se puede determinar si se creó la session de pago. <br>
+
+    Success Response: Si el status es igual a **“OK”** <br>
+
+    Verificar: <code>response.IsSuccessful() // return boolean</code> <br>
+
+    Error Response: Si el status es igual a **“ERROR”** <br>
+
+    Verificar motivo del error: <code>response.Status.Message // return string</code>
+
+
+###Obtenga información sobre una sesión <code>(getRequestInformation)</code>
+Obtiene la información de la sesión y transacciones realizadas.
+
+>Ejemplo de llamada:
+
+```csharp
+    RedirectInformation response = gateway.Query(requestId);
+```
+**Retorno:** <br>
+
+Servicio responde una instancia de la clase <code>RedirectInformation</code>. Se puede verificar el status de la sesión a través: <br>
+
+<code>response.IsSuccessful() // return boolean</code> <br>
+<code>response.IsRejected() // return boolean</code> <br>
+<code>response.IsApproved() // return boolean</code> <br>
+<code>response.Status.status // return boolean</code> <br>
+
+###Cobro sin intervención del usuario (Collect)
+
+Permite realizar cobros sin la intervención del usuario usando medios de pago previamente suscritos.
+
+>Ejemplo de llamada:
+
+```csharp
+    Token token = new Token(“YOUR_TOKEN”);
+    Instrument instrument = new Instrument(token);
+    Person person = new Person(dni, type, Name, Surname, email);
+    Amount amount = new Amount(1000);
+    Payment payment = new Payment("123456789", "TEST", amount);
+    CollectRequest collectRequest = new CollectRequest(person,
+                                            payment,instrument);
+    RedirectInformation collect = this.gateway.Collect(collectRequest);
+```
+
+**Retorno:** <br>
+Servicio responde una instancia de la clase <code>RedirectInformation</code>. Se puede verificar el status de la sesión a través:<br>
+
+<code>response.IsSuccessful() // return boolean</code> <br>
+<code>response.IsRejected() // return boolean</code> <br>
+<code>response.IsApproved() // return boolean</code> <br>
+<code>response.Status.status // return boolean</code> <br>
+
+###Revertir un pago <code>(reversePayment)</code>
+Permite revertir un pago aprobado con el código de referencia interna.
+
+>Ejemplo de llamada:
+
+```csharp
+    ReverseResponse response = this.gateway.Reverse(requestId);
+```
+
+**Retorno:**<br>
+  Servicio responde una instancia de la clase <code>ReverseResponse</code>. Se puede verificar el status de la sesión a través:<br>
+
+   <code>response.IsSuccessful() // return boolean</code><br>
+   <code>response.Status.status // return boolean</code>
+
+
+###Leer respuesta enviada a la url de notificación <code>(ReadNotification)</code>
+
+Permite leer la respuesta enviada por parte de PlacetoPay a la Url de notificación del comercio. <br>
+
+
+> Ejemplo de llamada:
+
+
+>// La notificación enviado por parte de PlacetoPay tiene la siguiente forma.
+
+```csharp
+{
+   "status":{
+      "status":"APPROVED",
+      "reason":"00",
+      "message":"Se ha aprobado su pago",
+      "date":"2016-10-10T16:39:57-05:00"
+   },
+   "requestId":83,
+   "reference":"TEST_20161010_213937",
+   "signature":"8fb4beea130ab3e75a1de956bd0213892e0f6839"
+}
+```
+
+>// La variable “data” debe ser un json con la estructura mencionada arriba en formato string.
+
+```csharp
+Notification notification = _gateway.ReadNotification(data);
+
+   // Verificar si la notificación es válida
+   if (notification.isValidNotification()) {
+       if (notification.isApproved()) {
+           // Liberar el producto
+       } else {
+           // Rechazar la orden
+       }
+   } else {
+       // There was some error or invalid structure
+   }
+```
+
+###Posibles errores
+    Para cado uno de los objetos de respuesta, al momento de presentarse alguna excepción o problema de conexión se informa en la propiedad  status.
+
+## Instalación librerias para JAVA
+Para conectarse con PlacetoPay por medio del servicio de web checkout utilizando java, ingrese al siguiente enlace: <br>
+
+[https://github.com/placetopay/java-placetopay](https://github.com/placetopay/java-placetopay)
