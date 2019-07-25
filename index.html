@@ -227,16 +227,16 @@
             <a href="#flujo-de-integracion" class="toc-h1 toc-link" data-title="Flujo de integración">Flujo de integración</a>
           </li>
           <li>
-            <a href="#librerias" class="toc-h1 toc-link" data-title="Librerias">Librerias</a>
+            <a href="#librerias" class="toc-h1 toc-link" data-title="Librerías">Librerías</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#instalacion-para-c-sharp" class="toc-h2 toc-link" data-title="Instalación para C Sharp">Instalación para C Sharp</a>
                         <ul class="toc-list-h3">
                             <li>
-                              <a href="#donde-obtener-la-libreria" class="toc-h3 toc-link" data-title="¿Donde obtener la librería?">¿Donde obtener la librería?</a>
+                              <a href="#donde-obtener-la-libreria" class="toc-h3 toc-link" data-title="¿Dónde obtener la librería?">¿Dónde obtener la librería?</a>
                             </li>
                             <li>
-                              <a href="#que-versiones-soporta" class="toc-h3 toc-link" data-title="¿Que versiones soporta?">¿Que versiones soporta?</a>
+                              <a href="#que-versiones-soporta" class="toc-h3 toc-link" data-title="¿Qué versiones soporta?">¿Qué versiones soporta?</a>
                             </li>
                             <li>
                               <a href="#que-datos-debo-tener-antes-de-iniciar-la-instalacion" class="toc-h3 toc-link" data-title="¿Qué datos debo tener antes de iniciar la instalación?">¿Qué datos debo tener antes de iniciar la instalación?</a>
@@ -268,7 +268,7 @@
                         </ul>
                   </li>
                   <li>
-                    <a href="#instalacion-librerias-para-java" class="toc-h2 toc-link" data-title="Instalación librerias para JAVA">Instalación librerias para JAVA</a>
+                    <a href="#instalacion-librerias-para-java" class="toc-h2 toc-link" data-title="Instalación librerÍas para JAVA">Instalación librerÍas para JAVA</a>
                   </li>
               </ul>
           </li>
@@ -289,7 +289,7 @@
               </ul>
           </li>
           <li>
-            <a href="#metodos-de-interfaz-de-web-checkout" class="toc-h1 toc-link" data-title="Metodos de Interfaz de Web CheckOut">Metodos de Interfaz de Web CheckOut</a>
+            <a href="#metodos-de-interfaz-de-web-checkout" class="toc-h1 toc-link" data-title="Métodos de Interfaz de Web CheckOut">Métodos de Interfaz de Web CheckOut</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#createrequest" class="toc-h2 toc-link" data-title="CreateRequest">CreateRequest</a>
@@ -448,7 +448,7 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduccion'>Introducción</h1>
-<p>Con WebCheckOut tu sitio obtiene una URL a la cual será redireccionado tu usuario para realizar el proceso transaccional. De esta manera evitas capturar información sensible y la definición para una interfaz de un proceso de pago.</p>
+<p>Con WebCheckOut tu sitio obtiene una URL a la cual será redireccionado tu usuario para realizar el proceso transaccional. De esta manera, evitas capturar información sensible y la definición para una interfaz de un proceso de pago.</p>
 
 <p>El API de WebCheckOut está basado en REST, retorna respuestas con codificación JSON. Para hacer uso de este servicio es necesario que tu sitio  se conecte usando la versión 1.2 de TLS.</p>
 
@@ -462,7 +462,7 @@
 
 <ul>
 <li><p>Se necesita la URL donde se van a enviar los datos mediante el uso del método POST (Endpoint).</p></li>
-<li><p>Se debe usar JSON para el envío de los parámetros de Autenticación, Información del pago y Datos de control.</p></li>
+<li><p>Se debe usar JSON para el envío de los parámetros de autenticación, información del pago y datos de control.</p></li>
 <li><p>El tiempo de expiración <code>expiration</code> debe ser una fecha válida en formato ISO 8601, indica el tiempo
 límite que tiene el usuario para realizar el pago y debe ser de al menos 5 minutos superior a la fecha actual.</p></li>
 </ul>
@@ -471,7 +471,7 @@ límite que tiene el usuario para realizar el pago y debe ser de al menos 5 minu
 
 <ul>
 <li><p>La url de retorno (returnUrl) es utilizada para redirigir al usuario una vez terminada la operación. Se recomienda enviar en la URL un dato con el cual el sitio pueda identificar el registro por ejemplo: <code>https://mysite.com/response/{reference}</code>.</p></li>
-<li><p>Configura en tu servidor una URL de notificación usando los puertos 80 ó 443 y en caso de que el pago se decline o apruebe, reciba una notificación mediante POST de forma asincrona.</p></li>
+<li><p>Configura en tu servidor una URL de notificación usando los puertos 80 ó 443 y en caso de que el pago se decline o apruebe, reciba una notificación mediante POST de forma asíncrona.</p></li>
 </ul>
 
 <p><strong>Importante:</strong> Esta URL de notificación debe ser suministrada a PlacetoPay para su configuración.</p>
@@ -490,18 +490,18 @@ límite que tiene el usuario para realizar el pago y debe ser de al menos 5 minu
 <li>Redirecciona al usuario al <code>processURL</code> obtenido en el punto 2.</li>
 <li>En la interfaz de Web Checkout el usuario realizará el proceso de pago o suscripción.</li>
 <li>Una vez el usuario realiza el proceso y hace clic en “Regresar al comercio”, éste es enviado a la URL de retorno <code>returnUrl</code> (Atributo especificado al crear la operación).</li>
-<li>Al llegar a tu sitio, con el <code>requestID</code> del regsitro debes consultar a PlacetoPay el estado de la sesión usando el método <a href="#getrequestinformation">getRequestInformation</a>.</li>
+<li>Al llegar a tu sitio, con el <code>requestID</code> del registro debes consultar a PlacetoPay el estado de la sesión usando el método <a href="#getrequestinformation">getRequestInformation</a>.</li>
 <li>Ejecuta tu regla de negocio según el estado obtenido.</li>
 <li>De manera asincrónica, PlacetoPay realiza una notificación, del estado final de una sesión, a tu sitio.</li>
 <li>Recomendamos implementar un proceso sonda para resolver aquellas transacciones que no  se resolvieron en los punto 7 y 9.</li>
 </ol>
-<h1 id='librerias'>Librerias</h1><h2 id='instalacion-para-c-sharp'>Instalación para C Sharp</h2><h3 id='donde-obtener-la-libreria'>¿Donde obtener la librería?</h3>
+<h1 id='librerias'>Librerías</h1><h2 id='instalacion-para-c-sharp'>Instalación para C Sharp</h2><h3 id='donde-obtener-la-libreria'>¿Dónde obtener la librería?</h3>
 <p>Repositorio: SDK .NET Framework 4.5.0 de Web Checkout.</p>
 
 <p><strong>DLL y dependencias:</strong> <br></p>
 
 <p><a href="https://drive.google.com/open?id=1UMy7SibuN3aVlRd4B8oLifCVQwxURzzv">https://drive.google.com/open?id=1UMy7SibuN3aVlRd4B8oLifCVQwxURzzv</a></p>
-<h3 id='que-versiones-soporta'>¿Que versiones soporta?</h3>
+<h3 id='que-versiones-soporta'>¿Qué versiones soporta?</h3>
 <p>La versión es estable para la versión 4.5.0</p>
 <h3 id='que-datos-debo-tener-antes-de-iniciar-la-instalacion'>¿Qué datos debo tener antes de iniciar la instalación?</h3>
 <p>PlacetoPay suministra <code>login</code> y <code>trankey</code>, datos que serán usados para la autenticación y relacionar las transacciones al sitio correspondiente.</p>
@@ -538,11 +538,11 @@ límite que tiene el usuario para realizar el pago y debe ser de al menos 5 minu
 <p><strong>Retorno:</strong> <br>
     Servicio responde una instancia de la clase <code/>RedirectResponse.</code> Verificando el status de la respuesta se puede determinar si se creó la session de pago. <br></p>
 
-<p>Success Response: Si el status es igual a <strong>“OK”</strong> <br></p>
+<p>Success Response: si el status es igual a <strong>“OK”</strong> <br></p>
 
 <p>Verificar: <code>response.IsSuccessful() // return boolean</code> <br></p>
 
-<p>Error Response: Si el status es igual a <strong>“ERROR”</strong> <br></p>
+<p>Error Response: si el status es igual a <strong>“ERROR”</strong> <br></p>
 
 <p>Verificar motivo del error: <code>response.Status.Message // return string</code></p>
 <h3 id='obtenga-informacion-sobre-una-sesion-getrequestinformation'>Obtenga información sobre una sesión <code>(getRequestInformation)</code></h3>
@@ -634,7 +634,7 @@ Servicio responde una instancia de la clase <code>RedirectInformation</code>. Se
    <span class="p">}</span>
 </code></pre><h3 id='posibles-errores'>Posibles errores</h3>
 <p>Para cado uno de los objetos de respuesta, al momento de presentarse alguna excepción o problema de conexión se informa en la propiedad  status.</p>
-<h2 id='instalacion-librerias-para-java'>Instalación librerias para JAVA</h2>
+<h2 id='instalacion-librerias-para-java'>Instalación librerÍas para JAVA</h2>
 <p>Para conectarse con PlacetoPay por medio del servicio de web checkout utilizando java, ingrese al siguiente enlace: <br></p>
 
 <p><a href="https://github.com/placetopay/java-placetopay">https://github.com/placetopay/java-placetopay</a></p>
@@ -729,7 +729,7 @@ El <code>seed</code> no puede tener diferencia de más de 5 minutos.
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre>
-<p>El servicio de Web CheckOut retorna los Códigos de respuesta para la autenticación fallida en el atributo <code>message</code> del objeto <code>status</code>.</p>
+<p>El servicio de Web CheckOut retorna los códigos de respuesta para la autenticación fallida en el atributo <code>message</code> del objeto <code>status</code>.</p>
 
 <table><thead>
 <tr>
@@ -792,14 +792,14 @@ Tus servidores requieren TLSv1.2 para recibir la solicitud, debido a la norma PC
 <li><p><strong>SoapFault responde con el mensaje &quot;Authentication Failed 103&quot;</strong> <br><br> 
 En el proceso de autenticación nosotros revisamos el campo <code>Created</code>, este campo debe estar en el tiempo GMT o el tiempo local usando el tiempo de zona. Si obtienes esta respuesta, se debe a que tu tiempo no es preciso con el tiempo real. Nosotros solo permitimos 5 minutos de diferencia entre los tiempos.
 Puedes usar NTP para mantener la precisión del reloj. </p></li>
-<li><p><strong>Dando los mismos valores EXACTOS que en los ejemplos anteriores a la <code>BASE64(SHA1($Nonce + $Created . $tranKey))</code> Estoy obteniendo un <code>password digest</code> diferente.</strong> <br><br> 
+<li><p><strong>Dando los mismos valores EXACTOS que en los ejemplos anteriores a la <code>BASE64(SHA1($Nonce + $Created . $tranKey))</code> estoy obteniendo un <code>password digest</code> diferente.</strong> <br><br> 
 Mantén en mente que BASE64 debería ser para el raw output  de la SHA1 y de acuerdo con todos los lenguajes de programación este puede ser requerido para configurar esta opción, por ejemplo.
 En PHP base64_encode(sha1( … , true)) este parametro retornaria el <code>raw output</code> para el <code>sHA1 algorithm</code></p></li>
 </ul>
-<h1 id='metodos-de-interfaz-de-web-checkout'>Metodos de Interfaz de Web CheckOut</h1>
-<p>El web service contiene diferentes metodos donde se ejecutan operaciones de tipo solicitud - respuesta, estas requieren para cada una, parámetros de ingreso que son usados por las estructuras de datos con las que se procesan información para posteriormente retornar una respuesta.</p>
+<h1 id='metodos-de-interfaz-de-web-checkout'>Métodos de Interfaz de Web CheckOut</h1>
+<p>El web service contiene diferentes métodos donde se ejecutan operaciones de tipo solicitud - respuesta, estas requieren para cada una, parámetros de ingreso que son usados por las estructuras de datos con las que se procesan información para posteriormente retornar una respuesta.</p>
 
-<p>Si deseas ejecutar un metodo rapidamente puedes usar: <a href="https://dnetix.co/p2p/client">https://dnetix.co/p2p/client</a></p>
+<p>Si deseas ejecutar un método rápidamente puedes usar: <a href="https://dnetix.co/p2p/client">https://dnetix.co/p2p/client</a></p>
 <h2 id='createrequest'>CreateRequest</h2>
 <blockquote>
 <p>Ejemplo para la petición de un pago:</p>
@@ -841,7 +841,7 @@ En PHP base64_encode(sha1( … , true)) este parametro retornaria el <code>raw o
 </code></pre>
 <p>Solicita la creación de la sesión (petición de cobro o suscripción) y retorna el identificador y la URL de procesamiento. <br> <br></p>
 
-<p>PARAMETROS</p>
+<p>PARÁMETROS</p>
 
 <table><thead>
 <tr>
@@ -877,7 +877,7 @@ Remplace el REQUEST_ID con el valor devuelto en la respuesta de la petición de 
 </code></pre>
 <p>Obtiene la información de la sesión y transacciones realizadas. <br> <br> </p>
 
-<p>PARAMETROS</p>
+<p>PARÁMETROS</p>
 
 <table><thead>
 <tr>
@@ -912,7 +912,7 @@ Remplace el REQUEST_ID con el valor devuelto en la respuesta de la petición de 
 </code></pre>
 <p>Permite revertir un pago aprobado con el código de referencia interna. <br> <br></p>
 
-<p>PARAMETROS </p>
+<p>PARÁMETROS </p>
 
 <table><thead>
 <tr>
@@ -933,7 +933,7 @@ Remplace el REQUEST_ID con el valor devuelto en la respuesta de la petición de 
 <h2 id='collect'>Collect</h2>
 <p>Permite realizar cobros sin la intervención del usuario usando medios de pago previamente suscritos.<br><br></p>
 
-<p>PARAMETROS</p>
+<p>PARÁMETROS</p>
 
 <table><thead>
 <tr>
@@ -1299,7 +1299,7 @@ Remplace el REQUEST_ID con el valor devuelto en la respuesta de la petición de 
 </tbody></table>
 <h2 id='paymentrequest'>PaymentRequest</h2>
 <blockquote>
-<p>Ejemplo de una estructuta payment para la solicitud de un pago:</p>
+<p>Ejemplo de una estructura payment para la solicitud de un pago:</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>   ...
     <span class="s2">"payment"</span>: <span class="o">{</span>
@@ -1438,7 +1438,7 @@ Remplace el REQUEST_ID con el valor devuelto en la respuesta de la petición de 
 <tr>
 <td>recurring <code>Opcional</code></td>
 <td><a href="#recurring">Recurring</a></td>
-<td>Información recurrente cuando Place to Pay procesa un pago recurrente.</td>
+<td>Información recurrente cuando PlacetoPay procesa un pago recurrente.</td>
 </tr>
 <tr>
 <td>subscribe <code>Opcional</code></td>
@@ -1671,7 +1671,7 @@ Remplace el REQUEST_ID con el valor devuelto en la respuesta de la petición de 
 </thead><tbody>
 <tr>
 <td><code>OK</code></td>
-<td>Peticiíon de autenticación procesada correctamente.</td>
+<td>Petición de autenticación procesada correctamente.</td>
 </tr>
 <tr>
 <td><code>FAILED</code></td>
@@ -1683,11 +1683,11 @@ Remplace el REQUEST_ID con el valor devuelto en la respuesta de la petición de 
 </tr>
 <tr>
 <td><code>APPROVED_PARTIAL</code></td>
-<td>Se visualiza cuando se ha aprobado una transacción, pero aún queda un monto pendiente. Este estado se muestra solo en la petición más no en el pago(Solo aplica para pagos mixtos).</td>
+<td>Si se permite parcialmente, se ha aprobado una transacción, pero aún queda un monto.</td>
 </tr>
 <tr>
 <td><code>PARTIAL_EXPIRED</code></td>
-<td>Cuando hay un pago parcial aprobado, pero la sesión ha caducado. Este estado se visualiza solo en la petición más no en el pago (Solo aplica para pagos mixtos).</td>
+<td>Cuando hay un pago parcial aprobado, pero la sesión ha caducado.</td>
 </tr>
 <tr>
 <td><code>REJECTED</code></td>
@@ -1726,7 +1726,7 @@ Remplace el REQUEST_ID con el valor devuelto en la respuesta de la petición de 
 <tr>
 <td>internalReference <code>Opcional</code></td>
 <td>int</td>
-<td>Referencia interna en Place to Pay.</td>
+<td>Referencia interna en PlacetoPay.</td>
 </tr>
 <tr>
 <td>reference <code>Opcional</code></td>
@@ -1799,7 +1799,7 @@ Remplace el REQUEST_ID con el valor devuelto en la respuesta de la petición de 
 <tr>
 <td>token <code>Opcional</code></td>
 <td>string</td>
-<td>Token completo para tarjeta de crédito, debe ser usada para solicitar cualquier transacción a Place to Pay.</td>
+<td>Token completo para tarjeta de crédito, debe ser usada para solicitar cualquier transacción a PlacetoPay.</td>
 </tr>
 <tr>
 <td>subtoken <code>Opcional</code></td>
@@ -2199,7 +2199,7 @@ Remplace el REQUEST_ID con el valor devuelto en la respuesta de la petición de 
 <tr>
 <td>price <code>Opcional</code></td>
 <td>decimal</td>
-<td>Costo del articulo.</td>
+<td>Costo del artículo.</td>
 </tr>
 <tr>
 <td>tax <code>Opcional</code></td>
@@ -2253,7 +2253,7 @@ Remplace el REQUEST_ID con el valor devuelto en la respuesta de la petición de 
 <tr>
 <td>token <code>Opcional</code></td>
 <td>string</td>
-<td>Token completo para tarjeta de crédito, debe ser usada para solicitar cualquier transacción a Place to Pay.</td>
+<td>Token completo para tarjeta de crédito, debe ser usada para solicitar cualquier transacción a PlacetoPay.</td>
 </tr>
 <tr>
 <td>subtoken <code>Opcional</code></td>
@@ -2300,9 +2300,9 @@ Remplace el REQUEST_ID con el valor devuelto en la respuesta de la petición de 
     <span class="s2">"userAgent"</span>: <span class="s2">"PlacetoPay Sandbox"</span>
 <span class="o">}</span>
 </code></pre>
-<p>Cuando el usuario selecciona pagar en tu sitio, inicia el flujo del servicio Web Checkout, donde su sitio envía al EndPoint de procesamiento mediante el método POST los parametros necesarios para crear la sesión de pago.</p>
+<p>Cuando el usuario selecciona pagar en tu sitio, inicia el flujo del servicio Web Checkout, donde su sitio envía al EndPoint de procesamiento mediante el método POST los parámetros necesarios para crear la sesión de pago.</p>
 
-<p>En la estructura se deben tener en cuenta algunos parámetros para consumir el metodo <a href="#createrequest">CreateRequest</a> los cuales estan contenidos en la estructura de <a href="#autenticacion">Autenticación</a> y la estructura <a href="#redirectrequest">RedirectRequest</a>.</p>
+<p>En la estructura se deben tener en cuenta algunos parámetros para consumir el método <a href="#createrequest">CreateRequest</a> los cuales estan contenidos en la estructura de <a href="#autenticacion">Autenticación</a> y la estructura <a href="#redirectrequest">RedirectRequest</a>.</p>
 
 <blockquote>
 <p>Ejemplo de una estructura payment para un pago:</p>
@@ -2433,7 +2433,7 @@ enviar el atributo <code>allowPartial</code> como: <code>TRUE</code>.</p>
 
 <ul>
 <li><code>APPROVED_PARTIAL:</code> Indica que se realiza al menos un pago aprobado pero no se realizado el pago total de la sesión.</li>
-<li><code>PARTIAL_EXPIRED:</code> Indica que se realiza al menos un pago aprobado pero no se completó el pago total de la sesión y esta expiró.</li>
+<li><code>PARTIAL_EXPIRED:</code> Indica que se realiza al menos un pago aprobado pero no se completó el pago total de la sesión y ésta expiró.</li>
 </ul>
 
 <aside class="notice">
@@ -2481,7 +2481,7 @@ Los cobros recurrentes sólo se realizarán en el caso que  la transacción inic
 </aside>
 
 <aside class="notice">
-En el caso de fallar un cobro recurrente, este será reintentado cada día durante N días, si luego del número máximo de reintentos no se obtiene una transacción aprobada, la reccurencia se cancela.
+En el caso de fallar un cobro recurrente, éste será reintentado cada día durante N días, si luego del número máximo de reintentos no se obtiene una transacción aprobada, la reccurencia se cancela.
 </aside>
 
 <aside class="notice">
@@ -2567,9 +2567,9 @@ Luego de tener el token, puede generar cobros al medio de pago tokenizado usando
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre>
-<p>Para realizar el cobro de una suscripción es necesario usar el método <a href="#collect">Collet</a> enviando el token obtenido en esta.</p>
+<p>Para realizar el cobro de una suscripción es necesario usar el método <a href="#collect">Collet</a> enviando el token obtenido en ésta.</p>
 
-<p>Importante: Este proceso no necesita la  intervención del usuario</p>
+<p>Importante: Este proceso no necesita la intervención del usuario.</p>
 
 <aside class="notice">
 Los cobros  se deben realizar en los tiempos acordados con el usuario al momento de la suscripción
@@ -2579,7 +2579,7 @@ Los cobros  se deben realizar en los tiempos acordados con el usuario al momento
 
 <ul>
 <li>El pago es ejecutado por PlacetoPay mientras que la suscripción es ejecutada por su sitio. </li>
-<li>En un pago recurrente ya creado no se puede modificar los intervalos de tiempo para el cobro ni el monto, mientras que en suscripción la información puede variar dependiendo de cómo envie la solicitud en el collect.</li>
+<li>En un pago recurrente ya creado no se puede modificar los intervalos de tiempo para el cobro ni el monto, mientras que en suscripción la información puede variar dependiendo de cómo envíe la solicitud en el collect.</li>
 <li>Para eliminar la recurrencia de un pago debe hacerse por la consola administrativa de PlacetoPay, mientras que en suscripción debe invalidar o eliminar de sus sistema el token obtenido.</li>
 </ul>
 
@@ -2616,7 +2616,7 @@ Si el usuario retorna al comercio, este debe consultar la información de la tra
 <tr>
 <td>requestId <code>Requerido</code></td>
 <td>Int</td>
-<td>Identificador unico de la sesión.</td>
+<td>Identificador único de la sesión.</td>
 </tr>
 <tr>
 <td>reference <code>Requerido</code></td>
@@ -2876,7 +2876,7 @@ Puedes validar que se trate de una respuesta de PlacetoPay haciendo un SHA-1 con
 
 <p><strong>Recomendación:</strong> Implementar en su sitio las dos alternativas, pues si algo falla en el proceso de retorno y notificación, la tarea programada puede ser usada como <strong>contingencia</strong>.</p>
 
-<p>Para consultar la sesión debe enviar el identificador único de la sesión de pago <code>requesId</code> usando el metodo <a href="#getRequestinformation">GetRequestInformation</a>.</p>
+<p>Para consultar la sesión debe enviar el identificador único de la sesión de pago <code>requesId</code> usando el método <a href="#getRequestinformation">GetRequestInformation</a>.</p>
 
 <aside class="notice">
 Para este consumo también es necesario enviar en la petición la autenticación.
@@ -3614,7 +3614,7 @@ Las convenciones son: <code>R</code> (requerida), <code>O</code> (opcional), <co
 <tr>
 <th>País</th>
 <th>Código</th>
-<th>Metodo de pago</th>
+<th>Método de pago</th>
 </tr>
 </thead><tbody>
 <tr>
@@ -3759,7 +3759,7 @@ Las convenciones son: <code>R</code> (requerida), <code>O</code> (opcional), <co
 </tr>
 </tbody></table>
 <h2 id='tipos-de-documento'>Tipos de documento</h2>
-<p>Esta es una lista de los tipos de docuemntos aceptados por redirección.</p>
+<p>Ésta es una lista de los tipos de documentos aceptados por redirección.</p>
 
 <table><thead>
 <tr>
