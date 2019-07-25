@@ -1,0 +1,51 @@
+---
+title: API Reference
+
+language_tabs: # must be one of https://git.io/vQNgJ
+  - shell
+  - csharp
+
+toc_footers:
+  - <a href='#'>Sign Up for a Developer Key</a>
+  - <a href='https://www.placetopay.com'>EGM Engineering whitout Borders</a>
+
+search: true
+
+includes:
+  - test-images 
+  - autenticacion 
+  - errors
+  - metodos-interfaz
+  - estructuras-info
+  - pagos
+  - adicional
+---
+
+# Introducción
+
+Con WebCheckOut tu sitio obtiene una URL a la cual será redireccionado tu usuario para realizar el proceso transaccional. De esta manera, evitas capturar información sensible y la definición para una interfaz de un proceso de pago.
+
+El API de WebCheckOut está basado en REST, retorna respuestas con codificación JSON. Para hacer uso de este servicio es necesario que tu sitio  se conecte usando la versión 1.2 de TLS.
+
+Puede usar la API WebCheckOut en modo de prueba, que no interactúa con las redes bancarias. Dependiendo del endpoint usado en la solicitud determina si la misma es en modo productivo o en modo de prueba.
+
+**Modo pruebas:** <code>https://test.placetopay.com/redirection/api/session/</code>
+
+**Modo producción:** <code>https://secure.placetopay.com/redirection/api/session/</code>
+
+**Consideraciones:**
+
+* Se necesita la URL donde se van a enviar los datos mediante el uso del método POST (Endpoint).
+
+* Se debe usar JSON para el envío de los parámetros de autenticación, información del pago y datos de control.
+
+* El tiempo de expiración <code>expiration</code> debe ser una fecha válida en formato ISO 8601, indica el tiempo
+límite que tiene el usuario para realizar el pago y debe ser de al menos 5 minutos superior a la fecha actual.
+
+**Importante:** El <code>expiration</code> es el tiempo máximo que se da para la sesión, si un usuario no realiza la operación la sesión queda pendiente hasta expirar. 
+
+* La url de retorno (returnUrl) es utilizada para redirigir al usuario una vez terminada la operación. Se recomienda enviar en la URL un dato con el cual el sitio pueda identificar el registro por ejemplo: <code>https://mysite.com/response/{reference}</code>.
+
+* Configura en tu servidor una URL de notificación usando los puertos 80 ó 443 y en caso de que el pago se decline o apruebe, reciba una notificación mediante POST de forma asíncrona.
+
+**Importante:** Esta URL de notificación debe ser suministrada a PlacetoPay para su configuración.
