@@ -4,11 +4,12 @@ title: API Reference
 language_tabs: # must be one of https://git.io/vQNgJ
   - shell
   - csharp
+  - php
 
 toc_footers:
   - <a href='#'>Sign Up for a Developer Key</a>
   - <a href='https://www.placetopay.com'>EGM Engineering whitout Borders</a>
-
+  
 search: true
 
 includes:
@@ -19,9 +20,11 @@ includes:
   - estructuras-info
   - pagos
   - adicional
+  - medios-pago
+  - cash
+  - pse
 ---
-
-# Introducción
+# WebCheckOut
 
 Con WebCheckOut tu sitio obtiene una URL a la cual será redireccionado tu usuario para realizar el proceso transaccional. De esta manera, evitas capturar información sensible y la definición para una interfaz de un proceso de pago.
 
@@ -39,7 +42,7 @@ Puede usar la API WebCheckOut en modo de prueba, que no interactúa con las rede
 
 * Se debe usar JSON para el envío de los parámetros de autenticación, información del pago y datos de control.
 
-* El tiempo de expiración <code>expiration</code> debe ser una fecha válida en formato ISO 8601, indica el tiempo
+* El tiempo de expiración <code>expiration</code> debe ser una fecha válida en formato [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html), indica el tiempo
 límite que tiene el usuario para realizar el pago y debe ser de al menos 5 minutos superior a la fecha actual.
 
 **Importante:** El <code>expiration</code> es el tiempo máximo que se da para la sesión, si un usuario no realiza la operación la sesión queda pendiente hasta expirar. 

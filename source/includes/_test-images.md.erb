@@ -1,4 +1,4 @@
-# Flujo de integración
+## Flujo de integración
 
 <%= image_tag "images/Warehouse@2x.png" %>
 
@@ -17,30 +17,30 @@
 10. Recomendamos implementar un proceso sonda para resolver aquellas transacciones que no  se resolvieron en los punto 7 y 9.
 
 
-# Librerías
+## Librerías
 
-## Instalación para C Sharp
+### Instalación para C Sharp
 
 
-###¿Dónde obtener la librería?
+#### ¿Dónde obtener la librería?
     Repositorio: SDK .NET Framework 4.5.0 de Web Checkout.
 
 **DLL y dependencias:** <br>
 
 [https://drive.google.com/open?id=1UMy7SibuN3aVlRd4B8oLifCVQwxURzzv](https://drive.google.com/open?id=1UMy7SibuN3aVlRd4B8oLifCVQwxURzzv)
 
-###¿Qué versiones soporta?
+#### ¿Qué versiones soporta?
    La versión es estable para la versión 4.5.0
 
-###¿Qué datos debo tener antes de iniciar la instalación?
+#### ¿Qué datos debo tener antes de iniciar la instalación?
    PlacetoPay suministra <code>login</code> y <code>trankey</code>, datos que serán usados para la autenticación y relacionar las transacciones al sitio correspondiente.
 
 
-###Agregar dependencia en Visual Studio
+#### Agregar dependencia en Visual Studio
  Ir al explorador de soluciones, desplegar las opciones del proyecto y luego: <br>
  Dependencias -> agregar referencia -> examinar -> examinar  -> seleccionar dll -> Aceptar
 
-###¿Cómo usar la clase?
+#### ¿Cómo usar la clase?
    Configurar instancia PlacetoPay necesaria para autenticarse ante los servicios web de PlacetoPay.
 
  ```csharp
@@ -54,7 +54,7 @@ El parámetro <code>"URL_INTEGRATION"</code> hace referencia al endpoint a usar,
 **Pruebas:** https://test.placetopay.com/redirection/ <br>
 **Producción:** https://secure.placetopay.com/redirection/ <br>
 
-###Crear una nueva sesión de pago <code>CreateRequest</code>
+#### Crear una nueva sesión de pago <code>CreateRequest</code>
 
 Solicita la creación de la sesión (petición de cobro o suscripción) y retorna el identificador y la URL de procesamiento. <br>
 
@@ -83,7 +83,7 @@ Solicita la creación de la sesión (petición de cobro o suscripción) y retorn
     Verificar motivo del error: <code>response.Status.Message // return string</code>
 
 
-###Obtenga información sobre una sesión <code>(getRequestInformation)</code>
+#### Obtenga información sobre una sesión <code>(getRequestInformation)</code>
 Obtiene la información de la sesión y transacciones realizadas.
 
 >Ejemplo de llamada:
@@ -100,7 +100,7 @@ Servicio responde una instancia de la clase <code>RedirectInformation</code>. Se
 <code>response.IsApproved() // return boolean</code> <br>
 <code>response.Status.status // return boolean</code> <br>
 
-###Cobro sin intervención del usuario (Collect)
+####Cobro sin intervención del usuario (Collect)
 
 Permite realizar cobros sin la intervención del usuario usando medios de pago previamente suscritos.
 
@@ -125,7 +125,7 @@ Servicio responde una instancia de la clase <code>RedirectInformation</code>. Se
 <code>response.IsApproved() // return boolean</code> <br>
 <code>response.Status.status // return boolean</code> <br>
 
-###Revertir un pago <code>(reversePayment)</code>
+####Revertir un pago <code>(reversePayment)</code>
 Permite revertir un pago aprobado con el código de referencia interna.
 
 >Ejemplo de llamada:
@@ -141,7 +141,7 @@ Permite revertir un pago aprobado con el código de referencia interna.
    <code>response.Status.status // return boolean</code>
 
 
-###Leer respuesta enviada a la url de notificación <code>(ReadNotification)</code>
+####Leer respuesta enviada a la url de notificación <code>(ReadNotification)</code>
 
 Permite leer la respuesta enviada por parte de PlacetoPay a la Url de notificación del comercio. <br>
 
@@ -182,10 +182,10 @@ Notification notification = _gateway.ReadNotification(data);
    }
 ```
 
-###Posibles errores
+####Posibles errores
     Para cado uno de los objetos de respuesta, al momento de presentarse alguna excepción o problema de conexión se informa en la propiedad  status.
 
-## Instalación librerÍas para JAVA
+### Instalación librerÍas para JAVA
 Para conectarse con PlacetoPay por medio del servicio de web checkout utilizando java, ingrese al siguiente enlace: <br>
 
 [https://github.com/placetopay/java-placetopay](https://github.com/placetopay/java-placetopay)

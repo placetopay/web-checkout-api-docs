@@ -1,4 +1,4 @@
-# Pagos
+## Pagos
 
 >Ejemplo para la petición de un pago:
 
@@ -84,7 +84,7 @@ En caso que la operación quede pendiente, el servicio notificará de forma así
 </aside>
 
 
-## Pago mixto
+### Pago mixto
 
 >Ejemplo de una petición para un pago mixto.
 
@@ -177,7 +177,7 @@ Al obtener el resultado de la operación, debe tener muy presente los siguiente 
  Es importante identificar según la regla de negocio del sitio al obtener alguno de estos dos estados.
 </aside>
 
-## Pago Recurrente
+### Pago Recurrente
 
 >Ejemplo petición para un pago recurrente:
 
@@ -230,7 +230,7 @@ En el caso de fallar un cobro recurrente, éste será reintentado cada día dura
 Las recurrencias sólo pueden ser canceladas en la consola administrativa de PlacetoPay.
 </aside>
 
-## Suscripción
+### Suscripción
 
 >Ejemplo petición para una suscripción:
 
@@ -276,7 +276,7 @@ Luego de tener el token, puede generar cobros al medio de pago tokenizado usando
 
 La estructura de la respuesta contiene toda la información de la petición original y una estructura de suscripción <code>(subscription)</code> con un instrumento <code>(instrument)</code> representado en forma de **token**. [Ver Ejemplo de respuesta de una suscripción](#consulta).
 
-### Recaudar usando suscripción 
+#### Recaudar usando suscripción 
 
 >Ejemplo para recaudar un pago con suscripción
 
@@ -319,7 +319,7 @@ Importante: Este proceso no necesita la intervención del usuario.
 Los cobros  se deben realizar en los tiempos acordados con el usuario al momento de la suscripción
 </aside>
 
-### Pago recurrente vs Suscripción
+#### Pago recurrente vs Suscripción
 
   Las principales diferencias entre estas dos funcionalidades son:
 
@@ -331,7 +331,7 @@ Los cobros  se deben realizar en los tiempos acordados con el usuario al momento
 Si el usuario retorna al comercio, este debe consultar la información de la transacción usando el identificador único <code>requestId</code> generado.
 </aside>
 
-# Notificación
+## Notificación
 
 >Ejemplo de notificación para el estado de una sesión:
 
@@ -379,7 +379,7 @@ Si este valor coincide con el valor proporcionado por el <code>signature</code>,
 <aside class="success">Luego de obtener el estado de la sesión, puede continuar con la regla de negocio de su sitio. (ejemplo: si la operación es aprobada, envia un correo electrónico al usuario).
 </aside>
 
-# Consulta
+## Consulta
 
 >Ejemplo de la petición de consulta de la información de una transacción:
 

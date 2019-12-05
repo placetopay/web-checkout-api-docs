@@ -1,4 +1,4 @@
-# Errores
+## Errores
 
 >Ejemplo atutenticación fallida:
 
@@ -16,7 +16,7 @@
 El servicio de Web CheckOut retorna los códigos de respuesta para la autenticación fallida en el atributo <code>message</code> del objeto <code>status</code>.
 
 Código | Causa
----------- | -------
+------ | ------
 100 | UsernameToken no proporcionado (Encabezado de la autorización malformado).
 101 | Identificador de sitio no existe ( Login incorrecto o no se encuentra en el ambiente).
 102 | El hash de TranKey no coincide (Trankey incorrecto o mal formado).
@@ -32,7 +32,7 @@ Código | Causa
 Si el error retornado no corresponde a ninguna anteriormente descrito, por favor revise el endpoint de consumo usado.
 </aside>.
 
-## Errores frecuentes
+### Errores frecuentes
 
 * **Mensaje de error “Autenticación mal formada”** <br><br>
 Se presenta cuando el sistema no detecta que se esté enviando login, tranKey, seed o nonce en la estructura auth enviada, también puede presentarse si se envían estos datos pero de manera incorrecta, es decir sin el parámetro content-type “application/json” de manera que el servidor interpreta la petición como texto en vez de un arreglo de datos.

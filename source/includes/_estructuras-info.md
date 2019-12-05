@@ -1,7 +1,7 @@
-# Estructuras de información
+## Estructuras de información
 Esta sección describe cada una de las estructuras de datos usada por los métodos de web service.
 
-## RedirectRequest
+### RedirectRequest
 
 > Ejmeplo de una estructura RedirectRequest para la solicitud de un pago:
 
@@ -134,7 +134,7 @@ noBuyerFill <code>Opcional</code> | bool | Por defecto se llenan los datos que s
 
 **Retorna:** [RedirectResponse](#redirectresponse)
 
-## RedirectResponse
+### RedirectResponse
      
    > Ejemplo de una estructura RedirectResponse con respuesta aprobada en una solicitud de pago con autenticación:
 
@@ -160,7 +160,7 @@ status <code>Requerido</code> | <a href="#status">Status</a> | Estructura que co
 requestId <code>Opcional</code> | Int | Referencia única de la sesión de pago.
 processUrl <code>Opcional</code> | String | URL donde se redirecciona al usuario para completar el proceso de pago.
 
-## RedirectInformation
+### RedirectInformation
    Estructura de respuesta a una solicitud para una información de transacción. <br><br>
 
 ATRIBUTOS
@@ -172,7 +172,7 @@ request <code>Opcional</code> | [RedirectRequest](#redirectrequest) | Informaci�
 payment <code>Opcional</code> | [Transaction[]](#transaction) | Información relacionada con el pago si este fue solicitado.
 subscription <code>Opcional</code> | [SubscriptionResponse](#subscriptionresponse) | Información relacionado con la suscripción si esta fue solicitada.
 
-## ReverseResponse
+### ReverseResponse
    Estructura de respuesta a una solicitud de pago reversado. <br><br>
 
 ATRIBUTOS
@@ -182,7 +182,7 @@ Nombre | Tipo | Descripción
 status <code>Requerido</code> | <a href="#status">Status</a> | Estado de la solicitud será APROBADO si se ha realizado el reverso de lo contrario puede ser RECHAZADA.
 payment <code>Opcional</code> | [Transaction](#transaction) | Si el reverso fue exitoso, se almacena como una nueva transacción.
 
-## Person
+### Person
    Estructura que refleja la información de una persona involucrada en una transacción. <br><br>
 
 ATRIBUTOS
@@ -198,7 +198,7 @@ email <code>Requerido</code> | String | Correo electrónico de la persona.
 address <code>Opcional</code> | <a href="#address">Address</a> | Información completa de la dirección.
 mobile <code>Opcional</code> | [PhoneNumberType](#phonenumbertype) | Número celular, el <code>PhoneNumberType</code> restringe la longitud del número de teléfono de la cadena a 30 caracteres.
 
-## PaymentRequest
+### PaymentRequest
   
 > Ejemplo de una estructura payment para la solicitud de un pago:
 
@@ -308,7 +308,7 @@ fields <code>Opcional</code> | [NameValuePair[]](#namevaluepair) | Información 
 recurring <code>Opcional</code> | [Recurring](#recurring) | Información recurrente cuando PlacetoPay procesa un pago recurrente.
 subscribe <code>Opcional</code> | bool | Permite solicitar un proceso de cobro y suscripción en la misma sesión.
  
-## SubscriptionRequest
+### SubscriptionRequest
    Estructura que contiene la información relacionada con una solicitud de suscripción para obtener un Token. <br><br>
 
 ATRIBUTOS
@@ -321,7 +321,7 @@ fields <code>Opcional</code> | [NameValuePair[]](#namevaluepair) | Información 
 
 **Retorna:** [SubscriptionResponse](#subscriptionresponse)
 
-## SubscriptionResponse
+### SubscriptionResponse
 
 >Ejemplo que contiene la estructura SubscriptionResponse:
 
@@ -355,7 +355,7 @@ status <code>Requerido</code> | <a href="#status">Status</a>| Estado de la suscr
 type <code>Opcional</code> | String | Esta cadena dicta el tipo de suscripción que se devuelve, puede ser [token, cuenta]
 instrument <code>Opcional</code> | <a href="#namevaluepair">NameValuePair[]</a> | Acorde con el tipo de suscripción los valore retornados puede cambiar y serán devueltos en la estructura de NameValuePair.<br>**token:**<code>[token, subtoken, franchise, <br>franchiseName, lastDigits, <br> validUntil]</code><br>**account:** <code>[bankCode, bankName, accountType, <br>accountNumber]</code>
 
-## NameValuePair
+### NameValuePair
 
  >Ejemplo que contiene la estructura namevaluepair:
 
@@ -415,7 +415,7 @@ keyword <code>Opcional</code> | string | Clave para el par de valores del dato.
 value <code>Opcional</code> | string |Valor para el par de datos.
 displayOn <code>Opcional</code> | string | Bajo qué circunstancias el campo debe ser mostrado en la interfaz de redirección. [none, payment, receipt, both, approved]
 
-## Status
+### Status
 
 >Ejemplo de una estructura status con respuesta fallida en una petición de autenticación:
 
@@ -440,7 +440,7 @@ reason <code>Requerido</code> | String | Código del motivo proporcionado.
 message <code>Requerido</code> | String | Descripción del código de razón.
 date <code>Requerido</code> | DateTime | Fecha y hora en que se genera el estado de pago.
 
-### Estado de una petición o pago
+#### Estado de una petición o pago
 
 >Ejemplo de un estado de una petición o pago:
 
@@ -470,7 +470,7 @@ Estado | Descripción
 <code>PENDING_VALIDATION</code> | La sesión está pendiente de validación de identidad del usuario.
 <code>REFUNDED</code> | Reintegro de una transacción por solicitud de un tarjeta habiente al comercio.
 
-## Transaction
+### Transaction
    Estructura que contiene información sobre el proceso de pago de la transacción en PlacetoPay. <br><br>
 
 ATRIBUTOS
@@ -490,7 +490,7 @@ refunded <code>Opcional</code> | boolean |
 authorization <code>Opcional</code> | string | Código de autorización.
 processorFields <code>Opcional</code> | [NameValuePair[]](#namevaluepair) | Campos adicionales del procesador.
 
-## Token
+### Token
    Estructura que contiene información acerca de un token usado para cobros de un cliente suscrito. <br><br>
 
 ATRIBUTOS
@@ -505,10 +505,10 @@ issuerName <code>Opcional</code> | string | Nombre del banco emisor.
 lastDigits <code>Opcional</code> | string | Últimos 4 dígitos de la tarjeta de crédito.
 validUntil <code>Opcional</code> | date | Fecha hasta la cual el token es válido, puede  ser determinada por la  fecha de expiración.
 
-## DocumentType
+### DocumentType
    Contiene los diferentes tipos de documento, cadena (string) (ver listado)
 
-## Address
+### Address
    Estructura que contiene la información sobre una dirección física. <br><br>
 
 ATRIBUTOS
@@ -522,10 +522,10 @@ postalCode <code>Opcional</code> | string | Código postal o equivalente se requ
 country <code>Opcional</code> | string | Código internacional del país que se aplica a la dirección física según  ISO 3166-1 ALPHA-2.
 phone <code>Opcional</code> | [PhoneNumberType](#phonenumbertype) | Número telefónico.
 
-## PhoneNumberType
+### PhoneNumberType
    Restringe la longitud del número de teléfono de la cadena a 30 caracteres.
 
-## Amount
+### Amount
 
 >Ejemplo de una esrtructura amount para un pago:
 
@@ -577,7 +577,7 @@ currency <code>Requerido</code> | String | De amountBase. Permite identificar la
 total <code>Requerido</code> | Decimal | De amountBase. Permite identificar el monto total que se va a pagar.
 taxes <code>Opcional</code> | [TaxDetail[]](#taxdetail) | Descrpción de los impuestos.
 details <code>Opcional</code> | [AmountDetail[]](#amountdetail) | Descripción del importe total.
-## TaxDetail
+### TaxDetail
   Estructura para almacenar información sobre un impuesto. <br><br>
 
 Nombre | Tipo | Descripción 
@@ -585,7 +585,7 @@ Nombre | Tipo | Descripción
 kind <code>Requerido</code> | string | Valor de clasificación, puede ser <code>[valueAddedTax, exciseDuty]</code>.
 amount <code>Requerido</code> | [AmountType](#amounttype) | Valor discriminado.
 
-## AmountDetail
+### AmountDetail
    Estructura para almacenar información sobre el valor. <br><br>
 
 ATRIBUTOS
@@ -595,10 +595,10 @@ Nombre | Tipo | Descripción
 kind <code>Requerido</code> | string | Valor de clasificación, puede ser <code>[discount, additional, <br> vatDevolutionBase, shipping, <br> handlingFee, insurance, <br> giftWrap, subtotal, fee, tip]</code>.
 amount <code>Requerido</code> | [AmountType](#amounttype) | Valor discriminado.
 
-## AmountType
+### AmountType
 Representación decimal del valor.
 
-## Recurring
+### Recurring
 Estructura que contiene la información requerida para una solicitud de pago recurrente. <br><br>
 
 ATRIBUTOS
@@ -612,7 +612,7 @@ maxPeriods <code>Requerido</code> | int | Número máximo de periodo (-1 en caso
 dueDate <code>Opcional</code> | date | Fecha para finalizar el pago.
 notificationUrl <code>Opcional</code> | string | URL en el que el servicio notificará cada vez que se haga un pago recurrente.
 
-## AmountConversion
+### AmountConversion
    Estructura para definir el factor de conversión y los valores. <br><br>
 
 ATRIBUTOS
@@ -624,17 +624,17 @@ to <code>Requerido</code> | [AmountBase](#amountbase) | Monto procesado por la e
 factor <code>Requerido</code> | double | Factor de conversión.
 
 
-## AmountBase
+### AmountBase
    Estructura que representa una cantidad que define la moneda y el total. <br><br>
 
 ATRIBUTOS
 
 Nombre | Tipo | Descripción
 -------|------|------------
-currency <code>Requerido</code> | string | Moneda acorde al ISO 4217 <code>(alphabetic code)</code>.
+currency <code>Requerido</code> | string | Moneda acorde al [ISO 4217](https://www.currency-iso.org/dam/downloads/lists/list_one.xml) <code>(alphabetic code)</code>.
 total <code>Requerido</code> | decimal | Valor total.
 
-## CollectRequest
+### CollectRequest
 
 >Ejemplo para recaudar un pago utilizando la estructura CollecRequest
 
@@ -679,7 +679,7 @@ payer <code>Requerido</code> | <a href="#person">Person</a> | Datos del titular 
 payment <code>Requerido</code> | <a href="#paymentrequest">PaymentRequest</a> | Objeto de pago cuando necesite solicitar un cobro.
 instrument <code>Requerido</code> | <a href="#instrument">Instrument</a> | Datos asociados al medio de pago suscrito.
 
-## Items
+### Items
    Posee una colección de estructuras de elementos. <br><br>
 
 ATRIBUTOS
@@ -688,7 +688,7 @@ Nombre | Tipo | Descripción
 -------|------|------------
 item <code>Opcional</code> | [Item[]](#item) | Arreglo de un elemento incluido.
 
-## Item 
+### Item 
    Estructura que contiene los detalles del elemento. <br><br>
    
 ATRIBUTOS
@@ -702,7 +702,7 @@ qty <code>Opcional</code> | string | Número de un artículo en particular.
 price <code>Opcional</code> | decimal | Costo del artículo.
 tax <code>Opcional</code> | decimal | Impuesto del artículo.
 
-## Instrument
+### Instrument
 
 >Ejemplo que contiene una estructura instrument:
 
@@ -725,7 +725,7 @@ Nombre | Tipo | Descripción
 -------|------|------------
 token <code>Requerido</code> | [SimpleToken](#simpletoken) | Datos asociados a una tarjeta de crédito tokenizada.
 
-## SimpleToken 
+### SimpleToken 
   Estructura que contiene los detalles de un token previamente obtenido mediante un proceso de suscripción, se debe enviar el token o el subtoken en los casos que se habilite, no es necesario enviar ambos. <br><br>
 
 ATRIBUTOS

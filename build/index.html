@@ -2,6 +2,7 @@
 <!doctype html>
 <html>
   <head>
+    <link href="images/favicon.ico" rel="icon" type="image/ico" />
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -201,7 +202,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;,&quot;csharp&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -212,47 +213,122 @@
       <img src="images/logo.png" class="logo" alt="Logo" />
         <div class="lang-selector">
               <a href="#" data-language-name="shell">shell</a>
+              <a href="#" data-language-name="csharp">csharp</a>
         </div>
         <div class="search">
-          <input type="text" class="search" id="input-search" placeholder="Buscar">
+          <input type="text" class="search" id="input-search" placeholder="Search">
         </div>
         <ul class="search-results"></ul>
       <ul id="toc" class="toc-list-h1">
           <li>
-            <a href="#web-checkout" class="toc-h1 toc-link" data-title="Web Checkout">Web Checkout</a>
+            <a href="#introduccion" class="toc-h1 toc-link" data-title="Introducción">Introducción</a>
+          </li>
+          <li>
+            <a href="#flujo-de-integracion" class="toc-h1 toc-link" data-title="Flujo de integración">Flujo de integración</a>
+          </li>
+          <li>
+            <a href="#librerias" class="toc-h1 toc-link" data-title="Librerías">Librerías</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#instalacion-para-c-sharp" class="toc-h2 toc-link" data-title="Instalación para C Sharp">Instalación para C Sharp</a>
+                        <ul class="toc-list-h3">
+                            <li>
+                              <a href="#donde-obtener-la-libreria" class="toc-h3 toc-link" data-title="¿Dónde obtener la librería?">¿Dónde obtener la librería?</a>
+                            </li>
+                            <li>
+                              <a href="#que-versiones-soporta" class="toc-h3 toc-link" data-title="¿Qué versiones soporta?">¿Qué versiones soporta?</a>
+                            </li>
+                            <li>
+                              <a href="#que-datos-debo-tener-antes-de-iniciar-la-instalacion" class="toc-h3 toc-link" data-title="¿Qué datos debo tener antes de iniciar la instalación?">¿Qué datos debo tener antes de iniciar la instalación?</a>
+                            </li>
+                            <li>
+                              <a href="#agregar-dependencia-en-visual-studio" class="toc-h3 toc-link" data-title="Agregar dependencia en Visual Studio">Agregar dependencia en Visual Studio</a>
+                            </li>
+                            <li>
+                              <a href="#como-usar-la-clase" class="toc-h3 toc-link" data-title="¿Cómo usar la clase?">¿Cómo usar la clase?</a>
+                            </li>
+                            <li>
+                              <a href="#crear-una-nueva-sesion-de-pago-createrequest" class="toc-h3 toc-link" data-title="Crear una nueva sesión de pago <code>CreateRequest</code>">Crear una nueva sesión de pago <code>CreateRequest</code></a>
+                            </li>
+                            <li>
+                              <a href="#obtenga-informacion-sobre-una-sesion-getrequestinformation" class="toc-h3 toc-link" data-title="Obtenga información sobre una sesión <code>(getRequestInformation)</code>">Obtenga información sobre una sesión <code>(getRequestInformation)</code></a>
+                            </li>
+                            <li>
+                              <a href="#cobro-sin-intervencion-del-usuario-collect" class="toc-h3 toc-link" data-title="Cobro sin intervención del usuario (Collect)">Cobro sin intervención del usuario (Collect)</a>
+                            </li>
+                            <li>
+                              <a href="#revertir-un-pago-reversepayment" class="toc-h3 toc-link" data-title="Revertir un pago <code>(reversePayment)</code>">Revertir un pago <code>(reversePayment)</code></a>
+                            </li>
+                            <li>
+                              <a href="#leer-respuesta-enviada-a-la-url-de-notificacion-readnotification" class="toc-h3 toc-link" data-title="Leer respuesta enviada a la url de notificación <code>(ReadNotification)</code>">Leer respuesta enviada a la url de notificación <code>(ReadNotification)</code></a>
+                            </li>
+                            <li>
+                              <a href="#posibles-errores" class="toc-h3 toc-link" data-title="Posibles errores">Posibles errores</a>
+                            </li>
+                        </ul>
+                  </li>
+                  <li>
+                    <a href="#instalacion-librerias-para-java" class="toc-h2 toc-link" data-title="Instalación librerÍas para JAVA">Instalación librerÍas para JAVA</a>
+                  </li>
+              </ul>
           </li>
           <li>
             <a href="#autenticacion" class="toc-h1 toc-link" data-title="Autenticación">Autenticación</a>
-          </li>
-          <li>
-            <a href="#pago-basico" class="toc-h1 toc-link" data-title="Pago básico">Pago básico</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#payment" class="toc-h2 toc-link" data-title="Payment">Payment</a>
+                    <a href="#ejemplos-de-autenticacion" class="toc-h2 toc-link" data-title="Ejemplos de autenticación">Ejemplos de autenticación</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#errores" class="toc-h1 toc-link" data-title="Errores">Errores</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#errores-frecuentes" class="toc-h2 toc-link" data-title="Errores frecuentes">Errores frecuentes</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#metodos-de-interfaz-de-web-checkout" class="toc-h1 toc-link" data-title="Métodos de Interfaz de Web CheckOut">Métodos de Interfaz de Web CheckOut</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#createrequest" class="toc-h2 toc-link" data-title="CreateRequest">CreateRequest</a>
                   </li>
                   <li>
-                    <a href="#amount" class="toc-h2 toc-link" data-title="Amount">Amount<br></a>
+                    <a href="#getrequestinformation" class="toc-h2 toc-link" data-title="GetRequestInformation">GetRequestInformation</a>
+                  </li>
+                  <li>
+                    <a href="#reversepayment" class="toc-h2 toc-link" data-title="ReversePayment">ReversePayment</a>
+                  </li>
+                  <li>
+                    <a href="#collect" class="toc-h2 toc-link" data-title="Collect">Collect</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#estructuras-de-informacion" class="toc-h1 toc-link" data-title="Estructuras de información">Estructuras de información</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#redirectrequest" class="toc-h2 toc-link" data-title="RedirectRequest">RedirectRequest</a>
                   </li>
                   <li>
                     <a href="#redirectresponse" class="toc-h2 toc-link" data-title="RedirectResponse">RedirectResponse</a>
                   </li>
                   <li>
-                    <a href="#status" class="toc-h2 toc-link" data-title="Status">Status</a>
+                    <a href="#redirectinformation" class="toc-h2 toc-link" data-title="RedirectInformation">RedirectInformation</a>
                   </li>
                   <li>
-                    <a href="#estado-de-la-solicitud-o-pago" class="toc-h2 toc-link" data-title="Estado de la solicitud o pago">Estado de la solicitud o pago</a>
+                    <a href="#reverseresponse" class="toc-h2 toc-link" data-title="ReverseResponse">ReverseResponse</a>
                   </li>
-              </ul>
-          </li>
-          <li>
-            <a href="#pago-mixto" class="toc-h1 toc-link" data-title="Pago mixto">Pago mixto</a>
-          </li>
-          <li>
-            <a href="#pago-recurrente" class="toc-h1 toc-link" data-title="Pago Recurrente">Pago Recurrente</a>
-          </li>
-          <li>
-            <a href="#suscripcion" class="toc-h1 toc-link" data-title="Suscripción">Suscripción</a>
-              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#person" class="toc-h2 toc-link" data-title="Person">Person</a>
+                  </li>
+                  <li>
+                    <a href="#paymentrequest" class="toc-h2 toc-link" data-title="PaymentRequest">PaymentRequest</a>
+                  </li>
+                  <li>
+                    <a href="#subscriptionrequest" class="toc-h2 toc-link" data-title="SubscriptionRequest">SubscriptionRequest</a>
+                  </li>
                   <li>
                     <a href="#subscriptionresponse" class="toc-h2 toc-link" data-title="SubscriptionResponse">SubscriptionResponse</a>
                   </li>
@@ -260,13 +336,85 @@
                     <a href="#namevaluepair" class="toc-h2 toc-link" data-title="NameValuePair">NameValuePair</a>
                   </li>
                   <li>
-                    <a href="#recaudar-pago-suscripcion" class="toc-h2 toc-link" data-title="Recaudar pago suscripción">Recaudar pago suscripción</a>
+                    <a href="#status" class="toc-h2 toc-link" data-title="Status">Status</a>
+                        <ul class="toc-list-h3">
+                            <li>
+                              <a href="#estado-de-una-peticion-o-pago" class="toc-h3 toc-link" data-title="Estado de una petición o pago">Estado de una petición o pago</a>
+                            </li>
+                        </ul>
                   </li>
                   <li>
-                    <a href="#tipos-de-documento" class="toc-h2 toc-link" data-title="Tipos de documento">Tipos de documento</a>
+                    <a href="#transaction" class="toc-h2 toc-link" data-title="Transaction">Transaction</a>
+                  </li>
+                  <li>
+                    <a href="#token" class="toc-h2 toc-link" data-title="Token">Token</a>
+                  </li>
+                  <li>
+                    <a href="#documenttype" class="toc-h2 toc-link" data-title="DocumentType">DocumentType</a>
+                  </li>
+                  <li>
+                    <a href="#address" class="toc-h2 toc-link" data-title="Address">Address</a>
+                  </li>
+                  <li>
+                    <a href="#phonenumbertype" class="toc-h2 toc-link" data-title="PhoneNumberType">PhoneNumberType</a>
+                  </li>
+                  <li>
+                    <a href="#amount" class="toc-h2 toc-link" data-title="Amount">Amount</a>
+                  </li>
+                  <li>
+                    <a href="#taxdetail" class="toc-h2 toc-link" data-title="TaxDetail">TaxDetail</a>
+                  </li>
+                  <li>
+                    <a href="#amountdetail" class="toc-h2 toc-link" data-title="AmountDetail">AmountDetail</a>
+                  </li>
+                  <li>
+                    <a href="#amounttype" class="toc-h2 toc-link" data-title="AmountType">AmountType</a>
+                  </li>
+                  <li>
+                    <a href="#recurring" class="toc-h2 toc-link" data-title="Recurring">Recurring</a>
+                  </li>
+                  <li>
+                    <a href="#amountconversion" class="toc-h2 toc-link" data-title="AmountConversion">AmountConversion</a>
+                  </li>
+                  <li>
+                    <a href="#amountbase" class="toc-h2 toc-link" data-title="AmountBase">AmountBase</a>
+                  </li>
+                  <li>
+                    <a href="#collectrequest" class="toc-h2 toc-link" data-title="CollectRequest">CollectRequest</a>
+                  </li>
+                  <li>
+                    <a href="#items" class="toc-h2 toc-link" data-title="Items">Items</a>
+                  </li>
+                  <li>
+                    <a href="#item" class="toc-h2 toc-link" data-title="Item">Item</a>
                   </li>
                   <li>
                     <a href="#instrument" class="toc-h2 toc-link" data-title="Instrument">Instrument</a>
+                  </li>
+                  <li>
+                    <a href="#simpletoken" class="toc-h2 toc-link" data-title="SimpleToken">SimpleToken</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#pagos" class="toc-h1 toc-link" data-title="Pagos">Pagos</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#pago-mixto" class="toc-h2 toc-link" data-title="Pago mixto">Pago mixto</a>
+                  </li>
+                  <li>
+                    <a href="#pago-recurrente" class="toc-h2 toc-link" data-title="Pago Recurrente">Pago Recurrente</a>
+                  </li>
+                  <li>
+                    <a href="#suscripcion" class="toc-h2 toc-link" data-title="Suscripción">Suscripción</a>
+                        <ul class="toc-list-h3">
+                            <li>
+                              <a href="#recaudar-usando-suscripcion" class="toc-h3 toc-link" data-title="Recaudar usando suscripción">Recaudar usando suscripción</a>
+                            </li>
+                            <li>
+                              <a href="#pago-recurrente-vs-suscripcion" class="toc-h3 toc-link" data-title="Pago recurrente vs Suscripción">Pago recurrente vs Suscripción</a>
+                            </li>
+                        </ul>
                   </li>
               </ul>
           </li>
@@ -277,29 +425,44 @@
             <a href="#consulta" class="toc-h1 toc-link" data-title="Consulta">Consulta</a>
           </li>
           <li>
-            <a href="#errores" class="toc-h1 toc-link" data-title="Errores">Errores</a>
+            <a href="#informacion-adicional" class="toc-h1 toc-link" data-title="Información adicional">Información adicional</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#campos-usados-por-tipo-de-operacion" class="toc-h2 toc-link" data-title="Campos usados por tipo de operación">Campos usados por tipo de operación</a>
+                  </li>
+                  <li>
+                    <a href="#metodos-de-pago" class="toc-h2 toc-link" data-title="Métodos de Pago.">Métodos de Pago.</a>
+                  </li>
+                  <li>
+                    <a href="#tipos-de-documento" class="toc-h2 toc-link" data-title="Tipos de documento">Tipos de documento</a>
+                  </li>
+              </ul>
           </li>
       </ul>
         <ul class="toc-footer">
             <li><a href='#'>Sign Up for a Developer Key</a></li>
-            <li><a href='https://github.com/lord/slate'>Documentation Powered by Slate</a></li>
+            <li><a href='https://www.placetopay.com'>EGM Engineering whitout Borders</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='web-checkout'>Web Checkout</h1>
-<p>Las especificaciones del servicio web y su arquitectura permite a cualquier aplicación conectarse a PlacetoPay. </p>
+        <h1 id='introduccion'>Introducción</h1>
+<p>Con WebCheckOut tu sitio obtiene una URL a la cual será redireccionado tu usuario para realizar el proceso transaccional. De esta manera, evitas capturar información sensible y la definición para una interfaz de un proceso de pago.</p>
 
-<p>Para hacer uso del servicio web es indispensable un lenguaje de programación que pueda conectarse con servicios REST y se conecte usando la versión 1.2 de TLS.</p>
+<p>El API de WebCheckOut está basado en REST, retorna respuestas con codificación JSON. Para hacer uso de este servicio es necesario que tu sitio  se conecte usando la versión 1.2 de TLS.</p>
 
-<p>En esta API se describen, los parámetros de ingreso y estructuras de datos utilizadas para conectarse con el web service <code>Web Checkout</code>.</p>
+<p>Puede usar la API WebCheckOut en modo de prueba, que no interactúa con las redes bancarias. Dependiendo del endpoint usado en la solicitud determina si la misma es en modo productivo o en modo de prueba.</p>
+
+<p><strong>Modo pruebas:</strong> <code>https://test.placetopay.com/redirection/api/session/</code></p>
+
+<p><strong>Modo producción:</strong> <code>https://secure.placetopay.com/redirection/api/session/</code></p>
 
 <p><strong>Consideraciones:</strong></p>
 
 <ul>
 <li><p>Se necesita la URL donde se van a enviar los datos mediante el uso del método POST (Endpoint).</p></li>
-<li><p>Se debe usar JSON para el envío de los parámetros de Autenticación, Información del pago y Datos de control.</p></li>
+<li><p>Se debe usar JSON para el envío de los parámetros de autenticación, información del pago y datos de control.</p></li>
 <li><p>El tiempo de expiración <code>expiration</code> debe ser una fecha válida en formato ISO 8601, indica el tiempo
 límite que tiene el usuario para realizar el pago y debe ser de al menos 5 minutos superior a la fecha actual.</p></li>
 </ul>
@@ -308,10 +471,173 @@ límite que tiene el usuario para realizar el pago y debe ser de al menos 5 minu
 
 <ul>
 <li><p>La url de retorno (returnUrl) es utilizada para redirigir al usuario una vez terminada la operación. Se recomienda enviar en la URL un dato con el cual el sitio pueda identificar el registro por ejemplo: <code>https://mysite.com/response/{reference}</code>.</p></li>
-<li><p>Configura en tu servidor una URL de notificación usando los puertos 80 ó 443 y en caso de que el pago se decline o apruebe, reciba una notificación mediante POST de forma asincrona.</p></li>
+<li><p>Configura en tu servidor una URL de notificación usando los puertos 80 ó 443 y en caso de que el pago se decline o apruebe, reciba una notificación mediante POST de forma asíncrona.</p></li>
 </ul>
 
 <p><strong>Importante:</strong> Esta URL de notificación debe ser suministrada a PlacetoPay para su configuración.</p>
+<h1 id='flujo-de-integracion'>Flujo de integración</h1>
+<p><img src="images/Warehouse@2x.png" alt="Warehouse@2x" /></p>
+
+<ol>
+<li>Al momento del usuario proceder con la operación en tu sitio, debes consumir el método <a href="#createrequest">createRequest</a>.</li>
+<li>Si la solicitud es procesada correctamente, el servicio crea una sesión y retorna en la respuesta: <br>
+
+<ul>
+<li>Identificador <code>requestID</code></li>
+<li>URL de procesamiento <code>processUrl</code>.</li>
+</ul></li>
+<li>Crea un registro en tu sistema, relaciona ese registro al <code>requestID</code> y déjalo en estado pendiente.</li>
+<li>Redirecciona al usuario al <code>processURL</code> obtenido en el punto 2.</li>
+<li>En la interfaz de Web Checkout el usuario realizará el proceso de pago o suscripción.</li>
+<li>Una vez el usuario realiza el proceso y hace clic en “Regresar al comercio”, éste es enviado a la URL de retorno <code>returnUrl</code> (Atributo especificado al crear la operación).</li>
+<li>Al llegar a tu sitio, con el <code>requestID</code> del registro debes consultar a PlacetoPay el estado de la sesión usando el método <a href="#getrequestinformation">getRequestInformation</a>.</li>
+<li>Ejecuta tu regla de negocio según el estado obtenido.</li>
+<li>De manera asincrónica, PlacetoPay realiza una notificación, del estado final de una sesión, a tu sitio.</li>
+<li>Recomendamos implementar un proceso sonda para resolver aquellas transacciones que no  se resolvieron en los punto 7 y 9.</li>
+</ol>
+<h1 id='librerias'>Librerías</h1><h2 id='instalacion-para-c-sharp'>Instalación para C Sharp</h2><h3 id='donde-obtener-la-libreria'>¿Dónde obtener la librería?</h3>
+<p>Repositorio: SDK .NET Framework 4.5.0 de Web Checkout.</p>
+
+<p><strong>DLL y dependencias:</strong> <br></p>
+
+<p><a href="https://drive.google.com/open?id=1UMy7SibuN3aVlRd4B8oLifCVQwxURzzv">https://drive.google.com/open?id=1UMy7SibuN3aVlRd4B8oLifCVQwxURzzv</a></p>
+<h3 id='que-versiones-soporta'>¿Qué versiones soporta?</h3>
+<p>La versión es estable para la versión 4.5.0</p>
+<h3 id='que-datos-debo-tener-antes-de-iniciar-la-instalacion'>¿Qué datos debo tener antes de iniciar la instalación?</h3>
+<p>PlacetoPay suministra <code>login</code> y <code>trankey</code>, datos que serán usados para la autenticación y relacionar las transacciones al sitio correspondiente.</p>
+<h3 id='agregar-dependencia-en-visual-studio'>Agregar dependencia en Visual Studio</h3>
+<p>Ir al explorador de soluciones, desplegar las opciones del proyecto y luego: <br>
+ Dependencias -&gt; agregar referencia -&gt; examinar -&gt; examinar  -&gt; seleccionar dll -&gt; Aceptar</p>
+<h3 id='como-usar-la-clase'>¿Cómo usar la clase?</h3>
+<p>Configurar instancia PlacetoPay necesaria para autenticarse ante los servicios web de PlacetoPay.</p>
+<pre class="highlight csharp tab-csharp"><code>    <span class="k">using</span> <span class="nn">P2P</span> <span class="p">=</span> <span class="n">PlacetoPay</span><span class="p">.</span><span class="n">Integrations</span><span class="p">.</span><span class="n">Library</span><span class="p">.</span><span class="n">CSharp</span><span class="p">.</span><span class="n">PlacetoPay</span><span class="p">;</span>
+    <span class="n">Gateway</span> <span class="n">gateway</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">P2P</span><span class="p">(</span><span class="n">YOUR_LOGIN</span><span class="p">,</span>
+                              <span class="n">YOUR_TRANKEY</span><span class="p">,</span>
+                              <span class="k">new</span> <span class="nf">Uri</span><span class="p">(</span><span class="s">"URL_INTEGRATION"</span><span class="p">),</span>
+                              <span class="n">Gateway</span><span class="p">.</span><span class="n">TP_SOAP</span> <span class="n">or</span> <span class="n">Gateway</span><span class="p">.</span><span class="n">TP_REST</span><span class="p">);</span>
+</code></pre>
+<p>El parámetro <code>&quot;URL_INTEGRATION&quot;</code> hace referencia al endpoint a usar, los cuales son: <br>
+<strong>Pruebas:</strong> https://test.placetopay.com/redirection/ <br>
+<strong>Producción:</strong> https://secure.placetopay.com/redirection/ <br></p>
+<h3 id='crear-una-nueva-sesion-de-pago-createrequest'>Crear una nueva sesión de pago <code>CreateRequest</code></h3>
+<p>Solicita la creación de la sesión (petición de cobro o suscripción) y retorna el identificador y la URL de procesamiento. <br></p>
+
+<blockquote>
+<p>Ejemplo de llamada:</p>
+</blockquote>
+<pre class="highlight csharp tab-csharp"><code>    <span class="n">Amount</span> <span class="n">amount</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Amount</span><span class="p">(</span><span class="err">'</span><span class="n">PAYMENT_AMOUNT</span><span class="err">'</span><span class="p">);</span>
+    <span class="n">Payment</span> <span class="n">payment</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Payment</span><span class="p">(</span><span class="s">"REFERENCE"</span><span class="p">,</span> <span class="s">"DESCRIPTION"</span><span class="p">,</span> <span class="n">amount</span><span class="p">);</span>
+    <span class="n">RedirectRequest</span> <span class="n">request</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">RedirectRequest</span><span class="p">(</span><span class="n">payment</span><span class="p">,</span>
+        <span class="n">RETURN_URL</span><span class="p">,</span>
+        <span class="n">IP_ADDRESS</span><span class="p">,</span>
+        <span class="n">USER_AGENT</span><span class="p">,</span>
+        <span class="n">EXPIRATION</span><span class="p">);</span>
+
+    <span class="n">RedirectResponse</span> <span class="n">response</span> <span class="p">=</span> <span class="n">gateway</span><span class="p">.</span><span class="nf">Request</span><span class="p">(</span><span class="n">request</span><span class="p">);</span>
+</code></pre>
+<p><strong>Retorno:</strong> <br>
+    Servicio responde una instancia de la clase <code/>RedirectResponse.</code> Verificando el status de la respuesta se puede determinar si se creó la session de pago. <br></p>
+
+<p>Success Response: si el status es igual a <strong>“OK”</strong> <br></p>
+
+<p>Verificar: <code>response.IsSuccessful() // return boolean</code> <br></p>
+
+<p>Error Response: si el status es igual a <strong>“ERROR”</strong> <br></p>
+
+<p>Verificar motivo del error: <code>response.Status.Message // return string</code></p>
+<h3 id='obtenga-informacion-sobre-una-sesion-getrequestinformation'>Obtenga información sobre una sesión <code>(getRequestInformation)</code></h3>
+<p>Obtiene la información de la sesión y transacciones realizadas.</p>
+
+<blockquote>
+<p>Ejemplo de llamada:</p>
+</blockquote>
+<pre class="highlight csharp tab-csharp"><code>    <span class="n">RedirectInformation</span> <span class="n">response</span> <span class="p">=</span> <span class="n">gateway</span><span class="p">.</span><span class="nf">Query</span><span class="p">(</span><span class="n">requestId</span><span class="p">);</span>
+</code></pre>
+<p><strong>Retorno:</strong> <br></p>
+
+<p>Servicio responde una instancia de la clase <code>RedirectInformation</code>. Se puede verificar el status de la sesión a través: <br></p>
+
+<p><code>response.IsSuccessful() // return boolean</code> <br>
+<code>response.IsRejected() // return boolean</code> <br>
+<code>response.IsApproved() // return boolean</code> <br>
+<code>response.Status.status // return boolean</code> <br></p>
+<h3 id='cobro-sin-intervencion-del-usuario-collect'>Cobro sin intervención del usuario (Collect)</h3>
+<p>Permite realizar cobros sin la intervención del usuario usando medios de pago previamente suscritos.</p>
+
+<blockquote>
+<p>Ejemplo de llamada:</p>
+</blockquote>
+<pre class="highlight csharp tab-csharp"><code>    <span class="n">Token</span> <span class="n">token</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Token</span><span class="p">(</span><span class="err">“</span><span class="n">YOUR_TOKEN</span><span class="err">”</span><span class="p">);</span>
+    <span class="n">Instrument</span> <span class="n">instrument</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Instrument</span><span class="p">(</span><span class="n">token</span><span class="p">);</span>
+    <span class="n">Person</span> <span class="n">person</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Person</span><span class="p">(</span><span class="n">dni</span><span class="p">,</span> <span class="n">type</span><span class="p">,</span> <span class="n">Name</span><span class="p">,</span> <span class="n">Surname</span><span class="p">,</span> <span class="n">email</span><span class="p">);</span>
+    <span class="n">Amount</span> <span class="n">amount</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Amount</span><span class="p">(</span><span class="m">1000</span><span class="p">);</span>
+    <span class="n">Payment</span> <span class="n">payment</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Payment</span><span class="p">(</span><span class="s">"123456789"</span><span class="p">,</span> <span class="s">"TEST"</span><span class="p">,</span> <span class="n">amount</span><span class="p">);</span>
+    <span class="n">CollectRequest</span> <span class="n">collectRequest</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">CollectRequest</span><span class="p">(</span><span class="n">person</span><span class="p">,</span>
+                                            <span class="n">payment</span><span class="p">,</span><span class="n">instrument</span><span class="p">);</span>
+    <span class="n">RedirectInformation</span> <span class="n">collect</span> <span class="p">=</span> <span class="k">this</span><span class="p">.</span><span class="n">gateway</span><span class="p">.</span><span class="nf">Collect</span><span class="p">(</span><span class="n">collectRequest</span><span class="p">);</span>
+</code></pre>
+<p><strong>Retorno:</strong> <br>
+Servicio responde una instancia de la clase <code>RedirectInformation</code>. Se puede verificar el status de la sesión a través:<br></p>
+
+<p><code>response.IsSuccessful() // return boolean</code> <br>
+<code>response.IsRejected() // return boolean</code> <br>
+<code>response.IsApproved() // return boolean</code> <br>
+<code>response.Status.status // return boolean</code> <br></p>
+<h3 id='revertir-un-pago-reversepayment'>Revertir un pago <code>(reversePayment)</code></h3>
+<p>Permite revertir un pago aprobado con el código de referencia interna.</p>
+
+<blockquote>
+<p>Ejemplo de llamada:</p>
+</blockquote>
+<pre class="highlight csharp tab-csharp"><code>    <span class="n">ReverseResponse</span> <span class="n">response</span> <span class="p">=</span> <span class="k">this</span><span class="p">.</span><span class="n">gateway</span><span class="p">.</span><span class="nf">Reverse</span><span class="p">(</span><span class="n">requestId</span><span class="p">);</span>
+</code></pre>
+<p><strong>Retorno:</strong><br>
+  Servicio responde una instancia de la clase <code>ReverseResponse</code>. Se puede verificar el status de la sesión a través:<br></p>
+
+<p><code>response.IsSuccessful() // return boolean</code><br>
+   <code>response.Status.status // return boolean</code></p>
+
+<h3 id='leer-respuesta-enviada-a-la-url-de-notificacion-readnotification'>Leer respuesta enviada a la url de notificación <code>(ReadNotification)</code></h3>
+<p>Permite leer la respuesta enviada por parte de PlacetoPay a la Url de notificación del comercio. <br></p>
+
+<blockquote>
+<p>Ejemplo de llamada:</p>
+
+<p>// La notificación enviado por parte de PlacetoPay tiene la siguiente forma.</p>
+</blockquote>
+<pre class="highlight csharp tab-csharp"><code><span class="p">{</span>
+   <span class="s">"status"</span><span class="p">:{</span>
+      <span class="s">"status"</span><span class="p">:</span><span class="s">"APPROVED"</span><span class="p">,</span>
+      <span class="s">"reason"</span><span class="p">:</span><span class="s">"00"</span><span class="p">,</span>
+      <span class="s">"message"</span><span class="p">:</span><span class="s">"Se ha aprobado su pago"</span><span class="p">,</span>
+      <span class="s">"date"</span><span class="p">:</span><span class="s">"2016-10-10T16:39:57-05:00"</span>
+   <span class="p">},</span>
+   <span class="s">"requestId"</span><span class="p">:</span><span class="m">83</span><span class="p">,</span>
+   <span class="s">"reference"</span><span class="p">:</span><span class="s">"TEST_20161010_213937"</span><span class="p">,</span>
+   <span class="s">"signature"</span><span class="p">:</span><span class="s">"8fb4beea130ab3e75a1de956bd0213892e0f6839"</span>
+<span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>// La variable “data” debe ser un json con la estructura mencionada arriba en formato string.</p>
+</blockquote>
+<pre class="highlight csharp tab-csharp"><code><span class="n">Notification</span> <span class="n">notification</span> <span class="p">=</span> <span class="n">_gateway</span><span class="p">.</span><span class="nf">ReadNotification</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+
+   <span class="c1">// Verificar si la notificación es válida</span>
+   <span class="k">if</span> <span class="p">(</span><span class="n">notification</span><span class="p">.</span><span class="nf">isValidNotification</span><span class="p">())</span> <span class="p">{</span>
+       <span class="k">if</span> <span class="p">(</span><span class="n">notification</span><span class="p">.</span><span class="nf">isApproved</span><span class="p">())</span> <span class="p">{</span>
+           <span class="c1">// Liberar el producto</span>
+       <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+           <span class="c1">// Rechazar la orden</span>
+       <span class="p">}</span>
+   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+       <span class="c1">// There was some error or invalid structure</span>
+   <span class="p">}</span>
+</code></pre><h3 id='posibles-errores'>Posibles errores</h3>
+<p>Para cado uno de los objetos de respuesta, al momento de presentarse alguna excepción o problema de conexión se informa en la propiedad  status.</p>
+<h2 id='instalacion-librerias-para-java'>Instalación librerÍas para JAVA</h2>
+<p>Para conectarse con PlacetoPay por medio del servicio de web checkout utilizando java, ingrese al siguiente enlace: <br></p>
+
+<p><a href="https://github.com/placetopay/java-placetopay">https://github.com/placetopay/java-placetopay</a></p>
 <h1 id='autenticacion'>Autenticación</h1><pre class="highlight shell tab-shell"><code>Ejemplo:
     Información proporcionada:
     login <span class="o">=</span> usuarioprueba
@@ -350,7 +676,7 @@ POST /api/session
 </tr>
 <tr>
 <td>tranKey</td>
-<td>Llave transaccional, que está formada por la siguiente operación: Base64(SHA-1(nonce + seed + secretkey)). El nonce dentro de la operación es el original, es decir, el que no está en Base64.</td>
+<td>Llave transaccional, que está formada por la siguiente operación: <code>Base64(SHA-1(nonce + seed + secretkey))</code>. El nonce dentro de la operación es el original, es decir, el que no está en Base64.</td>
 </tr>
 <tr>
 <td>nonce</td>
@@ -358,13 +684,9 @@ POST /api/session
 </tr>
 <tr>
 <td>seed</td>
-<td>Fecha actual, la cual se genera en formato ISO 8601.</td>
+<td>Fecha actual, la cual se genera en formato <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601</a>.</td>
 </tr>
 </tbody></table>
-
-<aside class="warning">
-El <code>seed</code> no puede tener diferencia de más de 5 minutos.
-</aside>
 
 <aside class="notice">
 El login y el secretKey son suministrados por PlacetoPay
@@ -373,9 +695,114 @@ El login y el secretKey son suministrados por PlacetoPay
 <aside class="notice">
 Esta estructura debe de ser enviada en cada petición realizada al servicio
 </aside>
-<h1 id='pago-basico'>Pago básico</h1>
+
+<aside class="warning">
+El <code>seed</code> no puede tener diferencia de más de 5 minutos.
+</aside>
+<h2 id='ejemplos-de-autenticacion'>Ejemplos de autenticación</h2>
+<p><a href="https://github.com/dnetix/redirection" target="_blank" style="text-decoration: none;">
+ <img src="images/php.png" class="logo-lenguaje" alt="PHP">
+</a>
+<a href="https://gist.github.com/dnetix/f37de7864b4efb8249d30e476e379f0a" target="_blank" style="text-decoration: none;">
+<img src="images/java.png" class="logo-lenguaje" alt="JAVA">
+</a>
+<a href="https://gist.github.com/dnetix/c18cc44861c5702d2b8ff2327b031c3e" target="_blank" style="text-decoration: none;">
+<img src="images/c.png" class="logo-lenguaje" alt="C#">
+</a>
+<a href="https://gist.github.com/dnetix/fea3868afe915229c7d140967e4d8519" target="_blank" style="text-decoration: none;">
+<img src="images/node.png" class="logo-lenguaje" alt="NodeJS">
+</a></p>
+
+<p>Todas las solicitudes al web deben ser autenticadas con <a href="https://www.oasis-open.org/committees/download.php/13392/wss-v1.1-spec-pr-UsernameTokenProfile-01.htm">WS Security UsernameToken Profile 1.1</a></p>
+
+<p>Usando <code>PasswordDigest (PasswordDigest = Base64 ( SHA-1 ( nonce + created + tranKey ) ))</code></p>
+<h1 id='errores'>Errores</h1>
 <blockquote>
-<p>Ejemplo para la petición de un pago básico:</p>
+<p>Ejemplo atutenticación fallida:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">{</span>
+    <span class="s2">"status"</span>: <span class="o">{</span>
+        <span class="s2">"status"</span>: <span class="s2">"FAILED"</span>,
+        <span class="s2">"reason"</span>: 401,
+        <span class="s2">"message"</span>: <span class="s2">"Authentication Failed 103"</span>,
+        <span class="s2">"date"</span>: <span class="s2">"2019-03-06T17:08:36-05:00"</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+<p>El servicio de Web CheckOut retorna los códigos de respuesta para la autenticación fallida en el atributo <code>message</code> del objeto <code>status</code>.</p>
+
+<table><thead>
+<tr>
+<th>Código</th>
+<th>Causa</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>100</td>
+<td>UsernameToken no proporcionado (Encabezado de la autorización malformado).</td>
+</tr>
+<tr>
+<td>101</td>
+<td>Identificador de sitio no existe ( Login incorrecto o no se encuentra en el ambiente).</td>
+</tr>
+<tr>
+<td>102</td>
+<td>El hash de TranKey no coincide (Trankey incorrecto o mal formado).</td>
+</tr>
+<tr>
+<td>103</td>
+<td>Fecha de la semilla mayor de 5 minutos.</td>
+</tr>
+<tr>
+<td>104</td>
+<td>Sitio inactivo.</td>
+</tr>
+<tr>
+<td>105</td>
+<td>Sitio expirado.</td>
+</tr>
+<tr>
+<td>106</td>
+<td>Credenciales expiradas.</td>
+</tr>
+<tr>
+<td>107</td>
+<td>Mala definición del UsernameToken (No cumple con el encabezado WSSE).</td>
+</tr>
+<tr>
+<td>200</td>
+<td>Saltar el encabezado de autenticación SOAP.</td>
+</tr>
+<tr>
+<td>10001</td>
+<td>Contacte a Soporte.</td>
+</tr>
+</tbody></table>
+
+<p><aside class="warning">
+Si el error retornado no corresponde a ninguna anteriormente descrito, por favor revise el endpoint de consumo usado.
+</aside>.</p>
+<h2 id='errores-frecuentes'>Errores frecuentes</h2>
+<ul>
+<li><p><strong>Mensaje de error “Autenticación mal formada”</strong> <br><br>
+Se presenta cuando el sistema no detecta que se esté enviando login, tranKey, seed o nonce en la estructura auth enviada, también puede presentarse si se envían estos datos pero de manera incorrecta, es decir sin el parámetro content-type “application/json” de manera que el servidor interpreta la petición como texto en vez de un arreglo de datos.
+Puedes validar esto haciendo la petición a la URL <a href="https://dnetix.co/p2p/client">https://dnetix.co/p2p/client</a> y capturando la respuesta, es una especie de espejo de la petición que te permitirá comprobar los parámetros y el body del mensaje.</p></li>
+<li><p><strong>Error conectando al servicio con el mensaje</strong> <code>ERROR: javax.net.ssl.SSLHandshakeException: Remote host closed connection during handshake</code> <br><br>
+Tus servidores requieren TLSv1.2 para recibir la solicitud, debido a la norma PCI. Por favor, revisa el cifrado y el protocolo utilizado para conectar al servidor. Si usas Java, ten presente que solo las versiones después de la 8 tienen soporte completo.</p></li>
+<li><p><strong>SoapFault responde con el mensaje &quot;Authentication Failed 103&quot;</strong> <br><br> 
+En el proceso de autenticación nosotros revisamos el campo <code>Created</code>, este campo debe estar en el tiempo GMT o el tiempo local usando el tiempo de zona. Si obtienes esta respuesta, se debe a que tu tiempo no es preciso con el tiempo real. Nosotros solo permitimos 5 minutos de diferencia entre los tiempos.
+Puedes usar NTP para mantener la precisión del reloj. </p></li>
+<li><p><strong>Dando los mismos valores EXACTOS que en los ejemplos anteriores a la <code>BASE64(SHA1($Nonce + $Created . $tranKey))</code> estoy obteniendo un <code>password digest</code> diferente.</strong> <br><br> 
+Mantén en mente que BASE64 debería ser para el raw output  de la SHA1 y de acuerdo con todos los lenguajes de programación este puede ser requerido para configurar esta opción, por ejemplo.
+En PHP base64_encode(sha1( … , true)) este parametro retornaria el <code>raw output</code> para el <code>sHA1 algorithm</code></p></li>
+</ul>
+<h1 id='metodos-de-interfaz-de-web-checkout'>Métodos de Interfaz de Web CheckOut</h1>
+<p>El web service contiene diferentes métodos donde se ejecutan operaciones de tipo solicitud - respuesta, estas requieren para cada una, parámetros de ingreso que son usados por las estructuras de datos con las que se procesan información para posteriormente retornar una respuesta.</p>
+
+<p>Si deseas ejecutar un método rápidamente puedes usar: <a href="https://dnetix.co/p2p/client">https://dnetix.co/p2p/client</a></p>
+<h2 id='createrequest'>CreateRequest</h2>
+<blockquote>
+<p>Ejemplo para la petición de un pago:</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>POST /api/session
 
@@ -386,6 +813,15 @@ Esta estructura debe de ser enviada en cada petición realizada al servicio
     <span class="s2">"nonce"</span>: <span class="s2">"TTJSa05UVmtNR000TlRrM1pqQTRNV1EREprWkRVMU9EZz0="</span>,
     <span class="s2">"seed"</span>: <span class="s2">"2019-04-25T18:17:23-04:00"</span>
   <span class="o">}</span>,
+    <span class="s2">"locale"</span>: <span class="s2">"en_CO"</span>,
+    <span class="s2">"buyer"</span>: <span class="o">{</span>
+      <span class="s2">"name"</span>: <span class="s2">"Deion"</span>,
+      <span class="s2">"surname"</span>: <span class="s2">"Ondricka"</span>,
+      <span class="s2">"email"</span>: <span class="s2">"dnetix@yopmail.com"</span>,
+      <span class="s2">"document"</span>: <span class="s2">"1040035000"</span>,
+      <span class="s2">"documentType"</span>: <span class="s2">"CC"</span>,
+      <span class="s2">"mobile"</span>: 3006108300
+  <span class="o">}</span>,
 
     <span class="s2">"payment"</span>: <span class="o">{</span>
         <span class="s2">"reference"</span>: <span class="s2">"3210"</span>,
@@ -393,7 +829,8 @@ Esta estructura debe de ser enviada en cada petición realizada al servicio
         <span class="s2">"amount"</span>: <span class="o">{</span>
             <span class="s2">"currency"</span>: <span class="s2">"COP"</span>,
             <span class="s2">"total"</span>: <span class="s2">"10000"</span>
-        <span class="o">}</span>
+        <span class="o">}</span>,
+      <span class="s2">"allowPartial"</span>:false
       <span class="o">}</span>,
 
     <span class="s2">"expiration"</span>: <span class="s2">"2019-03-05T00:00:00-05:00"</span>,
@@ -402,134 +839,316 @@ Esta estructura debe de ser enviada en cada petición realizada al servicio
     <span class="s2">"userAgent"</span>: <span class="s2">"PlacetoPay Sandbox"</span>
 <span class="o">}</span>
 </code></pre>
-<p>Cuando el usuario selecciona pagar en tu sitio, inicia el flujo del servicio Web Checkout, donde su sitio envía al EndPoint de procesamiento <code>(Ej: https://test.placetopay.com/redirection/api/session/)</code>, mediante el método POST los parametros necesarios para crear la sesión de pago.</p>
+<p>Solicita la creación de la sesión (petición de cobro o suscripción) y retorna el identificador y la URL de procesamiento. <br> <br></p>
 
-<p>En la estructura se deben tener en cuenta algunos parámetros que se manejan dependiendo del tipo de transacción (<a href="#pago-basico">Pago básico</a>, <a href="#pago-mixto">mixto</a>, o <a href="#pago-recurrente">recurrente</a>):</p>
-
-<p>La siguiente información es necesaria para consumir el <code>CreateRequest</code>:</p>
-<h2 id='payment'>Payment</h2>
-<blockquote>
-<p>Ejemplo de una estructura payment:</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code><span class="o">{</span>
-...
-    <span class="s2">"payment"</span>: <span class="o">{</span>
-        <span class="s2">"reference"</span>: <span class="s2">"3210"</span>,
-        <span class="s2">"description"</span>: <span class="s2">"Pago básico de prueba 04032019"</span>,
-        <span class="s2">"amount"</span>: <span class="o">{</span>
-            <span class="s2">"currency"</span>: <span class="s2">"COP"</span>,
-            <span class="s2">"total"</span>: <span class="s2">"10000"</span>
-        <span class="o">}</span>
-      <span class="o">}</span>,
-...
-<span class="o">}</span>
-</code></pre>
-<p>Estructura que contiene la información acerca del pago de la transacción requerida al servicio web.</p>
+<p>PARÁMETROS</p>
 
 <table><thead>
 <tr>
-<th>Parametro</th>
-<th>Tipo</th>
-<th>Descripción</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>reference</td>
-<td>String(32)</td>
-<td>Esta debe ser única en la solicitud de un pago.</td>
-</tr>
-<tr>
-<td>description</td>
-<td>String</td>
-<td>Permite identificar la descripción del pago.</td>
-</tr>
-<tr>
-<td>amount</td>
-<td><a href="#amount">Amount</a></td>
-<td>Objeto que contiene el monto a ser cobrado.</td>
-</tr>
-</tbody></table>
-<h2 id='amount'>Amount<br></h2>
-<blockquote>
-<p>Ejemplo de una esrtructura amount para un pago básico:</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code><span class="o">{</span>
-  ...
-        <span class="s2">"amount"</span>: <span class="o">{</span>
-            <span class="s2">"currency"</span>: <span class="s2">"COP"</span>,
-            <span class="s2">"total"</span>: <span class="s2">"10000"</span>
-        <span class="o">}</span>
-  ...
-<span class="o">}</span>
-</code></pre>
-<p>Contiene diferentes atributos que determinan el contenido del valor total, incluyendo los impuestos y detalles. </p>
-
-<table><thead>
-<tr>
-<th>Parametro</th>
-<th>Tipo</th>
-<th>Descripción</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>currency</td>
-<td>String</td>
-<td>Permite identificar la moneda en que se va realizar un pago, acorde al <a href="https://www.currency-iso.org/dam/downloads/lists/list_one.xml">ISO 4217</a> (Alphabetic).</td>
-</tr>
-<tr>
-<td>total</td>
-<td>Decimal</td>
-<td>Permite identificar el monto total que se va a pagar.</td>
-</tr>
-<tr>
-<td>taxes</td>
-<td>TaxDetail[]</td>
-<td>Descrpción de los impuestos.</td>
-</tr>
-<tr>
-<td>details</td>
-<td>AmountDetail[]</td>
-<td>Descripción del importe total.</td>
+<td>payload <code>Opcional</code></td>
+<td><a href="#redirectrequest">RedirectRequest</a></td>
+<td>Información sobre el pago requerido</td>
 </tr>
 </tbody></table>
 
-<p>Atributos que permiten generar una petición de redirección:</p>
+<p><strong>Retorna</strong> <br>
+   <strong><a href="#redirectresponse">RedirectResponse</a>:</strong> Es un objeto con la información de redirección.</p>
+<h2 id='getrequestinformation'>GetRequestInformation</h2>
+<blockquote>
+<p>Ejemplo para obtener información de una petición:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>POST /api/session/REQUEST_ID
+Remplace el REQUEST_ID con el valor devuelto en la respuesta de la petición de pago.
+
+<span class="o">{</span>
+  <span class="s2">"auth"</span>: <span class="o">{</span>
+    <span class="s2">"login"</span>: <span class="s2">"usuarioprueba"</span>,
+    <span class="s2">"tranKey"</span>: <span class="s2">"T0O+x3gNlQUf0iBxEuenPvBPlWs="</span>,
+    <span class="s2">"nonce"</span>: <span class="s2">"YzkwODVlODJkZWJiODJiMDk1NTU3OTA5OGJlM2Q3Y2E="</span>,
+    <span class="s2">"seed"</span>: <span class="s2">"2019-04-25T18:17:23-04:00"</span>,
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+<p>Obtiene la información de la sesión y transacciones realizadas. <br> <br> </p>
+
+<p>PARÁMETROS</p>
 
 <table><thead>
 <tr>
-<th>Parametro</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>requestId <code>Requerido</code></td>
+<td>int</td>
+<td>Identificador de la sesión a consultar.</td>
+</tr>
+</tbody></table>
+
+<p><strong>Retorna</strong> <br>
+  <strong><a href="#redirectinformation">RedirectInformation</a>:</strong> Información del estado de la transacción</p>
+<h2 id='reversepayment'>ReversePayment</h2>
+<blockquote>
+<p>Ejemplo para revertir un pago aprobado:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>POST /api/reverse
+<span class="o">{</span>
+    <span class="s2">"auth"</span>: <span class="o">{</span>
+    <span class="s2">"login"</span>: <span class="s2">"usuarioprueba"</span>,
+    <span class="s2">"tranKey"</span>: <span class="s2">"jsHJzM3+XG754wXh+aBvi70D9/4="</span>,
+    <span class="s2">"nonce"</span>: <span class="s2">"TTJSa05UVmtNR000TlRrM1pqQTRNV1EREprWkRVMU9EZz0="</span>,
+    <span class="s2">"seed"</span>: <span class="s2">"2019-04-25T18:17:23-04:00"</span>
+    <span class="o">}</span>,
+    <span class="s2">"internalReference"</span>: <span class="s2">"1468647381"</span>
+<span class="o">}</span>
+</code></pre>
+<p>Permite revertir un pago aprobado con el código de referencia interna. <br> <br></p>
+
+<p>PARÁMETROS </p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>internalReference <code>Requerido</code></td>
+<td>int</td>
+<td>Referencia interna de la transacción a reversar que se encuentra en el listado de transacciones del getRequestInformation (payment).</td>
+</tr>
+</tbody></table>
+
+<p><strong>Retorna</strong> <br>
+<strong><a href="#reverseresponse">ReverseResponse</a>:</strong> Información de estado de la operación.</p>
+<h2 id='collect'>Collect</h2>
+<p>Permite realizar cobros sin la intervención del usuario usando medios de pago previamente suscritos.<br><br></p>
+
+<p>PARÁMETROS</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>payload <code>Requerido</code></td>
+<td><a href="#collectrequest">CollectRequest</a></td>
+<td>Datos del pago, pagador y medio de pago a implementar como se describe en la estructura <code>CollectRequest</code>.</td>
+</tr>
+</tbody></table>
+
+<p><strong>Retorna</strong> <br>
+<strong><a href="#redirectinformation">RedirectInformation</a>:</strong> Información de estado de la operación.</p>
+<h1 id='estructuras-de-informacion'>Estructuras de información</h1>
+<p>Esta sección describe cada una de las estructuras de datos usada por los métodos de web service.</p>
+<h2 id='redirectrequest'>RedirectRequest</h2>
+<blockquote>
+<p>Ejmeplo de una estructura RedirectRequest para la solicitud de un pago:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>    ...
+       <span class="o">{</span>
+        <span class="s2">"locale"</span>: <span class="s2">"es_CO"</span>,
+        <span class="s2">"buyer"</span>: <span class="o">{</span>
+            <span class="s2">"name"</span>: <span class="s2">"Prof. General Hoppe"</span>,
+            <span class="s2">"surname"</span>: <span class="s2">"Kuhic"</span>,
+            <span class="s2">"email"</span>: <span class="s2">"ejohns@yahoo.com"</span>,
+            <span class="s2">"documentType"</span>: <span class="s2">"CC"</span>,
+            <span class="s2">"document"</span>: <span class="s2">"4216523744"</span>,
+            <span class="s2">"mobile"</span>: <span class="s2">"3006108300"</span>,
+            <span class="s2">"address"</span>: <span class="o">{</span>
+                <span class="s2">"street"</span>: <span class="s2">"27791 Kyle Vista"</span>,
+                <span class="s2">"city"</span>: <span class="s2">"Metzton"</span>,
+                <span class="s2">"state"</span>: <span class="s2">"Antioquia"</span>,
+                <span class="s2">"postalCode"</span>: <span class="s2">"46366-1132"</span>,
+                <span class="s2">"country"</span>: <span class="s2">"US"</span>,
+                <span class="s2">"phone"</span>: <span class="s2">"438-475-0498 x513"</span>
+            <span class="o">}</span>
+        <span class="o">}</span>,
+        <span class="s2">"payment"</span>: <span class="o">{</span>
+            <span class="s2">"reference"</span>: <span class="s2">"TEST_20190517_161956"</span>,
+            <span class="s2">"description"</span>: <span class="s2">"Et alias quia nisi sequi."</span>,
+            <span class="s2">"amount"</span>: <span class="o">{</span>
+            <span class="s2">"taxes"</span>: <span class="o">[</span>
+                <span class="o">{</span>
+                <span class="s2">"kind"</span>: <span class="s2">"ice"</span>,
+                <span class="s2">"amount"</span>: 2.76,
+                <span class="s2">"base"</span>: 23
+                <span class="o">}</span>,
+                <span class="o">{</span>
+                <span class="s2">"kind"</span>: <span class="s2">"valueAddedTax"</span>,
+                <span class="s2">"amount"</span>: 4.37,
+                <span class="s2">"base"</span>: 23
+                <span class="o">}</span>
+            <span class="o">]</span>,
+            <span class="s2">"details"</span>: <span class="o">[</span>
+                <span class="o">{</span>
+                <span class="s2">"kind"</span>: <span class="s2">"shipping"</span>,
+                <span class="s2">"amount"</span>: 1.15
+                <span class="o">}</span>,
+                <span class="o">{</span>
+                <span class="s2">"kind"</span>: <span class="s2">"tip"</span>,
+                <span class="s2">"amount"</span>: 1.15
+                <span class="o">}</span>,
+                <span class="o">{</span>
+                <span class="s2">"kind"</span>: <span class="s2">"subtotal"</span>,
+                <span class="s2">"amount"</span>: 23
+                <span class="o">}</span>
+            <span class="o">]</span>,
+            <span class="s2">"currency"</span>: <span class="s2">"USD"</span>,
+            <span class="s2">"total"</span>: 32.43
+            <span class="o">}</span>,
+            <span class="s2">"items"</span>: <span class="o">[</span>
+            <span class="o">{</span>
+                <span class="s2">"sku"</span>: 62762,
+                <span class="s2">"name"</span>: <span class="s2">"Placeat consequuntur."</span>,
+                <span class="s2">"category"</span>: <span class="s2">"physical"</span>,
+                <span class="s2">"qty"</span>: 1,
+                <span class="s2">"price"</span>: 23,
+                <span class="s2">"tax"</span>: 4.37
+            <span class="o">}</span>
+            <span class="o">]</span>,
+            <span class="s2">"recurring_remove"</span>: <span class="o">{</span>
+            <span class="s2">"periodicity"</span>: <span class="s2">"D"</span>,
+            <span class="s2">"interval"</span>: 7,
+            <span class="s2">"nextPayment"</span>: <span class="s2">"2019-05-19"</span>,
+            <span class="s2">"maxPeriods"</span>: 4,
+            <span class="s2">"notificationUrl"</span>: <span class="s2">"https://dnetix.co/ping/recurring_notification"</span>
+            <span class="o">}</span>,
+            <span class="s2">"shipping"</span>: <span class="o">{</span>
+            <span class="s2">"name"</span>: <span class="s2">"Prof. General Hoppe"</span>,
+            <span class="s2">"surname"</span>: <span class="s2">"Kuhic"</span>,
+            <span class="s2">"email"</span>: <span class="s2">"ejohns@yahoo.com"</span>,
+            <span class="s2">"documentType"</span>: <span class="s2">"CC"</span>,
+            <span class="s2">"document"</span>: <span class="s2">"4216523744"</span>,
+            <span class="s2">"mobile"</span>: <span class="s2">"3006108300"</span>,
+            <span class="s2">"address"</span>: <span class="o">{</span>
+                <span class="s2">"street"</span>: <span class="s2">"27791 Kyle Vista"</span>,
+                <span class="s2">"city"</span>: <span class="s2">"Metzton"</span>,
+                <span class="s2">"state"</span>: <span class="s2">"Antioquia"</span>,
+                <span class="s2">"postalCode"</span>: <span class="s2">"46366-1132"</span>,
+                <span class="s2">"country"</span>: <span class="s2">"US"</span>,
+                <span class="s2">"phone"</span>: <span class="s2">"438-475-0498 x513"</span>
+            <span class="o">}</span>
+            <span class="o">}</span>,
+            <span class="s2">"allowPartial"</span>: <span class="nb">false</span>
+        <span class="o">}</span>,
+        <span class="s2">"expiration"</span>: <span class="s2">"2019-05-18T16:19:56-05:00"</span>,
+        <span class="s2">"ipAddress"</span>: <span class="s2">"190.85.82.130"</span>,
+        <span class="s2">"userAgent"</span>: <span class="s2">"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36"</span>,
+        <span class="s2">"returnUrl"</span>: <span class="s2">"https://dnetix.co/p2p/client"</span>,
+        <span class="s2">"cancelUrl"</span>: <span class="s2">"https://dnetix.co"</span>,
+        <span class="s2">"skipResult"</span>: <span class="nb">false</span>,
+        <span class="s2">"noBuyerFill"</span>: <span class="nb">false</span>,
+        <span class="s2">"captureAddress"</span>: <span class="nb">false</span>,
+        <span class="s2">"paymentMethod"</span>: null,
+        <span class="s2">"fields"</span>: <span class="o">[</span>
+            <span class="o">{</span>
+            <span class="s2">"keyword"</span>: <span class="s2">"Redeem Code"</span>,
+            <span class="s2">"value"</span>: 226931,
+            <span class="s2">"displayOn"</span>: <span class="s2">"payment"</span>
+            <span class="o">}</span>
+        <span class="o">]</span>,
+    ...    
+</code></pre>
+<p>Estructura que contiene toda la información acerca de la transacción para ser procesada. <br><br></p>
+
+<p>ATRIBUTOS</p>
+
+<table><thead>
+<tr>
+<th>Nombre</th>
 <th>Tipo</th>
 <th>Descripción</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>expiration</td>
-<td>DateTime</td>
+<td>locale <code>Opcional</code></td>
+<td>string</td>
+<td>Definido con los códigos ISO 639 (language) y ISO 3166-1 alpha-2 (2-letras del país). <code>ej. en_US, es_CO</code></td>
+</tr>
+<tr>
+<td>payer <code>Opcional</code></td>
+<td><a href="#person">Person</a></td>
+<td>Información del ordenante, si establece este objeto, los datos del pagador utilizarán esta información.</td>
+</tr>
+<tr>
+<td>buyer <code>Opcional</code></td>
+<td><a href="#person">Person</a></td>
+<td>Información del comprador en la transacción.</td>
+</tr>
+<tr>
+<td>payment <code>Opcional</code></td>
+<td><a href="#paymentrequest">PaymentRequest</a></td>
+<td>Objeto de pago cuando necesite solicitar un cobro.</td>
+</tr>
+<tr>
+<td>subscription <code>Opcional</code></td>
+<td><a href="#subscriptionrequest">SubscriptionRequest</a></td>
+<td>Objeto de suscripción utilizado cuando se necesita un token.</td>
+</tr>
+<tr>
+<td>fields <code>Opcional</code></td>
+<td><a href="#namevaluepair">NameValuePair[]</a></td>
+<td>Información adicional relacionada con la solicitud que el comercio requiere para guardar con la transacción.</td>
+</tr>
+<tr>
+<td>paymentMethod <code>Opcional</code></td>
+<td>string</td>
+<td>Forzar el medio de pago en la interfaz de redirección, los códigos aceptados son los de la lista. Si necesita más de uno separarlos con coma. <code>ej. <em>ATH</em>,<em>PSE</em>,CR_VS</code></td>
+</tr>
+<tr>
+<td>expiration <code>Requerido</code></td>
+<td>dateTime</td>
 <td>Fecha de expiración de una solicitud, el usuario debe terminar el proceso antes de esta fecha. i.e. 2019-03-05T00:00:00-05:00.</td>
 </tr>
 <tr>
-<td>returnurl</td>
-<td>String</td>
+<td>returnUrl <code>Requerido</code></td>
+<td>string</td>
 <td>URL de retorno es utilizada para redirigir al usuario una vez termina la operación de pago.</td>
 </tr>
 <tr>
-<td>ipAddress</td>
-<td>String</td>
+<td>cancelUrl</td>
+<td>string</td>
+<td>URL para retornar cuando el cliente aborte la operación.</td>
+</tr>
+<tr>
+<td>ipAddress <code>Requerido</code></td>
+<td>string</td>
 <td>Dirección IP del usuario.</td>
 </tr>
 <tr>
-<td>userAgent</td>
-<td>String</td>
+<td>userAgent <code>Requerido</code></td>
+<td>string</td>
 <td>Agente de usuario informado por el usuario.</td>
+</tr>
+<tr>
+<td>skipResult <code>Opcional</code></td>
+<td>bool</td>
+<td>Si se envía el parámetro como true se omite la pantalla del resultado en redirección y una vez aprobado el pago regresa al comercio automaticamente.</td>
+</tr>
+<tr>
+<td>noBuyerFill <code>Opcional</code></td>
+<td>bool</td>
+<td>Por defecto se llenan los datos que se piden en redirección con los del comprador (buyer) enviados, si se envía como true se omite este autocompletado automático.</td>
 </tr>
 </tbody></table>
 
-<aside class="notice">
-En el returnUrl se recomienda enviar en la URL un dato con el cual el sitio pueda identificar el registro por ejemplo: <code>https://mysite.com/response/{reference}</code>.
-</aside>
+<p><strong>Retorna:</strong> <a href="#redirectresponse">RedirectResponse</a></p>
 <h2 id='redirectresponse'>RedirectResponse</h2>
 <blockquote>
-<p>Ejemplo de una estructura RedirectResponse con respuesta aprobada en una solicitud de autenticación:</p>
+<p>Ejemplo de una estructura RedirectResponse con respuesta aprobada en una solicitud de pago con autenticación:</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="o">{</span>
     <span class="s2">"status"</span>: <span class="o">{</span>
@@ -542,7 +1161,9 @@ En el returnUrl se recomienda enviar en la URL un dato con el cual el sitio pued
     <span class="s2">"processUrl"</span>: <span class="s2">"https://test.placetopay.com/redirection/session/181348/43d83d36aa46de5f993aafb9b3e0be48"</span>
 <span class="o">}</span>
 </code></pre>
-<p>Estructura que contiene la petición de respuesta inicial desde el método <code>createRequest.</code></p>
+<p>Estructura que contiene la respuesta inicial desde el método <a href="#createrequest">createRequest</a>. <br><br></p>
+
+<p>ATRIBUTOS</p>
 
 <table><thead>
 <tr>
@@ -552,19 +1173,433 @@ En el returnUrl se recomienda enviar en la URL un dato con el cual el sitio pued
 </tr>
 </thead><tbody>
 <tr>
-<td>status</td>
+<td>status <code>Requerido</code></td>
 <td><a href="#status">Status</a></td>
 <td>Estructura que contiene el estado de la solicitud de pago.</td>
 </tr>
 <tr>
-<td>requestId</td>
+<td>requestId <code>Opcional</code></td>
 <td>Int</td>
 <td>Referencia única de la sesión de pago.</td>
 </tr>
 <tr>
-<td>processUrl</td>
+<td>processUrl <code>Opcional</code></td>
 <td>String</td>
 <td>URL donde se redirecciona al usuario para completar el proceso de pago.</td>
+</tr>
+</tbody></table>
+<h2 id='redirectinformation'>RedirectInformation</h2>
+<p>Estructura de respuesta a una solicitud para una información de transacción. <br><br></p>
+
+<p>ATRIBUTOS</p>
+
+<table><thead>
+<tr>
+<th>Nombre</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>status <code>Requerido</code></td>
+<td><a href="#status">Status</a></td>
+<td>Estado de esta solicitud, debe observar el estado interno de cada objeto.</td>
+</tr>
+<tr>
+<td>request <code>Opcional</code></td>
+<td><a href="#redirectrequest">RedirectRequest</a></td>
+<td>Información con la solicitud original.</td>
+</tr>
+<tr>
+<td>payment <code>Opcional</code></td>
+<td><a href="#transaction">Transaction[]</a></td>
+<td>Información relacionada con el pago si este fue solicitado.</td>
+</tr>
+<tr>
+<td>subscription <code>Opcional</code></td>
+<td><a href="#subscriptionresponse">SubscriptionResponse</a></td>
+<td>Información relacionado con la suscripción si esta fue solicitada.</td>
+</tr>
+</tbody></table>
+<h2 id='reverseresponse'>ReverseResponse</h2>
+<p>Estructura de respuesta a una solicitud de pago reversado. <br><br></p>
+
+<p>ATRIBUTOS</p>
+
+<table><thead>
+<tr>
+<th>Nombre</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>status <code>Requerido</code></td>
+<td><a href="#status">Status</a></td>
+<td>Estado de la solicitud será APROBADO si se ha realizado el reverso de lo contrario puede ser RECHAZADA.</td>
+</tr>
+<tr>
+<td>payment <code>Opcional</code></td>
+<td><a href="#transaction">Transaction</a></td>
+<td>Si el reverso fue exitoso, se almacena como una nueva transacción.</td>
+</tr>
+</tbody></table>
+<h2 id='person'>Person</h2>
+<p>Estructura que refleja la información de una persona involucrada en una transacción. <br><br></p>
+
+<p>ATRIBUTOS</p>
+
+<table><thead>
+<tr>
+<th>Parametro</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>documentType <code>Opcional</code></td>
+<td><a href="#tipos-de-documento">DocumentType</a></td>
+<td>Tipo de identificación del usuario pagador.</td>
+</tr>
+<tr>
+<td>document</td>
+<td>String</td>
+<td>Identificación.</td>
+</tr>
+<tr>
+<td>name <code>Requerido</code></td>
+<td>String</td>
+<td>Nombres de la persona.</td>
+</tr>
+<tr>
+<td>surname <code>Opcional</code></td>
+<td>String</td>
+<td>Apellidos de la persona.</td>
+</tr>
+<tr>
+<td>company <code>Opcional</code></td>
+<td>String</td>
+<td>Nombre de la empresa en la que trabaja o representa.</td>
+</tr>
+<tr>
+<td>email <code>Requerido</code></td>
+<td>String</td>
+<td>Correo electrónico de la persona.</td>
+</tr>
+<tr>
+<td>address <code>Opcional</code></td>
+<td><a href="#address">Address</a></td>
+<td>Información completa de la dirección.</td>
+</tr>
+<tr>
+<td>mobile <code>Opcional</code></td>
+<td><a href="#phonenumbertype">PhoneNumberType</a></td>
+<td>Número celular, el <code>PhoneNumberType</code> restringe la longitud del número de teléfono de la cadena a 30 caracteres.</td>
+</tr>
+</tbody></table>
+<h2 id='paymentrequest'>PaymentRequest</h2>
+<blockquote>
+<p>Ejemplo de una estructura payment para la solicitud de un pago:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>   ...
+    <span class="s2">"payment"</span>: <span class="o">{</span>
+            <span class="s2">"reference"</span>: <span class="s2">"TEST_20190517_135449"</span>,
+            <span class="s2">"description"</span>: <span class="s2">"Et est suscipit fugit possimus."</span>,
+            <span class="s2">"amount"</span>: <span class="o">{</span>
+            <span class="s2">"taxes"</span>: <span class="o">[</span>
+                <span class="o">{</span>
+                <span class="s2">"kind"</span>: <span class="s2">"ice"</span>,
+                <span class="s2">"amount"</span>: 1.56,
+                <span class="s2">"base"</span>: 13
+                <span class="o">}</span>,
+                <span class="o">{</span>
+                <span class="s2">"kind"</span>: <span class="s2">"valueAddedTax"</span>,
+                <span class="s2">"amount"</span>: 2.47,
+                <span class="s2">"base"</span>: 13
+                <span class="o">}</span>
+            <span class="o">]</span>,
+            <span class="s2">"details"</span>: <span class="o">[</span>
+                <span class="o">{</span>
+                <span class="s2">"kind"</span>: <span class="s2">"shipping"</span>,
+                <span class="s2">"amount"</span>: 0.65
+                <span class="o">}</span>,
+                <span class="o">{</span>
+                <span class="s2">"kind"</span>: <span class="s2">"tip"</span>,
+                <span class="s2">"amount"</span>: 0.65
+                <span class="o">}</span>,
+                <span class="o">{</span>
+                <span class="s2">"kind"</span>: <span class="s2">"subtotal"</span>,
+                <span class="s2">"amount"</span>: 13
+                <span class="o">}</span>
+            <span class="o">]</span>,
+            <span class="s2">"currency"</span>: <span class="s2">"USD"</span>,
+            <span class="s2">"total"</span>: 18.33
+            <span class="o">}</span>,
+            <span class="s2">"items"</span>: <span class="o">[</span>
+            <span class="o">{</span>
+                <span class="s2">"sku"</span>: 73131,
+                <span class="s2">"name"</span>: <span class="s2">"Veniam quia."</span>,
+                <span class="s2">"category"</span>: <span class="s2">"physical"</span>,
+                <span class="s2">"qty"</span>: 1,
+                <span class="s2">"price"</span>: 13,
+                <span class="s2">"tax"</span>: 2.47
+            <span class="o">}</span>
+            <span class="o">]</span>,
+            <span class="s2">"recurring_remove"</span>: <span class="o">{</span>
+            <span class="s2">"periodicity"</span>: <span class="s2">"D"</span>,
+            <span class="s2">"interval"</span>: 7,
+            <span class="s2">"nextPayment"</span>: <span class="s2">"2019-05-19"</span>,
+            <span class="s2">"maxPeriods"</span>: 4,
+            <span class="s2">"notificationUrl"</span>: <span class="s2">"https://dnetix.co/ping/recurring_notification"</span>
+            <span class="o">}</span>,
+            <span class="s2">"shipping"</span>: <span class="o">{</span>
+            <span class="s2">"name"</span>: <span class="s2">"Miss Fanny Jacobson"</span>,
+            <span class="s2">"surname"</span>: <span class="s2">"Turcotte"</span>,
+            <span class="s2">"email"</span>: <span class="s2">"lisandro69@yahoo.com"</span>,
+            <span class="s2">"documentType"</span>: <span class="s2">"CC"</span>,
+            <span class="s2">"document"</span>: <span class="s2">"8792527177"</span>,
+            <span class="s2">"mobile"</span>: <span class="s2">"3006108300"</span>,
+            <span class="s2">"address"</span>: <span class="o">{</span>
+                <span class="s2">"street"</span>: <span class="s2">"44669 Lowe Lakes Apt. 468"</span>,
+                <span class="s2">"city"</span>: <span class="s2">"Port Emileview"</span>,
+                <span class="s2">"state"</span>: <span class="s2">"Antioquia"</span>,
+                <span class="s2">"postalCode"</span>: <span class="s2">"00555"</span>,
+                <span class="s2">"country"</span>: <span class="s2">"US"</span>,
+                <span class="s2">"phone"</span>: <span class="s2">"1-868-319-9048"</span>
+            <span class="o">}</span>
+            <span class="o">}</span>,
+            <span class="s2">"allowPartial"</span>: <span class="nb">false</span>
+        <span class="o">}</span>,
+        <span class="s2">"expiration"</span>: <span class="s2">"2019-05-18T13:54:49-05:00"</span>,
+        <span class="s2">"ipAddress"</span>: <span class="s2">"190.85.82.130"</span>,
+        <span class="s2">"userAgent"</span>: <span class="s2">"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 
+                      (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36"</span>,
+        <span class="s2">"returnUrl"</span>: <span class="s2">"https://dnetix.co/p2p/client"</span>,
+        <span class="s2">"cancelUrl"</span>: <span class="s2">"https://dnetix.co"</span>,
+        <span class="s2">"skipResult"</span>: <span class="nb">false</span>,
+        <span class="s2">"noBuyerFill"</span>: <span class="nb">false</span>,
+        <span class="s2">"captureAddress"</span>: <span class="nb">false</span>,
+        <span class="s2">"paymentMethod"</span>: null,
+        <span class="s2">"fields"</span>: <span class="o">[</span>
+            <span class="o">{</span>
+            <span class="s2">"keyword"</span>: <span class="s2">"Redeem Code"</span>,
+            <span class="s2">"value"</span>: 754100,
+            <span class="s2">"displayOn"</span>: <span class="s2">"payment"</span>
+            <span class="o">}</span>
+        <span class="o">]</span>,
+    ...
+</code></pre>
+<p>Estructura que contiene la información acerca del pago de la transacción requerida al servicio web. <br><br></p>
+
+<p>ATRIBUTOS</p>
+
+<table><thead>
+<tr>
+<th>Nombre</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>reference <code>Requerido</code></td>
+<td>string(32)</td>
+<td>Única referencia para la solicitud de pago.</td>
+</tr>
+<tr>
+<td>description <code>Opcional</code></td>
+<td>string</td>
+<td>Descripción de la cuenta.</td>
+</tr>
+<tr>
+<td>amount <code>Requerido</code></td>
+<td><a href="#amount">Amount</a></td>
+<td>Objeto que contiene el monto a ser cobrado.</td>
+</tr>
+<tr>
+<td>allowPartial <code>Requerido</code></td>
+<td>bool</td>
+<td>Define si el monto a ser cobrado puede ser parcial.</td>
+</tr>
+<tr>
+<td>shipping <code>Opcional</code></td>
+<td><a href="#person">Person</a></td>
+<td>Información de la persona quien recibe el producto o servicio en la transacción.</td>
+</tr>
+<tr>
+<td>items <code>Opcional</code></td>
+<td><a href="#items">Items</a></td>
+<td>Productos relacionados con esta solicitud de pago.</td>
+</tr>
+<tr>
+<td>fields <code>Opcional</code></td>
+<td><a href="#namevaluepair">NameValuePair[]</a></td>
+<td>Información adicional relacionada con la solicitud de pago que el comercio requiere guardar con la transacción.</td>
+</tr>
+<tr>
+<td>recurring <code>Opcional</code></td>
+<td><a href="#recurring">Recurring</a></td>
+<td>Información recurrente cuando PlacetoPay procesa un pago recurrente.</td>
+</tr>
+<tr>
+<td>subscribe <code>Opcional</code></td>
+<td>bool</td>
+<td>Permite solicitar un proceso de cobro y suscripción en la misma sesión.</td>
+</tr>
+</tbody></table>
+<h2 id='subscriptionrequest'>SubscriptionRequest</h2>
+<p>Estructura que contiene la información relacionada con una solicitud de suscripción para obtener un Token. <br><br></p>
+
+<p>ATRIBUTOS</p>
+
+<table><thead>
+<tr>
+<th>Nombre</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>reference <code>Requerido</code></td>
+<td>string</td>
+<td>Referencia única para la solicitud de suscripción</td>
+</tr>
+<tr>
+<td>description <code>Opcional</code></td>
+<td>string</td>
+<td>Descripción de la suscripción.</td>
+</tr>
+<tr>
+<td>fields <code>Opcional</code></td>
+<td><a href="#namevaluepair">NameValuePair[]</a></td>
+<td>Información adicional relacionada con la suscripción.</td>
+</tr>
+</tbody></table>
+
+<p><strong>Retorna:</strong> <a href="#subscriptionresponse">SubscriptionResponse</a></p>
+<h2 id='subscriptionresponse'>SubscriptionResponse</h2>
+<blockquote>
+<p>Ejemplo que contiene la estructura SubscriptionResponse:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>  <span class="o">{</span>
+     ...
+        <span class="s2">"subscription"</span>: <span class="o">{</span>
+                <span class="s2">"type"</span>: <span class="s2">"token"</span>,
+                <span class="s2">"status"</span>: <span class="o">{</span>
+                    <span class="s2">"status"</span>: <span class="s2">"OK"</span>,
+                    <span class="s2">"reason"</span>: <span class="s2">"00"</span>,
+                    <span class="s2">"message"</span>: <span class="s2">"Token generado exitosamente"</span>,
+                    <span class="s2">"date"</span>: <span class="s2">"2019-03-08T10:31:54-05:00"</span>
+                <span class="o">}</span>,
+                <span class="s2">"instrument"</span>: <span class="o">[</span>
+                    <span class="o">{</span>
+                        <span class="s2">"keyword"</span>: <span class="s2">"token"</span>,
+                        <span class="s2">"value"</span>: <span class="s2">"1b394089c97bc5f155b684c068806d858d9e4180c8643b5b29cf216c4b656d3e"</span>,
+                        <span class="s2">"displayOn"</span>: <span class="s2">"none"</span>
+                    <span class="o">}</span>,
+     ...               
+ <span class="o">}</span>
+</code></pre>
+<p>Estructura que contiene información para el método de pago suscripción. <br><br></p>
+
+<p>ATRIBUTOS</p>
+
+<table><thead>
+<tr>
+<th>Parametro</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>status <code>Requerido</code></td>
+<td><a href="#status">Status</a></td>
+<td>Estado de la suscripción.</td>
+</tr>
+<tr>
+<td>type <code>Opcional</code></td>
+<td>String</td>
+<td>Esta cadena dicta el tipo de suscripción que se devuelve, puede ser [token, cuenta]</td>
+</tr>
+<tr>
+<td>instrument <code>Opcional</code></td>
+<td><a href="#namevaluepair">NameValuePair[]</a></td>
+<td>Acorde con el tipo de suscripción los valore retornados puede cambiar y serán devueltos en la estructura de NameValuePair.<br><strong>token:</strong><code>[token, subtoken, franchise, <br>franchiseName, lastDigits, <br> validUntil]</code><br><strong>account:</strong> <code>[bankCode, bankName, accountType, <br>accountNumber]</code></td>
+</tr>
+</tbody></table>
+<h2 id='namevaluepair'>NameValuePair</h2>
+<blockquote>
+<p>Ejemplo que contiene la estructura namevaluepair:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>     ...
+            <span class="s2">"processorFields"</span>: <span class="o">[</span>
+                <span class="o">{</span>
+                    <span class="s2">"keyword"</span>: <span class="s2">"merchantCode"</span>,
+                    <span class="s2">"value"</span>: <span class="s2">"011271442"</span>,
+                    <span class="s2">"displayOn"</span>: <span class="s2">"none"</span>
+                <span class="o">}</span>,
+                <span class="o">{</span>
+                    <span class="s2">"keyword"</span>: <span class="s2">"terminalNumber"</span>,
+                    <span class="s2">"value"</span>: <span class="s2">"00057742"</span>,
+                    <span class="s2">"displayOn"</span>: <span class="s2">"none"</span>
+                <span class="o">}</span>,
+                <span class="o">{</span>
+                    <span class="s2">"keyword"</span>: <span class="s2">"lastDigits"</span>,
+                    <span class="s2">"value"</span>: <span class="s2">"1111"</span>,
+                    <span class="s2">"displayOn"</span>: <span class="s2">"none"</span>
+                <span class="o">}</span>,
+                <span class="o">{</span>
+                    <span class="s2">"keyword"</span>: <span class="s2">"id"</span>,
+                    <span class="s2">"value"</span>: <span class="s2">"42337fd0ed2b037667ccabce3427f042"</span>,
+                    <span class="s2">"displayOn"</span>: <span class="s2">"none"</span>
+                <span class="o">}</span>,
+                <span class="o">{</span>
+                    <span class="s2">"keyword"</span>: <span class="s2">"bin"</span>,
+                    <span class="s2">"value"</span>: <span class="s2">"411111"</span>,
+                    <span class="s2">"displayOn"</span>: <span class="s2">"none"</span>
+                <span class="o">}</span>,
+                <span class="o">{</span>
+                    <span class="s2">"keyword"</span>: <span class="s2">"installments"</span>,
+                    <span class="s2">"value"</span>: <span class="s2">"1"</span>,
+                    <span class="s2">"displayOn"</span>: <span class="s2">"none"</span>
+                <span class="o">}</span>,
+                <span class="o">{</span>
+                    <span class="s2">"keyword"</span>: <span class="s2">"expiration"</span>,
+                    <span class="s2">"value"</span>: <span class="s2">"0320"</span>,
+                    <span class="s2">"displayOn"</span>: <span class="s2">"none"</span>
+                <span class="o">}</span>,
+                <span class="o">{</span>
+                    <span class="s2">"keyword"</span>: <span class="s2">"cardType"</span>,
+                    <span class="s2">"value"</span>: <span class="s2">"C"</span>,
+                    <span class="s2">"displayOn"</span>: <span class="s2">"none"</span>
+                <span class="o">}</span>
+            <span class="o">]</span>
+    ...       
+</code></pre>
+<p>Se utiliza para definir un tipo de par <code>clave-valor</code> <br><br></p>
+
+<p>ATRIBUTOS</p>
+
+<table><thead>
+<tr>
+<th>Nombre</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>keyword <code>Opcional</code></td>
+<td>string</td>
+<td>Clave para el par de valores del dato.</td>
+</tr>
+<tr>
+<td>value <code>Opcional</code></td>
+<td>string</td>
+<td>Valor para el par de datos.</td>
+</tr>
+<tr>
+<td>displayOn <code>Opcional</code></td>
+<td>string</td>
+<td>Bajo qué circunstancias el campo debe ser mostrado en la interfaz de redirección. [none, payment, receipt, both, approved]</td>
 </tr>
 </tbody></table>
 <h2 id='status'>Status</h2>
@@ -580,7 +1615,9 @@ En el returnUrl se recomienda enviar en la URL un dato con el cual el sitio pued
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre>
-<p>Estructura que contiene la información de la respuesta sobre una solicitud o pago, e informa el estado actual de la misma.</p>
+<p>Estructura que contiene la información de la respuesta sobre una solicitud o pago, e informa el estado actual de la misma. <br><br></p>
+
+<p>ATRIBUTOS</p>
 
 <table><thead>
 <tr>
@@ -590,39 +1627,40 @@ En el returnUrl se recomienda enviar en la URL un dato con el cual el sitio pued
 </tr>
 </thead><tbody>
 <tr>
-<td>status</td>
+<td>status <code>Requerido</code></td>
 <td>String(32)</td>
-<td><a href="#estado-de-la-solicitud-o-pago">Estado de la solicitud o pago</a></td>
+<td><a href="#estado-de-una-peticion-o-pago">Estado de una petición o pago</a></td>
 </tr>
 <tr>
-<td>reason</td>
+<td>reason <code>Requerido</code></td>
 <td>String</td>
 <td>Código del motivo proporcionado.</td>
 </tr>
 <tr>
-<td>message</td>
+<td>message <code>Requerido</code></td>
 <td>String</td>
 <td>Descripción del código de razón.</td>
 </tr>
 <tr>
-<td>date</td>
+<td>date <code>Requerido</code></td>
 <td>DateTime</td>
 <td>Fecha y hora en que se genera el estado de pago.</td>
 </tr>
 </tbody></table>
-<h2 id='estado-de-la-solicitud-o-pago'>Estado de la solicitud o pago</h2>
+<h3 id='estado-de-una-peticion-o-pago'>Estado de una petición o pago</h3>
 <blockquote>
-<p>Ejemplo de un estado de solicitud de pago con respuesta aprobada en una solicitud de autenticación:</p>
+<p>Ejemplo de un estado de una petición o pago:</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="o">{</span>
     <span class="s2">"status"</span>: <span class="o">{</span>
-        <span class="s2">"status"</span>: <span class="s2">"OK"</span>,
-        <span class="s2">"reason"</span>: <span class="s2">"PC"</span>,
-        <span class="s2">"message"</span>: <span class="s2">"La petición se ha procesado correctamente"</span>,
-        <span class="s2">"date"</span>: <span class="s2">"2019-03-04T16:50:02-05:00"</span>
+        <span class="s2">"status"</span>: <span class="s2">"REJECTED"</span>,
+        <span class="s2">"message"</span>: <span class="s2">""</span>,
+        <span class="s2">"reason"</span>: <span class="s2">""</span>,
+        <span class="s2">"date"</span>: <span class="s2">"2016-09-15T13:49:01-05:00"</span>
     <span class="o">}</span>,
-    <span class="s2">"requestId"</span>: 181348,
-    <span class="s2">"processUrl"</span>: <span class="s2">"https://test.placetopay.com/redirection/session/181348/43d83d36aa46de5f993aafb9b3e0be48"</span>
+    <span class="s2">"requestId"</span>: 58,
+    <span class="s2">"reference"</span>: <span class="s2">"ORDER-1000"</span>,
+    <span class="s2">"signature"</span>: <span class="s2">"feb3e7cc76939c346f9640573a208662f30704ab"</span>
 <span class="o">}</span>
 </code></pre>
 <table><thead>
@@ -633,7 +1671,7 @@ En el returnUrl se recomienda enviar en la URL un dato con el cual el sitio pued
 </thead><tbody>
 <tr>
 <td><code>OK</code></td>
-<td>Peticiíon de autenticación procesada correctamente.</td>
+<td>Petición de autenticación procesada correctamente.</td>
 </tr>
 <tr>
 <td><code>FAILED</code></td>
@@ -668,88 +1706,643 @@ En el returnUrl se recomienda enviar en la URL un dato con el cual el sitio pued
 <td>Reintegro de una transacción por solicitud de un tarjeta habiente al comercio.</td>
 </tr>
 </tbody></table>
+<h2 id='transaction'>Transaction</h2>
+<p>Estructura que contiene información sobre el proceso de pago de la transacción en PlacetoPay. <br><br></p>
+
+<p>ATRIBUTOS</p>
+
+<table><thead>
+<tr>
+<th>Nombrre</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>status <code>Requerido</code></td>
+<td><a href="#status">Status</a></td>
+<td>Estado de la transacción.</td>
+</tr>
+<tr>
+<td>internalReference <code>Opcional</code></td>
+<td>int</td>
+<td>Referencia interna en PlacetoPay.</td>
+</tr>
+<tr>
+<td>reference <code>Opcional</code></td>
+<td>string</td>
+<td>Referencia enviada por el comercio para la transacción.</td>
+</tr>
+<tr>
+<td>paymentMethod <code>Opcional</code></td>
+<td>string</td>
+<td>Código del método de pago utilizado.</td>
+</tr>
+<tr>
+<td>paymentMethodName <code>Opcional</code></td>
+<td>string</td>
+<td>Nombre del método de pago utilizado.</td>
+</tr>
+<tr>
+<td>issuerName <code>Opcional</code></td>
+<td>string</td>
+<td>Nombre del emisor o del procesador.</td>
+</tr>
+<tr>
+<td>amount <code>Opcional</code></td>
+<td><a href="#amountconversion">AmountConversion</a></td>
+<td>Valor procesado.</td>
+</tr>
+<tr>
+<td>receipt <code>Opcional</code></td>
+<td>string</td>
+<td>Numero de recibo de la transacción.</td>
+</tr>
+<tr>
+<td>franchise <code>Opcional</code></td>
+<td>string</td>
+<td>Franquicia de la tarjeta utilizada.</td>
+</tr>
+<tr>
+<td>refunded <code>Opcional</code></td>
+<td>boolean</td>
+<td></td>
+</tr>
+<tr>
+<td>authorization <code>Opcional</code></td>
+<td>string</td>
+<td>Código de autorización.</td>
+</tr>
+<tr>
+<td>processorFields <code>Opcional</code></td>
+<td><a href="#namevaluepair">NameValuePair[]</a></td>
+<td>Campos adicionales del procesador.</td>
+</tr>
+</tbody></table>
+<h2 id='token'>Token</h2>
+<p>Estructura que contiene información acerca de un token usado para cobros de un cliente suscrito. <br><br></p>
+
+<p>ATRIBUTOS</p>
+
+<table><thead>
+<tr>
+<th>Nombre</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>status <code>Requerido</code></td>
+<td><a href="#status">Status</a></td>
+<td>Estado del proceso de tokenización.</td>
+</tr>
+<tr>
+<td>token <code>Opcional</code></td>
+<td>string</td>
+<td>Token completo para tarjeta de crédito, debe ser usada para solicitar cualquier transacción a PlacetoPay.</td>
+</tr>
+<tr>
+<td>subtoken <code>Opcional</code></td>
+<td>string</td>
+<td>Representación numérica del token para casos donde es requerido un número adicional que parece como una tarjeta de crédito, los últimos 4 dígitos son iguales a los últimos 4 dígitos de la tarjeta de crédito.</td>
+</tr>
+<tr>
+<td>franchiseName <code>Opcional</code></td>
+<td>string</td>
+<td>Franquicia de la tarjeta tokenizada.</td>
+</tr>
+<tr>
+<td>issuerName <code>Opcional</code></td>
+<td>string</td>
+<td>Nombre del banco emisor.</td>
+</tr>
+<tr>
+<td>lastDigits <code>Opcional</code></td>
+<td>string</td>
+<td>Últimos 4 dígitos de la tarjeta de crédito.</td>
+</tr>
+<tr>
+<td>validUntil <code>Opcional</code></td>
+<td>date</td>
+<td>Fecha hasta la cual el token es válido, puede  ser determinada por la  fecha de expiración.</td>
+</tr>
+</tbody></table>
+<h2 id='documenttype'>DocumentType</h2>
+<p>Contiene los diferentes tipos de documento, cadena (string) (ver listado)</p>
+<h2 id='address'>Address</h2>
+<p>Estructura que contiene la información sobre una dirección física. <br><br></p>
+
+<p>ATRIBUTOS</p>
+
+<table><thead>
+<tr>
+<th>Nombre</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>street <code>Requerido</code></td>
+<td>string</td>
+<td>Dirección física completa.</td>
+</tr>
+<tr>
+<td>city <code>Requerido</code></td>
+<td>string</td>
+<td>Nombre de la ciudad.</td>
+</tr>
+<tr>
+<td>state <code>Opcional</code></td>
+<td>string</td>
+<td>Nombre del estado coincidente con la dirección.</td>
+</tr>
+<tr>
+<td>postalCode <code>Opcional</code></td>
+<td>string</td>
+<td>Código postal o equivalente se requiere generalmente para los países que tienen.</td>
+</tr>
+<tr>
+<td>country <code>Opcional</code></td>
+<td>string</td>
+<td>Código internacional del país que se aplica a la dirección física según  ISO 3166-1 ALPHA-2.</td>
+</tr>
+<tr>
+<td>phone <code>Opcional</code></td>
+<td><a href="#phonenumbertype">PhoneNumberType</a></td>
+<td>Número telefónico.</td>
+</tr>
+</tbody></table>
+<h2 id='phonenumbertype'>PhoneNumberType</h2>
+<p>Restringe la longitud del número de teléfono de la cadena a 30 caracteres.</p>
+<h2 id='amount'>Amount</h2>
+<blockquote>
+<p>Ejemplo de una esrtructura amount para un pago:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">{</span>
+  ...
+         <span class="s2">"amount"</span>: <span class="o">{</span>
+           <span class="s2">"taxes"</span>: <span class="o">[</span>
+                <span class="o">{</span>
+                <span class="s2">"kind"</span>: <span class="s2">"ice"</span>,
+                <span class="s2">"amount"</span>: 1.56,
+                <span class="s2">"base"</span>: 13
+                <span class="o">}</span>,
+                <span class="o">{</span>
+                <span class="s2">"kind"</span>: <span class="s2">"valueAddedTax"</span>,
+                <span class="s2">"amount"</span>: 2.47,
+                <span class="s2">"base"</span>: 13
+                <span class="o">}</span>
+            <span class="o">]</span>,
+            <span class="s2">"details"</span>: <span class="o">[</span>
+                <span class="o">{</span>
+                <span class="s2">"kind"</span>: <span class="s2">"shipping"</span>,
+                <span class="s2">"amount"</span>: 0.65
+                <span class="o">}</span>,
+                <span class="o">{</span>
+                <span class="s2">"kind"</span>: <span class="s2">"tip"</span>,
+                <span class="s2">"amount"</span>: 0.65
+                <span class="o">}</span>,
+                <span class="o">{</span>
+                <span class="s2">"kind"</span>: <span class="s2">"subtotal"</span>,
+                <span class="s2">"amount"</span>: 13
+                <span class="o">}</span>
+            <span class="o">]</span>,
+            <span class="s2">"currency"</span>: <span class="s2">"COP"</span>,
+            <span class="s2">"total"</span>: <span class="s2">"10000"</span>
+        <span class="o">}</span>
+  ...     
+<span class="o">}</span>
+</code></pre>
+<p>Extiende de AmountBase y describe el contenido del valor total, incluyendo impuestos y detalles. <br><br></p>
+
+<p>ATRIBUTOS</p>
+
+<table><thead>
+<tr>
+<th>Parametro</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency <code>Requerido</code></td>
+<td>String</td>
+<td>De amountBase. Permite identificar la moneda en que se va realizar un pago, acorde al <a href="https://www.currency-iso.org/dam/downloads/lists/list_one.xml">ISO 4217</a> (Alphabetic).</td>
+</tr>
+<tr>
+<td>total <code>Requerido</code></td>
+<td>Decimal</td>
+<td>De amountBase. Permite identificar el monto total que se va a pagar.</td>
+</tr>
+<tr>
+<td>taxes <code>Opcional</code></td>
+<td><a href="#taxdetail">TaxDetail[]</a></td>
+<td>Descrpción de los impuestos.</td>
+</tr>
+<tr>
+<td>details <code>Opcional</code></td>
+<td><a href="#amountdetail">AmountDetail[]</a></td>
+<td>Descripción del importe total.</td>
+</tr>
+</tbody></table>
+<h2 id='taxdetail'>TaxDetail</h2>
+<p>Estructura para almacenar información sobre un impuesto. <br><br></p>
+
+<table><thead>
+<tr>
+<th>Nombre</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>kind <code>Requerido</code></td>
+<td>string</td>
+<td>Valor de clasificación, puede ser <code>[valueAddedTax, exciseDuty]</code>.</td>
+</tr>
+<tr>
+<td>amount <code>Requerido</code></td>
+<td><a href="#amounttype">AmountType</a></td>
+<td>Valor discriminado.</td>
+</tr>
+</tbody></table>
+<h2 id='amountdetail'>AmountDetail</h2>
+<p>Estructura para almacenar información sobre el valor. <br><br></p>
+
+<p>ATRIBUTOS</p>
+
+<table><thead>
+<tr>
+<th>Nombre</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>kind <code>Requerido</code></td>
+<td>string</td>
+<td>Valor de clasificación, puede ser <code>[discount, additional, <br> vatDevolutionBase, shipping, <br> handlingFee, insurance, <br> giftWrap, subtotal, fee, tip]</code>.</td>
+</tr>
+<tr>
+<td>amount <code>Requerido</code></td>
+<td><a href="#amounttype">AmountType</a></td>
+<td>Valor discriminado.</td>
+</tr>
+</tbody></table>
+<h2 id='amounttype'>AmountType</h2>
+<p>Representación decimal del valor.</p>
+<h2 id='recurring'>Recurring</h2>
+<p>Estructura que contiene la información requerida para una solicitud de pago recurrente. <br><br></p>
+
+<p>ATRIBUTOS</p>
+
+<table><thead>
+<tr>
+<th>Nombre</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>periodicity <code>Requerido</code></td>
+<td>string</td>
+<td>Periodicidad de la factura <code>[D, M, Y]</code></td>
+</tr>
+<tr>
+<td>interval <code>Requerido</code></td>
+<td>int</td>
+<td>Intervalo asociado a la periodicidad.</td>
+</tr>
+<tr>
+<td>nextPayment <code>Requerido</code></td>
+<td>date</td>
+<td>Fecha del próximo pago.</td>
+</tr>
+<tr>
+<td>maxPeriods <code>Requerido</code></td>
+<td>int</td>
+<td>Número máximo de periodo (-1 en caso de que no haya  restricción.)</td>
+</tr>
+<tr>
+<td>dueDate <code>Opcional</code></td>
+<td>date</td>
+<td>Fecha para finalizar el pago.</td>
+</tr>
+<tr>
+<td>notificationUrl <code>Opcional</code></td>
+<td>string</td>
+<td>URL en el que el servicio notificará cada vez que se haga un pago recurrente.</td>
+</tr>
+</tbody></table>
+<h2 id='amountconversion'>AmountConversion</h2>
+<p>Estructura para definir el factor de conversión y los valores. <br><br></p>
+
+<p>ATRIBUTOS</p>
+
+<table><thead>
+<tr>
+<th>Nombre</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>from <code>Requerido</code></td>
+<td><a href="#amountbase">AmountBase</a></td>
+<td>Monto solicitado.</td>
+</tr>
+<tr>
+<td>to <code>Requerido</code></td>
+<td><a href="#amountbase">AmountBase</a></td>
+<td>Monto procesado por la entidad.</td>
+</tr>
+<tr>
+<td>factor <code>Requerido</code></td>
+<td>double</td>
+<td>Factor de conversión.</td>
+</tr>
+</tbody></table>
+<h2 id='amountbase'>AmountBase</h2>
+<p>Estructura que representa una cantidad que define la moneda y el total. <br><br></p>
+
+<p>ATRIBUTOS</p>
+
+<table><thead>
+<tr>
+<th>Nombre</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency <code>Requerido</code></td>
+<td>string</td>
+<td>Moneda acorde al ISO 4217 <code>(alphabetic code)</code>.</td>
+</tr>
+<tr>
+<td>total <code>Requerido</code></td>
+<td>decimal</td>
+<td>Valor total.</td>
+</tr>
+</tbody></table>
+<h2 id='collectrequest'>CollectRequest</h2>
+<blockquote>
+<p>Ejemplo para recaudar un pago utilizando la estructura CollecRequest</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>POST /api/collect
+<span class="o">{</span>
+    <span class="s2">"auth"</span>: <span class="o">{</span>
+        <span class="s2">"login"</span>: <span class="s2">"usuarioprueba"</span>,
+        <span class="s2">"tranKey"</span>: <span class="s2">"YhmdBEZKTMAFsxkI1SrgS4SdBfE="</span>,
+        <span class="s2">"nonce"</span>: <span class="s2">"TlRoaE0yWTROMk0wWVRFellXUTVNVFUwWVRZNVpHRXpZbU16TWpJM01UWT0="</span>,
+        <span class="s2">"seed"</span>: <span class="s2">"2019-04-25T18:17:23-04:00"</span>
+  <span class="o">}</span>,
+    <span class="s2">"instrument"</span>: <span class="o">{</span>
+        <span class="s2">"token"</span>: <span class="o">{</span>
+            <span class="s2">"token"</span>: <span class="s2">"1b394089c97bc5f155b684c068806d858d9e4180c8643b5b29cf216c4b656d3e"</span>
+        <span class="o">}</span>
+    <span class="o">}</span>,
+    <span class="s2">"payer"</span>: <span class="o">{</span>
+            <span class="s2">"document"</span>: <span class="s2">"911111111"</span>,
+            <span class="s2">"documentType"</span>: <span class="s2">"CC"</span>,
+            <span class="s2">"name"</span>: <span class="s2">"Prueba aliado"</span>,
+            <span class="s2">"surname"</span>: <span class="s2">"JA"</span>,
+            <span class="s2">"email"</span>: <span class="s2">"juan.jimenez@placetopay.com"</span>
+    <span class="o">}</span>,
+    <span class="s2">"payment"</span>: <span class="o">{</span>
+        <span class="s2">"reference"</span>: <span class="s2">"3110"</span>,
+        <span class="s2">"description"</span>: <span class="s2">"Pago con suscripción 3110"</span>,
+        <span class="s2">"amount"</span>: <span class="o">{</span>
+            <span class="s2">"currency"</span>: <span class="s2">"COP"</span>,
+            <span class="s2">"total"</span>:10000
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+<p>Permite realizar cobros sin la intervención del usuario usando medios de pago previamente suscritos. <br><br></p>
+
+<p>ATRIBUTOS</p>
+
+<table><thead>
+<tr>
+<th>Parametro</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>payer <code>Requerido</code></td>
+<td><a href="#person">Person</a></td>
+<td>Datos del titular del medio de pago almacenado.</td>
+</tr>
+<tr>
+<td>payment <code>Requerido</code></td>
+<td><a href="#paymentrequest">PaymentRequest</a></td>
+<td>Objeto de pago cuando necesite solicitar un cobro.</td>
+</tr>
+<tr>
+<td>instrument <code>Requerido</code></td>
+<td><a href="#instrument">Instrument</a></td>
+<td>Datos asociados al medio de pago suscrito.</td>
+</tr>
+</tbody></table>
+<h2 id='items'>Items</h2>
+<p>Posee una colección de estructuras de elementos. <br><br></p>
+
+<p>ATRIBUTOS</p>
+
+<table><thead>
+<tr>
+<th>Nombre</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>item <code>Opcional</code></td>
+<td><a href="#item">Item[]</a></td>
+<td>Arreglo de un elemento incluido.</td>
+</tr>
+</tbody></table>
+<h2 id='item'>Item</h2>
+<p>Estructura que contiene los detalles del elemento. <br><br></p>
+
+<p>ATRIBUTOS</p>
+
+<table><thead>
+<tr>
+<th>Nombre</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>sku <code>Requerido</code></td>
+<td>string</td>
+<td>Unidad en stock correspondiente (SKU) al artículo.</td>
+</tr>
+<tr>
+<td>name <code>Opcional</code></td>
+<td>string</td>
+<td>Nombre del artículo.</td>
+</tr>
+<tr>
+<td>category <code>Opcional</code></td>
+<td>string</td>
+<td>Puede ser [digital, physical].</td>
+</tr>
+<tr>
+<td>qty <code>Opcional</code></td>
+<td>string</td>
+<td>Número de un artículo en particular.</td>
+</tr>
+<tr>
+<td>price <code>Opcional</code></td>
+<td>decimal</td>
+<td>Costo del artículo.</td>
+</tr>
+<tr>
+<td>tax <code>Opcional</code></td>
+<td>decimal</td>
+<td>Impuesto del artículo.</td>
+</tr>
+</tbody></table>
+<h2 id='instrument'>Instrument</h2>
+<blockquote>
+<p>Ejemplo que contiene una estructura instrument:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>   <span class="o">{</span>
+     ...
+        <span class="s2">"instrument"</span>: <span class="o">{</span>
+           <span class="s2">"token"</span>: <span class="o">{</span>
+               <span class="s2">"token"</span>: <span class="s2">"1b394089c97bc5f155b684c068806d858d9e4180c8643b5b29cf216c4b656d3e"</span>
+            <span class="o">}</span>
+       <span class="o">}</span>,
+     ...               
+    <span class="o">}</span>
+</code></pre>
+<p>Estructura que contiene los detalles de un medio de pago suscrito. <br><br></p>
+
+<p>ATRIBUTO</p>
+
+<table><thead>
+<tr>
+<th>Nombre</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>token <code>Requerido</code></td>
+<td><a href="#simpletoken">SimpleToken</a></td>
+<td>Datos asociados a una tarjeta de crédito tokenizada.</td>
+</tr>
+</tbody></table>
+<h2 id='simpletoken'>SimpleToken</h2>
+<p>Estructura que contiene los detalles de un token previamente obtenido mediante un proceso de suscripción, se debe enviar el token o el subtoken en los casos que se habilite, no es necesario enviar ambos. <br><br></p>
+
+<p>ATRIBUTOS</p>
+
+<table><thead>
+<tr>
+<th>Nombre</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>token <code>Opcional</code></td>
+<td>string</td>
+<td>Token completo para tarjeta de crédito, debe ser usada para solicitar cualquier transacción a PlacetoPay.</td>
+</tr>
+<tr>
+<td>subtoken <code>Opcional</code></td>
+<td>string</td>
+<td>Representación numérica del Token para casos donde es requerido un número adicional que parece como una tarjeta de crédito, los últimos 4 dígitos son iguales a los últimos 4 dígitos de la tarjeta de crédito.</td>
+</tr>
+<tr>
+<td>installments <code>Opcional</code></td>
+<td>int</td>
+<td>Número de cuotas en las cuales se solicita el cobro (opcional).</td>
+</tr>
+<tr>
+<td>cvv <code>Opcional</code></td>
+<td>string</td>
+<td>Dígitos del código de seguridad de la tarjeta a usar en los casos en los que sea necesario, generalmente se deja en blanco si se tiene una terminal sin validación de CVV.</td>
+</tr>
+</tbody></table>
+<h1 id='pagos'>Pagos</h1>
+<blockquote>
+<p>Ejemplo para la petición de un pago:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>POST /api/session
+
+<span class="o">{</span>
+  <span class="s2">"auth"</span>: <span class="o">{</span>
+    <span class="s2">"login"</span>: <span class="s2">"usuarioprueba"</span>,
+    <span class="s2">"tranKey"</span>: <span class="s2">"jsHJzM3+XG754wXh+aBvi70D9/4="</span>,
+    <span class="s2">"nonce"</span>: <span class="s2">"TTJSa05UVmtNR000TlRrM1pqQTRNV1EREprWkRVMU9EZz0="</span>,
+    <span class="s2">"seed"</span>: <span class="s2">"2019-04-25T18:17:23-04:00"</span>
+  <span class="o">}</span>,
+
+    <span class="s2">"payment"</span>: <span class="o">{</span>
+        <span class="s2">"reference"</span>: <span class="s2">"3210"</span>,
+        <span class="s2">"description"</span>: <span class="s2">"Pago de prueba 04032019"</span>,
+        <span class="s2">"amount"</span>: <span class="o">{</span>
+            <span class="s2">"currency"</span>: <span class="s2">"COP"</span>,
+            <span class="s2">"total"</span>: <span class="s2">"10000"</span>
+        <span class="o">}</span>
+      <span class="o">}</span>,
+
+    <span class="s2">"expiration"</span>: <span class="s2">"2019-03-05T00:00:00-05:00"</span>,
+    <span class="s2">"returnUrl"</span>: <span class="s2">"https://mysite.com/response/3210"</span>,
+    <span class="s2">"ipAddress"</span>: <span class="s2">"127.0.0.1"</span>,
+    <span class="s2">"userAgent"</span>: <span class="s2">"PlacetoPay Sandbox"</span>
+<span class="o">}</span>
+</code></pre>
+<p>Cuando el usuario selecciona pagar en tu sitio, inicia el flujo del servicio Web Checkout, donde su sitio envía al EndPoint de procesamiento mediante el método POST los parámetros necesarios para crear la sesión de pago.</p>
+
+<p>En la estructura se deben tener en cuenta algunos parámetros para consumir el método <a href="#createrequest">CreateRequest</a> los cuales estan contenidos en la estructura de <a href="#autenticacion">Autenticación</a> y la estructura <a href="#redirectrequest">RedirectRequest</a>.</p>
+
+<blockquote>
+<p>Ejemplo de una estructura payment para un pago:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">{</span>
+...
+    <span class="s2">"payment"</span>: <span class="o">{</span>
+        <span class="s2">"reference"</span>: <span class="s2">"3210"</span>,
+        <span class="s2">"description"</span>: <span class="s2">"Pago de prueba 04032019"</span>,
+        <span class="s2">"amount"</span>: <span class="o">{</span>
+            <span class="s2">"currency"</span>: <span class="s2">"COP"</span>,
+            <span class="s2">"total"</span>: <span class="s2">"10000"</span>
+        <span class="o">}</span>
+      <span class="o">}</span>,
+...
+<span class="o">}</span>
+</code></pre>
+<blockquote>
+<p>Ejemplo de una esrtructura amount para un pago:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">{</span>
+  ...
+        <span class="s2">"amount"</span>: <span class="o">{</span>
+            <span class="s2">"currency"</span>: <span class="s2">"COP"</span>,
+            <span class="s2">"total"</span>: <span class="s2">"10000"</span>
+        <span class="o">}</span>
+  ...     
+<span class="o">}</span>
+</code></pre>
+<aside class="notice">
+En el returnUrl se recomienda enviar en la URL un dato con el cual el sitio pueda identificar el registro por ejemplo: <code>https://mysite.com/response/{reference}</code>.
+</aside>
 
 <ul>
 <li>Al recibir la respuesta del <a href="#redirectresponse">redirectResponse</a>, esta debe ser almacenada en su sistema. La operación debe quedar marcada como pendiente. <br></li>
 <li>Luego de almacenar la respuesta de la operación, el sitio debe redireccionar al usuario sobre la misma pestaña a la interfaz de la sesión en Web Checkout (processUrl) donde debe ingresar la información para procesar el pago:</li>
-</ul>
-
-<table><thead>
-<tr>
-<th>Parametro</th>
-<th>Tipo</th>
-<th>Obligatoriedad</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>correo electrónico</td>
-<td>String</td>
-<td>Si</td>
-</tr>
-<tr>
-<td>tipo de documento</td>
-<td>DocumentType</td>
-<td>Si</td>
-</tr>
-<tr>
-<td>número de documento</td>
-<td>String</td>
-<td>Si</td>
-</tr>
-<tr>
-<td>nombre</td>
-<td>String</td>
-<td>Si</td>
-</tr>
-<tr>
-<td>apellidos</td>
-<td>String</td>
-<td>Si</td>
-</tr>
-<tr>
-<td>celular</td>
-<td>String</td>
-<td>Si</td>
-</tr>
-</tbody></table>
-
-<ul>
 <li>Posteriormente el usuario debe seleccionar el medio de pago con el que va realizar la compra.</li>
 <li>Finalmente el usuario ingresa los datos del medio de pago:</li>
-</ul>
-
-<table><thead>
-<tr>
-<th>Parametro</th>
-<th>Tipo</th>
-<th>Obligatoriedad</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>número de tarjeta</td>
-<td>String</td>
-<td>Si</td>
-</tr>
-<tr>
-<td>fecha de vencimiento</td>
-<td>dateTime</td>
-<td>Si</td>
-</tr>
-<tr>
-<td>código de seguridad</td>
-<td>String</td>
-<td>Si</td>
-</tr>
-<tr>
-<td>cuotas</td>
-<td>String</td>
-<td>Si</td>
-</tr>
-</tbody></table>
-
-<ul>
 <li>El servicio Web Checkout procesa la operación y retorna a su sistema <code>(returnUrl)</code>. </li>
-<li>Su sistema consulta la información de la sesión.</li>
+<li>Su sistema <a href="#consulta">consulta</a> la información de la sesión.</li>
 <li>Su sistema almacena los datos necesarios obtenidos en la respuesta de la sesión.</li>
 <li>Su sistema presenta al usuario la información de la operación.</li>
 </ul>
@@ -757,7 +2350,7 @@ En el returnUrl se recomienda enviar en la URL un dato con el cual el sitio pued
 <aside class="notice">
 En caso que la operación quede pendiente, el servicio notificará de forma asíncrona a la URL de notificación una vez sea resuelta (Apruebe o decline)
 </aside>
-<h1 id='pago-mixto'>Pago mixto</h1>
+<h2 id='pago-mixto'>Pago mixto</h2>
 <blockquote>
 <p>Ejemplo de una petición para un pago mixto.</p>
 </blockquote>
@@ -829,38 +2422,10 @@ En caso que la operación quede pendiente, el servicio notificará de forma así
     ...
 <span class="o">}</span>
 </code></pre>
-<blockquote>
-<p>Ejemplo de un pago mixto en estado pendiente:</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code><span class="o">{</span>
-    ...
-    <span class="s2">"status"</span>: <span class="o">{</span>
-        <span class="s2">"status"</span>: <span class="s2">"PENDING"</span>,
-        <span class="s2">"reason"</span>: <span class="s2">"PC"</span>,
-        <span class="s2">"message"</span>: <span class="s2">"La petición se encuentra activa"</span>,
-        <span class="s2">"date"</span>: <span class="s2">"2019-04-25T11:25:53-05:00"</span>
-    <span class="o">}</span>,
-    ...
-<span class="o">}</span>
-</code></pre>
 <p>El pago mixto permite utilizar varios medios de pago al momento de pagar para una misma sesión.</p>
 
-<p>Para hacer uso de esta funcionalidad, en la estructura <code>payment</code> del <a href="#pago-basico">Pago básico</a> es necesario
+<p>Para hacer uso de esta funcionalidad, en la estructura <code><a href="#paymentrequest">payment</a></code> del <a href="#pagos">Pago</a> es necesario 
 enviar el atributo <code>allowPartial</code> como: <code>TRUE</code>.</p>
-
-<table><thead>
-<tr>
-<th>Parametro</th>
-<th>Tipo</th>
-<th>Descripción</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>allowPartial</td>
-<td>Bool</td>
-<td>Define si la operación permite pago mixto.</td>
-</tr>
-</tbody></table>
 
 <p><strong>Estados adicionales de una sesión de pago mixto</strong></p>
 
@@ -868,13 +2433,13 @@ enviar el atributo <code>allowPartial</code> como: <code>TRUE</code>.</p>
 
 <ul>
 <li><code>APPROVED_PARTIAL:</code> Indica que se realiza al menos un pago aprobado pero no se realizado el pago total de la sesión.</li>
-<li><code>PARTIAL_EXPIRED:</code> Indica que se realiza al menos un pago aprobado pero no se completó el pago total de la sesión y esta expiró.</li>
+<li><code>PARTIAL_EXPIRED:</code> Indica que se realiza al menos un pago aprobado pero no se completó el pago total de la sesión y ésta expiró.</li>
 </ul>
 
 <aside class="notice">
  Es importante identificar según la regla de negocio del sitio al obtener alguno de estos dos estados.
 </aside>
-<h1 id='pago-recurrente'>Pago Recurrente</h1>
+<h2 id='pago-recurrente'>Pago Recurrente</h2>
 <blockquote>
 <p>Ejemplo petición para un pago recurrente:</p>
 </blockquote>
@@ -909,49 +2474,20 @@ enviar el atributo <code>allowPartial</code> como: <code>TRUE</code>.</p>
 </code></pre>
 <p>Es un cobro periódico realizado por PlacetoPay para un  <strong>mismo valor</strong> con un intervalo (diario, mensual, anual) según la indicación dada en la petición.</p>
 
-<p>Para hacer uso de esta funcionalidad, en la estructura <code>payment</code> del Pago básico es necesario enviar en el objeto <code> recurring</code> la siguiente información:</p>
-
-<table><thead>
-<tr>
-<th>Parametro</th>
-<th>Tipo</th>
-<th>Descripción</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>periodicity</td>
-<td>String</td>
-<td>Define periodicidad de un  pago.  [D, M, Y].</td>
-</tr>
-<tr>
-<td>interval</td>
-<td>Int</td>
-<td>Número de Días, Meses o Años asociado a la periodicidad (-1 representa un intervalo indefinido).</td>
-</tr>
-<tr>
-<td>nexPayment</td>
-<td>Date</td>
-<td>Fecha del próximo pago con formato AAAA-MM-DD.</td>
-</tr>
-<tr>
-<td>maxPeriods</td>
-<td>Int</td>
-<td>Número máximo de periodos a recaudar (-1 en caso de que no haya  restricción.)</td>
-</tr>
-</tbody></table>
+<p>Para hacer uso de esta funcionalidad, en la estructura <code><a href="#paymentrequest">payment</a></code> del Pago recurrente es necesario enviar en el objeto <code> <a href="#recurring">recurring</a></code> los datos obligatorios para esta estructura, los cuales puede visualizar en la sesión de <a href="#campos-usados-por-tipo-de-operacion">Campos usados por tipo de operación</a>.</p>
 
 <aside class="notice">
 Los cobros recurrentes sólo se realizarán en el caso que  la transacción inicial sea aprobada.
 </aside>
 
 <aside class="notice">
-En el caso de fallar un cobro recurrente, este será reintentado cada día durante N días, si luego del número máximo de reintentos no se obtiene una transacción aprobada, la reccurencia se cancela.
+En el caso de fallar un cobro recurrente, éste será reintentado cada día durante N días, si luego del número máximo de reintentos no se obtiene una transacción aprobada, la reccurencia se cancela.
 </aside>
 
 <aside class="notice">
 Las recurrencias sólo pueden ser canceladas en la consola administrativa de PlacetoPay.
 </aside>
-<h1 id='suscripcion'>Suscripción</h1>
+<h2 id='suscripcion'>Suscripción</h2>
 <blockquote>
 <p>Ejemplo petición para una suscripción:</p>
 </blockquote>
@@ -974,148 +2510,18 @@ Las recurrencias sólo pueden ser canceladas en la consola administrativa de Pla
 </code></pre>
 <p>La suscripción permite almacenar de forma segura (tokenizando) el medio de pago de un usuario, para que luego pueda efectuar cobros relacionados a este mismo.</p>
 
-<p>Para hacer uso de esta funcionalidad es necesario reemplazar en la solicitud al servicio la  estructura <code>Payment</code> por <code>Subscription</code> en la cual deben ser enviada la siguiente información:</p>
+<p>Para hacer uso de esta funcionalidad es necesario enviar en el <a href="#redirectrequest">RedirectRequest</a> la estructura <code>subscription</code>.</p>
 
-<table><thead>
-<tr>
-<th>Parametro</th>
-<th>Tipo</th>
-<th>Descripción</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>reference</td>
-<td>String</td>
-<td>Esta debe ser única en la solicitud de suscripción.</td>
-</tr>
-<tr>
-<td>description</td>
-<td>String</td>
-<td>Descripción de la suscripción</td>
-</tr>
-</tbody></table>
-<h2 id='subscriptionresponse'>SubscriptionResponse</h2>
-<blockquote>
-<p>Ejemplo que contiene la estructura SubscriptionResponse:</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code>  <span class="o">{</span>
-     ...
-        <span class="s2">"subscription"</span>: <span class="o">{</span>
-                <span class="s2">"type"</span>: <span class="s2">"token"</span>,
-                <span class="s2">"status"</span>: <span class="o">{</span>
-                    <span class="s2">"status"</span>: <span class="s2">"OK"</span>,
-                    <span class="s2">"reason"</span>: <span class="s2">"00"</span>,
-                    <span class="s2">"message"</span>: <span class="s2">"Token generado exitosamente"</span>,
-                    <span class="s2">"date"</span>: <span class="s2">"2019-03-08T10:31:54-05:00"</span>
-                <span class="o">}</span>,
-                <span class="s2">"instrument"</span>: <span class="o">[</span>
-                    <span class="o">{</span>
-                        <span class="s2">"keyword"</span>: <span class="s2">"token"</span>,
-                        <span class="s2">"value"</span>: <span class="s2">"1b394089c97bc5f155b684c068806d858d9e4180c8643b5b29cf216c4b656d3e"</span>,
-                        <span class="s2">"displayOn"</span>: <span class="s2">"none"</span>
-                    <span class="o">}</span>,
-     ...
- <span class="o">}</span>
-</code></pre>
-<p>Estructura que contiene información para el método de pago con suscripción.</p>
+<p>Estructura que se utilizan para el método de pago con suscripción.</p>
 
-<table><thead>
-<tr>
-<th>Parametro</th>
-<th>Tipo</th>
-<th>Descripción</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>status</td>
-<td>Status</td>
-<td>Estado de la suscripción.</td>
-</tr>
-<tr>
-<td>type</td>
-<td>String</td>
-<td>Esta cadena dicta el tipo de suscripción que se devuelve, puede ser [token, cuenta]</td>
-</tr>
-<tr>
-<td>instrument</td>
-<td><a href="#namevaluepair">NameValuePair[]</a></td>
-<td>Acorde con el tipo de suscripción los valore retornados puede cambiar y serán devueltos en la estructura de NameValuePair.<br><strong>token:</strong><code>[token, subtoken, franchise, <br>franchiseName, lastDigits, validUntil]</code><br><strong>account:</strong> <code>[bankCode, bankName, accountType, <br>accountNumber]</code></td>
-</tr>
-</tbody></table>
-<h2 id='namevaluepair'>NameValuePair</h2>
-<blockquote>
-<p>Ejemplo que contiene la estructura namevaluepair:</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code>     ...
-            <span class="s2">"processorFields"</span>: <span class="o">[</span>
-                <span class="o">{</span>
-                    <span class="s2">"keyword"</span>: <span class="s2">"merchantCode"</span>,
-                    <span class="s2">"value"</span>: <span class="s2">"011271442"</span>,
-                    <span class="s2">"displayOn"</span>: <span class="s2">"none"</span>
-                <span class="o">}</span>,
-                <span class="o">{</span>
-                    <span class="s2">"keyword"</span>: <span class="s2">"terminalNumber"</span>,
-                    <span class="s2">"value"</span>: <span class="s2">"00057742"</span>,
-                    <span class="s2">"displayOn"</span>: <span class="s2">"none"</span>
-                <span class="o">}</span>,
-                <span class="o">{</span>
-                    <span class="s2">"keyword"</span>: <span class="s2">"lastDigits"</span>,
-                    <span class="s2">"value"</span>: <span class="s2">"1111"</span>,
-                    <span class="s2">"displayOn"</span>: <span class="s2">"none"</span>
-                <span class="o">}</span>,
-                <span class="o">{</span>
-                    <span class="s2">"keyword"</span>: <span class="s2">"id"</span>,
-                    <span class="s2">"value"</span>: <span class="s2">"42337fd0ed2b037667ccabce3427f042"</span>,
-                    <span class="s2">"displayOn"</span>: <span class="s2">"none"</span>
-                <span class="o">}</span>,
-                <span class="o">{</span>
-                    <span class="s2">"keyword"</span>: <span class="s2">"bin"</span>,
-                    <span class="s2">"value"</span>: <span class="s2">"411111"</span>,
-                    <span class="s2">"displayOn"</span>: <span class="s2">"none"</span>
-                <span class="o">}</span>,
-                <span class="o">{</span>
-                    <span class="s2">"keyword"</span>: <span class="s2">"installments"</span>,
-                    <span class="s2">"value"</span>: <span class="s2">"1"</span>,
-                    <span class="s2">"displayOn"</span>: <span class="s2">"none"</span>
-                <span class="o">}</span>,
-                <span class="o">{</span>
-                    <span class="s2">"keyword"</span>: <span class="s2">"expiration"</span>,
-                    <span class="s2">"value"</span>: <span class="s2">"0320"</span>,
-                    <span class="s2">"displayOn"</span>: <span class="s2">"none"</span>
-                <span class="o">}</span>,
-                <span class="o">{</span>
-                    <span class="s2">"keyword"</span>: <span class="s2">"cardType"</span>,
-                    <span class="s2">"value"</span>: <span class="s2">"C"</span>,
-                    <span class="s2">"displayOn"</span>: <span class="s2">"none"</span>
-                <span class="o">}</span>
-            <span class="o">]</span>
-    ...
-</code></pre>
-<p>Se utiliza para definir un tipo de par <code>clave-valor</code></p>
-
-<table><thead>
-<tr>
-<th>Parametro</th>
-<th>Tipo</th>
-<th>Descripción</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>keyword</td>
-<td>String</td>
-<td>Clave para el par de valores del dato.</td>
-</tr>
-<tr>
-<td>value</td>
-<td>String</td>
-<td>Valor para el par de datos.</td>
-</tr>
-<tr>
-<td>displayOn</td>
-<td>String</td>
-<td>Bajo qué circunstancias el campo debe ser mostrado en la interfaz de redirección. <br><code>[none, payment, receipt, both, approved]</code></td>
-</tr>
-</tbody></table>
+<ul>
+<li><a href="#subscriptionresponse">SubscriptionResponse</a></li>
+<li><a href="#collectrequest">CollectRequest</a></li>
+<li><a href="#namevaluepair">NameValuePair</a></li>
+<li><a href="#token">Token</a></li>
+<li><a href="#person">Person</a></li>
+<li><a href="#instrument">Instrument</a></li>
+</ul>
 
 <aside class="notice">
 Se recomienda realizar un cobro por un valor mínimo para identificar que la tarjeta se encuentra activa.
@@ -1127,9 +2533,7 @@ Luego de tener el token, puede generar cobros al medio de pago tokenizado usando
 </aside>
 
 <p>La estructura de la respuesta contiene toda la información de la petición original y una estructura de suscripción <code>(subscription)</code> con un instrumento <code>(instrument)</code> representado en forma de <strong>token</strong>. <a href="#consulta">Ver Ejemplo de respuesta de una suscripción</a>.</p>
-<h2 id='recaudar-pago-suscripcion'>Recaudar pago suscripción</h2>
-<p>Con el <code>token</code> obtenido se procede a realizar la petición de recaudo del pago a la URL de procesamiento <code>(Ej: https://test.placetopay.com/redirection/api/collect/)</code> sin intervención del usuario, mediante el método POST y los parametros con estructuras JSON. Adicionalmente debe enviarse una estructura de pago <code>(payment)</code> y pagador <code>(payer)</code>.</p>
-<h3 id='collect'>Collect</h3>
+<h3 id='recaudar-usando-suscripcion'>Recaudar usando suscripción</h3>
 <blockquote>
 <p>Ejemplo para recaudar un pago con suscripción</p>
 </blockquote>
@@ -1163,270 +2567,28 @@ Luego de tener el token, puede generar cobros al medio de pago tokenizado usando
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre>
-<p>Permite realizar cobros sin la intervención del usuario usando medios de pago previamente suscritos.</p>
+<p>Para realizar el cobro de una suscripción es necesario usar el método <a href="#collect">Collet</a> enviando el token obtenido en ésta.</p>
 
-<table><thead>
-<tr>
-<th>Parametro</th>
-<th>Tipo</th>
-<th>Descripción</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>payer</td>
-<td><a href="#person">Person</a></td>
-<td>Datos del titular del medio de pago almacenado.</td>
-</tr>
-<tr>
-<td>payment</td>
-<td><a href="#payment">PaymentRequest</a></td>
-<td>Objeto de pago cuando necesite solicitar un cobro.</td>
-</tr>
-<tr>
-<td>instrument</td>
-<td><a href="#instrument">Instrument</a></td>
-<td>Datos asociados al medio de pago suscrito.</td>
-</tr>
-</tbody></table>
-<h3 id='person'>Person</h3>
-<p>Estructura que refleja la información de una persona involucrada en una transacción.</p>
-
-<table><thead>
-<tr>
-<th>Parametro</th>
-<th>Tipo</th>
-<th>Descripción</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>documentType</td>
-<td>DocumentType</td>
-<td><a href="#tipos-de-documento">Tipo de documento</a></td>
-</tr>
-<tr>
-<td>document</td>
-<td>String</td>
-<td>Identificación.</td>
-</tr>
-<tr>
-<td>name</td>
-<td>String</td>
-<td>Nombres de la persona.</td>
-</tr>
-<tr>
-<td>surname</td>
-<td>String</td>
-<td>Apellidos de la persona.</td>
-</tr>
-<tr>
-<td>company</td>
-<td>String</td>
-<td>Nombre de la empresa en la que trabaja o representa.</td>
-</tr>
-<tr>
-<td>email</td>
-<td>String</td>
-<td>Correo electrónico de la persona.</td>
-</tr>
-<tr>
-<td>address</td>
-<td>Address</td>
-<td>Información completa de la dirección.</td>
-</tr>
-<tr>
-<td>mobile</td>
-<td>PhoneNumberType</td>
-<td>Número celular, el <code>PhoneNumberType</code> restringe la longitud del número de teléfono de la cadena a 30 caracteres.</td>
-</tr>
-</tbody></table>
-<h2 id='tipos-de-documento'>Tipos de documento</h2>
-<p>Esta es una lista de los tipos de docuemntos aceptados por redirección.</p>
-
-<table><thead>
-<tr>
-<th>País</th>
-<th>Código</th>
-<th>Tipo de documento</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>Internacional</td>
-<td>PPN</td>
-<td>Pasaporte</td>
-</tr>
-<tr>
-<td></td>
-<td>TAX</td>
-<td>TAX</td>
-</tr>
-<tr>
-<td></td>
-<td>LIC</td>
-<td>Labeler Identification Code</td>
-</tr>
-<tr>
-<td>Colombia</td>
-<td>CC</td>
-<td>Cédula de ciudadanía</td>
-</tr>
-<tr>
-<td></td>
-<td>CE</td>
-<td>Cédula de extranjería</td>
-</tr>
-<tr>
-<td></td>
-<td>TI</td>
-<td>Tarjeta de identidad</td>
-</tr>
-<tr>
-<td></td>
-<td>RC</td>
-<td>Registro Civil</td>
-</tr>
-<tr>
-<td></td>
-<td>NIT</td>
-<td>Número de Identificación Tributaria</td>
-</tr>
-<tr>
-<td></td>
-<td>RUT</td>
-<td>Registro único tributario</td>
-</tr>
-<tr>
-<td>Ecuador</td>
-<td>CI</td>
-<td>Cédula de identidad</td>
-</tr>
-<tr>
-<td></td>
-<td>RUC</td>
-<td>Registro Único de Contribuyentes</td>
-</tr>
-<tr>
-<td>Panamá</td>
-<td>CIP</td>
-<td>Cédula de identidad personal</td>
-</tr>
-<tr>
-<td>Brazil</td>
-<td>CPF</td>
-<td>Cadastro de Pessoas Físicas</td>
-</tr>
-<tr>
-<td>USA</td>
-<td>SSN</td>
-<td>Social security number</td>
-</tr>
-</tbody></table>
-
-<p><strong>Pago recurrente vs Suscripción</strong><br>
-  Las principales diferencias entre estas dos funcionalidades son:</p>
-
-<ul>
-<li>El pago recurrente es ejecutado por PlacetoPay mientras que la suscripción es ejecutada por su sitio. </li>
-<li>En un pago recurrente ya creado no se puede modificar los intervalos de tiempo para el cobro ni el monto, mientras que en suscripción la información puede variar dependiendo de cómo envie la solicitud en el collect.</li>
-<li>Para eliminar la recurrencia de un pago debe hacerse por la consola administrativa de PlacetoPay, mientras que en suscripción debe invalidar o eliminar de sus sistema el token obtenido.</li>
-</ul>
-<h2 id='instrument'>Instrument</h2>
-<blockquote>
-<p>Ejemplo que contiene una estructura instrument:</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code>   <span class="o">{</span>
-     ...
-        <span class="s2">"instrument"</span>: <span class="o">{</span>
-           <span class="s2">"token"</span>: <span class="o">{</span>
-               <span class="s2">"token"</span>: <span class="s2">"1b394089c97bc5f155b684c068806d858d9e4180c8643b5b29cf216c4b656d3e"</span>
-            <span class="o">}</span>
-       <span class="o">}</span>,
-     ...
-    <span class="o">}</span>
-</code></pre>
-<p>Estructura que contiene los detalles de un medio de pago suscrito.</p>
-
-<p><strong>Token</strong><br>
-Estructura que contiene información acerca de un token usado para cobros de un cliente suscrito.</p>
-
-<table><thead>
-<tr>
-<th>Parametro</th>
-<th>Tipo</th>
-<th>Descripción</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>token</td>
-<td>String</td>
-<td>Token completo para tarjeta de crédito, debe ser usado para solicitar cualquier transacción a PlacetoPay.</td>
-</tr>
-</tbody></table>
-
-<p><strong>Payer</strong><br></p>
-
-<blockquote>
-<p>Ejemplo que contiene una estructura payer:</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code>   <span class="o">{</span>
-    ...
-        <span class="s2">"payer"</span>: <span class="o">{</span>
-                    <span class="s2">"document"</span>: <span class="s2">"98762729"</span>,
-                    <span class="s2">"documentType"</span>: <span class="s2">"CE"</span>,
-                    <span class="s2">"name"</span>: <span class="s2">"JD"</span>,
-                    <span class="s2">"surname"</span>: <span class="s2">"JA"</span>,
-                    <span class="s2">"email"</span>: <span class="s2">"juan.jimenez@placetopay.com"</span>,
-                    <span class="s2">"mobile"</span>: <span class="s2">"321000000"</span>
-                <span class="o">}</span>,
-    ...
-   <span class="o">}</span>
-</code></pre>
-<p>Estructura que contiene los datos del titular del medio de pago almacenado.</p>
-
-<table><thead>
-<tr>
-<th>Parametro</th>
-<th>Tipo</th>
-<th>Descripción</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>document</td>
-<td>String</td>
-<td>Identificación del usuario.</td>
-</tr>
-<tr>
-<td>documentType</td>
-<td><a href="#tipos-de-documento">DocumentType</a></td>
-<td>Tipo de identificación del usuario pagador.</td>
-</tr>
-<tr>
-<td>name</td>
-<td>String</td>
-<td>Nombres del usuario pagador.</td>
-</tr>
-<tr>
-<td>surname</td>
-<td>String</td>
-<td>Apellidos del usuario pagador.</td>
-</tr>
-<tr>
-<td>email</td>
-<td>String</td>
-<td>Correo electronico del usuario pagador.</td>
-</tr>
-<tr>
-<td>mobile</td>
-<td>PhoneNumberType</td>
-<td>Número telefónico.</td>
-</tr>
-</tbody></table>
+<p>Importante: Este proceso no necesita la intervención del usuario.</p>
 
 <aside class="notice">
-Si el usuario retorna al comercio, este debe consultar la información de la transacción usando el identificador único (requestId) generado.
+Los cobros  se deben realizar en los tiempos acordados con el usuario al momento de la suscripción
+</aside>
+<h3 id='pago-recurrente-vs-suscripcion'>Pago recurrente vs Suscripción</h3>
+<p>Las principales diferencias entre estas dos funcionalidades son:</p>
+
+<ul>
+<li>El pago es ejecutado por PlacetoPay mientras que la suscripción es ejecutada por su sitio. </li>
+<li>En un pago recurrente ya creado no se puede modificar los intervalos de tiempo para el cobro ni el monto, mientras que en suscripción la información puede variar dependiendo de cómo envíe la solicitud en el collect.</li>
+<li>Para eliminar la recurrencia de un pago debe hacerse por la consola administrativa de PlacetoPay, mientras que en suscripción debe invalidar o eliminar de sus sistema el token obtenido.</li>
+</ul>
+
+<aside class="notice">
+Si el usuario retorna al comercio, este debe consultar la información de la transacción usando el identificador único <code>requestId</code> generado.
 </aside>
 <h1 id='notificacion'>Notificación</h1>
 <blockquote>
-<p>Ejemplo de notificación para un pago aprobado:</p>
+<p>Ejemplo de notificación para el estado de una sesión:</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="o">{</span>
     <span class="s2">"status"</span>: <span class="o">{</span>
@@ -1440,39 +2602,9 @@ Si el usuario retorna al comercio, este debe consultar la información de la tra
     <span class="s2">"signature"</span>: <span class="s2">"feb3e7cc76939c346f9640573a208662f30704ab"</span>
 <span class="o">}</span>
 </code></pre>
-<blockquote>
-<p>Ejemplo de notificación para un pago pendiente:</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code><span class="o">{</span>
-    <span class="s2">"status"</span>: <span class="o">{</span>
-        <span class="s2">"status"</span>: <span class="s2">"PENDING"</span>,
-        <span class="s2">"message"</span>: <span class="s2">""</span>,
-        <span class="s2">"reason"</span>: <span class="s2">""</span>,
-        <span class="s2">"date"</span>: <span class="s2">"2016-09-15T13:49:01-05:00"</span>
-    <span class="o">}</span>,
-    <span class="s2">"requestId"</span>: 58,
-    <span class="s2">"reference"</span>: <span class="s2">"ORDER-1000"</span>,
-    <span class="s2">"signature"</span>: <span class="s2">"feb3e7cc76939c346f9640573a208662f30704ab"</span>
-<span class="o">}</span>
-</code></pre>
-<blockquote>
-<p>Ejemplo de notificación para un pago declinado:</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code><span class="o">{</span>
-    <span class="s2">"status"</span>: <span class="o">{</span>
-        <span class="s2">"status"</span>: <span class="s2">"REJECTED"</span>,
-        <span class="s2">"message"</span>: <span class="s2">""</span>,
-        <span class="s2">"reason"</span>: <span class="s2">""</span>,
-        <span class="s2">"date"</span>: <span class="s2">"2016-09-15T13:49:01-05:00"</span>
-    <span class="o">}</span>,
-    <span class="s2">"requestId"</span>: 58,
-    <span class="s2">"reference"</span>: <span class="s2">"ORDER-1000"</span>,
-    <span class="s2">"signature"</span>: <span class="s2">"feb3e7cc76939c346f9640573a208662f30704ab"</span>
-<span class="o">}</span>
-</code></pre>
 <p>Una notificación permite informar al comercio sobre el estado de las sesiones.</p>
 
-<p>Configura en tu servidor una URL de notificación usando los puertos <code>80</code> ó <code>443</code> y en caso de que el pago se cancele o apruebe, reciba una notificación mediante POST.</p>
+<p>Configura en tu servidor una URL de notificación usando los puertos <code>80</code> ó <code>443</code> y en caso de que la sesión se cancele o apruebe, reciba una notificación mediante POST.</p>
 
 <table><thead>
 <tr>
@@ -1482,17 +2614,17 @@ Si el usuario retorna al comercio, este debe consultar la información de la tra
 </tr>
 </thead><tbody>
 <tr>
-<td>requestId</td>
+<td>requestId <code>Requerido</code></td>
 <td>Int</td>
-<td>Identificador unico de la sesión.</td>
+<td>Identificador único de la sesión.</td>
 </tr>
 <tr>
-<td>reference</td>
+<td>reference <code>Requerido</code></td>
 <td>String</td>
 <td>Reeferencia que acompañada con el <code>requestId</code> permite identificar la sesión de pago afectada.</td>
 </tr>
 <tr>
-<td>signature</td>
+<td>signature <code>Requerido</code></td>
 <td>String</td>
 <td>Firma que permite validar la petición recibida.</td>
 </tr>
@@ -1554,7 +2686,7 @@ Puedes validar que se trate de una respuesta de PlacetoPay haciendo un SHA-1 con
         <span class="o">}</span>,
         <span class="s2">"payment"</span>: <span class="o">{</span>
             <span class="s2">"reference"</span>: <span class="s2">"3210"</span>,
-            <span class="s2">"description"</span>: <span class="s2">"Pago básico de prueba 04/03/2019"</span>,
+            <span class="s2">"description"</span>: <span class="s2">"Pago de prueba 04/03/2019"</span>,
             <span class="s2">"amount"</span>: <span class="o">{</span>
                 <span class="s2">"currency"</span>: <span class="s2">"COP"</span>,
                 <span class="s2">"total"</span>: <span class="s2">"10000"</span>
@@ -1744,7 +2876,7 @@ Puedes validar que se trate de una respuesta de PlacetoPay haciendo un SHA-1 con
 
 <p><strong>Recomendación:</strong> Implementar en su sitio las dos alternativas, pues si algo falla en el proceso de retorno y notificación, la tarea programada puede ser usada como <strong>contingencia</strong>.</p>
 
-<p>Para consultar la sesión debe enviar el identificador único de la sesión de pago <code>requesId</code>, mediante el método POST se envían los datos de autenticación y se genera la respuesta de la transacción (<code>endpoint:  https://test.placetopay.com/redirection/api/session/<strong>{requestid}</strong></code>).</p>
+<p>Para consultar la sesión debe enviar el identificador único de la sesión de pago <code>requesId</code> usando el método <a href="#getRequestinformation">GetRequestInformation</a>.</p>
 
 <aside class="notice">
 Para este consumo también es necesario enviar en la petición la autenticación.
@@ -1754,59 +2886,9 @@ Para este consumo también es necesario enviar en la petición la autenticación
 
 <ul>
 <li><p><a href="#status">status</a></p></li>
-<li><p><strong>request</strong>
-Contiene </p></li>
+<li><p><a href="#redirectrequest">request</a></p></li>
+<li><p><a href="#redirectrequest">fields</a><br></p></li>
 </ul>
-
-<p>Datos adicionales a la estructura <code>payment</code></p>
-
-<table><thead>
-<tr>
-<th>Parametro</th>
-<th>Tipo</th>
-<th>Descripción</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>allowPartial</td>
-<td>Bool</td>
-<td>Define si el monto a ser cobrado puede ser parcial.</td>
-</tr>
-<tr>
-<td>suscribe</td>
-<td>Bool</td>
-<td>Permite solicitar un proceso de cobro y suscripción en la misma sesión.</td>
-</tr>
-</tbody></table>
-
-<p><strong>fields</strong><br></p>
-
-<p>Estructura de tipo <code>nameValuePair</code> que se utiliza para definir un tipo de par <code>clave-valor</code><br>.
-Estructura que con la información adicional relacionada con la solicitud que el comercio requiere para guardar con la transacción.</p>
-
-<table><thead>
-<tr>
-<th>Parametro</th>
-<th>Tipo</th>
-<th>Descripción</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>keyword</td>
-<td>String</td>
-<td>Clave para el par de valores del dato</td>
-</tr>
-<tr>
-<td>value</td>
-<td>String</td>
-<td>Valor para el par de datos</td>
-</tr>
-<tr>
-<td>displayOn</td>
-<td>String</td>
-<td>Define bajo qué circunstancias el campo debe ser mostrado en la interfaz de redirección (none, payment, receipt, both, approved).</td>
-</tr>
-</tbody></table>
 
 <p>Datos de la transacción:</p>
 
@@ -1818,103 +2900,951 @@ Estructura que con la información adicional relacionada con la solicitud que el
 </tr>
 </thead><tbody>
 <tr>
-<td>internalReference</td>
+<td>internalReference <code>Opcional</code></td>
 <td>Int</td>
 <td>Referencia interna en PlacetoPay.</td>
 </tr>
 <tr>
-<td>paymentMethod</td>
+<td>paymentMethod <code>Opcional</code></td>
 <td>String</td>
 <td>Código del método de pago utilizado.</td>
 </tr>
 <tr>
-<td>paymentMethodName</td>
+<td>paymentMethodName <code>Opcional</code></td>
 <td>String</td>
 <td>Nombre del método de pago utilizado.</td>
 </tr>
 <tr>
-<td>issuerName</td>
+<td>issuerName <code>Opcional</code></td>
 <td>String</td>
 <td>Nombre del emisor o del procesador.</td>
 </tr>
 </tbody></table>
-<h1 id='errores'>Errores</h1>
-<blockquote>
-<p>Ejemplo atutenticación fallida:</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code><span class="o">{</span>
-    <span class="s2">"status"</span>: <span class="o">{</span>
-        <span class="s2">"status"</span>: <span class="s2">"FAILED"</span>,
-        <span class="s2">"reason"</span>: 401,
-        <span class="s2">"message"</span>: <span class="s2">"Authentication Failed 103"</span>,
-        <span class="s2">"date"</span>: <span class="s2">"2019-03-06T17:08:36-05:00"</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre>
-<p>El servicio de Web CheckOut retorna los Códigos de respuesta para la autenticación fallida en el atributo <code>message</code> del objeto <code>status</code>.</p>
+<h1 id='informacion-adicional'>Información adicional</h1><h2 id='campos-usados-por-tipo-de-operacion'>Campos usados por tipo de operación</h2>
+<p>Matriz con los campos disponibles para enviar por operación.
+Las convenciones son: <code>R</code> (requerida), <code>O</code> (opcional), <code>A</code> (recomendada), <code>-</code> (no aplica), <code>R*</code> (Es requerido, se debe enviar uno de ellos)</p>
 
 <table><thead>
 <tr>
-<th>Código</th>
-<th>Causa</th>
+<th></th>
+<th>Payment</th>
+<th>Subscription</th>
+<th>Payment Partial</th>
+<th>Reverse Payment</th>
+<th>Recurrent payment</th>
+<th>Invalidate token</th>
+<th>Collect</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>100</td>
-<td>UsernameToken no proporcionado (Encabezado de la autorización malformado).</td>
+<td><strong>locale</strong></td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
 </tr>
 <tr>
-<td>101</td>
-<td>Identificador de sitio no existe ( Login incorrecto o no se encuentra en el ambiente).</td>
+<td><strong>payer</strong></td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>R</td>
 </tr>
 <tr>
-<td>102</td>
-<td>El hash de TranKey no coincide (Trankey incorrecto o mal formado).</td>
+<td>documentType</td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>R</td>
 </tr>
 <tr>
-<td>103</td>
-<td>Fecha de la semilla mayor de 5 minutos.</td>
+<td>document</td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>R</td>
 </tr>
 <tr>
-<td>104</td>
-<td>Sitio inactivo.</td>
+<td>name</td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>R</td>
 </tr>
 <tr>
-<td>105</td>
-<td>Sitio expirado.</td>
+<td>surname</td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>R</td>
 </tr>
 <tr>
-<td>106</td>
-<td>Credenciales expiradas.</td>
+<td>company</td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
 </tr>
 <tr>
-<td>107</td>
-<td>Mala definición del UsernameToken (No cumple con el encabezado WSSE).</td>
+<td>email</td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>R</td>
 </tr>
 <tr>
-<td>200</td>
-<td>Saltar el encabezado de autenticación SOAP.</td>
+<td>address</td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>A</td>
 </tr>
 <tr>
-<td>10001</td>
-<td>Contacte a Soporte.</td>
+<td>mobile</td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>A</td>
+</tr>
+<tr>
+<td><strong>buyer</strong></td>
+<td>A</td>
+<td>A</td>
+<td>A</td>
+<td>-</td>
+<td>A</td>
+<td>-</td>
+<td>O</td>
+</tr>
+<tr>
+<td>documentType</td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+</tr>
+<tr>
+<td>document</td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+</tr>
+<tr>
+<td>name</td>
+<td>A</td>
+<td>A</td>
+<td>A</td>
+<td>-</td>
+<td>A</td>
+<td>-</td>
+<td>O</td>
+</tr>
+<tr>
+<td>surname O</td>
+<td>O</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td></td>
+</tr>
+<tr>
+<td>company</td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+</tr>
+<tr>
+<td>email</td>
+<td>A</td>
+<td>A</td>
+<td>A</td>
+<td>-</td>
+<td>A</td>
+<td>-</td>
+<td>O</td>
+</tr>
+<tr>
+<td>address</td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+</tr>
+<tr>
+<td>mobile</td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+</tr>
+<tr>
+<td><strong>payment</strong></td>
+<td>R</td>
+<td>-</td>
+<td>R</td>
+<td>-</td>
+<td>R</td>
+<td>-</td>
+<td>R</td>
+</tr>
+<tr>
+<td>reference</td>
+<td>R</td>
+<td>-</td>
+<td>R</td>
+<td>-</td>
+<td>R</td>
+<td>-</td>
+<td>R</td>
+</tr>
+<tr>
+<td>description</td>
+<td>R</td>
+<td>-</td>
+<td>R</td>
+<td>-</td>
+<td>R</td>
+<td>-</td>
+<td>R</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>R</td>
+<td>-</td>
+<td>R</td>
+<td>-</td>
+<td>R</td>
+<td>-</td>
+<td>R</td>
+</tr>
+<tr>
+<td><code>currency</code></td>
+<td>R</td>
+<td>-</td>
+<td>R</td>
+<td>-</td>
+<td>R</td>
+<td>-</td>
+<td>R</td>
+</tr>
+<tr>
+<td><code>total</code></td>
+<td>R</td>
+<td>-</td>
+<td>R</td>
+<td>-</td>
+<td>R</td>
+<td>-</td>
+<td>R</td>
+</tr>
+<tr>
+<td><code>taxes</code></td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>details</code></td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+</tr>
+<tr>
+<td>allowPartial</td>
+<td>-</td>
+<td>-</td>
+<td>R</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>shipping</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>documentType</code></td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>document</code></td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>surname</code></td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>company</code></td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>email</code></td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>address</code></td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>mobile</code></td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+</tr>
+<tr>
+<td>items</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+</tr>
+<tr>
+<td>fields</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+</tr>
+<tr>
+<td>recurring</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>R</td>
+<td>-</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>periodicity</code></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>R</td>
+<td>-</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>interval</code></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>R</td>
+<td>-</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>nextPayment</code></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>R</td>
+<td>-</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>maxPeriods</code></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>R</td>
+<td>-</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>dueDate</code></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>R</td>
+<td>-</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>notificationUrl</code></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>R</td>
+<td>-</td>
+<td>O</td>
+</tr>
+<tr>
+<td><strong>subscription</strong></td>
+<td>-</td>
+<td>R</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>reference</td>
+<td>-</td>
+<td>R</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>description</td>
+<td>-</td>
+<td>R</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>fields</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>fields</strong></td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+</tr>
+<tr>
+<td>keyword</td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+</tr>
+<tr>
+<td>value</td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+</tr>
+<tr>
+<td>displayOn</td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+</tr>
+<tr>
+<td><strong>paymentMethod</strong></td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>expiration</strong></td>
+<td>R</td>
+<td>R</td>
+<td>R</td>
+<td>-</td>
+<td>R</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>returnUrl</strong></td>
+<td>R</td>
+<td>R</td>
+<td>R</td>
+<td>-</td>
+<td>R</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>cancelUrl</strong></td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+<td>-</td>
+<td>O</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>ipAddress</strong></td>
+<td>R</td>
+<td>R</td>
+<td>R</td>
+<td>-</td>
+<td>R</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>userAgent</strong></td>
+<td>R</td>
+<td>R</td>
+<td>R</td>
+<td>-</td>
+<td>R</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>requestId</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>R</td>
+<td>-</td>
+<td>R</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>Instrument</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>R</td>
+</tr>
+<tr>
+<td>token</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>R</td>
+</tr>
+<tr>
+<td><code>token</code></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>R*</td>
+</tr>
+<tr>
+<td><code>subtoken</code></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>R*</td>
+</tr>
+<tr>
+<td><code>instalments</code></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>cvv</code></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>O</td>
 </tr>
 </tbody></table>
+<h2 id='metodos-de-pago'>Métodos de Pago.</h2>
+<p>Esta es una lista de las franquicias disponibles en redirección.</p>
 
-<p><aside class="warning">
-Si el error retornado no corresponde a ninguna anteriormente descrito, por favor revise el endpoint de consumo usado.
-</aside>.</p>
+<table><thead>
+<tr>
+<th>País</th>
+<th>Código</th>
+<th>Método de pago</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Colombia</td>
+<td>CR_VS</td>
+<td>Visa</td>
+</tr>
+<tr>
+<td></td>
+<td>CR_CR</td>
+<td>Credencial Banco de Occidente</td>
+</tr>
+<tr>
+<td></td>
+<td>CR_VE</td>
+<td>Visa Electron</td>
+</tr>
+<tr>
+<td></td>
+<td>CR_DN</td>
+<td>Diners Club</td>
+</tr>
+<tr>
+<td></td>
+<td>CR_AM</td>
+<td>American Express</td>
+</tr>
+<tr>
+<td></td>
+<td>RM_MC</td>
+<td>MasterCard</td>
+</tr>
+<tr>
+<td></td>
+<td>TY_EX</td>
+<td>Tarjeta Éxito</td>
+</tr>
+<tr>
+<td></td>
+<td>TY_AK</td>
+<td>Alkosto</td>
+</tr>
+<tr>
+<td></td>
+<td><em>PSE</em></td>
+<td>Débito a cuentas corrientes y ahorros (PSE)</td>
+</tr>
+<tr>
+<td></td>
+<td>SFPAY</td>
+<td>Safety Pay</td>
+</tr>
+<tr>
+<td></td>
+<td><em>ATH</em></td>
+<td>Corresponsales bancarios Grupo Aval</td>
+</tr>
+<tr>
+<td></td>
+<td>AC_WU</td>
+<td>Western Union</td>
+</tr>
+<tr>
+<td></td>
+<td>PYPAL</td>
+<td>PayPal</td>
+</tr>
+<tr>
+<td></td>
+<td>T1_BC</td>
+<td>Bancolombia Recaudos</td>
+</tr>
+<tr>
+<td></td>
+<td>AV_BO</td>
+<td>Banco de Occidente Recaudos</td>
+</tr>
+<tr>
+<td></td>
+<td>AV_AV</td>
+<td>Banco AV Villas Recaudos</td>
+</tr>
+<tr>
+<td></td>
+<td>AV_BB</td>
+<td>Banco de Bogotá Recaudos</td>
+</tr>
+<tr>
+<td></td>
+<td>VISAC</td>
+<td>Visa Checkout</td>
+</tr>
+<tr>
+<td></td>
+<td>GNPIN</td>
+<td>GanaPIN</td>
+</tr>
+<tr>
+<td></td>
+<td>GNRIS</td>
+<td>Tarjeta RIS</td>
+</tr>
+<tr>
+<td></td>
+<td>MSTRP</td>
+<td>Masterpass</td>
+</tr>
+<tr>
+<td></td>
+<td>DBTAC</td>
+<td>Registro cuentas débito</td>
+</tr>
+<tr>
+<td></td>
+<td><em>PPD</em></td>
+<td>Débito pre-autorizado (PPD)</td>
+</tr>
+<tr>
+<td></td>
+<td>CDNSA</td>
+<td>Codensa</td>
+</tr>
+<tr>
+<td>Ecuador</td>
+<td>ID_VS</td>
+<td>Visa</td>
+</tr>
+<tr>
+<td></td>
+<td>ID_MC</td>
+<td>Mastercard</td>
+</tr>
+<tr>
+<td></td>
+<td>ID_DN</td>
+<td>Diners</td>
+</tr>
+<tr>
+<td></td>
+<td>ID_DS</td>
+<td>Discover</td>
+</tr>
+</tbody></table>
+<h2 id='tipos-de-documento'>Tipos de documento</h2>
+<p>Ésta es una lista de los tipos de documentos aceptados por redirección.</p>
 
-<ul>
-<li><strong>Error conectando al servicio con el mensaje</strong>
-<code>ERROR: javax.net.ssl.SSLHandshakeException: Remote host closed connection during handshake</code>
-Tus servidores requieren TLSv1.2 para recibir la solicitud, debido a la norma PCI. Por favor, revisa el cifrado y el protocolo utilizado para conectar al servidor. Si usas Java, ten presente que solo las versiones después de la 8 tienen soporte completo.</li>
-</ul>
+<table><thead>
+<tr>
+<th>País</th>
+<th>Código</th>
+<th>Tipo de documento</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Internacional</td>
+<td>PPN</td>
+<td>Pasaporte</td>
+</tr>
+<tr>
+<td></td>
+<td>TAX</td>
+<td>TAX</td>
+</tr>
+<tr>
+<td></td>
+<td>LIC</td>
+<td>Labeler Identification Code</td>
+</tr>
+<tr>
+<td>Colombia</td>
+<td>CC</td>
+<td>Cédula de ciudadanía</td>
+</tr>
+<tr>
+<td></td>
+<td>CE</td>
+<td>Cédula de extranjería</td>
+</tr>
+<tr>
+<td></td>
+<td>TI</td>
+<td>Tarjeta de identidad</td>
+</tr>
+<tr>
+<td></td>
+<td>RC</td>
+<td>Registro Civil</td>
+</tr>
+<tr>
+<td></td>
+<td>NIT</td>
+<td>Número de Identificación Tributaria</td>
+</tr>
+<tr>
+<td></td>
+<td>RUT</td>
+<td>Registro único tributario</td>
+</tr>
+<tr>
+<td>Ecuador</td>
+<td>CI</td>
+<td>Cédula de identidad</td>
+</tr>
+<tr>
+<td></td>
+<td>RUC</td>
+<td>Registro Único de Contribuyentes</td>
+</tr>
+<tr>
+<td>Panamá</td>
+<td>CIP</td>
+<td>Cédula de identidad personal</td>
+</tr>
+<tr>
+<td>Brazil</td>
+<td>CPF</td>
+<td>Cadastro de Pessoas Físicas</td>
+</tr>
+<tr>
+<td>USA</td>
+<td>SSN</td>
+<td>Social security number</td>
+</tr>
+</tbody></table>
 
       </div>
       <div class="dark-box">
           <div class="lang-selector">
                 <a href="#" data-language-name="shell">shell</a>
+                <a href="#" data-language-name="csharp">csharp</a>
           </div>
       </div>
     </div>
