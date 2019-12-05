@@ -213,17 +213,6 @@ a {
     color: $nav-active-parent-text;
   }
 
-  .toc-list-h4 {
-    display: none;
-    background-color: $nav-subitem-bg;
-    font-weight: 500;
-  }
-
-  .toc-h4 {
-    padding-left: $nav-padding + $nav-padding + $nav-padding + $nav-indent;
-    font-size: 12px;
-  }
-
   .toc-list-h3 {
     display: none;
     background-color: $nav-subitem-bg;
@@ -232,7 +221,7 @@ a {
 
   .toc-h3 {
     padding-left: $nav-padding + $nav-padding + $nav-indent;
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .toc-list-h2 {
@@ -243,7 +232,7 @@ a {
 
   .toc-h2 {
     padding-left: $nav-padding + $nav-indent;
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .toc-footer {
@@ -429,16 +418,16 @@ a {
   }
 
   // the div is the tocify hidden div for placeholding stuff
-  &>h1, &>h2, &h3, &h4, &>div {
+  &>h1, &>h2, &>h3, &>div {
     clear:both;
   }
 
   h1 {
     @extend %header-font;
-    font-size: 28px;
+    font-size: 25px;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
-    margin-bottom: $h2-margin-bottom;
+    margin-bottom: $h1-margin-bottom;
     margin-top: 6em;
     border-top: 0px solid #72D54A;
     border-bottom: 1px solid #72D54A;
@@ -451,25 +440,8 @@ a {
 
   h2 {
     @extend %header-font;
-    font-size: 24px;
-    margin-top: 6em;
-    margin-bottom: $h2-margin-bottom;
-    border-top: 0px solid #4F566B;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-    border-top: 0px solid  white;
-    border-bottom: 1px solid white;
-  }
-
-  h2:first-child, div:first-child + h2 {
-    border-top-width: 0;
-    margin-top: 0;
-  }
-
-  h3 {
-    @extend %header-font;
     font-size: 19px;
-    margin-top: 6em;
+    margin-top: 4em;
     margin-bottom: 0;
     border-top: 0px solid #4F566B;
     padding-top: 1.2em;
@@ -478,20 +450,20 @@ a {
 
   // h2s right after h1s should bump right up
   // against the h1s.
-  h2 + h3, h2 + div + h3 {
-    margin-top: $h2-margin-bottom * -1;
+  h1 + h2, h1 + div + h2 {
+    margin-top: $h1-margin-bottom * -1;
     border-top: none;
   }
 
-   h4, h5, h6 {
+  h3, h4, h5, h6 {
     @extend %header-font;
-    font-size: 20px;
+    font-size: 15px;
     margin-top: 5.5em;
     margin-bottom: 0.8em;
   }
 
   h4, h5, h6 {
-    font-size: 14px;
+    font-size: 10px;
   }
 
   hr {
@@ -501,7 +473,7 @@ a {
   }
 
   table {
-    margin-bottom: 1em;
+    margin-bottom: 3em;
     overflow: auto;
     th,td {
       text-align: left;

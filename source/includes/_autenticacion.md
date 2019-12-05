@@ -1,4 +1,4 @@
-## Autenticación
+# Autenticación
 
 ```shell
 Ejemplo:
@@ -51,7 +51,7 @@ Esta estructura debe de ser enviada en cada petición realizada al servicio
 El <code>seed</code> no puede tener diferencia de más de 5 minutos.
 </aside>
 
-### Ejemplos de autenticación
+## Ejemplos de autenticación
 
 <a href="https://github.com/dnetix/redirection" target="_blank" style="text-decoration: none;">
  <img src="images/php.png" class="logo-lenguaje" alt="PHP">

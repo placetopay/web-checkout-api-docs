@@ -1,6 +1,6 @@
-## Información adicional
+# Información adicional
 
-### Campos usados por tipo de operación
+## Campos usados por tipo de operación
 Matriz con los campos disponibles para enviar por operación.
 Las convenciones son: <code>R</code> (requerida), <code>O</code> (opcional), <code>A</code> (recomendada), <code>-</code> (no aplica), <code>R*</code> (Es requerido, se debe enviar uno de ellos)
 
@@ -74,7 +74,7 @@ displayOn | O | O | O | - | O | - | O
     <code>instalments</code> | - | - | - | - | - | - | O
     <code>cvv</code> | - | - | - | - | - | - | O
 
-### Métodos de Pago.
+## Métodos de Pago.
     Esta es una lista de las franquicias disponibles en redirección.
 
 País | Código | Método de pago
@@ -109,7 +109,7 @@ Ecuador  | ID_VS | Visa
          | ID_DS | Discover
 
 
-### Tipos de documento
+## Tipos de documento
 Ésta es una lista de los tipos de documentos aceptados por redirección.
 
 País | Código | Tipo de documento
