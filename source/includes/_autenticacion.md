@@ -52,6 +52,7 @@ El <code>seed</code> no puede tener diferencia de más de 5 minutos.
 </aside>
 
 ## Ejemplos de autenticación
+<<<<<<< HEAD
 
 <a href="https://github.com/dnetix/redirection" target="_blank" style="text-decoration: none;">
  <img src="images/php.png" class="logo-lenguaje" alt="PHP">
@@ -65,6 +66,12 @@ El <code>seed</code> no puede tener diferencia de más de 5 minutos.
 <a href="https://gist.github.com/dnetix/fea3868afe915229c7d140967e4d8519" target="_blank" style="text-decoration: none;">
 <img src="images/node.png" class="logo-lenguaje" alt="NodeJS">
 </a>
+=======
+[<img src="images/php.png" class="logo-lenguaje" alt="PHP">](https://github.com/dnetix/redirection)
+[<img src="images/java.png" class="logo-lenguaje" alt="JAVA">](https://gist.github.com/dnetix/f37de7864b4efb8249d30e476e379f0a)
+[<img src="images/c.png" class="logo-lenguaje" alt="C#">](https://gist.github.com/dnetix/c18cc44861c5702d2b8ff2327b031c3e)
+[<img src="images/node.png" class="logo-lenguaje" alt="NodeJS">](https://gist.github.com/dnetix/fea3868afe915229c7d140967e4d8519)
+>>>>>>> d23cf869ef50574b39cd5bca47b788efc5493434
 
 Todas las solicitudes al web deben ser autenticadas con [WS Security UsernameToken Profile 1.1](https://www.oasis-open.org/committees/download.php/13392/wss-v1.1-spec-pr-UsernameTokenProfile-01.htm)
 

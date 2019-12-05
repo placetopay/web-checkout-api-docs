@@ -1,8 +1,16 @@
+<<<<<<< HEAD
 # Métodos de Interfaz de Web CheckOut
 
 El web service contiene diferentes métodos donde se ejecutan operaciones de tipo solicitud - respuesta, estas requieren para cada una, parámetros de ingreso que son usados por las estructuras de datos con las que se procesan información para posteriormente retornar una respuesta.
 
 Si deseas ejecutar un método rápidamente puedes usar: [https://dnetix.co/p2p/client](https://dnetix.co/p2p/client)
+=======
+# Metodos de Interfaz de Web CheckOut
+
+El web service contiene diferentes metodos donde se ejecutan operaciones de tipo solicitud - respuesta, estas requieren para cada una, parámetros de ingreso que son usados por las estructuras de datos con las que se procesan información para posteriormente retornar una respuesta.
+
+Si deseas ejecutar un metodo rapidamente puedes usar: [https://dnetix.co/p2p/client](https://dnetix.co/p2p/client)
+>>>>>>> d23cf869ef50574b39cd5bca47b788efc5493434
 
 ## CreateRequest
 
@@ -46,7 +54,11 @@ POST /api/session
 ```
  Solicita la creación de la sesión (petición de cobro o suscripción) y retorna el identificador y la URL de procesamiento. <br> <br>
  
+<<<<<<< HEAD
 PARÁMETROS
+=======
+PARAMETROS
+>>>>>>> d23cf869ef50574b39cd5bca47b788efc5493434
 
 Name | Type | Description
 ---- |----- | -----------
@@ -74,7 +86,11 @@ Remplace el REQUEST_ID con el valor devuelto en la respuesta de la petición de 
 ```
 Obtiene la información de la sesión y transacciones realizadas. <br> <br> 
 
+<<<<<<< HEAD
 PARÁMETROS
+=======
+PARAMETROS
+>>>>>>> d23cf869ef50574b39cd5bca47b788efc5493434
 
 Name | Type | Description
 -----| ---- | -----------
@@ -101,7 +117,11 @@ POST /api/reverse
 ```
    Permite revertir un pago aprobado con el código de referencia interna. <br> <br>
 
+<<<<<<< HEAD
 PARÁMETROS 
+=======
+PARAMETROS 
+>>>>>>> d23cf869ef50574b39cd5bca47b788efc5493434
 
 Name | Type | Description
 -----| -----|------------
@@ -114,7 +134,11 @@ internalReference <code>Requerido</code> | int | Referencia interna de la transa
 ## Collect
 Permite realizar cobros sin la intervención del usuario usando medios de pago previamente suscritos.<br><br>
 
+<<<<<<< HEAD
 PARÁMETROS
+=======
+PARAMETROS
+>>>>>>> d23cf869ef50574b39cd5bca47b788efc5493434
 
 Name | Type | Description
 -----|------|------------

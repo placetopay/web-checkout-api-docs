@@ -13,7 +13,11 @@
 }
 ```
 
+<<<<<<< HEAD
 El servicio de Web CheckOut retorna los códigos de respuesta para la autenticación fallida en el atributo <code>message</code> del objeto <code>status</code>.
+=======
+El servicio de Web CheckOut retorna los Códigos de respuesta para la autenticación fallida en el atributo <code>message</code> del objeto <code>status</code>.
+>>>>>>> d23cf869ef50574b39cd5bca47b788efc5493434
 
 Código | Causa
 ---------- | -------
@@ -45,6 +49,10 @@ Tus servidores requieren TLSv1.2 para recibir la solicitud, debido a la norma PC
 En el proceso de autenticación nosotros revisamos el campo <code>Created</code>, este campo debe estar en el tiempo GMT o el tiempo local usando el tiempo de zona. Si obtienes esta respuesta, se debe a que tu tiempo no es preciso con el tiempo real. Nosotros solo permitimos 5 minutos de diferencia entre los tiempos.
 Puedes usar NTP para mantener la precisión del reloj. 
 
+<<<<<<< HEAD
 * **Dando los mismos valores EXACTOS que en los ejemplos anteriores a la <code>BASE64(SHA1($Nonce + $Created . $tranKey))</code> estoy obteniendo un <code>password digest</code> diferente.** <br><br> 
+=======
+* **Dando los mismos valores EXACTOS que en los ejemplos anteriores a la <code>BASE64(SHA1($Nonce + $Created . $tranKey))</code> Estoy obteniendo un <code>password digest</code> diferente.** <br><br> 
+>>>>>>> d23cf869ef50574b39cd5bca47b788efc5493434
 Mantén en mente que BASE64 debería ser para el raw output  de la SHA1 y de acuerdo con todos los lenguajes de programación este puede ser requerido para configurar esta opción, por ejemplo.
 En PHP base64_encode(sha1( … , true)) este parametro retornaria el <code>raw output</code> para el <code>sHA1 algorithm</code>

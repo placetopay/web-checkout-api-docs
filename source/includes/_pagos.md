@@ -29,9 +29,15 @@ POST /api/session
 }
 ```
 
+<<<<<<< HEAD
 Cuando el usuario selecciona pagar en tu sitio, inicia el flujo del servicio Web Checkout, donde su sitio envía al EndPoint de procesamiento mediante el método POST los parámetros necesarios para crear la sesión de pago.
 
 En la estructura se deben tener en cuenta algunos parámetros para consumir el método [CreateRequest](#createrequest) los cuales estan contenidos en la estructura de [Autenticación](#autenticacion) y la estructura [RedirectRequest](#redirectrequest).
+=======
+Cuando el usuario selecciona pagar en tu sitio, inicia el flujo del servicio Web Checkout, donde su sitio envía al EndPoint de procesamiento mediante el método POST los parametros necesarios para crear la sesión de pago.
+
+En la estructura se deben tener en cuenta algunos parámetros para consumir el metodo [CreateRequest](#createrequest) los cuales estan contenidos en la estructura de [Autenticación](#autenticacion) y la estructura [RedirectRequest](#redirectrequest).
+>>>>>>> d23cf869ef50574b39cd5bca47b788efc5493434
 
 
 >Ejemplo de una estructura payment para un pago:
@@ -171,7 +177,11 @@ enviar el atributo <code>allowPartial</code> como: <code>TRUE</code>.
 Al obtener el resultado de la operación, debe tener muy presente los siguiente dos estados:
 
 * <code>APPROVED_PARTIAL:</code> Indica que se realiza al menos un pago aprobado pero no se realizado el pago total de la sesión.
+<<<<<<< HEAD
 * <code>PARTIAL_EXPIRED:</code> Indica que se realiza al menos un pago aprobado pero no se completó el pago total de la sesión y ésta expiró.
+=======
+* <code>PARTIAL_EXPIRED:</code> Indica que se realiza al menos un pago aprobado pero no se completó el pago total de la sesión y esta expiró.
+>>>>>>> d23cf869ef50574b39cd5bca47b788efc5493434
 
 <aside class="notice">
  Es importante identificar según la regla de negocio del sitio al obtener alguno de estos dos estados.
@@ -223,7 +233,11 @@ Los cobros recurrentes sólo se realizarán en el caso que  la transacción inic
 </aside>
 
 <aside class="notice">
+<<<<<<< HEAD
 En el caso de fallar un cobro recurrente, éste será reintentado cada día durante N días, si luego del número máximo de reintentos no se obtiene una transacción aprobada, la reccurencia se cancela.
+=======
+En el caso de fallar un cobro recurrente, este será reintentado cada día durante N días, si luego del número máximo de reintentos no se obtiene una transacción aprobada, la reccurencia se cancela.
+>>>>>>> d23cf869ef50574b39cd5bca47b788efc5493434
 </aside>
 
 <aside class="notice">
@@ -311,9 +325,15 @@ POST /api/collect
     }
 }
 ```
+<<<<<<< HEAD
 Para realizar el cobro de una suscripción es necesario usar el método [Collet](#collect) enviando el token obtenido en ésta.
 
 Importante: Este proceso no necesita la intervención del usuario.
+=======
+Para realizar el cobro de una suscripción es necesario usar el método [Collet](#collect) enviando el token obtenido en esta.
+
+Importante: Este proceso no necesita la  intervención del usuario
+>>>>>>> d23cf869ef50574b39cd5bca47b788efc5493434
 
 <aside class="notice">
 Los cobros  se deben realizar en los tiempos acordados con el usuario al momento de la suscripción
@@ -324,7 +344,11 @@ Los cobros  se deben realizar en los tiempos acordados con el usuario al momento
   Las principales diferencias entre estas dos funcionalidades son:
 
   * El pago es ejecutado por PlacetoPay mientras que la suscripción es ejecutada por su sitio. 
+<<<<<<< HEAD
   * En un pago recurrente ya creado no se puede modificar los intervalos de tiempo para el cobro ni el monto, mientras que en suscripción la información puede variar dependiendo de cómo envíe la solicitud en el collect.
+=======
+  * En un pago recurrente ya creado no se puede modificar los intervalos de tiempo para el cobro ni el monto, mientras que en suscripción la información puede variar dependiendo de cómo envie la solicitud en el collect.
+>>>>>>> d23cf869ef50574b39cd5bca47b788efc5493434
   * Para eliminar la recurrencia de un pago debe hacerse por la consola administrativa de PlacetoPay, mientras que en suscripción debe invalidar o eliminar de sus sistema el token obtenido.
 
 <aside class="notice">
@@ -355,7 +379,11 @@ Configura en tu servidor una URL de notificación usando los puertos <code>80</c
 
 Parametro | Tipo | Descripción
 --------- | ---- | -----------
+<<<<<<< HEAD
 requestId <code>Requerido</code> | Int | Identificador único de la sesión.
+=======
+requestId <code>Requerido</code> | Int | Identificador unico de la sesión.
+>>>>>>> d23cf869ef50574b39cd5bca47b788efc5493434
 reference <code>Requerido</code> | String | Reeferencia que acompañada con el <code>requestId</code> permite identificar la sesión de pago afectada.
 signature <code>Requerido</code> | String | Firma que permite validar la petición recibida.
 
@@ -612,7 +640,11 @@ La consulta de información de una transacción se puede dar cuando el usuario e
 
 **Recomendación:** Implementar en su sitio las dos alternativas, pues si algo falla en el proceso de retorno y notificación, la tarea programada puede ser usada como **contingencia**.
 
+<<<<<<< HEAD
 Para consultar la sesión debe enviar el identificador único de la sesión de pago <code>requesId</code> usando el método [GetRequestInformation](#getRequestinformation).
+=======
+Para consultar la sesión debe enviar el identificador único de la sesión de pago <code>requesId</code> usando el metodo [GetRequestInformation](#getRequestinformation).
+>>>>>>> d23cf869ef50574b39cd5bca47b788efc5493434
 
 <aside class="notice">
 Para este consumo también es necesario enviar en la petición la autenticación.

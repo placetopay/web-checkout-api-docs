@@ -1,7 +1,11 @@
 # Flujo de integración
 
 <%= image_tag "images/Warehouse@2x.png" %>
+<<<<<<< HEAD
 
+=======
+<%= image_tag "images/PHP.png" %> 
+>>>>>>> d23cf869ef50574b39cd5bca47b788efc5493434
 
 1. Al momento del usuario proceder con la operación en tu sitio, debes consumir el método [createRequest](#createrequest).
 2. Si la solicitud es procesada correctamente, el servicio crea una sesión y retorna en la respuesta: <br>
@@ -11,25 +15,41 @@
 4. Redirecciona al usuario al <code>processURL</code> obtenido en el punto 2.
 5. En la interfaz de Web Checkout el usuario realizará el proceso de pago o suscripción.
 6. Una vez el usuario realiza el proceso y hace clic en “Regresar al comercio”, éste es enviado a la URL de retorno <code>returnUrl</code> (Atributo especificado al crear la operación).
+<<<<<<< HEAD
 7. Al llegar a tu sitio, con el <code>requestID</code> del registro debes consultar a PlacetoPay el estado de la sesión usando el método [getRequestInformation](#getrequestinformation).
+=======
+7. Al llegar a tu sitio, con el <code>requestID</code> del regsitro debes consultar a PlacetoPay el estado de la sesión usando el método [getRequestInformation](#getrequestinformation).
+>>>>>>> d23cf869ef50574b39cd5bca47b788efc5493434
 8. Ejecuta tu regla de negocio según el estado obtenido.
 9. De manera asincrónica, PlacetoPay realiza una notificación, del estado final de una sesión, a tu sitio.
 10. Recomendamos implementar un proceso sonda para resolver aquellas transacciones que no  se resolvieron en los punto 7 y 9.
 
 
+<<<<<<< HEAD
 # Librerías
+=======
+# Librerias
+>>>>>>> d23cf869ef50574b39cd5bca47b788efc5493434
 
 ## Instalación para C Sharp
 
 
+<<<<<<< HEAD
 ###¿Dónde obtener la librería?
+=======
+###¿Donde obtener la librería?
+>>>>>>> d23cf869ef50574b39cd5bca47b788efc5493434
     Repositorio: SDK .NET Framework 4.5.0 de Web Checkout.
 
 **DLL y dependencias:** <br>
 
 [https://drive.google.com/open?id=1UMy7SibuN3aVlRd4B8oLifCVQwxURzzv](https://drive.google.com/open?id=1UMy7SibuN3aVlRd4B8oLifCVQwxURzzv)
 
+<<<<<<< HEAD
 ###¿Qué versiones soporta?
+=======
+###¿Que versiones soporta?
+>>>>>>> d23cf869ef50574b39cd5bca47b788efc5493434
    La versión es estable para la versión 4.5.0
 
 ###¿Qué datos debo tener antes de iniciar la instalación?
@@ -74,11 +94,19 @@ Solicita la creación de la sesión (petición de cobro o suscripción) y retorn
   **Retorno:** <br>
     Servicio responde una instancia de la clase <code/>RedirectResponse.</code> Verificando el status de la respuesta se puede determinar si se creó la session de pago. <br>
 
+<<<<<<< HEAD
     Success Response: si el status es igual a **“OK”** <br>
 
     Verificar: <code>response.IsSuccessful() // return boolean</code> <br>
 
     Error Response: si el status es igual a **“ERROR”** <br>
+=======
+    Success Response: Si el status es igual a **“OK”** <br>
+
+    Verificar: <code>response.IsSuccessful() // return boolean</code> <br>
+
+    Error Response: Si el status es igual a **“ERROR”** <br>
+>>>>>>> d23cf869ef50574b39cd5bca47b788efc5493434
 
     Verificar motivo del error: <code>response.Status.Message // return string</code>
 
@@ -185,7 +213,11 @@ Notification notification = _gateway.ReadNotification(data);
 ###Posibles errores
     Para cado uno de los objetos de respuesta, al momento de presentarse alguna excepción o problema de conexión se informa en la propiedad  status.
 
+<<<<<<< HEAD
 ## Instalación librerÍas para JAVA
+=======
+## Instalación librerias para JAVA
+>>>>>>> d23cf869ef50574b39cd5bca47b788efc5493434
 Para conectarse con PlacetoPay por medio del servicio de web checkout utilizando java, ingrese al siguiente enlace: <br>
 
 [https://github.com/placetopay/java-placetopay](https://github.com/placetopay/java-placetopay)

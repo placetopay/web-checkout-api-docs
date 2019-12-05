@@ -77,7 +77,11 @@ displayOn | O | O | O | - | O | - | O
 ## Métodos de Pago.
     Esta es una lista de las franquicias disponibles en redirección.
 
+<<<<<<< HEAD
 País | Código | Método de pago
+=======
+País | Código | Metodo de pago
+>>>>>>> d23cf869ef50574b39cd5bca47b788efc5493434
 -----|--------|---------------
 Colombia | CR_VS | Visa
          | CR_CR | Credencial Banco de Occidente
@@ -110,7 +114,11 @@ Ecuador  | ID_VS | Visa
 
 
 ## Tipos de documento
+<<<<<<< HEAD
 Ésta es una lista de los tipos de documentos aceptados por redirección.
+=======
+Esta es una lista de los tipos de docuemntos aceptados por redirección.
+>>>>>>> d23cf869ef50574b39cd5bca47b788efc5493434
 
 País | Código | Tipo de documento
 --------- | ---- | -----------

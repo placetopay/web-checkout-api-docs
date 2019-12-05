@@ -200,7 +200,11 @@ mobile <code>Opcional</code> | [PhoneNumberType](#phonenumbertype) | Número cel
 
 ## PaymentRequest
   
+<<<<<<< HEAD
 > Ejemplo de una estructura payment para la solicitud de un pago:
+=======
+> Ejemplo de una estructuta payment para la solicitud de un pago:
+>>>>>>> d23cf869ef50574b39cd5bca47b788efc5493434
 
 ```shell
    ...
@@ -305,7 +309,11 @@ allowPartial <code>Requerido</code> | bool | Define si el monto a ser cobrado pu
 shipping <code>Opcional</code> | [Person](#person) | Información de la persona quien recibe el producto o servicio en la transacción.
 items <code>Opcional</code> | [Items](#items) | Productos relacionados con esta solicitud de pago.
 fields <code>Opcional</code> | [NameValuePair[]](#namevaluepair) | Información adicional relacionada con la solicitud de pago que el comercio requiere guardar con la transacción.
+<<<<<<< HEAD
 recurring <code>Opcional</code> | [Recurring](#recurring) | Información recurrente cuando PlacetoPay procesa un pago recurrente.
+=======
+recurring <code>Opcional</code> | [Recurring](#recurring) | Información recurrente cuando Place to Pay procesa un pago recurrente.
+>>>>>>> d23cf869ef50574b39cd5bca47b788efc5493434
 subscribe <code>Opcional</code> | bool | Permite solicitar un proceso de cobro y suscripción en la misma sesión.
  
 ## SubscriptionRequest
@@ -460,7 +468,11 @@ date <code>Requerido</code> | DateTime | Fecha y hora en que se genera el estado
 
 Estado | Descripción
 --------- | -----------
+<<<<<<< HEAD
 <code>OK</code> | Petición de autenticación procesada correctamente.
+=======
+<code>OK</code> | Peticiíon de autenticación procesada correctamente.
+>>>>>>> d23cf869ef50574b39cd5bca47b788efc5493434
 <code>FAILED</code> | Fallo en una petición de autenticación.
 <code>APPROVED</code> | Petición de pago o suscripción terminada
 <code>APPROVED_PARTIAL</code> | Si se permite parcialmente, se ha aprobado una transacción, pero aún queda un monto.
@@ -478,7 +490,11 @@ ATRIBUTOS
 Nombrre | Tipo | Descripción
 --------|------|------------
 status <code>Requerido</code> | [Status](#status) | Estado de la transacción.
+<<<<<<< HEAD
 internalReference <code>Opcional</code> | int | Referencia interna en PlacetoPay.
+=======
+internalReference <code>Opcional</code> | int | Referencia interna en Place to Pay.
+>>>>>>> d23cf869ef50574b39cd5bca47b788efc5493434
 reference <code>Opcional</code> | string | Referencia enviada por el comercio para la transacción.
 paymentMethod <code>Opcional</code> | string | Código del método de pago utilizado.
 paymentMethodName <code>Opcional</code> | string | Nombre del método de pago utilizado.
@@ -498,7 +514,11 @@ ATRIBUTOS
 Nombre | Tipo | Descripción
 -------|------|-------------
 status <code>Requerido</code> | <a href="#status">Status</a> | Estado del proceso de tokenización.
+<<<<<<< HEAD
 token <code>Opcional</code> | string | Token completo para tarjeta de crédito, debe ser usada para solicitar cualquier transacción a PlacetoPay.
+=======
+token <code>Opcional</code> | string | Token completo para tarjeta de crédito, debe ser usada para solicitar cualquier transacción a Place to Pay.
+>>>>>>> d23cf869ef50574b39cd5bca47b788efc5493434
 subtoken <code>Opcional</code> | string | Representación numérica del token para casos donde es requerido un número adicional que parece como una tarjeta de crédito, los últimos 4 dígitos son iguales a los últimos 4 dígitos de la tarjeta de crédito.
 franchiseName <code>Opcional</code> | string | Franquicia de la tarjeta tokenizada.
 issuerName <code>Opcional</code> | string | Nombre del banco emisor.
@@ -699,7 +719,11 @@ sku <code>Requerido</code> | string | Unidad en stock correspondiente (SKU) al a
 name <code>Opcional</code> | string | Nombre del artículo.
 category <code>Opcional</code> | string | Puede ser [digital, physical].
 qty <code>Opcional</code> | string | Número de un artículo en particular.
+<<<<<<< HEAD
 price <code>Opcional</code> | decimal | Costo del artículo.
+=======
+price <code>Opcional</code> | decimal | Costo del articulo.
+>>>>>>> d23cf869ef50574b39cd5bca47b788efc5493434
 tax <code>Opcional</code> | decimal | Impuesto del artículo.
 
 ## Instrument
@@ -732,7 +756,11 @@ ATRIBUTOS
 
 Nombre | Tipo | Descripción
 -------|------|------------
+<<<<<<< HEAD
 token <code>Opcional</code> |string | Token completo para tarjeta de crédito, debe ser usada para solicitar cualquier transacción a PlacetoPay.
+=======
+token <code>Opcional</code> |string | Token completo para tarjeta de crédito, debe ser usada para solicitar cualquier transacción a Place to Pay.
+>>>>>>> d23cf869ef50574b39cd5bca47b788efc5493434
 subtoken <code>Opcional</code> | string | Representación numérica del Token para casos donde es requerido un número adicional que parece como una tarjeta de crédito, los últimos 4 dígitos son iguales a los últimos 4 dígitos de la tarjeta de crédito.
 installments <code>Opcional</code> | int | Número de cuotas en las cuales se solicita el cobro (opcional).
 cvv <code>Opcional</code> | string | Dígitos del código de seguridad de la tarjeta a usar en los casos en los que sea necesario, generalmente se deja en blanco si se tiene una terminal sin validación de CVV.
