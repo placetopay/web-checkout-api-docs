@@ -1,10 +1,10 @@
-# Métodos de Interfaz de Web CheckOut
+## Métodos de Interfaz de Web CheckOut
 
 El web service contiene diferentes métodos donde se ejecutan operaciones de tipo solicitud - respuesta, estas requieren para cada una, parámetros de ingreso que son usados por las estructuras de datos con las que se procesan información para posteriormente retornar una respuesta.
 
 Si deseas ejecutar un método rápidamente puedes usar: [https://dnetix.co/p2p/client](https://dnetix.co/p2p/client)
 
-## CreateRequest
+### CreateRequest
 
 >Ejemplo para la petición de un pago:
 
@@ -48,14 +48,14 @@ POST /api/session
  
 PARÁMETROS
 
-Name | Type | Description
----- |----- | -----------
-payload <code>Opcional</code> | [RedirectRequest](#redirectrequest) | Información sobre el pago requerido
+| Name                          | Type                                | Description                         |
+|-------------------------------|-------------------------------------|-------------------------------------|
+| payload <code>Opcional</code> | [RedirectRequest](#redirectrequest) | Información sobre el pago requerido |
 
 **Retorna** <br>
    **[RedirectResponse](#redirectresponse):** Es un objeto con la información de redirección.
 
-## GetRequestInformation
+### GetRequestInformation
 
 >Ejemplo para obtener información de una petición:
 
@@ -76,14 +76,14 @@ Obtiene la información de la sesión y transacciones realizadas. <br> <br>
 
 PARÁMETROS
 
-Name | Type | Description
------| ---- | -----------
-requestId <code>Requerido</code> | int | Identificador de la sesión a consultar.
+| Name                             | Type | Description                             |
+|----------------------------------|------|-----------------------------------------|
+| requestId <code>Requerido</code> | int  | Identificador de la sesión a consultar. |
 
 **Retorna** <br>
   **[RedirectInformation](#redirectinformation):** Información del estado de la transacción
 
-## ReversePayment
+### ReversePayment
 
 >Ejemplo para revertir un pago aprobado:
 
@@ -103,21 +103,21 @@ POST /api/reverse
 
 PARÁMETROS 
 
-Name | Type | Description
------| -----|------------
-internalReference <code>Requerido</code> | int | Referencia interna de la transacción a reversar que se encuentra en el listado de transacciones del getRequestInformation (payment).
+| Name                                     | Type | Description                                                                                                                          |
+|------------------------------------------|------|--------------------------------------------------------------------------------------------------------------------------------------|
+| internalReference <code>Requerido</code> | int  | Referencia interna de la transacción a reversar que se encuentra en el listado de transacciones del getRequestInformation (payment). |
 
 
 **Retorna** <br>
 **[ReverseResponse](#reverseresponse):** Información de estado de la operación.
 
-## Collect
+### Collect
 Permite realizar cobros sin la intervención del usuario usando medios de pago previamente suscritos.<br><br>
 
 PARÁMETROS
 
-Name | Type | Description
------|------|------------
-payload <code>Requerido</code> | [CollectRequest](#collectrequest) | Datos del pago, pagador y medio de pago a implementar como se describe en la estructura <code>CollectRequest</code>.
+| Name                           | Type                              | Description                                                                                                          |
+|--------------------------------|-----------------------------------|----------------------------------------------------------------------------------------------------------------------|
+| payload <code>Requerido</code> | [CollectRequest](#collectrequest) | Datos del pago, pagador y medio de pago a implementar como se describe en la estructura <code>CollectRequest</code>. |
 **Retorna** <br>
 **[RedirectInformation](#redirectinformation):** Información de estado de la operación.

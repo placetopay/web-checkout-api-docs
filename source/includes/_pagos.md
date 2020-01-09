@@ -1,4 +1,4 @@
-# Pagos
+## Pagos
 
 >Ejemplo para la petición de un pago:
 
@@ -31,7 +31,7 @@ POST /api/session
 
 Cuando el usuario selecciona pagar en tu sitio, inicia el flujo del servicio Web Checkout, donde su sitio envía al EndPoint de procesamiento mediante el método POST los parámetros necesarios para crear la sesión de pago.
 
-En la estructura se deben tener en cuenta algunos parámetros para consumir el método [CreateRequest](#createrequest) los cuales estan contenidos en la estructura de [Autenticación](#autenticacion) y la estructura [RedirectRequest](#redirectrequest).
+En la estructura se deben tener en cuenta algunos parámetros para consumir el método [CreateRequest](#createrequest) los cuales están contenidos en la estructura de [Autenticación](#autenticacion) y la estructura [RedirectRequest](#redirectrequest).
 
 
 >Ejemplo de una estructura payment para un pago:
@@ -51,7 +51,7 @@ En la estructura se deben tener en cuenta algunos parámetros para consumir el m
 }
 ```
 
->Ejemplo de una esrtructura amount para un pago:
+>Ejemplo de una estructura amount para un pago:
 
 
 ```shell
@@ -84,7 +84,7 @@ En caso que la operación quede pendiente, el servicio notificará de forma así
 </aside>
 
 
-## Pago mixto
+### Pago mixto
 
 >Ejemplo de una petición para un pago mixto.
 
@@ -154,7 +154,7 @@ POST /api/session
     "status": {
         "status": "PARTIAL_EXPIRED",
         "reason": "PX",
-        "message": "La petición esta expirada o cancelada y se han realizado pagos",
+        "message": "La petición está expirada o cancelada y se han realizado pagos",
         "date": "2019-04-01T11:15:38-05:00"
     },
     ...
@@ -177,7 +177,7 @@ Al obtener el resultado de la operación, debe tener muy presente los siguiente 
  Es importante identificar según la regla de negocio del sitio al obtener alguno de estos dos estados.
 </aside>
 
-## Pago Recurrente
+### Pago Recurrente
 
 >Ejemplo petición para un pago recurrente:
 
@@ -223,14 +223,14 @@ Los cobros recurrentes sólo se realizarán en el caso que  la transacción inic
 </aside>
 
 <aside class="notice">
-En el caso de fallar un cobro recurrente, éste será reintentado cada día durante N días, si luego del número máximo de reintentos no se obtiene una transacción aprobada, la reccurencia se cancela.
+En el caso de fallar un cobro recurrente, éste seguirá reintentado cada día durante N días, si luego del número máximo de reintentos no se obtiene una transacción aprobada, la recurrencia se cancela.
 </aside>
 
 <aside class="notice">
 Las recurrencias sólo pueden ser canceladas en la consola administrativa de PlacetoPay.
 </aside>
 
-## Suscripción
+### Suscripción
 
 >Ejemplo petición para una suscripción:
 
@@ -276,7 +276,7 @@ Luego de tener el token, puede generar cobros al medio de pago tokenizado usando
 
 La estructura de la respuesta contiene toda la información de la petición original y una estructura de suscripción <code>(subscription)</code> con un instrumento <code>(instrument)</code> representado en forma de **token**. [Ver Ejemplo de respuesta de una suscripción](#consulta).
 
-### Recaudar usando suscripción 
+#### Recaudar usando suscripción 
 
 >Ejemplo para recaudar un pago con suscripción
 
@@ -319,7 +319,7 @@ Importante: Este proceso no necesita la intervención del usuario.
 Los cobros  se deben realizar en los tiempos acordados con el usuario al momento de la suscripción
 </aside>
 
-### Pago recurrente vs Suscripción
+#### Pago recurrente vs Suscripción
 
   Las principales diferencias entre estas dos funcionalidades son:
 
@@ -331,7 +331,7 @@ Los cobros  se deben realizar en los tiempos acordados con el usuario al momento
 Si el usuario retorna al comercio, este debe consultar la información de la transacción usando el identificador único <code>requestId</code> generado.
 </aside>
 
-# Notificación
+## Notificación
 
 >Ejemplo de notificación para el estado de una sesión:
 
@@ -351,13 +351,13 @@ Si el usuario retorna al comercio, este debe consultar la información de la tra
 
 Una notificación permite informar al comercio sobre el estado de las sesiones.
 
-Configura en tu servidor una URL de notificación usando los puertos <code>80</code> ó <code>443</code> y en caso de que la sesión se cancele o apruebe, reciba una notificación mediante POST.
+Configura en tu servidor una URL de notificación usando los puertos <code>80</code> o <code>443</code> y en caso de que la sesión se cancele o apruebe, reciba una notificación mediante POST.
 
-Parametro | Tipo | Descripción
---------- | ---- | -----------
-requestId <code>Requerido</code> | Int | Identificador único de la sesión.
-reference <code>Requerido</code> | String | Reeferencia que acompañada con el <code>requestId</code> permite identificar la sesión de pago afectada.
-signature <code>Requerido</code> | String | Firma que permite validar la petición recibida.
+| Parametro                        | Tipo   | Descripción                                                                                              |
+|----------------------------------|--------|----------------------------------------------------------------------------------------------------------|
+| requestId <code>Requerido</code> | Int    | Identificador único de la sesión.                                                                        |
+| reference <code>Requerido</code> | String | Reeferencia que acompañada con el <code>requestId</code> permite identificar la sesión de pago afectada. |
+| signature <code>Requerido</code> | String | Firma que permite validar la petición recibida.                                                          |
 
 De manera asincrónica, una notificación del estado de la petición será enviada a una URL definida por configuración del comercio en PlacetoPay.
 
@@ -376,10 +376,10 @@ Si este valor coincide con el valor proporcionado por el <code>signature</code>,
 <aside class="warning">Bajo ninguna circunstancia reveles tu <code>secretKey</code> en ninguna parte accesible a los clientes o usuarios de su aplicación.
 </aside>
 
-<aside class="success">Luego de obtener el estado de la sesión, puede continuar con la regla de negocio de su sitio. (ejemplo: si la operación es aprobada, envia un correo electrónico al usuario).
+<aside class="success">Luego de obtener el estado de la sesión, puede continuar con la regla de negocio de su sitio. (ejemplo: si la operación es aprobada, envía un correo electrónico al usuario).
 </aside>
 
-# Consulta
+## Consulta
 
 >Ejemplo de la petición de consulta de la información de una transacción:
 
@@ -628,9 +628,9 @@ La respuesta de la transacción debe contener diferentes objetos:
 
 Datos de la transacción:
 
-Parametro | Tipo | Descripción
---------- | ---- | -----------
-internalReference <code>Opcional</code> | Int | Referencia interna en PlacetoPay.
-paymentMethod <code>Opcional</code> | String | Código del método de pago utilizado.
-paymentMethodName <code>Opcional</code> | String | Nombre del método de pago utilizado.
-issuerName <code>Opcional</code> | String | Nombre del emisor o del procesador.
+| Parámetro                               | Tipo   | Descripción                          |
+|-----------------------------------------|--------|--------------------------------------|
+| internalReference <code>Opcional</code> | Int    | Referencia interna en PlacetoPay.    |
+| paymentMethod <code>Opcional</code>     | String | Código del método de pago utilizado. |
+| paymentMethodName <code>Opcional</code> | String | Nombre del método de pago utilizado. |
+| issuerName <code>Opcional</code>        | String | Nombre del emisor o del procesador.  |

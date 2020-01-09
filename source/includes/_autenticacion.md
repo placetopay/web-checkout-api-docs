@@ -1,6 +1,7 @@
-# Autenticación
+## Autenticación
 
 ```shell
+
 Ejemplo:
     Información proporcionada:
     login = usuarioprueba
@@ -16,6 +17,7 @@ Ejemplo:
 ```
 
 ```shell
+
 Ejemplo:
 POST /api/session
 
@@ -31,12 +33,12 @@ POST /api/session
 
 La autenticación al servicio debe ser enviada sobre el objeto <code>auth</code>, el cual debe contener los siguientes atributos:
 
-Parametro | Descripción
---------- | -----------
-login | Identificador del sitio.
-tranKey | Llave transaccional, que está formada por la siguiente operación: <code>Base64(SHA-1(nonce + seed + secretkey))</code>. El nonce dentro de la operación es el original, es decir, el que no está en Base64.
-nonce | Valor aleatorio para cada solicitud codificado en Base64.
-seed | Fecha actual, la cual se genera en formato [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html).
+| Parámetro | Descripción                                                                                                                                                                                                 |
+|-----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| login     | Identificador del sitio.                                                                                                                                                                                    |
+| tranKey   | Llave transaccional, que está formada por la siguiente operación: <code>Base64(SHA-1(nonce + seed + secretkey))</code>. El nonce dentro de la operación es el original, es decir, el que no está en Base64. |
+| nonce     | Valor aleatorio para cada solicitud codificado en Base64.                                                                                                                                                   |
+| seed      | Fecha actual, la cual se genera en formato [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html).                                                                                              |
 
 
 <aside class="notice">
@@ -51,7 +53,7 @@ Esta estructura debe de ser enviada en cada petición realizada al servicio
 El <code>seed</code> no puede tener diferencia de más de 5 minutos.
 </aside>
 
-## Ejemplos de autenticación
+### Ejemplos de autenticación
 
 <a href="https://github.com/dnetix/redirection" target="_blank" style="text-decoration: none;">
  <img src="images/php.png" class="logo-lenguaje" alt="PHP">

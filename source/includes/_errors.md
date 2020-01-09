@@ -1,6 +1,6 @@
-# Errores
+## Errores
 
->Ejemplo atutenticación fallida:
+>Ejemplo autenticación fallida:
 
 ```shell
 {
@@ -15,24 +15,24 @@
 
 El servicio de Web CheckOut retorna los códigos de respuesta para la autenticación fallida en el atributo <code>message</code> del objeto <code>status</code>.
 
-Código | Causa
----------- | -------
-100 | UsernameToken no proporcionado (Encabezado de la autorización malformado).
-101 | Identificador de sitio no existe ( Login incorrecto o no se encuentra en el ambiente).
-102 | El hash de TranKey no coincide (Trankey incorrecto o mal formado).
-103 | Fecha de la semilla mayor de 5 minutos.
-104 | Sitio inactivo.
-105 | Sitio expirado.
-106 | Credenciales expiradas.
-107 | Mala definición del UsernameToken (No cumple con el encabezado WSSE).
-200 | Saltar el encabezado de autenticación SOAP.
-10001 | Contacte a Soporte.
+| Código | Causa                                                                                  |
+|--------|----------------------------------------------------------------------------------------|
+| 100    | UsernameToken no proporcionado (Encabezado de la autorización malformado).             |
+| 101    | Identificador de sitio no existe ( Login incorrecto o no se encuentra en el ambiente). |
+| 102    | El hash de TranKey no coincide (Trankey incorrecto o mal formado).                     |
+| 103    | Fecha de la semilla mayor de 5 minutos.                                                |
+| 104    | Sitio inactivo.                                                                        |
+| 105    | Sitio expirado.                                                                        |
+| 106    | Credenciales expiradas.                                                                |
+| 107    | Mala definición del UsernameToken (No cumple con el encabezado WSSE).                  |
+| 200    | Saltar el encabezado de autenticación SOAP.                                            |
+| 10001  | Contacte a Soporte.                                                                    |
 
 <aside class="warning">
 Si el error retornado no corresponde a ninguna anteriormente descrito, por favor revise el endpoint de consumo usado.
 </aside>.
 
-## Errores frecuentes
+### Errores frecuentes
 
 * **Mensaje de error “Autenticación mal formada”** <br><br>
 Se presenta cuando el sistema no detecta que se esté enviando login, tranKey, seed o nonce en la estructura auth enviada, también puede presentarse si se envían estos datos pero de manera incorrecta, es decir sin el parámetro content-type “application/json” de manera que el servidor interpreta la petición como texto en vez de un arreglo de datos.
