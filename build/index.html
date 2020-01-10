@@ -24,7 +24,6 @@
   color: #555555;
 }
 .highlight .gs {
-  color: #d0d0d0;
 }
 .highlight .gu {
   color: #aaaaaa;
@@ -4019,39 +4018,19 @@ Las convenciones son: <code>R</code> (requerida), <code>O</code> (opcional), <co
 <h3 id='tarjeta-de-pruebas'>Tarjeta de pruebas</h3>
 <table><thead>
 <tr>
-<th>Franquicia</th>
-<th>Número</th>
+<th>Franchise</th>
+<th>Card number</th>
 <th>Comportamiento</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>Diners</td>
-<td>36545400000008</td>
-<td>Aprueba</td>
-</tr>
-<tr>
-<td>Diners</td>
-<td>36545400000248</td>
+<td>Visa</td>
+<td>4005580000000040</td>
 <td>Rechaza</td>
 </tr>
 <tr>
-<td>Diners</td>
-<td>36545400000438</td>
-<td>Se tarda 5 minutos en aprobar</td>
-</tr>
-<tr>
-<td>Diners</td>
-<td>36545400000701</td>
-<td>Deja la transacción en estado pendiente y al resolverse se aprueba</td>
-</tr>
-<tr>
-<td>Diners</td>
-<td>36545407030701</td>
-<td>Deja la transacción en estado pendiente y al resolverse se rechaza</td>
-</tr>
-<tr>
 <td>Visa</td>
-<td>4110770010002837</td>
+<td>4007000000027</td>
 <td>Aprueba</td>
 </tr>
 <tr>
@@ -4061,25 +4040,69 @@ Las convenciones son: <code>R</code> (requerida), <code>O</code> (opcional), <co
 </tr>
 <tr>
 <td>Visa</td>
-<td>4012888888881881</td>
-<td>Aprueba</td>
-</tr>
-<tr>
-<td>Visa</td>
-<td>4005580000000040</td>
-<td>Rechaza</td>
+<td>4212121212121214</td>
+<td>Deja la operación pendiente como modo de captura, la operación debe ser autorizada o cancelada en el panel de Place to Pay  o de otra manera por operaciones de VOID o SETTLE.</td>
 </tr>
 <tr>
 <td>Visa</td>
 <td>4666666666666669</td>
-<td>Se tarda 5 minutos en aprobar</td>
+<td>Este toma 5 minutos para autorizar. La idea es simular un tiempo de espera en su autorización. Así que el servicio de consumo fallará por el tiempo, lo que obligará al uso del Webservice para verificar cuando la operación completa su proceso. Tenga en cuenta los tiempos de consumo de Webservice.</td>
 </tr>
 <tr>
 <td>Visa</td>
 <td>36545407032780</td>
 <td>Deja la operación en estado Manual (se debe aprobar o rechazar desde la consola)</td>
 </tr>
+<tr>
+<td>MasterCard</td>
+<td>5424000000000015</td>
+<td>Aprueba</td>
+</tr>
+<tr>
+<td>MasterCard Credencial (BCO)</td>
+<td>540625 10 00 00 00 08</td>
+<td>Aprueba</td>
+</tr>
+<tr>
+<td>AmericanExpress</td>
+<td>370000000000002</td>
+<td>Aprueba</td>
+</tr>
+<tr>
+<td>Diners</td>
+<td>36018623456787</td>
+<td>Aprueba</td>
+</tr>
+<tr>
+<td>BBVA Club Campestre</td>
+<td>8130010000000000</td>
+<td>Aprueba</td>
+</tr>
+<tr>
+<td>Visa Electron (Debit card)</td>
+<td>4027390000000006</td>
+<td>Aprueba</td>
+</tr>
+<tr>
+<td>Visa Electron (Debit card)</td>
+<td>4215440000000001</td>
+<td>Rechaza</td>
+</tr>
+<tr>
+<td>Codensa</td>
+<td>5907120000000009</td>
+<td>Rechaza</td>
+</tr>
+<tr>
+<td>Tarjeta RIS</td>
+<td>6372000000000007</td>
+<td>Rechaza</td>
+</tr>
 </tbody></table>
+
+<aside class="notice">
+Los número de tarjetas solo tienen dicho comportamiento en el ambiente de pruebas.
+</aside>
 <h3 id='metodos-de-pago-codigos'>Métodos de Pago Códigos.</h3>
 <p>Esta es una lista de las franquicias disponibles en redirección.</p>
 

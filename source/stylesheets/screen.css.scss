@@ -391,8 +391,8 @@ a {
     }
 
     &.active {
-      border: 2px solid #7CD355;
-      color: #7CD355;
+      border: 2px solid #ff8000;
+      color: #ff8000;
     }
   }
 
@@ -450,8 +450,8 @@ a {
     padding-bottom: 0.5em;
     margin-bottom: $h1-margin-bottom;
     margin-top: 6em;
-    border-top: 0px solid #72D54A;
-    border-bottom: 1px solid #72D54A;
+    border-top: 0px solid #ff8000;
+    border-bottom: 1px solid #ff8000;
   }
 
   h1:first-child, div:first-child + h1 {
@@ -606,7 +606,7 @@ a {
 
     &.success {
       background-color: #282828;
-      color: #a8d595;
+      color: #ff8000;
     }
   }
 
