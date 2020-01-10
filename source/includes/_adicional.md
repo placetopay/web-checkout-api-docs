@@ -85,14 +85,14 @@ Visa | 4212121212121214 | Deja la operación pendiente como modo de captura, la 
 Visa | 4666666666666669 | Este toma 5 minutos para autorizar. La idea es simular un tiempo de espera en su autorización. Así que el servicio de consumo fallará por el tiempo, lo que obligará al uso del Webservice para verificar cuando la operación completa su proceso. Tenga en cuenta los tiempos de consumo de Webservice.
 Visa | 36545407032780 | Deja la operación en estado Manual (se debe aprobar o rechazar desde la consola)
 MasterCard | 5424000000000015 | Aprueba
-MasterCard Credencial (BCO) | 540625 10 00 00 00 08 | Autoriza
-AmericanExpress | 370000000000002 | Autoriza
-Diners | 36018623456787 | Autoriza
-BBVA Club Campestre | 8130010000000000 | Autoriza
-Visa Electron (Debit card) | 4027390000000006 | Autoriza
-Visa Electron (Debit card) | 4215440000000001 | Declina
-Codensa | 5907120000000009 | Declina
-Tarjeta RIS | 6372000000000007 | Declina 
+MasterCard Credencial (BCO) | 540625 10 00 00 00 08 | Aprueba
+AmericanExpress | 370000000000002 | Aprueba
+Diners | 36018623456787 | Aprueba
+BBVA Club Campestre | 8130010000000000 | Aprueba
+Visa Electron (Debit card) | 4027390000000006 | Aprueba
+Visa Electron (Debit card) | 4215440000000001 | Rechaza
+Codensa | 5907120000000009 | Rechaza
+Tarjeta RIS | 6372000000000007 | Rechaza
 
 <aside class="notice">
 Los número de tarjetas solo tienen dicho comportamiento en el ambiente de pruebas.
