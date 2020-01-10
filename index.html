@@ -607,7 +607,14 @@
 
                             </li>
                             <li>
-                              <a href="#metodos-de-pago" class="toc-h3 toc-link" data-title="Métodos de Pago.">Métodos de Pago.</a>
+                              <a href="#tarjeta-de-pruebas" class="toc-h3 toc-link" data-title="Tarjeta de pruebas">Tarjeta de pruebas</a>
+
+                                
+
+
+                            </li>
+                            <li>
+                              <a href="#metodos-de-pago-codigos" class="toc-h3 toc-link" data-title="Métodos de Pago Códigos.">Métodos de Pago Códigos.</a>
 
                                 
 
@@ -4008,75 +4015,274 @@ Las convenciones son: <code>R</code> (requerida), <code>O</code> (opcional), <co
 <td>O</td>
 </tr>
 </tbody></table>
-<h3 id='metodos-de-pago'>Métodos de Pago.</h3>
+<h3 id='tarjeta-de-pruebas'>Tarjeta de pruebas</h3>
+<table><thead>
+<tr>
+<th>Franquicia</th>
+<th>Número</th>
+<th>Comportamiento</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Diners</td>
+<td>36545400000008</td>
+<td>Aprueba</td>
+</tr>
+<tr>
+<td>Diners</td>
+<td>36545400000248</td>
+<td>Rechaza</td>
+</tr>
+<tr>
+<td>Diners</td>
+<td>36545400000438</td>
+<td>Se tarda 5 minutos en aprobar</td>
+</tr>
+<tr>
+<td>Diners</td>
+<td>36545400000701</td>
+<td>Deja la transacción en estado pendiente y al resolverse se aprueba</td>
+</tr>
+<tr>
+<td>Diners</td>
+<td>36545407030701</td>
+<td>Deja la transacción en estado pendiente y al resolverse se rechaza</td>
+</tr>
+<tr>
+<td>Visa</td>
+<td>4110770010002837</td>
+<td>Aprueba</td>
+</tr>
+<tr>
+<td>Visa</td>
+<td>4111111111111111</td>
+<td>Aprueba</td>
+</tr>
+<tr>
+<td>Visa</td>
+<td>4012888888881881</td>
+<td>Aprueba</td>
+</tr>
+<tr>
+<td>Visa</td>
+<td>4005580000000040</td>
+<td>Rechaza</td>
+</tr>
+<tr>
+<td>Visa</td>
+<td>4666666666666669</td>
+<td>Se tarda 5 minutos en aprobar</td>
+</tr>
+<tr>
+<td>Visa</td>
+<td>36545407032780</td>
+<td>Deja la operación en estado Manual (se debe aprobar o rechazar desde la consola)</td>
+</tr>
+</tbody></table>
+<h3 id='metodos-de-pago-codigos'>Métodos de Pago Códigos.</h3>
 <p>Esta es una lista de las franquicias disponibles en redirección.</p>
 
 <table><thead>
 <tr>
 <th>País</th>
-<th>Código</th>
+<th>Franquicia</th>
 <th>Método de pago</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>Colombia</td>
-<td>CR_VS</td>
-<td>Visa</td>
+<td>AC_WU</td>
+<td>ath</td>
 </tr>
 <tr>
 <td></td>
-<td>CR_CR</td>
-<td>Credencial Banco de Occidente</td>
+<td>AV_AV</td>
+<td>ath</td>
 </tr>
 <tr>
 <td></td>
-<td>CR_VE</td>
-<td>Visa Electron</td>
+<td>AV_BB</td>
+<td>ath</td>
 </tr>
 <tr>
 <td></td>
-<td>CR_DN</td>
-<td>Diners Club</td>
+<td>AV_BO</td>
+<td>ath</td>
+</tr>
+<tr>
+<td></td>
+<td>AV_BP</td>
+<td>ath</td>
+</tr>
+<tr>
+<td></td>
+<td>BBVAC</td>
+<td>ath</td>
+</tr>
+<tr>
+<td></td>
+<td>BP_AM</td>
+<td>amex</td>
+</tr>
+<tr>
+<td></td>
+<td>BP_DN</td>
+<td>diners</td>
+</tr>
+<tr>
+<td></td>
+<td>BP_DS</td>
+<td>discover</td>
+</tr>
+<tr>
+<td></td>
+<td>BP_EL</td>
+<td>elo</td>
+</tr>
+<tr>
+<td></td>
+<td>BP_MC</td>
+<td>master</td>
+</tr>
+<tr>
+<td></td>
+<td>BP_VS</td>
+<td>visa</td>
+</tr>
+<tr>
+<td></td>
+<td>CAFAM</td>
+<td>cafam</td>
+</tr>
+<tr>
+<td></td>
+<td>CDNSA</td>
+<td>codensa</td>
+</tr>
+<tr>
+<td></td>
+<td>CMRFB</td>
+<td>falabella</td>
 </tr>
 <tr>
 <td></td>
 <td>CR_AM</td>
-<td>American Express</td>
+<td>amex</td>
 </tr>
 <tr>
 <td></td>
-<td>RM_MC</td>
-<td>MasterCard</td>
+<td>CR_CR</td>
+<td>credencial</td>
 </tr>
 <tr>
 <td></td>
-<td>TY_EX</td>
-<td>Tarjeta Éxito</td>
+<td>CR_DN</td>
+<td>diners</td>
 </tr>
 <tr>
 <td></td>
-<td>TY_AK</td>
-<td>Alkosto</td>
+<td>CR_VE</td>
+<td>visa_electron</td>
 </tr>
 <tr>
 <td></td>
-<td><em>PSE</em></td>
-<td>Débito a cuentas corrientes y ahorros (PSE)</td>
+<td>CR_VS</td>
+<td>visa</td>
 </tr>
 <tr>
 <td></td>
-<td>SFPAY</td>
-<td>Safety Pay</td>
+<td>DBTAC</td>
+<td>debito</td>
 </tr>
 <tr>
 <td></td>
-<td><em>ATH</em></td>
-<td>Corresponsales bancarios Grupo Aval</td>
+<td>DF_DN</td>
+<td>diners</td>
 </tr>
 <tr>
 <td></td>
-<td>AC_WU</td>
-<td>Western Union</td>
+<td>DF_DS</td>
+<td>discover</td>
+</tr>
+<tr>
+<td></td>
+<td>DF_MC</td>
+<td>master</td>
+</tr>
+<tr>
+<td></td>
+<td>DF_VS</td>
+<td>visa</td>
+</tr>
+<tr>
+<td></td>
+<td>DISCO</td>
+<td>discover</td>
+</tr>
+<tr>
+<td></td>
+<td>DVVND</td>
+<td>ath</td>
+</tr>
+<tr>
+<td></td>
+<td>EFCTY</td>
+<td>efecty</td>
+</tr>
+<tr>
+<td></td>
+<td>ENPCT</td>
+<td>cooperativa</td>
+</tr>
+<tr>
+<td></td>
+<td>GNOFC</td>
+<td>gana</td>
+</tr>
+<tr>
+<td></td>
+<td>GNPIN</td>
+<td>gana</td>
+</tr>
+<tr>
+<td></td>
+<td>GNRIS</td>
+<td>ris</td>
+</tr>
+<tr>
+<td></td>
+<td>ID_DN</td>
+<td>diners</td>
+</tr>
+<tr>
+<td></td>
+<td>ID_DS</td>
+<td>discover</td>
+</tr>
+<tr>
+<td></td>
+<td>ID_MC</td>
+<td>master</td>
+</tr>
+<tr>
+<td></td>
+<td>ID_VS</td>
+<td>visa</td>
+</tr>
+<tr>
+<td></td>
+<td>MSTRP</td>
+<td>masterpass</td>
+</tr>
+<tr>
+<td></td>
+<td>PBBVA</td>
+<td>ath</td>
+</tr>
+<tr>
+<td></td>
+<td>PINVL</td>
+<td>Pin Valida</td>
 </tr>
 <tr>
 <td></td>
@@ -4085,58 +4291,73 @@ Las convenciones son: <code>R</code> (requerida), <code>O</code> (opcional), <co
 </tr>
 <tr>
 <td></td>
+<td>RM_MC</td>
+<td>master</td>
+</tr>
+<tr>
+<td></td>
+<td>SOMOS</td>
+<td>somos</td>
+</tr>
+<tr>
+<td></td>
+<td>SB_VS</td>
+<td>visa</td>
+</tr>
+<tr>
+<td></td>
+<td>SFPAY</td>
+<td>safetypay</td>
+</tr>
+<tr>
+<td></td>
+<td>SPGRS</td>
+<td>supergiros</td>
+</tr>
+<tr>
+<td></td>
 <td>T1_BC</td>
-<td>Bancolombia Recaudos</td>
+<td>ath</td>
 </tr>
 <tr>
 <td></td>
-<td>AV_BO</td>
-<td>Banco de Occidente Recaudos</td>
+<td>T1_CV</td>
+<td>ath</td>
 </tr>
 <tr>
 <td></td>
-<td>AV_AV</td>
-<td>Banco AV Villas Recaudos</td>
+<td>TY_AK</td>
+<td>exito</td>
 </tr>
 <tr>
 <td></td>
-<td>AV_BB</td>
-<td>Banco de Bogotá Recaudos</td>
+<td>TY_EX</td>
+<td>alkosto</td>
 </tr>
 <tr>
 <td></td>
 <td>VISAC</td>
-<td>Visa Checkout</td>
+<td>visa_checkout</td>
 </tr>
 <tr>
 <td></td>
-<td>GNPIN</td>
-<td>GanaPIN</td>
+<td>V_VBV</td>
+<td>Verified by visa</td>
 </tr>
 <tr>
 <td></td>
-<td>GNRIS</td>
-<td>Tarjeta RIS</td>
-</tr>
-<tr>
-<td></td>
-<td>MSTRP</td>
-<td>Masterpass</td>
-</tr>
-<tr>
-<td></td>
-<td>DBTAC</td>
-<td>Registro cuentas débito</td>
+<td><em>ATH</em></td>
+<td>ath</td>
 </tr>
 <tr>
 <td></td>
 <td><em>PPD</em></td>
-<td>Débito pre-autorizado (PPD)</td>
+<td>ppd</td>
 </tr>
 <tr>
 <td></td>
-<td>CDNSA</td>
-<td>Codensa</td>
+<td><em>PSE</em></td>
+<td>pse</td>
 </tr>
 <tr>
 <td>Ecuador</td>
