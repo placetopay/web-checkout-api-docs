@@ -76,19 +76,27 @@ displayOn | O | O | O | - | O | - | O
 
 ### Tarjeta de pruebas
 
-Franquicia | Número | Comportamiento
------------|--------|----------------
-Diners | 36545400000008 | Aprueba
-Diners | 36545400000248 | Rechaza
-Diners | 36545400000438 | Se tarda 5 minutos en aprobar
-Diners | 36545400000701 | Deja la transacción en estado pendiente y al resolverse se aprueba
-Diners | 36545407030701 | Deja la transacción en estado pendiente y al resolverse se rechaza
-Visa | 4110770010002837 | Aprueba
-Visa | 4111111111111111 | Aprueba
-Visa | 4012888888881881 | Aprueba
+Franchise | Card number | Comportamiento
+----------|-------------|---------------
 Visa | 4005580000000040 | Rechaza
-Visa | 4666666666666669 | Se tarda 5 minutos en aprobar
+Visa | 4007000000027 | Aprueba
+Visa | 4111111111111111 | Aprueba
+Visa | 4212121212121214 | Deja la operación pendiente como modo de captura, la operación debe ser autorizada o cancelada en el panel de Place to Pay  o de otra manera por operaciones de VOID o SETTLE.
+Visa | 4666666666666669 | Este toma 5 minutos para autorizar. La idea es simular un tiempo de espera en su autorización. Así que el servicio de consumo fallará por el tiempo, lo que obligará al uso del Webservice para verificar cuando la operación completa su proceso. Tenga en cuenta los tiempos de consumo de Webservice.
 Visa | 36545407032780 | Deja la operación en estado Manual (se debe aprobar o rechazar desde la consola)
+MasterCard | 5424000000000015 | Aprueba
+MasterCard Credencial (BCO) | 540625 10 00 00 00 08 | Autoriza
+AmericanExpress | 370000000000002 | Autoriza
+Diners | 36018623456787 | Autoriza
+BBVA Club Campestre | 8130010000000000 | Autoriza
+Visa Electron (Debit card) | 4027390000000006 | Autoriza
+Visa Electron (Debit card) | 4215440000000001 | Declina
+Codensa | 5907120000000009 | Declina
+Tarjeta RIS | 6372000000000007 | Declina 
+
+<aside class="notice">
+Los número de tarjetas solo tienen dicho comportamiento en el ambiente de pruebas.
+</aside>
 
 ### Métodos de Pago Códigos.
     Esta es una lista de las franquicias disponibles en redirección.
