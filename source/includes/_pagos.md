@@ -496,11 +496,6 @@ POST /api/session/181348
                     "displayOn": "none"
                 },
                 {
-                    "keyword": "bin",
-                    "value": "411111",
-                    "displayOn": "none"
-                },
-                {
                     "keyword": "installments",
                     "value": "1",
                     "displayOn": "none"

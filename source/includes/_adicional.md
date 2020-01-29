@@ -101,66 +101,66 @@ Los número de tarjetas solo tienen dicho comportamiento en el ambiente de prueb
 ### Métodos de Pago Códigos.
     Esta es una lista de las franquicias disponibles en redirección.
 
-País | Franquicia  | Método de pago
------|--------|---------------
-Colombia | AC_WU | ath
- | AV_AV | ath
- |AV_BB | ath
- | AV_BO | ath
- | AV_BP | ath
- | BBVAC | ath
- | BP_AM | amex
- | BP_DN | diners
- | BP_DS | discover
- | BP_EL | elo
- | BP_MC | master
- | BP_VS | visa
- | CAFAM | cafam
- | CDNSA | codensa
- | CMRFB | falabella
- | CR_AM | amex
- | CR_CR | credencial
- | CR_DN | diners
- | CR_VE | visa_electron
- | CR_VS | visa
- | DBTAC | debito
- | DF_DN | diners
- | DF_DS | discover
- | DF_MC | master
- | DF_VS | visa
- | DISCO | discover
- | DVVND | ath
- | EFCTY | efecty
- | ENPCT | cooperativa
- | GNOFC | gana
- | GNPIN | gana
- | GNRIS | ris
- | ID_DN | diners
- | ID_DS | discover
- | ID_MC | master
- | ID_VS | visa
- | MSTRP | masterpass
- | PBBVA | ath
- | PINVL | Pin Valida
- | PYPAL | PayPal
- | RM_MC | master
- | SOMOS | somos
- | SB_VS | visa
- | SFPAY | safetypay
- | SPGRS | supergiros
- | T1_BC | ath
- | T1_CV | ath
- | TY_AK | exito
- | TY_EX | alkosto
- | VISAC | visa_checkout
- | V_VBV | Verified by visa
- | _ATH_ | ath
- | _PPD_ | ppd
- | _PSE_ | pse
-Ecuador  | ID_VS | Visa
-         | ID_MC | Mastercard
-         | ID_DN | Diners
-         | ID_DS | Discover
+País | Franquicia  | Método de pago | Descripción
+-----|-------------|----------------|------------
+Colombia | AC_WU | ath | Wester Union
+ | AV_AV | ath | Banco AV Villas Recaudos
+ |AV_BB | ath | Banco de Bogotá Recaudos
+ | AV_BO | ath | Banco de Occidente Recaudos
+ | AV_BP | ath |
+ | BBVAC | ath |
+ | BP_AM | amex |
+ | BP_DN | diners |
+ | BP_DS | discover |
+ | BP_EL | elo |
+ | BP_MC | master | 
+ | BP_VS | visa | 
+ | CAFAM | cafam | 
+ | CDNSA | codensa | Codensa
+ | CMRFB | falabella | 
+ | CR_AM | amex | American Express
+ | CR_CR | credencial | Credencial Banco de Occidente
+ | CR_DN | diners | Diners Club
+ | CR_VE | visa_electron | Visa Electron
+ | CR_VS | visa | Visa
+ | DBTAC | debito | Registro cuentas débito
+ | DF_DN | diners | 
+ | DF_DS | discover | 
+ | DF_MC | master | 
+ | DF_VS | visa | 
+ | DISCO | discover | Disvover
+ | DVVND | ath | 
+ | EFCTY | efecty | Efecty
+ | ENPCT | cooperativa | 
+ | GNOFC | gana |
+ | GNPIN | gana | GanaPIN
+ | GNRIS | ris | Tarjeta RIS
+ | ID_DN | diners | 
+ | ID_DS | discover | 
+ | ID_MC | master | 
+ | ID_VS | visa | 
+ | MSTRP | masterpass | Masterpass
+ | PBBVA | ath | 
+ | PINVL | Pin Valida | 
+ | PYPAL | PayPal | PayPal
+ | RM_MC | master | MasterCard
+ | SOMOS | somos |
+ | SB_VS | visa |
+ | SFPAY | safetypay | Safety Pay
+ | SPGRS | supergiros | 
+ | T1_BC | ath | Bancolombia Recaudos
+ | T1_CV | ath | 
+ | TY_AK | Alkosto | Alkosto
+ | TY_EX | Exito | Tarjeta Éxito
+ | VISAC | visa_checkout | Visa Checkout
+ | V_VBV | Verified by visa | 
+ | _ATH_ | ath | Corresponsales bancarios Grupo Aval
+ | _PPD_ | ppd | Débito pre-autorizado (PPD)
+ | _PSE_ | pse | Débito a cuentas corrientes y ahorros (PSE)
+Ecuador  | ID_VS | Visa |
+         | ID_MC | Mastercard |
+         | ID_DN | Diners |
+         | ID_DS | Discover |
 
 ### Tipos de documento
 Ésta es una lista de los tipos de documentos aceptados por redirección.
