@@ -107,7 +107,7 @@ Colombia | AC_WU | ath | Wester Union
  | AV_AV | ath | Banco AV Villas Recaudos
  |AV_BB | ath | Banco de Bogotá Recaudos
  | AV_BO | ath | Banco de Occidente Recaudos
- | AV_BP | ath |
+ | AV_BP | ath | Banco popular Recaudos
  | BBVAC | ath |
  | BP_AM | amex |
  | BP_DN | diners |

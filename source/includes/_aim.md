@@ -23,6 +23,7 @@ La implementación de este método se hizo pensando en minimizar el ancho de ban
 #### ¿En qué casos es mejor usar este tipo de integración?
 
 La integración AIM se recomienda únicamente en los casos que no sea factible que el usuario realice la transacción ingresando los datos sensibles en Placetopay o en donde se requiere un control particular de la operación.  Algunos ejemplos son:
+
 * Cobros recurrentes desde una base de datos propietaria.
 * Integración con un sistema de audiorespuesta.
 * Múltiples transacciones a diferentes recaudadores con la misma información del tarjetahabiente.
