@@ -173,7 +173,6 @@ Internacional | PPN | Pasaporte
 Colombia | CC | Cédula de ciudadanía
          | CE | Cédula de extranjería
          | TI | Tarjeta de identidad
-         | RC | Registro Civil
          | NIT | Número de Identificación Tributaria
          | RUT | Registro único tributario
 Ecuador | CI | Cédula de identidad
@@ -181,3 +180,8 @@ Ecuador | CI | Cédula de identidad
 Panamá | CIP | Cédula de identidad personal
 Brazil | CPF | Cadastro de Pessoas Físicas
 USA | SSN | Social security number
+Peru| DNI | DNI
+Costa Rica | CRCPF | Cédula personal física
+           | CPJ | Cédula personal juridica
+           | DIMEX | DIMEX- Docuemnto de identificación de Migración y Extranjería
+           | DIDI | DIDI - Docuemnto de identificación de diplomáticos
