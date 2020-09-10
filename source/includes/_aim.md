@@ -450,7 +450,7 @@ PARÁMETROS
 
 | Nombre | Tipo | Descripción
 |--------|------|------------
-| auth | [Authentication](#authentication) | Datos de autenticación.
+| auth | [Authentication](#authentication-colombia) | Datos de autenticación.
 | request | [QueryRequest](#queryrequest) | Parámetros para buscar la transacción.
 
 **Retorna** <br>

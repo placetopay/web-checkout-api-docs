@@ -199,7 +199,7 @@ PARÁMETROS
 
 | Nombre | Tipo                              | Descripción            |
 |--------|-----------------------------------|------------------------|
-| auth   | [Authentication](#authentication) | Datos de autenticación |
+| auth   | [Authentication](#authentication-colombia) | Datos de autenticación |
 
 **Retorna** <br>
 **[Bank[]](#bank).** Un arreglo con la lista de bancos habilitados.
@@ -220,7 +220,7 @@ PARÁMETROS
 
 | Nombre      | Tipo                                            | Descripción            |
 |-------------|-------------------------------------------------|------------------------|
-| auth        | [Authentication](#authentication)               | Datos de autenticación |
+| auth        | [Authentication](#authentication-colombia)               | Datos de autenticación |
 | transaction | [PSETransactionRequest](#psetransactionrequest) | Datos de la solicitud  |
 
 **Retorna** <br>
@@ -236,7 +236,7 @@ PARÁMETROS
 
 | Nombre      | Tipo                                                                  | Descripción            |
 |-------------|-----------------------------------------------------------------------|------------------------|
-| auth        | [Authentication](#authentication)                                     | Datos de autenticación |
+| auth        | [Authentication](#authentication-colombia)                                     | Datos de autenticación |
 | transaction | [PSETransactionMultiCreditRequest](#psetransactionmulticreditrequest) | Datos de la solicitud  |
 
 **Retorna** <br>
@@ -308,7 +308,7 @@ PARÁMETROS
 
 | Nombre        | Tipo                              | Descripción                                                                                                  |
 |---------------|-----------------------------------|--------------------------------------------------------------------------------------------------------------|
-| auth          | [Authentication](#authentication) | Datos de autenticación                                                                                       |
+| auth          | [Authentication](#authentication-colombia) | Datos de autenticación                                                                                       |
 | transactionID | int                               | Identificador único de la transacción en Placetopay, equivale al retornado en la creación de la transacción. |
 
 

@@ -1,0 +1,1827 @@
+## Authentication Ecuador
+
+Estructura que contiene la información de autenticación del sitio generada de acuerdo al WSSE UsernameToken Profile 1.1
+
+```shell
+
+Ejemplo:
+    Información proporcionada:
+    login = usuarioprueba 
+    tranKey = ABCD1234 
+   
+    Datos generados por el usuario:
+    nonce = 12345678 //Valor aleatorio para cada petición.
+    seed = 2019-04-25T18:17:23-04:00 // Fecha ISO 8601 (Y-m-d\TH:i:s\Z) or (Y-m-d\TH:i:sP) 
+
+    Datos a enviar:
+    tranKey = dsRL5wIymrySr9TgsYtxWZEIb5/RtW1v3n3xLqQZKj4= //Base64(SHA-256(nonce + seed + tranKey)) 
+    nonce = MTIzNDU2Nzg= //Base64(Nonce)
+
+    //El valor del trankey resultante es  Base64(SHA-256(nonce + seed + tranKey)) El nonce dentro del SHA-256 no es codificado en Base64, sólo está codificado como parámetro. 
+```
+
+```shell
+
+Ejemplo:
+POST /gateway/authentication
+
+{
+  "auth": { 
+    "login": "usuarioprueba", 
+    "tranKey": "dsRL5wIymrySr9TgsYtxWZEIb5/RtW1v3n3xLqQZKj4=", 
+    "nonce": "MTIzNDU2Nzg=", 
+    "seed": "2018-01-29T17:02:49-05:00"
+  }
+}
+```
+
+| Name | Type | Description |
+|-------|------|------------|
+| login	| string | Identificador del sitio a usar. |
+| tranKey |	string	| Digest Llave transaccional para el consumo de los servicios. |
+| nonce	| string | Valor aleatorio generado por cada petición en BASE64. |
+| seed	| string | Fecha de generación de esta estructura en [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html). |
+
+<aside class="notice">
+Ten en cuenta que nonce y seed son generados, el login y el secretKey son suministrados por PlacetoPay
+</aside>
+
+<aside class="notice">
+Para conectarse con la API REST, la autenticación debe fusionarse como parámetro auth con los datos de la petición.
+</aside>
+
+Ejemplo de autenticación: 
+ 
+Todas las solicitudes al web deben ser autenticadas con Web Services Security UsernameToken Profile 1.1. [https://www.oasis-open.org/committees/download.php/13392/wss-v1.1-spec-pr-
+UsernameTokenProfile-01.htm](https://www.oasis-open.org/committees/download.php/13392/wss-v1.1-spec-pr-UsernameTokenProfile-01.htm) 
+ 
+Usando PasswordDigest 
+
+(PasswordDigest = Base64 ( SHA-256 ( nonce + seed + tranKey ) ))
+
+## Webservice Credito Ecuador
+
+Aquí se describe un método de conexión a Placetopay basado en el envío de datos por método POST a la plataforma en una comunicación servidor servidor bajo un esquema REST.
+
+Este mecanismo sólo debe ser usado por aquellos clientes de la plataforma que requieren capturar la información del tarjeta habiente incluyendo los datos sensibles.
+
+### Descripción método
+
+El método de integración contempla las operaciones básicas para el procesamiento de tarjetas no presenciales, esto es tipos de crédito, intereses, generación de OTP, autorización, reverso.
+
+Principalmente, se describirán cada uno de los usos y los datos requeridos en la trama para cada uno de los casos.  La respuesta para cada operación está unificada en un solo tipo de trama resultante.
+
+Por defecto el lenguaje de las respuestas es en español, si se desea cambiar es necesario enviar el parámetro “locale” en las peticiones.
+
+
+### Flujo de integración AIM Ecuador
+
+*Cómo funciona la implementación?*
+
+1. Una vez se capture el número de tarjeta del usuario se realiza el consumo al servicio de información [<code>informationRequest</code>](#solicitud-de-informacion) enviándolo en la petición
+2.	Se analiza la respuesta del servicio para disponer las opciones que siguen.
+   *	Si la respuesta trae tipos de crédito [<code>credit</code>](#credit) se deben mostrar al usuario para permitirle seleccionar cual desea usar.
+   *	Si la respuesta tiene el parámetro <code>displayInterest</code> en true, se debe, una vez seleccionado un tipo de crédito, consumir el servicio de cálculo de intereses [<code>interestCalculation</code>](#calculo-de-intereses) y mostrar al usuario la respuesta, así cada vez que el usuario cambie de tipo de crédito.
+   *	Si la respuesta trae el parámetro <code>requireOtp</code> en true, se debe hacer el consumo al servicio de generación de OTP [<code>otpGeneration</code>](#generacion-de-otp) y obtener del usuario el código que será de 6 dígitos para enviarlo posteriormente en el servicio de validación de OTP [<code>otpValidate</code>](#validacion-de-otp) una vez se tenga una respuesta se enviará el resultado signature bajo el campo OTP de la solicitud de procesamiento.
+3.	Una vez se haya obtenido el tipo de crédito (si lo hay), el OTP (si se requiere) se consume el servicio de procesamiento de transacción [<code>processTransaction</code>](#procesamiento-de-transaccion) y se analiza la respuesta que puede ser final (aprobada, declinada o fallida) o que puede estar pendiente. En ambos casos se retornará un valor para internalReference que es muy importante almacenar porque le permitirá realizar consultas posteriores con el servicio [<code>queryTransaction</code>](#consulta-de-transaccion).
+   *    Si se aprobó la transacción es importante almacenar también el número de autorización, le permitirá realizar reversos posteriormente si fuese necesario.
+   *	Generalmente las transacciones son culminadas en un tiempo corto (menos de 3 seg), pero si la transacción queda en estado pendiente es importante tener un cron job o similar que esté consultando cada 5 minutos por las transacciones pendientes hasta que se resuelvan.
+
+
+#### ¿En qué casos es mejor implementar esta integración?
+
+La integración se recomienda únicamente en los casos que no sea factible que el usuario realice la transacción ingresando los datos sensibles en PlacetoPay o en donde se requiere un control particular de la operación:
+
+* Cobros recurrentes desde una base de datos propietaria.
+* Integración con un sistema de audiorespuesta.
+* Múltiples transacciones a diferentes recaudadores con la misma información del tarjetahabiente.
+* Interfaz móvil propietaria, no basada en HTML.
+* Integración con sistemas cuya entrada de los datos sensibles no la realice directamente el tarjetahabiente.
+
+#### ¿Qué obligaciones tengo al implementar esta integración?
+
+Tenga en cuenta que al implementar tipo de integración, usted está suministrando todos los datos del comprador incluyendo los datos sensibles de la tarjeta, este solo hecho requiere que la captura de la información sea por un mecanismo seguro que no ponga en peligro los datos del tarjetahabiente. Si la información la captura por una página Web, el punto donde se capturan estos datos debe estar sobre protocolo seguro HTTPS usando certificados de seguridad expedidos por una entidad certificadora acreditada.
+
+Si la captura la realiza por un Call Center, quien obtiene los datos sensibles debe ser un mecanismo de IVR (Interactive Voice Response) o audiorespuesta; esto implicaría un rompimiento en el proceso entre el proceso que realiza el operador con su CRM y el IVR quien captura los datos sensibles. Finalmente el CRM consolida los dos conjuntos de datos y los remite a Placetopay.
+
+Si la captura proviene de una base de datos de tarjetas previamente inscritas, asegúrese que esta información está encriptada por un mecanismo seguro de encriptación como AES o 3DES, desencripte solo en el momento en que construye la trama a ser enviada a Placetopay.
+
+<aside class="warning">
+Placetopay tiene servicios de tokenización que pueden ser usados.
+</aside>
+
+Tenga en cuenta que como regla general usted no debe almacenar el número de tarjeta, fecha de vencimiento y CVV2. Estos solo pueden tener persistencia durante la solicitud de la autorización, una vez procesada no deben ser almacenados.
+
+### Metodos de interfaz credito Ecuador
+
+Todos los consumos se realizan a la URL base, que será proporcionada por el área de operaciones y se le adiciona a dicha URL el endpoint del servicio a consumir.
+
+Por ejemplo si la URL base fuese https://placetopay.com para consumir el servicio se solicitud de información se realiza un POST con los datos del ejemplo a la URL https://placetopay.com/gateway/information.
+
+
+#### Solicitud de Información 
+<code>informationRequest</code>
+
+Este servicio proporciona información sobre la tarjeta del usuario que se va a procesar, tal como qué servicios son los que se usarán para ella y los tipos de crédito, si aplica, que hay para esta, si no hay tipos de crédito se retorna un arreglo vacío y si los hay, se debe iterar cada tipo de crédito con los installments que se encuentran en el arreglo.
+
+En el ejemplo de la respuesta hay un tipo de crédito “DIF PLUS PAGO TOTAL” y este tiene 3, 6, 9 ,12 en el arreglo de installments, se debe dar la opción al usuario de seleccionar.
+
+DIF PLUS PAGO TOTAL (3) meses
+DIF PLUS PAGO TOTAL (6) meses
+DIF PLUS PAGO TOTAL (9) meses
+DIF PLUS PAGO TOTAL (12) meses
+
+Y así sucesivamente, este es un ejemplo de como se muestran en el servicio de redirección en un <code>select</code>.
+
+<%= image_tag "images/serviciosRedireccionEC.png" %>
+
+```shell
+
+Ejemplo de petición:
+POST /gateway/information
+
+{
+  "auth": {
+    "login": "6dd490faf9cb87a9862245da41170ff2",
+    "tranKey": "/K9f7yJpyptkPrADFWoWYsO5yZU=",
+    "nonce": "WW1aa01XWXlOVEEzT1RoalptSmpOalEzT1dNd05UTXlZMkUwWlRRME1UVT0=",
+    "seed": "2018-01-29T17:09:38-05:00"
+  },
+  "instrument": {
+    "card": {
+      "number": "36545400000008"
+    }
+  },
+  "payment": {
+    "reference": "testing_12",
+    "amount": {
+      "total": 12.10,
+      "currency": "USD"
+    }
+  }
+}
+
+```
+PARÁMETROS
+
+| Nombre | Tipo                              | Descripción               |
+|--------|-----------------------------------|---------------------------|
+| locale | string                            | Definido con los códigos [ISO 639-1](https://es.wikipedia.org/wiki/ISO_639-1) y Código del país acorde a [ISO 3166-1](http://www.iso.org/iso/english_country_names_and_code_elements). alpha-2 (2-letras del país). ej. en_US, es_EC, es_CO. |
+| auth   | [Authentication](#authentication-ecuador) | datos de autenticación del sitio. |
+| instrument | [Instrument](#instrument) | Estructura de entrada para la tarjeta o token. |
+| payment |	[Payment](#payment) | Información simple del cobro a realizar. |
+
+
+```shell
+
+Ejemplo de respuesta:
+POST /gateway/information
+
+{
+    "status": {
+        "status": "OK",
+        "reason": 0,
+        "message": "La petición se ha procesado correctamente",
+        "date": "2018-02-05T21:16:00-05:00"
+    },
+    "provider": "INTERDIN",
+    "cardTypes": [
+        "C"
+    ],
+    "displayInterest": true,
+    "requireOtp": true,
+    "requireCvv2": true,
+    "threeDS": "unsupported",
+    "credits": [
+        {
+            "code": 1,
+            "type": "00",
+            "groupCode": "C",
+            "installments": [
+                1
+            ],
+            "installment": 1,
+            "description": "CORRIENTE"
+        },
+        {
+            "code": 1,
+            "type": "01",
+            "groupCode": "D",
+            "installments": [
+                3
+            ],
+            "installment": 3,
+            "description": "DIFERIDO CORRIENTE"
+        },
+        {
+            "code": 1,
+            "type": "22",
+            "groupCode": "M",
+            "installments": [
+                12,
+                9,
+                6,
+                3
+            ],
+            "installment": 12,
+            "description": "DIF PLUS PAGO TOTAL"
+        },
+        {
+            "code": 1,
+            "type": "02",
+            "groupCode": "P",
+            "installments": [
+                24,
+                21,
+                18,
+                15,
+                12,
+                9,
+                6,
+                3
+            ],
+            "installment": 24,
+            "description": "DIFERIDO PROPIO"
+        },
+        {
+            "code": 1,
+            "type": "03",
+            "groupCode": "X",
+            "installments": [
+                3
+            ],
+            "installment": 3,
+            "description": "PLAN PAGOS ESPECIAL"
+        }
+    ]
+}
+
+```
+
+**Retorna**
+
+| Nombre | Tipo                              | Descripción               |
+|--------|-----------------------------------|---------------------------|
+| status |	[Status](#status) |Información del estado de la petición. |
+| provider | string	| Determina el proveedor que procesa la transacción (INTERDIN, DATAFAST, BANRED). |
+| cardTypes	| string[] | Tipos de tarjeta soportados. |
+| requireOtp | bool	| Determina si se necesita un OTP para procesar. |
+| requireCvv2 | bool | Determina si se requiere obtener el CVV2 del usuario. |
+| threeDS | string	| Determina si la tarjeta requiere una autenticación previa con el servicio de 3DSecure (unsupported, required, optional). |
+| credits | Credit[] | Arreglo de tipos de crédito disponibles, arreglo vacío si no es soportado por el proveedor. |
+
+
+#### Consumo de 3DS 
+<code>mpiLookup</code>
+
+Este servicio se consume si es necesario la autenticación en el servicio de 3DS para la tarjeta provista por el cliente (threeDS en required, optional) el cual indica que si está enrolada la tarjeta.
+
+```shell
+
+Ejemplo de petición:
+POST /gateway/mpi/lookup
+
+{ 
+    "auth": { 
+        "login": "c4ca4238a0b923820dcc509a6f75849b", 
+        "tranKey": "8z3bUNae48+33mo7+Sr4mqpYOE0DK4OC3Ml2axs8Fjo=", 
+        "nonce": "WHQ5bGpNZXFYM21yeno2Tg==", 
+        "seed": "2019-05-08T09:09:16-05:00" 
+    }, 
+    "payment": { 
+        "reference": "1234567890", 
+        "description": "Testing Payment", 
+        "amount": { 
+            "currency": "USD", 
+            "total": 3000 
+        } 
+    }, 
+    "instrument": { 
+        "card": { 
+            "number": "4111111111111111", 
+      "expirationMonth":"12", 
+      "expirationYear":"21", 
+      "cvv": "123" 
+  } 
+}, 
+"returnUrl": "https://www.yoursite.com" 
+} 
+
+```
+PARÁMETROS
+
+| Nombre | Tipo                              | Descripción               |
+|--------|-----------------------------------|---------------------------|
+| auth   | [Authentication](#authentication-ecuador) | datos de autenticación del sitio. |
+| instrument | [Instrument](#instrument) | Estructura de entrada para la tarjeta o token. |
+| payment |	[Payment](#payment) | Información simple del cobro a realizar. |
+| returnUrl | String 	| URL para retornar cuando el cliente termine la operación. |
+
+```shell
+
+Ejemplo de respuesta:
+POST /gateway/mpi/lookup
+
+{ 
+    "status": { 
+        "status": "OK", 
+        "reason": "00", 
+        "message": "La petici\u00f3n se ha procesado correctamente", 
+        "date": "2019-05-08T09:13:23-05:00" 
+    }, 
+    "data": { 
+        "enrolled": "Y", 
+        "redirectUrl": "https://3ds-mpi.placetopay.com/the_url_to_validate", 
+        "identifier": 1, 
+        "eci": null, 
+        "formData": null 
+    } } 
+
+```
+
+**Retorna**
+
+| Nombre | Tipo                              | Descripción               |
+|--------|-----------------------------------|---------------------------|
+| status |	[Status](#status) |Información del estado de la petición. |
+| instrument | [Instrument](#instrument) |	Estructura de entrada para la tarjeta o token. |
+| payment | [Payment](#payment) |	Información simple del cobro a realizar. |
+| Id | String |	Identificador de la sesión de la redirección de 3DS. |
+
+#### Consulta de 3DS
+<code>mpiQuery</code>
+
+Este método se debe consumir al momento de volver de la redirección  de la validación de 3DS, se debe de enviar en el parámetro de “id”  lo obtuvimos en el método “Consumo de 3DS” en el parámetro “identifier” para obtener la información de la validación. 
+
+```shell
+
+Ejemplo de petición:
+POST /gateway/mpi/query
+
+"auth": { 
+        "login": "c4ca4238a0b923820dcc509a6f75849b", 
+        "tranKey": "j6MxdO3aNNd6tgWbAv2J0GU94iIcJvi55RgsbqHDSf8=", 
+        "nonce": "YmZ1c05zSUt4MTVzSm9ncw==", 
+        "seed": "2019-05-08T09:17:26-05:00" 
+    }, 
+    "instrument": { 
+        "card": { 
+            "number": "4532840681197602", 
+            "expiration": "12/20", 
+            "cvv": "123" 
+        } 
+    }, 
+    "id": 1 
+}
+
+```
+PARÁMETROS
+
+| Nombre | Tipo                              | Descripción               |
+|--------|-----------------------------------|---------------------------|
+| auth   | [Authentication](#authentication-ecuador) | datos de autenticación del sitio. |
+| instrument | [Instrument](#instrument) | Estructura de entrada para la tarjeta o token. |
+| payment |	[Payment](#payment) | Información simple del cobro a realizar. |
+| Id | String |	Identificador de la sesión de la redirección de 3DS. |
+
+```shell
+
+Ejemplo de respuesta:
+POST /gateway/mpi/query
+
+{ 
+    "status": { 
+        "status": "OK", 
+        "reason": "00", 
+        "message": "La petici\u00f3n se ha procesado correctamente", 
+        "date": "2019-05-08T09:17:26-05:00" 
+    }, 
+    "data": { 
+        "enrolled": "Y", 
+        "authenticated": "Y", 
+        "validSignature": true, 
+        "eci": "05", 
+        "cavv": "AAACCZJiUGVlF4U5AmJQEwAAAAA=", 
+        "xid": "Z8UuHYF8Epz46M8V/MkGJDl2Y5E=" 
+    } }
+
+```
+
+**Retorna**
+
+| Nombre | Tipo                              | Descripción               |
+|--------|-----------------------------------|---------------------------|
+| status |	[Status](#status) |Información del estado de la petición. |
+| enrolled | String |	Determina el estado del enrolamiento de la tarjeta de usuario. |
+|          |        | Y: 	la 	autenticación 	está 	disponible. |
+|          |        | N: la autenticación no está disponible. 
+|          |        | U: No se puede saber la disponibilidad de la autenticación. |
+| authenticated |	String | validSignature 	boolean 	Al comunicarse con el ACS, las firmas de mensajes deben validarse, este parámetro indica el resultado de esa validación. 
+| eci 	| number |	Indica el nivel de seguridad y el resultado de la autorización 3DS. |
+| cavv | String |	Valor de verificación de autenticación del titular de la tarjeta. |
+| xid | String | Identificador de transacción resultante del proceso de autenticación. |
+
+#### Cálculo de Intereses 
+<code>interesCalculation</code>
+
+Este servicio se debe consumir si la tarjeta requiere que se muestren los intereses <code>displayInterest</code> en <code>true</code> y como ejemplo de esta manera se muestran los valores en el servicio de redirección.
+
+<%= image_tag "images/EcCaculoInteres.png" %>
+
+```shell
+
+Ejemplo de petición:
+POST /gateway/interests
+
+{
+  "auth": {
+    "login": "6dd490faf9cb87a9862245da41170ff2",
+    "tranKey": "/K9f7yJpyptkPrADFWoWYsO5yZU=",
+    "nonce": "WW1aa01XWXlOVEEzT1RoalptSmpOalEzT1dNd05UTXlZMkUwWlRRME1UVT0=",
+    "seed": "2018-01-29T17:09:38-05:00"
+  },
+  "instrument": {
+    "card": {
+      "number": "36545400000008"
+    },
+    "credit": {
+      "code": 1,
+      "type": "22",
+      "groupCode": "M",
+      "installment": 12
+    }
+  },
+  "payment": {
+    "reference": "testing_12",
+    "amount": {
+      "total": 120.10,
+      "currency": "USD"
+    }
+  }
+}
+
+
+```
+PARÁMETROS
+
+| Nombre | Tipo                              | Descripción               |
+|--------|-----------------------------------|---------------------------|
+| locale | string | Definido con los códigos [ISO 639-1](https://es.wikipedia.org/wiki/ISO_639-1) y Código del país acorde a [ISO 3166-1](http://www.iso.org/iso/english_country_names_and_code_elements). alpha-2 (2-letras del país). ej. en_US, es_EC, es_CO. |
+| auth	| [Authentication](#authentication-ecuador) | Información de autenticación del sitio. |
+| instrument | [Instrument](#instrument) | Estructura de entrada para la tarjeta o token. |
+| payment | [Payment](#payment) | Información simple del cobro a realizar. |
+
+
+```shell
+
+Ejemplo de respuesta:
+POST /gateway/interests
+
+{
+    "status": {
+        "status": "OK",
+        "reason": 0,
+        "message": "La petición se ha procesado correctamente",
+        "date": "2018-02-05T21:18:11-05:00"
+    },
+    "provider": "INTERDIN",
+    "values": {
+        "original": 120.1,
+        "installment": 0,
+        "interest": 2.7622999999999998,
+        "total": 122.86229999999999
+    },
+    "conversion": null
+}
+
+```
+
+**Retorna**
+
+| Nombre | Tipo                              | Descripción               |
+|--------|-----------------------------------|---------------------------|
+| status |	[Status](#status) | Información del estado de la petición. |
+| provider	| string | Determina el proveedor que procesa la transacción (INTERDIN, DATAFAST, BANRED).
+| values | [InterestValues](#interestValues)| Valores para el monto y el tipo de crédito enviado. |
+| conversion | [AmountConversion](#amountConversion) | Si se realiza una conversión de moneda se proporciona la información de dicha conversion, null si no se realizó. |
+
+
+#### Generación de OTP 
+<code>otpGeneration</code>
+
+Este servicio se consume si es necesario el otp para la tarjeta provista por el cliente <code>requireOtp</code> en <code>true</code> y debe permitirsele al usuario ingresar el OTP para enviarlo posteriormente en el servicio de procesamiento, a manera de ejemplo de esta manera se captura en la interfaz de redirección.
+
+<%= image_tag "images/EcOTP.png" %>
+
+```shell
+
+Ejemplo de petición:
+POST /gateway/otp/generate
+
+{
+  "auth": {
+    "login": "6dd490faf9cb87a9862245da41170ff2",
+    "tranKey": "+ZmLlE0ZgHa/C9wxTfDaHHIjb4krPxj/zQzpJsmI81w=",
+    "nonce": "TldFeFpqZGpPRE5rTVRNd1pUUTJPREZoTTJNeE1UYzFOekJsWVRVNFl6TT0=",
+    "seed": "2018-03-06T10:43:36-05:00"
+  },
+  "instrument": {
+    "card": {
+      "number": "36545400000008"
+    }
+  },
+  "payment": {
+    "reference": "testing_12",
+    "amount": {
+      "total": 120.10,
+      "currency": "USD"
+    }
+  }
+}
+
+```
+PARÁMETROS
+
+| Nombre | Tipo                              | Descripción               |
+|--------|-----------------------------------|---------------------------|
+| locale | string | Definido con los códigos [ISO 639-1](https://es.wikipedia.org/wiki/ISO_639-1) y Código del país acorde a [ISO 3166-1](http://www.iso.org/iso/english_country_names_and_code_elements). alpha-2 (2-letras del país). ej. en_US, es_EC, es_CO. |
+| auth	| [Authentication](#authentication-ecuador) | Información de autenticación del sitio. |
+| instrument | [Instrument](#instrument) | Estructura de entrada para la tarjeta o token. |
+
+```shell
+
+Ejemplo de respuesta:
+POST /gateway/otp/generate
+
+{
+    "status": {
+        "status": "OK",
+        "reason": 0,
+        "message": "La petición se ha procesado correctamente",
+        "date": "2018-02-05T21:20:37-05:00"
+    },
+    "provider": "INTERDIN"
+}
+
+```
+
+**Retorna**
+
+| Nombre | Tipo                              | Descripción               |
+|--------|-----------------------------------|---------------------------|
+| status |	[Status](#status) | Información del estado de la petición. |
+| provider	| string | Determina el proveedor que procesa la transacción (INTERDIN, DATAFAST, BANRED). |
+
+
+#### Validación de OTP 
+<code>otpValidation</code>
+
+Permite validar que el OTP provisto concuerde con el enviado por el proveedor, de ser así se retornará un valor “signature” que debe enviarse en la petición de procesamiento como “otp” esto con el fin de que se tome en cuenta a la hora de analizar la transacción por los filtros de seguridad. |
+
+```shell
+
+Ejemplo de petición:
+POST /gateway/otp/validate
+
+{
+  "auth": {
+    "login": "6dd490faf9cb87a9862245da41170ff2",
+    "tranKey": "/K9f7yJpyptkPrADFWoWYsO5yZU=",
+    "nonce": "WW1aa01XWXlOVEEzT1RoalptSmpOalEzT1dNd05UTXlZMkUwWlRRME1UVT0=",
+    "seed": "2018-01-29T17:09:38-05:00"
+  },
+  "instrument": {
+    "card": {
+      "number": "36545400000008"
+    },
+    "otp": "123456"
+  },
+  "payment": {
+  	"reference": "TEST_20171108_144400",
+    "amount": {
+      "total": 120.10,
+      "currency": "USD"
+    }
+  }
+}
+
+```
+PARÁMETROS
+
+| Nombre | Tipo                              | Descripción               |
+|--------|-----------------------------------|---------------------------|
+| locale | string | Definido con los códigos [ISO 639-1](https://es.wikipedia.org/wiki/ISO_639-1) y Código del país acorde a [ISO 3166-1](http://www.iso.org/iso/english_country_names_and_code_elements). alpha-2 (2-letras del país). ej. en_US, es_EC, es_CO. |
+| auth	| [Authentication](#authentication-ecuador) | Información de autenticación del sitio. |
+| instrument | [Instrument](#instrument) | Estructura de entrada para la tarjeta o token. |
+| payment | [Payment](#payment) | Información simple del cobro a realizar. |
+
+```shell
+
+Ejemplo de respuesta:
+POST /gateway/otp/validate
+
+{
+    "status": {
+        "status": "OK",
+        "reason": 0,
+        "message": "OTP Validation successful",
+        "date": "2018-07-19T08:59:57-05:00"
+    },
+    "provider": "INTERDIN"
+    "signature": "a8ecc59c2510a8ae27e1724ebf4647b5",
+    "validated": true
+}
+
+```
+
+**Retorna**
+
+| Nombre | Tipo                              | Descripción               |
+|--------|-----------------------------------|---------------------------|
+| status |	[Status](#status) | Información del estado de la petición. |
+| provider	| string | Determina el proveedor que procesa la transacción (INTERDIN, DATAFAST, BANRED). |
+| signature | string | Firma asignada a la comprobación de OTP de la transacción, necesaria para los filtros de seguridad, vacío en caso de no proporcionar el OTP correcto. |
+| validated | bool | Determina si el OTP ha sido verificado.
+
+#### Procesamiento de transacción
+<code>processTransaction</code>
+
+Este servicio permite que se realice el cobro a la tarjeta del usuario, los parámetros del instrument son variables, si no se pide tipo de crédito ni otp no es necesario enviar esas variables, payer es siempre requerido, buyer es opcional pero recomendado.
+
+Por cuestiones de certificación, especialmente con Interdin es necesario mostrarle una vez terminado el proceso la respuesta al usuario, este es un ejemplo de como se muestra en redirección, la forma no importa tanto como los datos que deben estar presentes.
+
+<%= image_tag "images/EcProcessTx.png" %>
+
+```shell
+
+Ejemplo de petición:
+POST /gateway/process
+
+{
+  "auth": {
+    "login": "45974e82a3867355d3471bc4a1f18a1c",
+    "tranKey": "/K9f7yJpyptkPrADFWoWYsO5yZU=",
+    "nonce": "WW1aa01XWXlOVEEzT1RoalptSmpOalEzT1dNd05UTXlZMkUwWlRRME1UVT0=",
+    "seed": "2018-01-29T17:09:38-05:00"
+  },
+  "locale": "es_EC",
+  "payment": {
+    "reference": "TEST_20171108_144400",
+    "description": "Ipsam quia sunt dolore minus atque blanditiis corrupti.",
+    "amount": {
+      "taxes": [
+        {
+          "kind": "ice",
+          "amount": 4.8,
+          "base": 40
+        },
+        {
+          "kind": "valueAddedTax",
+          "amount": 7.6,
+          "base": 40
+        }
+      ],
+      "details": [
+        {
+          "kind": "shipping",
+          "amount": 2
+        },
+        {
+          "kind": "tip",
+          "amount": 2
+        },
+        {
+          "kind": "subtotal",
+          "amount": 40
+        }
+      ],
+      "currency": "USD",
+      "total": 56.4
+    }
+  },
+  "ipAddress": "127.0.0.1",
+  "userAgent": "Mozilla/5.0 USER_AGENT HERE",
+  "additional": {
+    "SOME_ADDITIONAL": "http://example.com/yourcheckout",
+  },
+  "instrument": {
+    "card": {
+      "number": "36545400000008",
+      "expirationMonth": "12",
+      "expirationYear": "21",
+      "cvv": "123"
+    },
+    "credit": {
+      "code": "1",
+      "type": "02",
+      "groupCode": "P",
+      "installment": "24"
+    },
+    "otp": "a8ecc59c2510a8ae27e1724ebf4647b5"
+  },
+  "payer": {
+    "document": "8467451900",
+    "documentType": "CC",
+    "name": "Miss Delia Schamberger Sr.",
+    "surname": "Wisozk",
+    "email": "tesst@gmail.com",
+    "mobile": "3006108300"
+  },
+  "buyer": {
+    "document": "8467451900",
+    "documentType": "CC",
+    "name": "Miss Delia Schamberger Sr.",
+    "surname": "Wisozk",
+    "email": "tesst@gmail.com",
+    "mobile": "3006108300"
+  }
+}
+
+```
+PARÁMETROS
+
+| Nombre | Tipo                              | Descripción               |
+|--------|-----------------------------------|---------------------------|
+| auth	| [Authentication](#authentication-ecuador) | Información de autenticación del sitio. |
+| locale | string | Definido con los códigos [ISO 639-1](https://es.wikipedia.org/wiki/ISO_639-1) y Código del país acorde a [ISO 3166-1](http://www.iso.org/iso/english_country_names_and_code_elements). alpha-2 (2-letras del país). ej. en_US, es_EC, es_CO. |
+| payment | [Payment](#payment) | Información simple del cobro a realizar. |
+| instrument | [Instrument](#instrument) | Estructura de entrada para la tarjeta o token. |
+| payer	| [Person](#person) | Información del pagador. |
+| buyer	| [Person](#person) | Información del comprador. |
+| ipAddress	| string | IP del usuario que realiza la transacción. |
+| userAgent	| string | <code>userAgent</code> del usuario que realiza la transacción. |
+| additional | string[]	| Arreglo clave valor de datos que se deseen adicionar y que serán almacenados. |
+
+```shell
+
+Ejemplo de respuesta:
+POST /gateway/process
+
+{
+    "status": {
+        "status": "APPROVED",
+        "reason": "00",
+        "message": "Aprobada",
+        "date": "2018-02-05T21:22:28-05:00"
+    },
+    "internalReference": 1449217014,
+    "reference": "TEST_20171108_144400",
+    "paymentMethod": "ID_DN",
+    "franchise": "diners",
+    "franchiseName": "Diners",
+    "issuerName": "Diners Club",
+    "amount": {
+        "currency": "COP",
+        "total": 159939.56
+    },
+    "conversion": {
+        "from": {
+            "currency": "COP",
+            "total": 159939.56
+        },
+        "to": {
+            "currency": "USD",
+            "total": 56.43
+        },
+        "factor": 0.00035282077804890796
+    },
+    "authorization": "000000",
+    "receipt": 1449217014,
+    "type": "AUTH_ONLY",
+    "refunded": false,
+    "lastDigits": "0008",
+    "provider": "INTERDIN",
+    "discount": null,
+    "processorFields": [],
+    "additional": {
+        "credit": {
+            "code": "1",
+            "type": "02",
+            "groupCode": "P",
+            "installments": "24"
+        },
+        "totalAmount": 57.72789,
+        "interestAmount": 1.29789,
+        "installmentAmount": 0,
+        "iceAmount": 0
+    }
+}
+
+```
+
+**Retorna**
+
+| Nombre | Tipo                              | Descripción               |
+|--------|-----------------------------------|---------------------------|
+| status |	[Status](#status) | Información del estado de la petición. |
+| provider	| string | Determina el proveedor que procesa la transacción (INTERDIN, DATAFAST, BANRED). |
+| internalReference	| bigint | Código único que identifica la transacción en los sistemas de PlacetoPay. |
+| reference	| string | Referencia provista por el comercio. |
+| paymentMethod	| string(5)	| Código que identifica el medio de pago usado. |
+| franchise	| string | Código de franquicia usado en la transacción (diners, visa, master, discover, amex). |
+| franchiseName	| string | Nombre de la franquicia usada. |
+| issuerName | string | Nombre del banco emisor de la tarjeta usada de acuerdo a nuestro listado de bines. |
+| amount | [Amount](#amount) | Valores asociados a la transacción. |
+| conversion | [AmountConversion](#amountConversion) | Valores de conversión usados para la transacción, siempre presente aunque no se realice cambio de moneda. |
+| authorization	| string | Código de autorización generado por el proveedor. |
+| receipt | string | Código de recibido de la petición de transacción. |
+| type | string | Identifica el funcionamiento de la transacción. |
+|      |        | AUTH_ONLY = Captura normal. |
+|      |        | CAPTURE_ONLY = La transacción debe ser aprobada desde la consola. |
+| refunded | bool | Determina si se ha realizado un reverso sobre esta transacción. |
+| lastDigits | string | Últimos 4 dígitos de la tarjeta empleada. |
+| additional | array | Datos adicionales empleados en la transacción. |
+
+#### Procesamiento de transacción seguro 
+<code>safeProcessTransaction</code>
+
+Método de procesamiento que requiere que se envíe el OTP, se puede enviar como el endpoint anterior (Previamente validado) o se puede enviar el valor que envía el usuario para que se haga la validación interna, solo debe usarse con tarjetas que en el servicio de obtención de información requieran OTP.
+Sus parámetros son los mismos del servicio de [Procesamiento de transacción](#procesamiento-de-transaccion).
+
+```shell
+
+Ejemplo de petición:
+POST /gateway/safe-process
+
+{
+  "auth": {
+    "login": "45974e82a3867355d3471bc4a1f18a1c",
+    "tranKey": "/K9f7yJpyptkPrADFWoWYsO5yZU=",
+    "nonce": "WW1aa01XWXlOVEEzT1RoalptSmpOalEzT1dNd05UTXlZMkUwWlRRME1UVT0=",
+    "seed": "2018-01-29T17:09:38-05:00"
+  },
+  "locale": "es_EC",
+  "payment": {
+    "reference": "TEST_20171108_144400",
+    "description": "Ipsam quia sunt dolore minus atque blanditiis corrupti.",
+    "amount": {
+      "taxes": [
+        {
+          "kind": "ice",
+          "amount": 4.8,
+          "base": 40
+        },
+        {
+          "kind": "valueAddedTax",
+          "amount": 7.6,
+          "base": 40
+        }
+      ],
+      "details": [
+        {
+          "kind": "shipping",
+          "amount": 2
+        },
+        {
+          "kind": "tip",
+          "amount": 2
+        },
+        {
+          "kind": "subtotal",
+          "amount": 40
+        }
+      ],
+      "currency": "USD",
+      "total": 56.4
+    }
+  },
+  "ipAddress": "127.0.0.1",
+  "userAgent": "Mozilla/5.0 USER_AGENT HERE",
+  "additional": {
+    "SOME_ADDITIONAL": "http://example.com/yourcheckout",
+  },
+  "instrument": {
+    "card": {
+      "number": "36545400000008",
+      "expirationMonth": "12",
+      "expirationYear": "21",
+      "cvv": "123"
+    },
+    "credit": {
+      "code": "1",
+      "type": "02",
+      "groupCode": "P",
+      "installment": "24"
+    },
+    "otp": "123456"
+  },
+  "payer": {
+    "document": "8467451900",
+    "documentType": "CC",
+    "name": "Miss Delia Schamberger Sr.",
+    "surname": "Wisozk",
+    "email": "tesst@gmail.com",
+    "mobile": "3006108300"
+  },
+  "buyer": {
+    "document": "8467451900",
+    "documentType": "CC",
+    "name": "Miss Delia Schamberger Sr.",
+    "surname": "Wisozk",
+    "email": "tesst@gmail.com",
+    "mobile": "3006108300"
+  }
+}
+
+```
+
+```shell
+
+Ejemplo de respuesta:
+POST /gateway/safe-process
+
+{
+    "status": {
+        "status": "APPROVED",
+        "reason": "00",
+        "message": "Aprobada",
+        "date": "2018-02-05T21:22:28-05:00"
+    },
+    "internalReference": 1449217014,
+    "reference": "TEST_20171108_144400",
+    "paymentMethod": "ID_DN",
+    "franchise": "diners",
+    "franchiseName": "Diners",
+    "issuerName": "Diners Club",
+    "amount": {
+        "currency": "COP",
+        "total": 159939.56
+    },
+    "conversion": {
+        "from": {
+            "currency": "COP",
+            "total": 159939.56
+        },
+        "to": {
+            "currency": "USD",
+            "total": 56.43
+        },
+        "factor": 0.00035282077804890796
+    },
+    "authorization": "000000",
+    "receipt": 1449217014,
+    "type": "AUTH_ONLY",
+    "refunded": false,
+    "lastDigits": "0008",
+    "provider": "INTERDIN",
+    "discount": null,
+    "processorFields": [],
+    "additional": {
+        "credit": {
+            "code": "1",
+            "type": "02",
+            "groupCode": "P",
+            "installments": "24"
+        },
+        "totalAmount": 57.72789,
+        "interestAmount": 1.29789,
+        "installmentAmount": 0,
+        "iceAmount": 0
+    }
+}
+
+```
+
+#### Consulta de transacción 
+<code>queryTransaction</code>
+
+```shell
+
+Ejemplo de petición:
+POST /gateway/query
+
+{
+  "auth": {
+    "login": "45974e82a3867355d3471bc4a1f18a1c",
+    "tranKey": "/K9f7yJpyptkPrADFWoWYsO5yZU=",
+    "nonce": "WW1aa01XWXlOVEEzT1RoalptSmpOalEzT1dNd05UTXlZMkUwWlRRME1UVT0=",
+    "seed": "2018-01-29T17:09:38-05:00"
+  },
+  "internalReference": 1449216982
+}
+
+```
+PARÁMETROS
+
+| Nombre | Tipo                              | Descripción               |
+|--------|-----------------------------------|---------------------------|
+| locale | string | Definido con los códigos [ISO 639-1](https://es.wikipedia.org/wiki/ISO_639-1) y Código del país acorde a [ISO 3166-1](http://www.iso.org/iso/english_country_names_and_code_elements). alpha-2 (2-letras del país). ej. en_US, es_EC, es_CO. |
+| auth	| [Authentication](#authentication-ecuador) | Información de autenticación del sitio. |
+| internalReference | bigint | Código único que representa la transacción en PlacetoPay. |
+
+
+```shell
+
+Ejemplo de respuesta:
+POST /gateway/query
+
+{
+    "status": {
+        "status": "APPROVED",
+        "reason": "00",
+        "message": "Aprobada",
+        "date": "2018-02-05T21:27:25-05:00"
+    },
+    "internalReference": 1449216982,
+    "reference": "TEST_20171108_144400",
+    "paymentMethod": "ID_DN",
+    "franchise": "diners",
+    "franchiseName": "Diners",
+    "issuerName": "Diners Club",
+    "amount": {
+        "taxes": [
+            {
+                "kind": "valueAddedTax",
+                "amount": 3.04,
+                "base": 16
+            },
+            {
+                "kind": "ice",
+                "amount": 1.92,
+                "base": 0
+            }
+        ],
+        "details": [
+            {
+                "kind": "shipping",
+                "amount": "0.80"
+            },
+            {
+                "kind": "tip",
+                "amount": "0.80"
+            }
+        ],
+        "currency": "USD",
+        "total": "22.56"
+    },
+    "conversion": {
+        "from": {
+            "currency": "USD",
+            "total": "22.56"
+        },
+        "to": {
+            "currency": "USD",
+            "total": "22.56"
+        },
+        "factor": 1
+    },
+    "authorization": "000000",
+    "receipt": 1449216982,
+    "type": "AUTH_ONLY",
+    "refunded": false,
+    "lastDigits": "0008",
+    "provider": "INTERDIN",
+    "discount": null,
+    "processorFields": [],
+    "additional": {
+        "credit": {
+            "code": "1",
+            "type": "02",
+            "groupCode": "P",
+            "installments": "24"
+        },
+        "totalAmount": 23.078879999999998,
+        "interestAmount": 0.51888,
+        "installmentAmount": 0,
+        "iceAmount": 1.92
+    }
+}
+
+```
+
+**Retorna**
+
+| Nombre | Tipo                              | Descripción               |
+|--------|-----------------------------------|---------------------------|
+| status |	[Status](#status) | Información del estado de la petición. |
+| provider	| string | Determina el proveedor que procesa la transacción (INTERDIN, DATAFAST, BANRED). |
+| internalReference	| bigint | Código único que identifica la transacción en los sistemas de PlacetoPay. |
+| reference	| string | Referencia provista por el comercio. |
+| paymentMethod	| string(5)	| Código que identifica el medio de pago usado. |
+| franchise	| string | Código de franquicia usado en la transacción (diners, visa, master, discover, amex). |
+| franchiseName	| string | Nombre de la franquicia usada. |
+| issuerName | string | Nombre del banco emisor de la tarjeta usada de acuerdo a nuestro listado de bines. |
+| amount | [Amount](#amount) | Valores asociados a la transacción. |
+| conversion | [AmountConversion](#amountconversion) | Valores de conversión usados para la transacción, siempre presente aunque no se realice cambio de moneda. |
+| authorization	| string | Código de autorización generado por el proveedor. |
+| receipt | string | Código de recibido de la petición de transacción. |
+| type	| string | Identifica el funcionamiento de la transacción. |
+|       |        | AUTH_ONLY = Captura normal. |
+|       |        | CAPTURE_ONLY = La transacción debe ser aprobada desde la consola. |
+| refunded	| bool	| Determina si se ha realizado un reverso sobre esta transacción. |
+| lastDigits | string |	Últimos 4 dígitos de la tarjeta empleada. |
+| additional | array | Datos adicionales empleados en la transacción. |
+
+
+#### Reverso de transacción 
+<code>reverseTransaction</code>
+
+```shell
+
+Ejemplo de petición:
+POST /gateway/transaction
+
+{
+  "auth": {
+    "login": "45974e82a3867355d3471bc4a1f18a1c",
+    "tranKey": "/K9f7yJpyptkPrADFWoWYsO5yZU=",
+    "nonce": "WW1aa01XWXlOVEEzT1RoalptSmpOalEzT1dNd05UTXlZMkUwWlRRME1UVT0=",
+    "seed": "2018-01-29T17:09:38-05:00"
+  },
+  "internalReference": 1449217014,
+  "authorization": "000000",
+  "action": "reverse"
+}
+
+
+```
+PARÁMETROS
+
+| Nombre | Tipo                              | Descripción               |
+|--------|-----------------------------------|---------------------------|
+| locale | string | Definido con los códigos [ISO 639-1](https://es.wikipedia.org/wiki/ISO_639-1) y Código del país acorde a [ISO 3166-1](http://www.iso.org/iso/english_country_names_and_code_elements). alpha-2 (2-letras del país). ej. en_US, es_EC, es_CO. |
+| auth	| [Authentication](#authentication-ecuador) | Información de autenticación del sitio. |
+| internalReference	|bigint	| Código único que representa la transacción en Placetopay. |
+| authorization	| string | Código de aprobación de la transacción dado por el proveedor. |
+| action | string | Acción a realizar sobre la transacción <code>reverse</code> |
+
+```shell
+
+Ejemplo de respuesta:
+POST /gateway/transaction
+
+{
+    "status": {
+        "status": "APPROVED",
+        "reason": "00",
+        "message": "Aprobada",
+        "date": "2018-02-05T21:32:41-05:00"
+    },
+    "internalReference": 1449217015,
+    "reference": "TEST_20171108_144400",
+    "paymentMethod": "ID_DN",
+    "franchise": "diners",
+    "franchiseName": "Diners",
+    "issuerName": "Diners Club",
+    "amount": {
+        "taxes": [
+            {
+                "kind": "valueAddedTax",
+                "amount": 0,
+                "base": 0
+            },
+            {
+                "kind": "ice",
+                "amount": 0,
+                "base": 0
+            }
+        ],
+        "details": [
+            {
+                "kind": "shipping",
+                "amount": "0.00"
+            },
+            {
+                "kind": "tip",
+                "amount": "0.00"
+            }
+        ],
+        "currency": "COP",
+        "total": "159939.56"
+    },
+    "conversion": {
+        "from": {
+            "currency": "COP",
+            "total": "159939.56"
+        },
+        "to": {
+            "currency": "USD",
+            "total": "56.43"
+        },
+        "factor": 0.00035282077804890796
+    },
+    "authorization": null,
+    "receipt": 1449217015,
+    "type": "CREDIT",
+    "refunded": false,
+    "lastDigits": "0008",
+    "provider": "INTERDIN",
+    "discount": null,
+    "processorFields": []
+}
+
+```
+
+**Retorna**
+
+| Nombre | Tipo                              | Descripción               |
+|--------|-----------------------------------|---------------------------|
+| status |	[Status](#status) | Información del estado de la petición. |
+| provider	| string | Determina el proveedor que procesa la transacción (INTERDIN, DATAFAST, BANRED). |
+| internalReference	| bigint | Código único que identifica la transacción en los sistemas de Placetopay. |
+| reference	| string | Referencia provista por el comercio. |
+| paymentMethod	| string(5)	| Código que identifica el medio de pago usado. |
+| franchise	| string | Código de franquicia usado en la transacción (diners, visa, master, discover, amex). |
+| franchiseName	| string | Nombre de la franquicia usada. |
+| issuerName | string | Nombre del banco emisor de la tarjeta usada de acuerdo a nuestro listado de bines. |
+| amount	| [Amount](#amount) | Valores asociados a la transacción. |
+| conversion | [AmountConversion](#amountConversion) | Valores de conversión usados para la transacción, siempre presente aunque no se realice cambio de moneda. |
+| authorization	| string | Código de autorización generado por el proveedor. |
+| receipt | string | Código de recibido de la petición de transacción. |
+| type	| string | Identifica el funcionamiento de la transacción. |
+|       |        | AUTH_ONLY = Captura normal. |
+|       |        | CAPTURE_ONLY = La transacción debe ser aprobada desde la consola. |
+| refunded |bool |Determina si se ha realizado un reverso sobre esta transacción. |
+| lastDigits | string |	Últimos 4 dígitos de la tarjeta empleada. |
+| additional | array | Datos adicionales empleados en la transacción. |
+
+#### Tokenización 
+<code>tokenize</code>
+
+Este servicio permite almacenar tarjetas de crédito de manera segura, a través de una petición que contenga la información de la misma, se generará un token que puede ser usado en el servicio de procesamiento y para todos los efectos, en PlacetoPay equivale a una tarjeta de crédito, la diferencia es que se envía la estructura token en vez de card.
+
+Previamente al consumo de este servicio se debe consultar el de información para saber si es necesario o no generar un OTP al cliente y en caso de ser necesario, solicitar el token a la persona y enviarlo en el consumo.
+
+```shell
+
+Ejemplo de petición:
+POST /gateway/tokenize
+
+{
+  "auth": {
+    "login": "6dd490faf9cb87a9862245da41170ff2",
+    "tranKey": "xkDytkHMxIqiY1cCk+QjBXS0QjM=",
+    "nonce": "T0RRM05UWTRNV0kyTWpJM1ptRXdZVFZoWmpnd1lqWmpNV0UzWW1VMU5EST0=",
+    "seed": "2017-11-01T16:23:21-05:00"
+  },
+  "payer": {
+    "name": "Dr. Wilfredo Cole Sr.",
+    "surname": "Corwin",
+    "email": "jewell32@abbott.com"
+  },
+  "instrument": {
+    "card": {
+      "number": "4111111111111111",
+      "expirationMonth": "02",
+      "expirationYear": "20",
+      "cvv": "123"
+    },
+    "otp": "123456"
+  },
+  "ipAddress": "127.0.0.1",
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36"
+}
+
+```
+PARÁMETROS
+
+| Nombre | Tipo                              | Descripción               |
+|--------|-----------------------------------|---------------------------|
+| locale | string | Definido con los códigos [ISO 639-1](https://es.wikipedia.org/wiki/ISO_639-1) y Código del país acorde a [ISO 3166-1](http://www.iso.org/iso/english_country_names_and_code_elements). alpha-2 (2-letras del país). ej. en_US, es_EC, es_CO. |
+| auth	| [Authentication](#authentication-ecuador) | Información de autenticación del sitio. |
+| payer	| [Person](#person) | Información del propietario de la tarjeta. |
+| instrument | [Instrument](#instrument) | Estructura de entrada para la tarjeta o token. |
+| ipAddress	| string | IP del usuario que realiza la transacción. |
+| userAgent	| string | UserAgent del usuario que realiza la transacción. |
+
+```shell
+
+Ejemplo de respuesta:
+POST /gateway/tokenize
+
+{
+    "status": {
+        "status": "OK",
+        "message": "Token generado exitosamente",
+        "reason": "00",
+        "date": "2018-03-06T20:47:01-05:00"
+    },
+    "provider": "INTERDIN",
+    "instrument": {
+        "token": {
+            "token": "81135c6e8115b27e6a8afa4bce7d619503e87603d1fc4d139abea11b7c5e17ae",
+            "subtoken": "1493989062790008",
+            "franchise": "diners",
+            "franchiseName": "Diners",
+            "issuerName": "Diners Club",
+            "lastDigits": "0008",
+            "validUntil": "12/21"
+        }
+    }
+}
+
+```
+
+**Retorna**
+
+| Nombre | Tipo                              | Descripción               |
+|--------|-----------------------------------|---------------------------|
+| status |	[Status](#status) | Información del estado de la petición. |
+| provider	| string | Determina el proveedor que procesa la transacción (INTERDIN, DATAFAST, BANRED). |
+| instrument | [Instrument](#instrument) | Estructura de entrada para la tarjeta o token. |
+
+
+#### Búsqueda de transacciones 
+<code>search</code>
+
+Este servicio permite la búsqueda de transacciones por referencia y monto, suele utilizarse en caso de pérdida de comunicación al crear una transacción para obtener la referencia interna nuevamente.
+
+```shell
+
+Ejemplo de petición:
+POST /gateway/search
+
+{
+  "auth": {
+    "login": "6dd490faf9cb87a9862245da41170ff2",
+    "tranKey": "Sp3zZPnK\/A4kQxcwqEIN3c4erol3bLPTzJQVJwwNBlw=",
+    "nonce": "NjU1MTAyMw==",
+    "seed": "2018-04-18T04:04:40+00:00"
+  },
+  "reference": "TEST_20180516_182751",
+  "amount": {
+    "currency": "USD",
+    "total": 32.43
+  }
+}
+
+```
+PARÁMETROS
+
+| Nombre | Tipo                              | Descripción               |
+|--------|-----------------------------------|---------------------------|
+| auth	| [Authentication](#authentication-ecuador) | Información de autenticación del sitio. |
+| reference	| string | Referencia inicial enviada. |
+| amount | [AmountBase](#amountbase) | Datos del valor de la transacción buscada. |
+
+```shell
+
+Ejemplo de respuesta:
+POST /gateway/tokenize
+
+{
+    "status": {
+        "status": "OK",
+        "message": "Token generado exitosamente",
+        "reason": "00",
+        "date": "2018-03-06T20:47:01-05:00"
+    },
+    "provider": "INTERDIN",
+    "instrument": {
+        "token": {
+            "token": "81135c6e8115b27e6a8afa4bce7d619503e87603d1fc4d139abea11b7c5e17ae",
+            "subtoken": "1493989062790008",
+            "franchise": "diners",
+            "franchiseName": "Diners",
+            "issuerName": "Diners Club",
+            "lastDigits": "0008",
+            "validUntil": "12/21"
+        }
+    }
+}
+
+```
+
+**Retorna**
+
+| Nombre | Tipo                              | Descripción               |
+|--------|-----------------------------------|---------------------------|
+| status |	[Status](#status) | Información del estado de la petición. |
+| transactions	[Transaction[]](#transaction) | Listado de transacciones que coinciden con los términos de búsqueda. |
+
+
+### Estructuras de datos
+
+#### Status
+
+Estructura que contiene la información sobre una solicitud o pago, informa al estado actual de la misma.
+
+ATRIBUTOS
+
+| Name | Type | Description |
+|-------|------|------------|
+| status | string |	Estado proporcionado, podría ser uno de esos: |
+|        |        | <code>OK, FAILED, APPROVED, </code> |
+|        |        | <code>REJECTED, PENDING, MANUAL, REFUNDED</code> |
+| reason | string | Código de motivo proporcionado. |
+| message |	string | Descripción del código de razón. |
+| date	| string | Fecha y hora de este estado. |
+
+#### Payment
+
+Estructura que contiene la información acerca del pago de la transacción requerida al servicio web
+
+ATRIBUTOS
+
+| Name | Type | Description |
+|-------|------|------------|
+| reference	| string(32) | Referencia para la solicitud de pago para vincular con el comercio. |
+| description |	string	| Descripción de la cuenta. |
+| amount | [Amount](#amount) | Detalle del monto a cobrar en la transacción. |
+
+#### Amount
+
+Estructura que contiene la información acerca del pago de la transacción requerida al servicio web
+
+ATRIBUTOS
+
+| Name | Type | Description |
+|-------|------|------------|
+| currency | string	| Moneda acorde al [ISO 4217](https://es.wikipedia.org/wiki/ISO_4217) <code>alphabetic code</code>
+| total	| decimal |	Valor total. |
+| taxes	| [TaxDetail[]](#taxdetail) | Descripción de los impuestos. |
+| details	| [AmountDetail[]](#amountdetail)| Descripción del importe total. |
+
+#### TaxDetail
+
+Estructura para almacenar información sobre un impuesto.
+
+ATRIBUTOS
+
+| Name | Type | Description |
+|-------|------|------------|
+| kind	| string	| Valor de clasificación, puede ser [valueAddedTax, exciseDuty, ice]. |
+| amount	| double	| Valor discriminado. |
+| base	| double	| Valor base. |
+
+#### AmountDetail
+
+Estructura para almacenar información sobre un valor adicional.
+
+ATRIBUTOS
+
+| Name | Type | Description |
+|-------|------|------------|
+| kind	|string	| Valor de clasificación, puede ser <code>discount, additional,</code> |
+|       |       |<code>vatDevolutionBase, shipping, handlingFee, insurance,</code> |
+|       |       |<code>giftWrap, subtotal, fee, tip</code> |
+| amount	| double	| Valor discriminado. |
+
+#### Instrument
+
+Estructura que contiene la información acerca del medio de pago a usar en una transacción, esta estructura es variable de acuerdo a la solicitud que se genere, cada servicio requiere que se usen unos u otros datos.
+
+ATRIBUTOS
+
+| Name | Type | Description |
+|-------|------|------------|
+| card	| [Card](#card) | Datos de una tarjeta a usar. |
+| token	| [Token](#token) | Información de token a usar. |
+| credit	| [Credit](#credit) | Datos del tipo de crédito a emplear. |
+| otp	| string	| Información del código de un uso generado. |
+
+#### Card
+
+Estructura que contiene la información de la tarjeta
+
+ATRIBUTOS
+
+| Name | Type | Description |
+|-------|------|------------|
+| number	| string	| Número completo de la tarjeta. |
+| expirationMonth	| string(2)	| Mes de expiración de la tarjeta en formato MM. | 
+| expirationYear	|string(2)	| Año de expiración de la tarjeta en formato YY. |
+| cvv	|string	| Dígitos de verificación de la tarjeta. |
+
+#### Token
+
+Estructura que contiene la información del token que asocia a la tarjeta
+
+ATRIBUTOS
+
+| Name | Type | Description |
+|-------|------|------------|
+| token	| string(64)	| Token alfanumérico asociado a la tarjeta registrada. |
+| subtoken	| string(16)	| Token numérico asociado a la tarjeta. |
+| franchise	| string(10)	| Nombre código de la franquicia de la tarjeta (diners, visa, visa_electron, amex, master, discover). |
+| franchiseName	| string(30)	| Nombre de la franquicia para mostrar al cliente. |
+| issuerName	| string(60)	| Nombre del emisor de la tarjeta, <code>puede ser nulo en caso de ser un bin desconocido</code>. |
+| lastDigits	| string(4)	| Últimos 4 dígitos de la tarjeta. |
+| validUntil	| string(5)	| Fecha de expiración del token, en formato MM/YY. |
+
+#### Credit
+
+Estructura que contiene la información del tipo de crédito
+
+ATRIBUTOS
+
+| Name | Type | Description |
+|-------|------|------------|
+| code	| string	| Código del tipo de crédito. |
+| type	| string	| Tipo asociado al crédito. |
+| groupCode	| string	| Código del grupo de tipo de crédito. | 
+| installment	| int	| Número de meses asociado al tipo de crédito. |
+| installments	| int[]	| Arreglo con los posibles valores de número de meses que se permiten al tipo de crédito. |
+
+#### InterestValues
+
+Estructura que contiene la información del cálculo de intereses para un tipo de crédito y monto.
+
+ATRIBUTOS
+
+| Name | Type | Description |
+|-------|------|------------|
+| original	| double	| Valor original de la transacción. | 
+| installment	| double	| Valor de la cuota asociada al tipo de crédito. | 
+| interest	| double	| Valor del interés de la transacción. |
+| total	| double	| Valor total que será pagado por el usuario. |
+
+#### AmountConversion
+
+Estructura para definir el factor de conversión y los valores.
+
+ATRIBUTOS
+
+| Name | Type | Description |
+|-------|------|------------|
+| from	| [AmountBase](#amountbase) | Monto solicitado. |
+| to	| [AmountBase](#amountbase) | Monto procesado por la entidad. | 
+| factor	| double	| Factor de conversión. |
+
+#### AmountBase
+
+Estructura que representa una cantidad que define la moneda y el total.
+
+ATRIBUTOS
+
+| Name | Type | Description |
+|-------|------|------------|
+| currency	| string	| Moneda acorde al [ISO 4217](https://www.currency-iso.org/dam/downloads/lists/list_one.xml) <code>(alphabetic code)</code>. |
+| total	| decimal	| Valor total. |
+
+#### Person
+
+Estructura que refleja la información de una persona involucrada en una transacción.
+
+ATRIBUTOS
+
+| Name | Type | Description |
+|-------|------|------------|
+| documentType	| string	| Tipo de identificación ([ver listado](#tipos-de-documento).
+| document	| string	| Identificación. |
+| name	| string	| Nombres de la persona. |
+| surname	| string	| Apellidos de la persona. |
+| company	| string	| Nombre de la empresa en la que trabaja o representa. |
+| email	| string	| Correo electrónico de la persona. |
+| address	| [Address](#address) | Información completa de la dirección. |
+| mobile	| string	| Número celular. |
+
+#### Address
+
+Estructura que contiene la información sobre una dirección física.
+
+ATRIBUTOS
+
+| Name | Type | Description |
+|-------|------|------------|
+| street	| string	| Dirección física completa. |
+| city	| string	| Nombre de la ciudad. |
+| state	| string	| Nombre del estado coincidente con la dirección. |
+| postalCode	| string	| Código postal o equivalente se requiere generalmente para los países que tienen. |
+| country	| string	| Código internacional del país que se aplica a la dirección física según  [ISO 3166-1 ALPHA-2](http://www.iso.org/iso/english_country_names_and_code_elements). | 
+| phone	| string	| Número telefónico. |
+
+#### Transaction
+
+Estructura que contiene la información de una transacción.
+
+| Name | Type | Description |
+|-------|------|------------|
+| status	| [Status](#status) | Información del estado de la petición. |
+| provider	| string	| Determina el proveedor que procesa la transacción (INTERDIN, DATAFAST, BANRED). |
+| internalReference	| bigint |	Código único que identifica la transacción en los sistemas de Placetopay. |
+| reference	| string	| Referencia provista por el comercio. |
+| paymentMethod	| string(5)	| Código que identifica el medio de pago usado. |
+| franchise | string	| Código de franquicia usado en la transacción (diners, visa, master, discover, amex). |
+| franchiseName	| string	| Nombre de la franquicia usada. |
+| issuerName	| string	| Nombre del banco emisor de la tarjeta usada de acuerdo a nuestro listado de bines. |
+| amount	| [Amount](#amount) | Valores asociados a la transacción. |
+| conversion	| [AmountConversion](#amountconversion) | Valores de conversión usados para la transacción, siempre presente aunque no se realice cambio de moneda. |
+| authorization	| string	| Código de autorización generado por el proveedor. |
+| receipt	| string	| Código de recibido de la petición de transacción. |
+| type	| string	| Identifica el funcionamiento de la transacción. |
+|       |         | AUTH_ONLY = Captura normal. |
+|       |         | CAPTURE_ONLY = La transacción debe ser aprobada desde la consola. |
+| refunded	| bool	| Determina si se ha realizado un reverso sobre esta transacción. |
+| lastDigits	| string	| Últimos 4 dígitos de la tarjeta empleada. |
+| additional	| array	| Datos adicionales empleados en la transacción. |
+
+### Información Adicional Ecuador
+
+#### Número de tarjeta de pruebas
+
+| Franquicia | Número | Comportamiento 
+|------------|---------|---------------
+| Diners | 36545400000008 | Aprueba
+| Diners | 36545400000248 | Rechaza
+| Diners | 36545400000438 | Se tarda 5 minutos en aprobar.
+| Diners | 36545400000701 | Deja la transacción en estado pendiente y al resolverse se aprueba.
+| Diners | 36545407030701 | Deja la transacción en estado pendiente y al resolverse se rechaza.
+| Visa | 4110770010002837 | Aprueba
+| Visa | 4111111111111111 | Aprueba
+| Visa | 4012888888881881 | Aprueba
+| Visa | 4005580000000040 | Aprueba
+| Visa | 4666666666666669 | Se tarda 5 minutos en aprobar.
+| Visa | 36545407032780 | Deja la operación en estado Manual (se debe aprobar o rechazar desde la consola).
+
+#### Códigos de medios de pago
+
+| Código | Medio de pago |
+|------------|---------|
+| ID_DN | Interdin Diners |
+| ID_VS | Interdin Visa |
+| ID_MC | Interdin Mastercard |
+| ID_DS | Interdin Discover |
+| ID_AM | Interdin American Express |
+| DF_DN | Datafast Diners |
+| DF_VS | Datafast Visa |
+| DF_MC | Datafast Mastercard |
+| DF_DS | Datafast Discover |
+| DF_AM | Datafast American Express |
+
+#### Tipos de documento
+
+[Ver lista de documentos aceptados por redirección](#tipos-de-documento)
+
+#### Códigos de respuesta
+
+Listado de códigos de respuesta para Interdin
+
+| Código | Detalle |
+|--------|---------|
+| 00 | Aprobada |
+| 02 | Por favor comunicarse con el call center |
+| 03 | Error en el código del comercio |
+| 05 | Rechazada |
+| 06 | Tipo de crédito no registrado |
+| 10 | Declinada, fallas técnicas |
+| 11 | Aprobada, VIP |
+| 12 | Negada, Mala selección del tipo de cuenta y asociación de un tipo de tarjeta errado |
+| 13 | Monto inválido |
+| 14 | Número de tarjeta inválido |
+| 15 | Negada, El producto no está activo en el sistema |
+| 16 | Negada, Numero cuotas inválidas |
+| 19 | CVV incorrecto |
+| 20 | Compras sin registro excedido |
+| 21 | CVV incorrecto |
+| 22 | CVV incorrecto |
+| 30 | Error en la información provista |
+| 31 | Negada, La terminal no está habilitada para recibir la tarjeta administrativa |
+| 33 | Negada, Tarjeta vencida con orden de retención |
+| 34 | Negada, retener/capturar |
+| 35 | Negada, retener/capturar |
+| 36 | Negada, Retener tarjeta |
+| 37 | Negada, Tarjeta bloqueada retener/capturar |
+| 38 | Negada, Número de intentos de PIN excedidos con orden de retención |
+| 39 | Negada, puede ser tarjeta bloqueada o timeout |
+| 41 | Retener tarjeta |
+| 43 | Retener tarjeta y llamar |
+| 51 | Negada, tarjeta vencida |
+| 54 | Tarjeta expirada |
+| 55 | Negada, PIN incorrecto |
+| 56 | Negada, No se encuentra tarjeta en el archivo de tarjetahabientes |
+| 57 | Invalid modal |
+| 58 | Error en el terminal asignado |
+| 61 | Negada, Monto excede el máximo definido por la Entidad Financiera en el archivo de Tarjetahabientes |
+| 62 | Negada, Tarjeta inhabilitada por la Entidad Financiera |
+| 65 | Negada, Límite de uso por períodos excedido |
+| 68 | Negada, Respuesta recibida muy tarde |
+| 70 | Negada, Tarjeta vencida |
+| 71 | Negada, El tipo de cuenta no corresponde |
+| 74 | Error en la información provista |
+| 75 | Negada, Número de intentos de PIN excedidos |
+| 77 | Error en el comercio provisto |
+| 78 | Información provista mal formada |
+| 79 | Fecha de caducidad incorrecta |
+| 80 | Descarga cancelada |
+| 81 | Error en el tipo de crédito asignado |
+| 82 | No se provee un origen |
+| 83 | No se permiten las cuotas |
+| 84 | Contactar Call Center |
+| 85 | Negada, La Entidad Financiera reportó información errada en el Archivo de Saldos |
+| 86 | Transacción pendiente, por favor espere mientras se resuelve |
+| 87 | Negada, CVV Errado |
+| 88 | Transacción pendiente, por favor espere mientras se resuelve |
+| 89 | Negada, Inválido el ruteo de la transacción por el tipo de tarjeta |
+| 90 | Negada, no es posible autorizar |
+| 91 | Negada, no es posible autorizar |
+| 92 | Negada, puede ser tarjeta bloqueada o timeout |
+| 93 | Negada, MAC inválido |
+| 94 | Negada, Transacción duplicada |
+| 96 | Reintentar |
+| 97 | Negada, Cedula errada o faltante |
+| 98 | Negada, CVV2 inválido |
+| 99 | Negada, CVV2 faltante |
+| ?* | Transacción pendiente de validación |
+| ?- | Transacción pendiente. Por favor consulte con su entidad financiera si el débito fue realizado |
+| ?1 | Fallida, Este establecimiento no puede hacer transacciones en la ventana de tiempo actual |
+| ?2 | Transacción declinada por políticas de riesgo |
+| ?5 | Fallida, Transacción no realizada en la entidad financiera |
+| ?C | Pago abortado por el usuario |
+| B1 | Negada, Número de factura inválido |
+| B2 | Negada, Factura vencida |
+| B3 | Negada, Factura pagada |
+| BC | Cliente bloqueado por políticas de control de riesgo |
+| BE | E-mail bloqueado por políticas de control de riesgo |
+| BI | IP bloqueada por políticas de control de riesgo |
+| BN | BIN de la tarjeta no es soportado por políticas de control de riesgo |
+| F1 | Negada, Filtro por comercio |
+| F2 | Negada, Filtro por agencia |
+| F3 | Negada, Filtro de aerolínea por franquicia |
+| FF | Negada, Tarjeta activa en el filtro |
+| N0 | Negada, Problema con el módulo de seguridad |
+| N2 | Negada, Se excedió el límite de preautorización |
+| N3 | Negada, Límite de retiros en línea excedidos |
+| N4 | Negada, Límite de retiros fuera de línea excedidos |
+| N5 | Negada, Límite por devolución excedido |
+| N6 | Negada, Total por devolución excedido |
+| N7 | Negada, Bloqueada por petición del cliente |
+| N8 | Negada, Excedió el tiempo permitido para responder |
+| N9 | Negada, Máximo número de devolución excedido |
+| O0 | Negada, lleno el archivo de referidos |
+| O1 | Negada, La Entidad Financiera reportó información inválida para esa tarjeta |
+| O2 | Negada, Avance menor que el límite mínimo por la entidad financiera |
+| O3 | Negada, Moroso |
+| O4 | Negada, Límites excedidos en el CAPF |
+| O5 | Negada, PIN requerido para la transacción |
+| O6 | Negada, Verificación del dígito de chequeo inválido del número de tarjeta |
+| O7 | Negada, No se ha podido enrutar correctamente al Autorizador para transacciones forzadas |
+| O8 | Negada, La Entidad Financiera reportó información errónea en el archivo de saldos |
+| O9 | Negada, Información errada en el Archivo de Tarjetas restringidas emitido por la Entidad Financiera |
+| OT | No ha pasado la validación del OTP |
+| P0 | Negada, Problema en el archivo de Tarjetahabientes |
+| P1 | Negada, El límite diario definido por la Entidad Financiera fue excedido |
+| P2 | Negada, No se encuentra en el archivo CAPF |
+| P3 | Negada, Avance menor al límite CAPF |
+| P4 | Negada, Número de usos excedido |
+| P5 | Negada, Usuario moroso, transacción referida CAPF |
+| P6 | Negada, Límites excedidos en el CAPF |
+| P7 | Negada, Avance menor que el mínimo |
+| P8 | Negada, Se requiere una tarjeta administrativa |
+| P9 | Negada, Valor no permitido para el comercio |
+| PE | Transacción pendiente |
+| Q0 | Negada, Fecha de transacción inválida |
+| Q1 | Negada, Fecha de vencimiento inválida |
+| Q2 | Negada, Código de transacción inválido |
+| Q3 | Negada, Valor del avance menor al mínimo con orden de retención |
+| Q4 | Negada, Excedido el número de usos por período con orden de retención |
+| Q5 | Negada, Usuario moroso con orden de retención |
+| Q6 | Negada, Excede el límite en el CAPF con orden de retención |
+| Q7 | Negada, El valor excede al máximo definido en el archivo de Tarjetahabientes con orden de retención |
+| Q8 | Negada, No hay registro de la tarjeta administrativa |
+| Q9 | Negada, La tarjeta administrativa no está habilitada |
+| R0 | Negada, Transacción administrativa aprobada / En ventana de cierre |
+| R1 | Negada, Transacción administrativa aprobada / Fuera de ventana de cierre |
+| R2 | Negada, Transacción administrativa aprobada |
+| R3 | Negada, La actualización de Contracargo es aprobada y el archivo es actualizado |
+| R4 | Negada, Devolución / Archivo de usuario actualizado / Adquirente no encontrado |
+| R5 | Negada, Devolución / Número de prefijo incorrecto |
+| R6 | Negada, Devolución / Código de respuesta incorrecto o configuración incorrecta |
+| R7 | Negada, Transacción administrativa no soportada |
+| R8 | Negada, La tarjeta está bloqueada en el archivo de tarjetas de uso restringido |
+| RD | Invalida la fecha hasta la cual se efectúa la recurrencia debe ser |
+| RI | Inválido el intervalo de la recurrencia |
+| RM | Invalido el límite de periodos debe ser |
+| RP | Invalida la periodicidad de la recurrencia debe ser |
+| RR | Indicador de recurrencia no es reconocido |
+| S4 | Negada, Log de transacciones lleno |
+| S5 | Negada, Devolución / Aprobada, archivo del cliente no actualizado |
+| S6 | Negada, Devolución / Aprobada, archivo del cliente no actualizado, adquirente no encontrado |
+| S7 | Negada, Devolución / Aceptada, destino incorrecto |
+| S8 | Negada, Problemas en el archivo ADMIN |
+| S9 | Negada, La Entidad no pudo validar el PIN por problemas en el Módulo de Seguridad |
+| T1 | Negada, Valor del avance no permitido por la Entidad |
+| T2 | Negada, Fecha de transacción inválida |
+| T3 | Negada, El establecimiento no está habilitado o el bin no está habilitado en el Sistema |
+| T4 | Negada, Monto excede el límite máximo y la transacción es referida |
+| T5 | Negada, Tarjeta emitida pero no activa o inactiva o cuenta cerrada |
+| T6 | Negada, Error en UAF |
+| T7 | Negada, Límite diario del Cash Back excedido |
+| T8 | Negada, Entidad fuera de línea |
+| TO | Negada, time out |
+| X2 | Plataforma en mantenimiento |
+| X3 | Fallida, petición inválida |
+| X4 | La tasa aeroportuaria es mayor que el máximo porcentaje permitido |
+| XA | Inválido el valor total a pagar, puede estar por fuera de los topes de transacción |
+| XB | Inválido el valor base de la devolución |
+| XC | Código de moneda inválido o no soportado |
+| XD | Invalida la fecha de expiración |
+| XE | Excepción dada desde la comunicación con el proveedor |
+| XF | Franquicia inválida o no soportada |
+| XG | Falla en la puerta de enlace con el proveedor |
+| XH | Falla en la comunicación con el servidor de transacciones |
+| XI | Inválido el número de referencia |
+| XL | Idioma no soportado por el comercio |
+| XM | Mes de vencimiento inválido |
+| XN | Inválido el número de tarjeta |
+| XP | Falla al establecer comunicación con el proveedor |
+| XQ | Inválido el número de cuotas a diferir |
+| XR | Falla en la lectura de la respuesta |
+| XS | No hallado el certificado del comercio |
+| XT | Inválido el valor del impuesto |
+| XU | Inválido el código de aerolínea o código para tasa administrativa |
+| XV | Código de verificación inválido |
+| XX | Respuesta de error desde el proveedor |
+| XY | Año de vencimiento inválido |
+| BR | La tarjeta no se encuentra enrolada en el servicio de 3DS |
+| SU | El servicio de 3DS no se encuentra activo |

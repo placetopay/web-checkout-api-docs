@@ -11,13 +11,15 @@ La integración directa al medio de pago en general NO es recomendada, pues difi
 * Completa flujo de transacción no disponible por redirección.
 * Usa el servicio a modo de marca blanca.
 
+Como cualquier proceso de integración, este requerirá una certificación del personal de soporte de Placetopay para revisar temas de funcionamiento, mejores prácticas y usabilidad.
+
 **¿Qué obligaciones tengo al usar esta integración?**
 
 Ten en cuenta que al usar este tipo de integración, se requiere de certificación y los tiempos de implementación pueden ser mucho más altos que cuando se integra por [WebCheckOut](#webcheckout).
 
 **Captura de la información**
 
-Al consumir el servicio de creación de la transacción, tu aplicación debe proveer información sobre el pagador, el comprador y la transacción. Si corresponden a la misma persona, solamente deberás especificar la información del pagador
+Al consumir el servicio de creación de la transacción, tu aplicación debe proveer información sobre el pagador, el comprador y la transacción. Si corresponden a la misma persona, solamente deberás especificar la información del pagador.
 
 Para proveer estos datos, tu aplicación deberá capturarlos directamente en el proceso o de alguna fuente de información previamente habilitada.
 

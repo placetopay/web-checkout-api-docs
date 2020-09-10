@@ -119,7 +119,7 @@ PARÁMETROS
 
 | Nombre | Tipo                              | Descripción               |
 |--------|-----------------------------------|---------------------------|
-| auth   | [Authentication](#authentication) | datos de autenticación    |
+| auth   | [Authentication](#authentication-colombia) | datos de autenticación    |
 | order  | [CashOrder](#cashorder)           | datos de la orden de pago |
 
 **Retorna** <br>
@@ -134,7 +134,7 @@ PARÁMETROS
 
 | Nombre | Tipo                              | Descripción                                       |
 |--------|-----------------------------------|---------------------------------------------------|
-| auth   | [Authentication](#authentication) | Datos de autenticación.                           |
+| auth   | [Authentication](#authentication-colombia) | Datos de autenticación.                           |
 | id     | int                               | Referencia única de la orden de pago a consultar. |
 
 **Retorna** <br>
@@ -147,7 +147,7 @@ Elimina una orden de pago en Placetopay que no haya sido pagada.
 PARÁMETROS
 
 Nombre | Tipo | Descripción
-auth | [Authentication](#authentication) | Datos de autenticación.
+auth | [Authentication](#authentication-colombia) | Datos de autenticación.
 id | int | Referencia única de la orden de pago a eliminar.
 
 **Retorno** <br>
@@ -161,7 +161,7 @@ PARÁMETROS
 
 | Nombre | Tipo                              | Descripción             |
 |--------|-----------------------------------|-------------------------|
-| auth   | [Authentication](#authentication) | Datos de autenticación. |
+| auth   | [Authentication](#authentication-colombia) | Datos de autenticación. |
 
 **Retorna** <br>
 **int**. Número de órdenes de pago eliminadas.
@@ -174,7 +174,7 @@ PARÁMETROS
 
 | Nombre | Tipo                              | Descripción                                    |
 |--------|-----------------------------------|------------------------------------------------|
-| auth   | [Authentication](#authentication) | Datos de autenticación.                        |
+| auth   | [Authentication](#authentication-colombia) | Datos de autenticación.                        |
 | id     | int                               | Referencia única de la orden de pago generada. |
 
 **Retorno** <br>
