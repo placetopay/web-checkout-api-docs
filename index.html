@@ -607,7 +607,7 @@
 
                             </li>
                             <li>
-                              <a href="#tarjeta-de-pruebas" class="toc-h3 toc-link" data-title="Tarjeta de pruebas">Tarjeta de pruebas</a>
+                              <a href="#tarjetas-de-pruebas" class="toc-h3 toc-link" data-title="Tarjetas de pruebas">Tarjetas de pruebas</a>
 
                                 
 
@@ -3176,7 +3176,7 @@ Las recurrencias sólo pueden ser canceladas en la consola administrativa de Pla
 <p>Ejemplo petición para una suscripción:</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="o">{</span>
-   <span class="s2">"auth"</span>:| <span class="o">{</span>
+   <span class="s2">"auth"</span>: <span class="o">{</span>
     <span class="s2">"login"</span>: <span class="s2">"usuarioprueba"</span>,
     <span class="s2">"tranKey"</span>: <span class="s2">"jsHJzM3+XG754wXh+aBvi70D9/4="</span>,
     <span class="s2">"nonce"</span>: <span class="s2">"TTJSa05UVmtNR000TlRrM1pqQTRNV1EREprWkRVMU9EZz0="</span>,
@@ -4286,7 +4286,7 @@ Las convenciones son: <code>R</code> (requerida), <code>O</code> (opcional), <co
 <td>O</td>
 </tr>
 </tbody></table>
-<h3 id='tarjeta-de-pruebas'>Tarjeta de pruebas</h3>
+<h3 id='tarjetas-de-pruebas'>Tarjetas de pruebas</h3>
 <table><thead>
 <tr>
 <th>Franchise</th>
@@ -4320,7 +4320,7 @@ Las convenciones son: <code>R</code> (requerida), <code>O</code> (opcional), <co
 <td>Este toma 5 minutos para autorizar. La idea es simular un tiempo de espera en su autorización. Así que el servicio de consumo fallará por el tiempo, lo que obligará al uso del Webservice para verificar cuando la operación completa su proceso. Tenga en cuenta los tiempos de consumo de Webservice.</td>
 </tr>
 <tr>
-<td>Visa</td>
+<td>Diners</td>
 <td>36545407032780</td>
 <td>Deja la operación en estado Manual (se debe aprobar o rechazar desde la consola)</td>
 </tr>
@@ -5022,8 +5022,6 @@ Placetopay tiene servicios de tokenización que pueden ser usados.
 </aside>
 
 <p>Tenga en cuenta que como regla general usted no debe almacenar el número de tarjeta, fecha de vencimiento y CVV2. Estos solo pueden tener persistencia durante la solicitud de la autorización, una vez procesada no deben ser almacenados.</p>
-
-<p>Como cualquier proceso de integración, este requerirá una certificación del personal de soporte de Placetopay para revisar temas de funcionamiento, mejores prácticas y usabilidad.</p>
 <h3 id='metodos-de-interfaz-credito-colombia'>Metodos de interfaz credito Colombia</h3>
 <p>A continuación se describen las tramas que deben ser enviadas a Placetopay para que la plataforma procese una operación, de igual forma la trama de respuesta entregada por la plataforma.</p>
 <h4 id='solicitud-de-autorizacion'>Solicitud de autorización</h4>
@@ -6853,7 +6851,7 @@ Producción:    <a href="https://api.placetopay.com/soap/placetopay/v11/">https:
 </thead><tbody>
 <tr>
 <td>auth</td>
-<td><a href="#authentication-colombia">Authentication</a></td>
+<td><a href="#authentication">Authentication</a></td>
 <td>Datos de autenticación.</td>
 </tr>
 <tr>
