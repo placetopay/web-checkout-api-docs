@@ -74,7 +74,7 @@ displayOn | O | O | O | - | O | - | O
     <code>instalments</code> | - | - | - | - | - | - | O
     <code>cvv</code> | - | - | - | - | - | - | O
 
-### Tarjeta de pruebas
+### Tarjetas de pruebas
 
 Franchise | Card number | Comportamiento
 ----------|-------------|---------------
@@ -83,7 +83,7 @@ Visa | 4007000000027 | Aprueba
 Visa | 4111111111111111 | Aprueba
 Visa | 4212121212121214 | Deja la operación pendiente como modo de captura, la operación debe ser autorizada o cancelada en el panel de Place to Pay  o de otra manera por operaciones de VOID o SETTLE.
 Visa | 4666666666666669 | Este toma 5 minutos para autorizar. La idea es simular un tiempo de espera en su autorización. Así que el servicio de consumo fallará por el tiempo, lo que obligará al uso del Webservice para verificar cuando la operación completa su proceso. Tenga en cuenta los tiempos de consumo de Webservice.
-Visa | 36545407032780 | Deja la operación en estado Manual (se debe aprobar o rechazar desde la consola)
+Diners | 36545407032780 | Deja la operación en estado Manual (se debe aprobar o rechazar desde la consola)
 MasterCard | 5424000000000015 | Aprueba
 MasterCard Credencial (BCO) | 540625 10 00 00 00 08 | Aprueba
 AmericanExpress | 370000000000002 | Aprueba

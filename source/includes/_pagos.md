@@ -236,7 +236,7 @@ Las recurrencias sólo pueden ser canceladas en la consola administrativa de Pla
 
 ```shell
 {
-   "auth":| {
+   "auth": {
     "login": "usuarioprueba",
     "tranKey": "jsHJzM3+XG754wXh+aBvi70D9/4=",
     "nonce": "TTJSa05UVmtNR000TlRrM1pqQTRNV1EREprWkRVMU9EZz0=",

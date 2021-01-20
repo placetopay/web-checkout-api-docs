@@ -44,8 +44,6 @@ Placetopay tiene servicios de tokenización que pueden ser usados.
 
 Tenga en cuenta que como regla general usted no debe almacenar el número de tarjeta, fecha de vencimiento y CVV2. Estos solo pueden tener persistencia durante la solicitud de la autorización, una vez procesada no deben ser almacenados.
 
-Como cualquier proceso de integración, este requerirá una certificación del personal de soporte de Placetopay para revisar temas de funcionamiento, mejores prácticas y usabilidad.
-
 ### Metodos de interfaz credito Colombia
 
 A continuación se describen las tramas que deben ser enviadas a Placetopay para que la plataforma procese una operación, de igual forma la trama de respuesta entregada por la plataforma.
@@ -450,7 +448,7 @@ PARÁMETROS
 
 | Nombre | Tipo | Descripción
 |--------|------|------------
-| auth | [Authentication](#authentication-colombia) | Datos de autenticación.
+| auth | [Authentication](#authentication) | Datos de autenticación.
 | request | [QueryRequest](#queryrequest) | Parámetros para buscar la transacción.
 
 **Retorna** <br>
